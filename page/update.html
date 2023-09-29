@@ -1,0 +1,59 @@
+<!-- 更新日志 -->
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style="text-align: center;">更新日志</title>
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+</head>
+
+<body>
+    <!-- 标题框 -->
+    <div class="rounded-box1">
+        <h1 style="text-align: center;">更新日志</h1>
+    </div>
+    
+    <!-- 文本框 -->
+    <div class="rounded-box6">
+        <p>ver 0.3.1 2023.09.29 16:29 <br> 删库跑路（bushi <br> 源码添加文件夹，优化猜数游戏效果。</p>
+        <p>ver 0.3.0 2023.09.24 15:11 <br> 加入猜数游戏的设置功能和结束界面。</p>
+        <p>ver 0.2.2 2023.09.17 00:46 <br> 改进部分细节，完善源码可读性。</p>
+        <p>ver 0.2.1 2023.08.20 12:14 <br> 删除加载动画。加入本页面背景，修改主页背景。</p>
+        <p>ver 0.2.0 2023.08.20 10:34 <br> 加入页面背景，完善界面UI。</p>
+        <p>ver 0.1.2 2023.08.19 11:58 <br> 取消返回功能。添加“加载中”动画。</p>
+        <p>ver 0.1.1 2023.08.19 10:49 <br> 修改部分细节，修复无法退出页面的问题。</p>
+        <p>ver 0.1.0 2023.08.19 10:02 <br> 增加“更新日志”和“查看仓库”，新增字体，调整猜数游戏，优化夜晚模式。</p>
+        <p>ver 0.0.1 2023.08.18 23:54 <br> 建立网站。</p>
+    </div>
+    
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 颜色主题设置 */
+        :root {
+            --bg-color-light: white;
+            --text-color-light: black;
+            --bg-color-dark: black;
+            --text-color-dark: white;
+        }
+
+        /* 背景图片设置 */
+        body {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            background-image: url('../img/day-updatebackground.svg'); /* 白天模式下的背景图片 */
+            background-repeat: repeat-y; /* 竖直重复填充背景图片 */
+            background-size: 150%; /* 按比例缩放图片以填满整个容器 */
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--bg-color-dark);
+                color: var(--text-color-dark);
+                background-image: url('../img/night-updatebackground.svg'); /* 夜晚模式下的背景图片 */
+            }
+        }
+    </style>
+</body>
+</html>

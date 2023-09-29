@@ -1,1 +1,202 @@
+/* 还没学CSS，整着玩的 */
 
+/* 颜色主题设置 */
+:root {
+--bg-color-light: white;
+--text-color-light: black;
+--bg-color-dark: black;
+--text-color-dark: white;
+--bg-color-loader-dark: #000000; /* 夜晚模式下的加载动画背景颜色 */
+}
+
+#loader-wrapper {
+    background-color: rgba(255, 255, 255, 0.9); /* 白天模式下的背景颜色 */
+}
+
+#loader {
+    background-color: var(--bg-color-light); /* 白天模式下的加载背景颜色 */
+}
+
+/* 给标题一点小震撼 */
+h1{font-weight:normal;font-size:30px}
+
+/* 自定义字体 */
+@font-face{
+    font-family:title;
+    src: url('../font/SmileySans-Oblique.ttf')
+}
+
+@font-face{
+    font-family:text;
+    src: url('../font/JiangChengHei-500W.ttf')
+}
+
+@font-face{
+    font-family:text;
+    src: url('../font/Intel One Mono Medium.ttf')
+}
+
+/* 调整网页字体 */
+body {
+    font-family: "text";
+}
+
+p {
+    font-family: "text";
+}
+
+h1 {
+    font-family: "title";
+}
+
+/* 调整输入框和按钮字体 */
+#userGuess, #minInput, #maxInput, button {
+    font-family: text;
+}
+
+/* 调整输入框和按钮文字大小 */
+#userGuess, #minInput, #maxInput, button {
+    font-size: 16px;
+}
+
+/* 调整输入框大小 */
+#userGuess {
+    width: 135px;
+    height: 25px;
+}
+
+#minInput, #maxInput {
+    width: 135px;
+    height: 20px;
+}
+
+/* 调整按钮位置 */
+#submitButton {
+    margin-top: 10px;
+}
+#toggleButton {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+#button2 {
+    margin-left: 10px;
+}
+#button4 {
+    margin-left: 10px;
+}
+#exitGame {
+    margin-left: 10px;
+}
+
+/* 圆角矩形底文字 */
+.rounded-box1 {
+    background-color: rgba(0, 0, 0, 0.5); /* 设置半透明的背景颜色 */
+    border-radius: 10px; /* 圆角半径 */
+    padding: 5px 20px 5px 20px; /* 从上、右、下、左添加内边距 */
+    color: white; /* 文字颜色 */
+}
+.rounded-box2 {
+    background-color: rgba(255, 209, 140, 0.5);
+    border-radius: 10px;
+    padding: 5px 20px 5px 20px;
+    color: black;
+    margin-top: 10px; /* 上部垂直间距 */
+}
+.rounded-box3 {
+    background-color: rgba(100, 107, 140, 0.5);
+    border-radius: 10px;
+    padding: 5px 20px 20px 20px;
+    color: black;
+    margin-top: 10px;
+}
+.rounded-box4 {
+    background-color: rgba(50, 200, 150, 0.5);
+    border-radius: 10px;
+    padding: 5px 20px 5px 20px;
+    color: black;
+    margin-top: 10px;
+}
+.rounded-box5 {
+    background-color: rgba(50, 200, 250, 0.5);
+    border-radius: 10px;
+    padding: 5px 20px 5px 20px;
+    color: black;
+    margin-top: 10px;
+}
+.rounded-box6 {
+    background-color: rgba(20, 100, 100, 0.5);
+    border-radius: 10px;
+    padding: 5px 20px 5px 20px;
+    color: black;
+    margin-top: 10px;
+}
+
+/* 白天模式下的按钮颜色 */
+button {
+    background-color: #11bbbb; /* 蓝色背景 */
+    color: black; /* 白色文字 */
+}
+
+/* 夜晚模式下的按钮颜色 */
+@media (prefers-color-scheme: dark) {
+    button {
+        background-color: #2c3e50; /* 深蓝色背景 */
+        color: #dddddd; /* 浅灰色文字 */
+    }
+}
+
+/* 白天模式下的输入框颜色 */
+input {
+    background-color: #999999; /* 浅灰色背景 */
+    color: #222222; /* 深灰色文字 */
+}
+
+/* 夜晚模式下的输入框颜色 */
+@media (prefers-color-scheme: dark) {
+    input {
+        background-color: #222222; /* 深灰色背景 */
+        color: #aaaaaa; /* 浅灰文字 */
+    }
+}
+
+/* 再来一局按钮设置 */
+#endGameButtons {
+    margin-top: 20px;
+}
+
+/* 状态反馈框 */
+.feedback-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 5px 20px 5px 20px;
+    color: white;
+    margin-top: 10px;
+    display: inline-block; /* 让容器根据内容大小自动调整宽度 */
+}
+
+/* 设置图标 */
+#settingsIcon {
+    position: absolute;
+    top: 115px;
+    right: 20px;
+    cursor: pointer;
+    width: 20px;
+}
+
+/* 设置框 */
+.minSetting {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.maxSetting {
+    margin-bottom: 15px;
+}
+
+.cancelSetting {
+    margin-left: 15px;
+}
+
+.endGameButtons {
+    margin-top: 15px;
+}

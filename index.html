@@ -1,0 +1,108 @@
+<!-- 主页 -->
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courage Luo的网站</title>
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+    <!-- 标题 -->
+    <h1 style="text-align: center;">欢迎来到Courage Luo的个人网站</h1>
+    <p style="text-align: center;">这里目前还什么都没有，按下面的按钮玩玩吧</p>
+    
+    <!-- 按钮整体 -->
+    <div class="buttonSet">
+        
+        <!-- 上面两个按钮 -->
+        <div style="display: flex; justify-content: center; height: 30px;">
+            <button id="button1">玩玩猜数游戏</button>
+            <button id="button2">自愿被Rickroll</button>
+        </div>
+    </div>
+    
+    <!-- 依旧是按钮整体 -->
+    <div class="buttonSet">
+        
+        <!-- 下面两个按钮 -->
+        <div style="display: flex; justify-content: center; height: 30px;">
+            <button id="button3">查看更新日志</button>
+            <button id="button4">查看Github仓库</button>
+        </div>
+    </div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 按键垂直间距设置*/
+        .buttonSet {
+            margin-bottom: 10px;
+        }
+
+        /* 背景图片设置 */
+        body {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            background-image: url('img/day-background.svg'); /* 白天模式下的背景图片 */
+            background-repeat: repeat; /* 重复填充背景图片 */
+            background-size: 250%; /* 按比例缩放图片以填满整个容器 */
+            background-attachment: fixed;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--bg-color-dark);
+                color: var(--text-color-dark);
+                background-image: url('img/night-background.svg'); /* 夜晚模式下的背景图片 */
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script>
+        // 为按钮设置ID
+        var button1 = document.getElementById("button1");
+        var button2 = document.getElementById("button2");
+        var button3 = document.getElementById("button3");
+        var button4 = document.getElementById("button4");
+    
+        // 设置猜数游戏的按钮
+        button1.addEventListener("click", function() {
+        
+            // 获取当前页面的URL
+            var currentURL = window.location.href;
+            
+            // 构建另一个文件的URL
+            var targetURL = currentURL.substring(0, currentURL.lastIndexOf("/") + 1) + "page/guessnum.html";    
+            
+            // 进行页面跳转
+            window.location.href = targetURL;
+        });
+    
+        // 设置Rickroll的按钮
+        button2.addEventListener("click", function() {
+            window.open("https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4")
+        });
+    
+        // 设置更新日志的按钮
+            button3.addEventListener("click", function() {
+            
+            // 获取当前页面的URL
+            var currentURL = window.location.href;
+            
+            // 构建另一个文件的URL
+            var targetURL = currentURL.substring(0, currentURL.lastIndexOf("/") + 1) + "page/update.html";    
+            
+            // 进行页面跳转
+            window.location.href = targetURL;
+        });
+        
+        // 设置跳转Git的按钮
+        button4.addEventListener("click", function() {
+            window.open("https://github.com/courageluo/courageluo.github.io/tree/main")
+        });
+    </script>
+</body>
+</html>

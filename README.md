@@ -8,4 +8,4 @@ An incomplete conception of a website, now there's a number guessing game on it.
 
 一个非常简单的猜数小游戏。
 
-A very simple game to guess a number.
+A very simple game of guessing a number.

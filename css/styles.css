@@ -18,22 +18,30 @@
 }
 
 /* 给标题一点小震撼 */
-h1{font-weight:normal;font-size:30px}
+h1 {
+    font-weight: normal;
+    font-size: 30px;
+}
 
 /* 自定义字体 */
 @font-face{
-    font-family:title;
+    font-family: title;
     src: url('../font/SmileySans-Oblique.ttf')
 }
 
 @font-face{
-    font-family:text;
+    font-family: text;
     src: url('../font/JiangChengHei-500W.ttf')
 }
 
 @font-face{
-    font-family:text;
+    font-family: text;
     src: url('../font/Intel One Mono Medium.ttf')
+}
+
+@font-face {
+    font-family: copyright;
+    src: url('../font/JetBrainsMono-Medium.ttf')
 }
 
 /* 调整网页字体 */
@@ -48,6 +56,35 @@ p {
 h1 {
     font-family: "title";
 }
+
+.copyright {
+    font-family: "copyright";
+    font-size: 12px;
+    text-align: center;
+}
+
+/* 全局设定 */
+.content {
+    flex: 1;
+}
+
+.footer {
+    background-color: #55CCDD;
+    padding: 0;
+    text-align: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+    .footer {
+        background-color: #0E2A47;
+    }
+    .copyright {
+        color: white;
+    }
+}
+
 
 /* 调整输入框和按钮字体 */
 #userGuess, #minInput, #maxInput, button {
@@ -90,12 +127,14 @@ h1 {
 
 /* 圆角矩形底文字 */
 .rounded-box1 {
+    margin: 10px;
     background-color: rgba(0, 0, 0, 0.5); /* 设置半透明的背景颜色 */
     border-radius: 10px; /* 圆角半径 */
     padding: 5px 20px 5px 20px; /* 从上、右、下、左添加内边距 */
     color: white; /* 文字颜色 */
 }
 .rounded-box2 {
+    margin: 10px;
     background-color: rgba(255, 209, 140, 0.5);
     border-radius: 10px;
     padding: 5px 20px 5px 20px;
@@ -108,6 +147,7 @@ h1 {
     }
 }
 .rounded-box3 {
+    margin: 10px;
     background-color: rgba(100, 107, 140, 0.5);
     border-radius: 10px;
     padding: 5px 20px 20px 20px;
@@ -120,6 +160,7 @@ h1 {
     }
 }
 .rounded-box4 {
+    margin: 10px;
     background-color: rgba(50, 200, 150, 0.5);
     border-radius: 10px;
     padding: 5px 20px 5px 20px;
@@ -132,6 +173,7 @@ h1 {
     }
 }
 .rounded-box5 {
+    margin: 10px;
     background-color: rgba(50, 200, 250, 0.5);
     border-radius: 10px;
     padding: 5px 20px 5px 20px;
@@ -144,6 +186,7 @@ h1 {
     }
 }
 .rounded-box6 {
+    margin: 10px;
     background-color: rgba(20, 100, 100, 0.5);
     border-radius: 10px;
     padding: 5px 20px 5px 20px;
@@ -191,6 +234,7 @@ input {
 
 /* 状态反馈框 */
 .feedback-container {
+    margin: 10px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding: 5px 20px 5px 20px;
@@ -224,4 +268,10 @@ input {
 
 .endGameButtons {
     margin-top: 15px;
+}
+
+/* 页脚内容 */
+.pageFooter {
+    margin-top: 20px;
+    fill: #FFFFFF;
 }

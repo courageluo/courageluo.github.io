@@ -11,28 +11,41 @@
 </head>
 
 <body>
-    <!-- 标题 -->
-    <h1 style="text-align: center;">欢迎来到Courage Luo的个人网站</h1>
-    <p style="text-align: center;">这里目前还什么都没有，按下面的按钮玩玩吧</p>
+    <!-- 网页内容 -->
+    <div class="content">
     
-    <!-- 按钮整体 -->
-    <div class="buttonSet">
-        
-        <!-- 上面两个按钮 -->
-        <div style="display: flex; justify-content: center; height: 30px;">
-            <button id="button1">玩玩猜数游戏</button>
-            <button id="button2">自愿被Rickroll</button>
+        <!-- 标题和问候语 -->
+        <div id="greetingContainer">
+            <h1 id="greeting" style="text-align: center;"></h1>
         </div>
+
+        <p style="text-align: center;">这里目前还什么都没有，按下面的按钮玩玩吧</p>
+    
+        <!-- 按钮整体 -->
+        <div class="buttonSet">
+            <!-- 上面两个按钮 -->
+            <div style="display: flex; justify-content: center; height: 30px;">
+                <button id="button1">玩玩猜数游戏</button>
+                <button id="button2">自愿被Rickroll</button>
+            </div>
+        </div>
+    
+        <!-- 依旧是按钮整体 -->
+        <div class="buttonSet">
+            <!-- 下面两个按钮 -->
+            <div style="display: flex; justify-content: center; height: 30px;">
+                <button id="button3">查看更新日志</button>
+                <button id="button4">查看Github仓库</button>
+            </div>
+        </div>
+    
     </div>
     
-    <!-- 依旧是按钮整体 -->
-    <div class="buttonSet">
-        
-        <!-- 下面两个按钮 -->
-        <div style="display: flex; justify-content: center; height: 30px;">
-            <button id="button3">查看更新日志</button>
-            <button id="button4">查看Github仓库</button>
-        </div>
+    <!-- 页脚 -->
+    <div class="footer">
+        <p class="copyright">
+            Copyright (C) 2023 Courage Luo <br> All Rights Reserved.
+        </p>
     </div>
 
     <!-- 内部CSS文件 -->
@@ -44,6 +57,10 @@
 
         /* 背景图片设置 */
         body {
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
             background-image: url('img/day-background.svg'); /* 白天模式下的背景图片 */
@@ -103,6 +120,29 @@
         button4.addEventListener("click", function() {
             window.open("https://github.com/courageluo/courageluo.github.io/tree/main")
         });
+        
+        // 获取当前时间
+        var now = new Date();
+        var hours = now.getHours();
+
+        // 根据时间设置问候语
+        var greetingElement = document.getElementById('greeting');
+        var welcomeText = "";
+
+        if (hours >= 7 && hours < 11) {
+            welcomeText = "早上好";
+        } else if (hours >= 11 && hours < 12) {
+            welcomeText = "中午好";
+        } else if (hours >= 12 && hours < 18) {
+            welcomeText = "下午好";
+        } else {
+            welcomeText = "晚上好";
+        }
+
+        // 设置问候语和标题
+        greetingElement.innerText = welcomeText + "! 欢迎来到我的个人网站";
+        document.title = "Courage Luo的网站 - " + welcomeText;
+
     </script>
 </body>
 </html>

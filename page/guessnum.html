@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <div class="content">
     <!-- 标题框 -->
     <div class="rounded-box1">
         <h1 style="text-align: center;">猜数游戏</h1>
@@ -70,7 +71,15 @@
             </div>
         </div>
     </div>
-
+    
+    </div>
+        
+    <!-- 页脚 -->
+    <div class="footer">
+        <p class="copyright">
+            Copyright (C) 2023 Courage Luo <br> All Rights Reserved.
+        </p>
+    </div>
     
     <!-- 内部CSS文件 -->
     <style>
@@ -84,6 +93,10 @@
 
         /* 背景图片设置 */
         body {
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
             background-image: url('../img/day-guessbackground.svg'); /* 白天模式下的背景图片 */
@@ -109,9 +122,9 @@
             width: 75%;
             max-width: 400px;
             background-color: var(--bg-color-light); /* 白天模式下的背景色 */
-                color: var(--text-color-light);
-                opacity: 0; /* 初始透明度为0，隐藏 */
-                transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
+            color: var(--text-color-light);
+            opacity: 0; /* 初始透明度为0，隐藏 */
+            transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -124,7 +137,7 @@
                 color: var(--text-color-dark);
                 opacity: 0; /* 初始透明度为0，隐藏 */
                 transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
-                box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+                box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
         }
 
@@ -151,7 +164,7 @@
                 color: var(--text-color-dark);
                 opacity: 0; /* 初始透明度为0，隐藏 */
                 transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
-                box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+                box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
         }
     </style>

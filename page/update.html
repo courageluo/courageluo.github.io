@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <div class="content">
     <!-- 标题框 -->
     <div class="rounded-box1">
         <h1 style="text-align: center;">更新日志</h1>
@@ -18,6 +19,7 @@
     
     <!-- 文本框 -->
     <div class="rounded-box6">
+        <p>ver 0.3.2 2023.10.06 01:27 <br> 增加版权栏，添加首页问候语。</p>
         <p>ver 0.3.1 2023.09.29 16:29 <br> 删库跑路（bushi <br> 源码添加文件夹，优化猜数游戏效果。</p>
         <p>ver 0.3.0 2023.09.24 15:11 <br> 加入猜数游戏的设置功能和结束界面。</p>
         <p>ver 0.2.2 2023.09.17 00:46 <br> 改进部分细节，完善源码可读性。</p>
@@ -26,7 +28,15 @@
         <p>ver 0.1.2 2023.08.19 11:58 <br> 取消返回功能。添加“加载中”动画。</p>
         <p>ver 0.1.1 2023.08.19 10:49 <br> 修改部分细节，修复无法退出页面的问题。</p>
         <p>ver 0.1.0 2023.08.19 10:02 <br> 增加“更新日志”和“查看仓库”，新增字体，调整猜数游戏，优化夜晚模式。</p>
-        <p>ver 0.0.1 2023.08.18 23:54 <br> 建立网站。</p>
+        <p>ver 0.0.0 2023.08.18 23:54 <br> 建立网站。</p>
+    </div>
+    </div>
+    
+        <!-- 页脚 -->
+    <div class="footer">
+        <p class="copyright">
+            Copyright (C) 2023 Courage Luo <br> All Rights Reserved.
+        </p>
     </div>
     
     <!-- 内部CSS文件 -->
@@ -41,6 +51,10 @@
 
         /* 背景图片设置 */
         body {
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
             background-image: url('../img/day-updatebackground.svg'); /* 白天模式下的背景图片 */

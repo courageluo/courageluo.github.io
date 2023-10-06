@@ -9,14 +9,6 @@
 --bg-color-loader-dark: #000000; /* 夜晚模式下的加载动画背景颜色 */
 }
 
-#loader-wrapper {
-    background-color: rgba(255, 255, 255, 0.9); /* 白天模式下的背景颜色 */
-}
-
-#loader {
-    background-color: var(--bg-color-light); /* 白天模式下的加载背景颜色 */
-}
-
 /* 给标题一点小震撼 */
 h1 {
     font-weight: normal;

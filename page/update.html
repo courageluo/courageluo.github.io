@@ -19,6 +19,7 @@
     
     <!-- 文本框 -->
     <div class="rounded-box6">
+        <p>ver 0.3.3 2024.01.01 00:00 <br> 改进部分细节。</p>
         <p>ver 0.3.2 2023.10.06 01:27 <br> 增加版权栏，添加首页问候语。</p>
         <p>ver 0.3.1 2023.09.29 16:29 <br> 删库跑路（bushi <br> 源码添加文件夹，优化猜数游戏效果。</p>
         <p>ver 0.3.0 2023.09.24 15:11 <br> 加入猜数游戏的设置功能和结束界面。</p>
@@ -32,10 +33,10 @@
     </div>
     </div>
     
-        <!-- 页脚 -->
+    <!-- 页脚 -->
     <div class="footer">
         <p class="copyright">
-            Copyright (C) 2023 Courage Luo <br> All Rights Reserved.
+            Copyright (C) 2023-<span id="currentYear">2023</span> Courage Luo <br> All Rights Reserved.
         </p>
     </div>
     
@@ -69,5 +70,13 @@
             }
         }
     </style>
+
+    <!-- 内部JS文件 -->
+    <script>
+       // 获取当前年份
+       const currentYear = new Date().getFullYear();
+       // 更新页脚中的年份
+       document.getElementById("currentYear").textContent = currentYear;
+   </script>
 </body>
 </html>

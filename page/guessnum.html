@@ -77,7 +77,7 @@
     <!-- 页脚 -->
     <div class="footer">
         <p class="copyright">
-            Copyright (C) 2023 Courage Luo <br> All Rights Reserved.
+            Copyright (C) 2023-<span id="currentYear">2023</span> Courage Luo <br> All Rights Reserved.
         </p>
     </div>
     
@@ -312,6 +312,11 @@
             // 进行页面跳转
             window.location.href = targetURL;
         });
+
+        // 获取当前年份
+        const currentYear = new Date().getFullYear();
+        // 更新页脚中的年份
+        document.getElementById("currentYear").textContent = currentYear;
     </script>
 </body>
 </html>

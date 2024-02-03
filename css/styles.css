@@ -255,7 +255,11 @@ input {
 }
 
 .cancelSetting {
-    margin-left: 15px;
+    margin-left: 5px;
+}
+
+.resetGameButton {
+    margin-left: 5px;
 }
 
 .endGameButtons {

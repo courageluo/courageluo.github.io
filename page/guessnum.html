@@ -46,6 +46,7 @@
             </div>
             <button onclick="applySettings()">确定</button>
             <button onclick="cancelSettings()" class="cancelSetting">取消</button>
+            <button onclick="resetGameButton()" class="resetGameButton">重置游戏</button>
         </div>
     </div>
     
@@ -257,6 +258,12 @@
             feedbackContainer.style.display = "none";
             
             rangeText.textContent = min + "到" + max;
+        }
+
+        // 设置菜单重置游戏
+        function resetGameButton() {
+            resetGame();
+            toggleSettings();
         }
         
         // 显示和隐藏设置框

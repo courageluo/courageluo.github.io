@@ -99,12 +99,22 @@ h1 {
     height: 20px;
 }
 
+#coeff1, #coeff2, #factor1, #factor2 {
+    width: 30px;
+    height: 20px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
 /* 调整按钮位置 */
 #submitButton {
     margin-top: 10px;
 }
 #toggleButton {
     margin-top: 10px;
+    margin-left: 5px;
+}
+#abandonButton {
     margin-left: 5px;
 }
 #button2 {
@@ -187,6 +197,19 @@ h1 {
 }
 @media (prefers-color-scheme: dark) {
     .rounded-box6 {
+        color: white;
+    }
+}
+.rounded-box7 {
+    margin: 10px;
+    background-color: rgba(100, 107, 140, 0.5);
+    border-radius: 10px;
+    padding: 5px 20px 20px 20px;
+    color: black;
+    margin-top: 20px;
+}
+@media (prefers-color-scheme: dark) {
+    .rounded-box7 {
         color: white;
     }
 }

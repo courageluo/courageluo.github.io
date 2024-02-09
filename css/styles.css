@@ -79,12 +79,12 @@ h1 {
 
 
 /* 调整输入框和按钮字体 */
-#userGuess, #minInput, #maxInput, button {
+input, button {
     font-family: text;
 }
 
 /* 调整输入框和按钮文字大小 */
-#userGuess, #minInput, #maxInput, button {
+input, button {
     font-size: 16px;
 }
 
@@ -161,6 +161,19 @@ h1 {
         color: white;
     }
 }
+.rounded-box3p {
+    margin: 10px;
+    background-color: rgba(100, 107, 140, 0.5);
+    border-radius: 10px;
+    padding: 5px 20px 20px 20px;
+    color: black;
+    margin-top: 20px;
+}
+@media (prefers-color-scheme: dark) {
+    .rounded-box3p {
+        color: white;
+    }
+}
 .rounded-box4 {
     margin: 10px;
     background-color: rgba(50, 200, 150, 0.5);
@@ -197,19 +210,6 @@ h1 {
 }
 @media (prefers-color-scheme: dark) {
     .rounded-box6 {
-        color: white;
-    }
-}
-.rounded-box7 {
-    margin: 10px;
-    background-color: rgba(100, 107, 140, 0.5);
-    border-radius: 10px;
-    padding: 5px 20px 20px 20px;
-    color: black;
-    margin-top: 20px;
-}
-@media (prefers-color-scheme: dark) {
-    .rounded-box7 {
         color: white;
     }
 }
@@ -287,6 +287,15 @@ input {
 
 .endGameButtons {
     margin-top: 15px;
+}
+
+.coeffSetting {
+    margin-top: 10px;
+}
+
+.constSetting {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* 页脚内容 */

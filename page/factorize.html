@@ -30,24 +30,28 @@
         </div>
 
         <!-- 游戏设置框 -->
-        <!-- <div class="rounded-box-settings" id="settingsBox">
+        <div class="rounded-box-settings" id="settingsBox">
             <div class="rounded-box1">
                 <h1 style="text-align: center;">游戏设置</h1>
             </div>
-            <div class="rounded-box3">
-                <div class="minSetting">
-                    <label for="minInput">最小值：</label>
-                    <input type="number" id="minInput" value="1">
+            <div class="rounded-box3p">
+                <div class="coeffSetting">
+                    <label for="minCoeffInput"><strong>系数</strong>最小值:</label>
+                    <input type="number" id="minCoeffInput" value="1">
+                    <label for="maxCoeffInput">最大值:</label>
+                    <input type="number" id="maxCoeffInput" value="10">
                 </div>
-                <div class="maxSetting">
-                    <label for="maxInput">最大值：</label>
-                    <input type="number" id="maxInput" value="10">
+                <div class="constSetting">
+                    <label for="minConstInput"><strong>常数</strong>最小值:</label>
+                    <input type="number" id="minConstInput" value="1">
+                    <label for="maxConstInput">最大值:</label>
+                    <input type="number" id="maxConstInput" value="10">
                 </div>
                 <button onclick="applySettings()">确定</button>
                 <button onclick="cancelSettings()" class="cancelSetting">取消</button>
                 <button onclick="resetGameButton()" class="resetGameButton">重置游戏</button>
             </div>
-        </div> -->
+        </div>
 
         <!-- 玩法提示框 -->
         <div class="rounded-box2" style="display: none;">
@@ -140,6 +144,12 @@
             }
         }
 
+        /* 设置输入框样式 */
+        #minCoeffInput, #maxCoeffInput, #minConstInput, #maxConstInput {
+            width: 35px;
+            height: 20px;
+        }
+
         /* 游戏结束矩形框样式 */
         #gameOverBox {
             display: none;
@@ -171,15 +181,15 @@
     <!-- 内部JS文件 -->
     <script>
         // 生成随机数
-        function generateRandom() {
-            return Math.floor(Math.random() * 10) + 1;
+        function randomInt(a, b) {
+            return Math.floor(a + (b - a + 1) * Math.random());
         }
 
         // 生成四个随机数
-        let randomCoeff1 = generateRandom();
-        let randomCoeff2 = generateRandom();
-        let randomConst1 = generateRandom();
-        let randomConst2 = generateRandom();
+        let randomCoeff1 = randomInt(1,10);
+        let randomCoeff2 = randomInt(1,10);
+        let randomConst1 = randomInt(1,10);
+        let randomConst2 = randomInt(1,10);
 
         // 生成需要分解的多项式
         let ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;
@@ -238,10 +248,10 @@
         // 重置游戏
         function resetGame() {
             // 生成新的四个随机数
-            randomCoeff1 = generateRandom();
-            randomCoeff2 = generateRandom();
-            randomConst1 = generateRandom();
-            randomConst2 = generateRandom();
+            randomCoeff1 = randomInt(1, 10);
+            randomCoeff2 = randomInt(1, 10);
+            randomConst1 = randomInt(1, 10);
+            randomConst2 = randomInt(1, 10);
 
             // 生成新的多项式
             ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;
@@ -249,12 +259,6 @@
 
             // 将多项式显示在页面上
             document.getElementById("poly").innerText = poly;
-
-            // 清空用户输入
-            // document.getElementById("coeff1").value = "";
-            // document.getElementById("factor1").value = "";
-            // document.getElementById("coeff2").value = "";
-            // document.getElementById("factor2").value = "";
 
             // 隐藏游戏结束框
             var gameOverBox = document.getElementById("gameOverBox");
@@ -278,7 +282,7 @@
             setTimeout(function () {
                 resetGame();
             }, 2500);
-										    // 清空用户输入
+			// 清空用户输入
             document.getElementById("coeff1").value = "";
             document.getElementById("factor1").value = "";
             document.getElementById("coeff2").value = "";
@@ -316,19 +320,29 @@
 
         // 应用设置
         function applySettings() {
-            var minInput = document.getElementById('minInput');
-            var maxInput = document.getElementById('maxInput');
-            min = parseInt(minInput.value);
-            max = parseInt(maxInput.value);
+            var minCoeffInput = document.getElementById('minCoeffInput');
+            var maxCoeffInput = document.getElementById('maxCoeffInput');
+            var minConstInput = document.getElementById('minConstInput');
+            var maxConstInput = document.getElementById('maxConstInput');
 
-            // 重新生成随机数
-            randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+            minCoeff = parseInt(minCoeffInput.value);
+            maxCoeff = parseInt(maxCoeffInput.value);
+            minConst = parseInt(minConstInput.value);
+            maxConst = parseInt(maxConstInput.value);
 
-            // 更新提示文本
-            var rangeText = document.getElementById('rangeText');
-            var hintText = document.getElementById('hintText');
-            rangeText.textContent = min + "到" + max;
-            hintText.textContent = min + "~" + max;
+            // 生成新的四个随机数
+            randomCoeff1 = randomInt(minCoeff, maxCoeff);
+            randomCoeff2 = randomInt(minCoeff, maxCoeff);
+            randomConst1 = randomInt(minConst, maxConst);
+            randomConst2 = randomInt(minConst, maxConst);
+
+            // 生成新的多项式
+            ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;
+            poly = `${randomCoeff1*randomCoeff2}x²+${randomCoeff1*randomConst2+randomCoeff2*randomConst1}x+${randomConst1*randomConst2}`;
+
+            // 将多项式显示在页面上
+            document.getElementById("poly").innerText = poly;
+
             toggleSettings();
         }
 

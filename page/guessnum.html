@@ -65,7 +65,7 @@
         <div class="rounded-box1">
             <h1>游戏结束</h1>
         </div>
-        <div class="rounded-box3">
+        <div class="rounded-box3p">
             <div class="endGameButtons">
                 <button onclick="resetGame()">再来一局</button>
                 <button id="backHome">返回主页</button>
@@ -187,7 +187,6 @@
             
             // 状态反馈文本
             if (guess === randomNum) {
-            
                 // 显示游戏结束矩形框，并添加渐显动画
                 var gameOverBox = document.getElementById("gameOverBox");
                 gameOverBox.style.display = "block";
@@ -198,7 +197,6 @@
                 document.getElementById("feedback").innerText = "恭喜你，猜测正确！";
                 document.getElementById("hint").innerText = `答案数字为${randomNum}`;
                 isGameOver = true;
-                
             } else if (guess > randomNum && guess <= max) {
                 max = guess;
                 document.getElementById("hint").innerText = `提示：${min}~${max}`;

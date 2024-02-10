@@ -21,7 +21,8 @@
             <!-- 显示需要分解的式子 -->
             <p>请分解:<span id="poly"></span></p>
             <!-- 输入框 -->
-            <p>你的答案是:(<input type="number" id="coeff1"></input>x+<input type="number" id="factor1"></input>)*(<input type="number" id="coeff2"></input>x+<input type="number" id="factor2"></input>)</p>
+            <p>你的答案是:(<input type="number" id="coeff1"></input>x+<input type="number" id="factor1"></input>)*(<input
+                    type="number" id="coeff2"></input>x+<input type="number" id="factor2"></input>)</p>
             <!-- 提交按钮 -->
             <button id="submitButton" onclick="checkGuess()">提交</button>
             <button id="toggleButton">查看玩法</button>
@@ -35,6 +36,12 @@
                 <h1 style="text-align: center;">游戏设置</h1>
             </div>
             <div class="rounded-box3p">
+                <div class="container">
+                    <div class="rectangle">
+                        <div class="left-side active" onclick="selectMode('single')">单局练习模式</div>
+                        <div class="right-side" onclick="selectMode('endless')">无尽记分模式</div>
+                    </div>
+                </div>
                 <div class="coeffSetting">
                     <label for="minCoeffInput"><strong>系数</strong>最小值:</label>
                     <input type="number" id="minCoeffInput" value="1">
@@ -68,7 +75,7 @@
             <div class="rounded-box1">
                 <h1>游戏结束</h1>
             </div>
-            <div class="rounded-box3">
+            <div class="rounded-box3p">
                 <div class="endGameButtons">
                     <button onclick="resetGame()">再来一局</button>
                     <button id="backHome">返回主页</button>
@@ -83,7 +90,7 @@
             Copyright (C) 2023-<span id="currentYear">2023</span> Courage Luo <br> All Rights Reserved.
         </p>
     </div>
-    
+
     <!-- 内部CSS文件 -->
     <style>
         /* 颜色主题设置 */
@@ -97,24 +104,30 @@
         /* 背景图片设置 */
         body {
             margin: 0px;
+            padding: 0px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
-            background-image: url('../img/day-factorizebackground.svg'); /* 白天模式下的背景图片 */
-            background-repeat: repeat; /* 重复填充背景图片 */
-            background-size: 100%; /* 按比例缩放图片以填满整个容器 */
+            background-image: url('../img/day-factorizebackground.svg');
+            /* 白天模式下的背景图片 */
+            background-repeat: repeat;
+            /* 重复填充背景图片 */
+            background-size: 100%;
+            /* 按比例缩放图片以填满整个容器 */
             background-attachment: fixed;
         }
+
         @media (prefers-color-scheme: dark) {
             body {
                 background-color: var(--bg-color-dark);
                 color: var(--text-color-dark);
-                background-image: url('../img/night-factorizebackground.svg'); /* 夜晚模式下的背景图片 */
+                background-image: url('../img/night-factorizebackground.svg');
+                /* 夜晚模式下的背景图片 */
             }
         }
-        
+
         /* 在弹出设置框之前，将其隐藏 */
         .rounded-box-settings {
             display: none;
@@ -124,22 +137,70 @@
             transform: translate(-50%, -50%);
             width: 75%;
             max-width: 400px;
-            background-color: var(--bg-color-light); /* 白天模式下的背景色 */
+            background-color: var(--bg-color-light);
+            /* 白天模式下的背景色 */
             color: var(--text-color-light);
-            opacity: 0; /* 初始透明度为0，隐藏 */
-            transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
+            opacity: 0;
+            /* 初始透明度为0，隐藏 */
+            transition: opacity 0.3s ease-in-out;
+            /* 添加透明度过渡效果 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        /* 模式设置样式 */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .rectangle {
+            width: 400px;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+        }
+
+        .left-side, .right-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .left-side {
+            border-right: 1px solid #ccc;
+        }
+
+        .left-side.active {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .right-side.active {
+            background-color: #555;
+            color: #fff;
+        }
+
         /* 根据夜晚模式更改背景色 */
         @media (prefers-color-scheme: dark) {
             .rounded-box-settings {
-                background-color: var(--bg-color-dark); /* 夜晚模式下的背景色 */
+                background-color: var(--bg-color-dark);
+                /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
-                opacity: 0; /* 初始透明度为0，隐藏 */
-                transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
+                opacity: 0;
+                /* 初始透明度为0，隐藏 */
+                transition: opacity 0.3s ease-in-out;
+                /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
         }
@@ -159,7 +220,8 @@
             transform: translate(-50%, -50%);
             width: 75%;
             max-width: 400px;
-            background-color: var(--bg-color-light); /* 白天模式下的背景色 */
+            background-color: var(--bg-color-light);
+            /* 白天模式下的背景色 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -169,10 +231,13 @@
         /* 根据夜晚模式更改背景色 */
         @media (prefers-color-scheme: dark) {
             #gameOverBox {
-                background-color: var(--bg-color-dark); /* 夜晚模式下的背景色 */
+                background-color: var(--bg-color-dark);
+                /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
-                opacity: 0; /* 初始透明度为0，隐藏 */
-                transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
+                opacity: 0;
+                /* 初始透明度为0，隐藏 */
+                transition: opacity 0.3s ease-in-out;
+                /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
         }
@@ -186,14 +251,14 @@
         }
 
         // 生成四个随机数
-        let randomCoeff1 = randomInt(1,10);
-        let randomCoeff2 = randomInt(1,10);
-        let randomConst1 = randomInt(1,10);
-        let randomConst2 = randomInt(1,10);
+        let randomCoeff1 = randomInt(1, 10);
+        let randomCoeff2 = randomInt(1, 10);
+        let randomConst1 = randomInt(1, 10);
+        let randomConst2 = randomInt(1, 10);
 
         // 生成需要分解的多项式
         let ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;
-        let poly = `${randomCoeff1*randomCoeff2}x²+${randomCoeff1*randomConst2+randomCoeff2*randomConst1}x+${randomConst1*randomConst2}`;
+        let poly = `${randomCoeff1 * randomCoeff2}x²+${randomCoeff1 * randomConst2 + randomCoeff2 * randomConst1}x+${randomConst1 * randomConst2}`;
 
         // 将多项式显示在页面上
         document.getElementById("poly").innerText = poly;
@@ -228,7 +293,7 @@
         }
 
         // 查看玩法按钮
-        document.getElementById('toggleButton').addEventListener('click', function() {
+        document.getElementById('toggleButton').addEventListener('click', function () {
             var gameRules = document.getElementById('gameRules');
             var toggleButton = document.getElementById('toggleButton');
             var roundedBox2 = document.querySelector('.rounded-box2');
@@ -255,7 +320,7 @@
 
             // 生成新的多项式
             ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;
-            poly = `${randomCoeff1*randomCoeff2}x²+${randomCoeff1*randomConst2+randomCoeff2*randomConst1}x+${randomConst1*randomConst2}`;
+            poly = `${randomCoeff1 * randomCoeff2}x²+${randomCoeff1 * randomConst2 + randomCoeff2 * randomConst1}x+${randomConst1 * randomConst2}`;
 
             // 将多项式显示在页面上
             document.getElementById("poly").innerText = poly;
@@ -282,7 +347,7 @@
             setTimeout(function () {
                 resetGame();
             }, 2500);
-			// 清空用户输入
+            // 清空用户输入
             document.getElementById("coeff1").value = "";
             document.getElementById("factor1").value = "";
             document.getElementById("coeff2").value = "";
@@ -293,6 +358,10 @@
         function resetGameButton() {
             resetGame();
             toggleSettings();
+            document.getElementById("minCoeffInput").value = 1;
+            document.getElementById("maxCoeffInput").value = 10;
+            document.getElementById("minConstInput").value = 1;
+            document.getElementById("maxConstInput").value = 10;
         }
 
         // 显示和隐藏设置框
@@ -300,7 +369,6 @@
             var settingsBox = document.getElementById('settingsBox');
             if (settingsBox.style.display === 'none' || settingsBox.style.display === '') {
                 settingsBox.style.display = 'block';
-
                 // 添加渐显动画
                 setTimeout(function () {
                     settingsBox.style.opacity = '1';
@@ -338,7 +406,7 @@
 
             // 生成新的多项式
             ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;
-            poly = `${randomCoeff1*randomCoeff2}x²+${randomCoeff1*randomConst2+randomCoeff2*randomConst1}x+${randomConst1*randomConst2}`;
+            poly = `${randomCoeff1 * randomCoeff2}x²+${randomCoeff1 * randomConst2 + randomCoeff2 * randomConst1}x+${randomConst1 * randomConst2}`;
 
             // 将多项式显示在页面上
             document.getElementById("poly").innerText = poly;
@@ -346,8 +414,21 @@
             toggleSettings();
         }
 
+        // 模式选择
+        function selectMode(mode) {
+            if (mode === 'single') {
+                document.querySelector('.left-side').classList.add('active');
+                document.querySelector('.right-side').classList.remove('active');
+                // alert('选择了单局练习模式');
+            } else if (mode === 'endless') {
+                document.querySelector('.right-side').classList.add('active');
+                document.querySelector('.left-side').classList.remove('active');
+                // alert('选择了无尽记分模式');
+            }
+        }
+
         // 设置返回主页的按钮
-        backHome.addEventListener("click", function() {
+        backHome.addEventListener("click", function () {
             // 获取当前页面的URL
             var currentURL = window.location.href;
 
@@ -364,4 +445,5 @@
         document.getElementById("currentYear").textContent = currentYear;
     </script>
 </body>
+
 </html>

@@ -263,6 +263,14 @@
         // 将多项式显示在页面上
         document.getElementById("poly").innerText = poly;
 
+        // 清空用户输入
+        function clearInput() {
+            document.getElementById("coeff1").value = "";
+            document.getElementById("factor1").value = "";
+            document.getElementById("coeff2").value = "";
+            document.getElementById("factor2").value = "";
+        }
+
         // 提交按钮
         function checkGuess() {
             let coeff1 = parseInt(document.getElementById("coeff1").value);
@@ -348,14 +356,12 @@
                 resetGame();
             }, 2500);
             // 清空用户输入
-            document.getElementById("coeff1").value = "";
-            document.getElementById("factor1").value = "";
-            document.getElementById("coeff2").value = "";
-            document.getElementById("factor2").value = "";
+            clearInput();
         }
 
         // 设置菜单重置游戏
         function resetGameButton() {
+            clearInput();
             resetGame();
             toggleSettings();
             document.getElementById("minCoeffInput").value = 1;
@@ -403,6 +409,9 @@
             randomCoeff2 = randomInt(minCoeff, maxCoeff);
             randomConst1 = randomInt(minConst, maxConst);
             randomConst2 = randomInt(minConst, maxConst);
+
+            // 清空用户输入
+            clearInput();
 
             // 生成新的多项式
             ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;

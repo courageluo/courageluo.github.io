@@ -273,9 +273,9 @@
         
         // 设置框默认值
         function clearValue(input) {
-            if (input.id.startsWith("min")) {
+            if (input.id.startsWith("min") && input.value === "1") {
                 input.value = "";
-            } else if (input.id.startsWith("max")) {
+            } else if (input.id.startsWith("max") && input.value === "10") {
                 input.value = "";
             }
         }

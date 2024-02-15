@@ -1,7 +1,7 @@
 <!-- 猜数游戏 -->
 <!DOCTYPE html>
 <html>
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,76 +12,78 @@
 
 <body>
     <div class="content">
-    <!-- 标题框 -->
-    <div class="rounded-box1">
-        <h1 style="text-align: center;">猜数游戏</h1>
-    </div>
-    
-    <!-- 操作框 -->
-    <div class="rounded-box3">
-        <p>请在<span id="rangeText">1到100</span>之间猜一个数字。</p>
-        <p id="hint">提示：<span id="hintText">1~100</span></p>
-        <!-- 输入框 -->
-        <input type="number" id="userGuess" min="1" max="100">
-        <br>
-        <!-- 提交按钮 -->
-        <button id="submitButton" onclick="checkGuess()">提交</button>
-        <button id="toggleButton">查看玩法</button>
-        <img src="../img/settings.svg" alt="Settings" id="settingsIcon" onclick="toggleSettings()">
-    </div>
-    
-    <!-- 游戏设置框 -->
-    <div class="rounded-box-settings" id="settingsBox">
+        <!-- 标题框 -->
         <div class="rounded-box1">
-            <h1 style="text-align: center;">游戏设置</h1>
+            <h1 style="text-align: center;">猜数游戏</h1>
         </div>
-        <div class="rounded-box3p">
-            <div class="minSetting">
-                <label for="minInput">最小值：</label>
-                <input type="number" id="minInput" value="1">
+
+        <!-- 操作框 -->
+        <div class="rounded-box3">
+            <p>请在<span id="rangeText">1到100</span>之间猜一个数字。</p>
+            <p id="hint">提示：<span id="hintText">1~100</span></p>
+            <!-- 输入框 -->
+            <input type="number" id="userGuess" min="1" max="100">
+            <br>
+            <!-- 提交按钮 -->
+            <button id="submitButton" onclick="checkGuess()">提交</button>
+            <button id="toggleButton">查看玩法</button>
+            <img src="../img/settings.svg" alt="Settings" id="settingsIcon" onclick="toggleSettings()">
+        </div>
+
+        <!-- 游戏设置框 -->
+        <div class="rounded-box-settings" id="settingsBox">
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">游戏设置</h1>
             </div>
-            <div class="maxSetting">
-                <label for="maxInput">最大值：</label>
-                <input type="number" id="maxInput" value="100">
-            </div>
-            <button onclick="applySettings()">确定</button>
-            <button onclick="cancelSettings()" class="cancelSetting">取消</button>
-            <button onclick="resetGameButton()" class="resetGameButton">重置游戏</button>
-        </div>
-    </div>
-    
-    <!-- 玩法提示框 -->
-    <div class="rounded-box2" style="display: none;">
-        <p id="gameRules">玩法：系统自动生成一个1到100之间的整数，你负责猜出这个数。每一次输入猜测后，系统会基于你的猜测给出相应的提示范围，直到你猜对为止。</p>
-    </div>
-    
-    <!-- 状态反馈框 -->
-    <div class="feedback-container" id="feedbackContainer" style="display: none;">
-        <p id="feedback"></p>
-    </div>
-    
-    <!-- 游戏结束矩形框 -->
-    <div class="rounded-box-settings" id="gameOverBox">
-        <div class="rounded-box1">
-            <h1>游戏结束</h1>
-        </div>
-        <div class="rounded-box3p">
-            <div class="endGameButtons">
-                <button onclick="resetGame()">再来一局</button>
-                <button id="backHome">返回主页</button>
+            <div class="rounded-box3p">
+                <div class="minSetting">
+                    <label for="minInput">最小值：</label>
+                    <input type="number" id="minInput" value="1">
+                </div>
+                <div class="maxSetting">
+                    <label for="maxInput">最大值：</label>
+                    <input type="number" id="maxInput" value="100">
+                </div>
+                <p id="errorText"></p>
+                <button onclick="applySettings()">确定</button>
+                <button onclick="cancelSettings()" class="cancelSetting">取消</button>
+                <button onclick="resetGameButton()" class="resetGameButton">重置游戏</button>
             </div>
         </div>
+
+        <!-- 玩法提示框 -->
+        <div class="rounded-box2" style="display: none;">
+            <p id="gameRules">玩法：系统自动生成一个1到100之间的整数，你负责猜出这个数。每一次输入猜测后，系统会基于你的猜测给出相应的提示范围，直到你猜对为止。</p>
+        </div>
+
+        <!-- 状态反馈框 -->
+        <div class="feedback-container" id="feedbackContainer" style="display: none;">
+            <p id="feedback"></p>
+        </div>
+
+        <!-- 游戏结束矩形框 -->
+        <div class="rounded-box-settings" id="gameOverBox">
+            <div class="rounded-box1">
+                <h1>游戏结束</h1>
+            </div>
+            <div class="rounded-box3p">
+                <div class="endGameButtons">
+                    <p id="endGameDisplay"></p>
+                    <button onclick="resetGame()">再来一局</button>
+                    <button id="backHome">返回主页</button>
+                </div>
+            </div>
+        </div>
+
     </div>
-    
-    </div>
-        
+
     <!-- 页脚 -->
     <div class="footer">
         <p class="copyright">
             Copyright (C) 2023-<span id="currentYear">2023</span> Courage Luo <br> All Rights Reserved.
         </p>
     </div>
-    
+
     <!-- 内部CSS文件 -->
     <style>
         /* 颜色主题设置 */
@@ -100,19 +102,24 @@
             min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
-            background-image: url('../img/day-guessbackground.svg'); /* 白天模式下的背景图片 */
-            background-repeat: repeat; /* 重复填充背景图片 */
-            background-size: 250%; /* 按比例缩放图片以填满整个容器 */
+            background-image: url('../img/day-guessbackground.svg');
+            /* 白天模式下的背景图片 */
+            background-repeat: repeat;
+            /* 重复填充背景图片 */
+            background-size: 250%;
+            /* 按比例缩放图片以填满整个容器 */
             background-attachment: fixed;
         }
+
         @media (prefers-color-scheme: dark) {
             body {
                 background-color: var(--bg-color-dark);
                 color: var(--text-color-dark);
-                background-image: url('../img/night-guessbackground.svg'); /* 夜晚模式下的背景图片 */
+                background-image: url('../img/night-guessbackground.svg');
+                /* 夜晚模式下的背景图片 */
             }
         }
-        
+
         /* 在弹出设置框之前，将其隐藏 */
         .rounded-box-settings {
             display: none;
@@ -122,10 +129,13 @@
             transform: translate(-50%, -50%);
             width: 75%;
             max-width: 400px;
-            background-color: var(--bg-color-light); /* 白天模式下的背景色 */
+            background-color: var(--bg-color-light);
+            /* 白天模式下的背景色 */
             color: var(--text-color-light);
-            opacity: 0; /* 初始透明度为0，隐藏 */
-            transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
+            opacity: 0;
+            /* 初始透明度为0，隐藏 */
+            transition: opacity 0.3s ease-in-out;
+            /* 添加透明度过渡效果 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -134,10 +144,13 @@
         /* 根据夜晚模式更改背景色 */
         @media (prefers-color-scheme: dark) {
             .rounded-box-settings {
-                background-color: var(--bg-color-dark); /* 夜晚模式下的背景色 */
+                background-color: var(--bg-color-dark);
+                /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
-                opacity: 0; /* 初始透明度为0，隐藏 */
-                transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
+                opacity: 0;
+                /* 初始透明度为0，隐藏 */
+                transition: opacity 0.3s ease-in-out;
+                /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
         }
@@ -151,7 +164,8 @@
             transform: translate(-50%, -50%);
             width: 75%;
             max-width: 400px;
-            background-color: var(--bg-color-light); /* 白天模式下的背景色 */
+            background-color: var(--bg-color-light);
+            /* 白天模式下的背景色 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -161,12 +175,19 @@
         /* 根据夜晚模式更改背景色 */
         @media (prefers-color-scheme: dark) {
             #gameOverBox {
-                background-color: var(--bg-color-dark); /* 夜晚模式下的背景色 */
+                background-color: var(--bg-color-dark);
+                /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
-                opacity: 0; /* 初始透明度为0，隐藏 */
-                transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
+                opacity: 0;
+                /* 初始透明度为0，隐藏 */
+                transition: opacity 0.3s ease-in-out;
+                /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
+        }
+
+        .errorText {
+            margin-bottom: 10px;
         }
     </style>
 
@@ -177,6 +198,7 @@
         let min = 1;
         let max = 100;
         let isGameOver = false;
+        let checkCount = 0;
 
         // 提交按钮
         function checkGuess() {
@@ -184,44 +206,47 @@
                 return;
             }
             let guess = parseInt(document.getElementById("userGuess").value);
-            
+
             // 状态反馈文本
             if (guess === randomNum) {
+                checkCount += 1;
                 // 显示游戏结束矩形框，并添加渐显动画
                 var gameOverBox = document.getElementById("gameOverBox");
                 gameOverBox.style.display = "block";
                 setTimeout(function () {
                     gameOverBox.style.opacity = "1";
                 }, 10); // 添加延迟以确保过渡效果生效
-                isGameOver = true;
                 document.getElementById("feedback").innerText = "恭喜你，猜测正确！";
                 document.getElementById("hint").innerText = `答案数字为${randomNum}`;
+                document.getElementById("endGameDisplay").innerText = `游戏结束，你一共猜测了${checkCount}次。`;
                 isGameOver = true;
             } else if (guess > randomNum && guess <= max) {
+                checkCount += 1;
                 max = guess;
                 document.getElementById("hint").innerText = `提示：${min}~${max}`;
-                document.getElementById("feedback").innerText = "猜的数字太大了！";
+                document.getElementById("feedback").innerText = `猜的数字太大了！已猜测次数：${checkCount}`;
             } else if (guess < randomNum && guess >= min) {
+                checkCount += 1;
                 min = guess;
                 document.getElementById("hint").innerText = `提示：${min}~${max}`;
-                document.getElementById("feedback").innerText = "猜的数字太小了！";
+                document.getElementById("feedback").innerText = `猜的数字太小了！已猜测次数：${checkCount}`;
             } else {
                 document.getElementById("feedback").innerText = "请确保猜测在当前提示范围内。";
             }
-       
+
             // 状态反馈框
             document.getElementById("feedbackContainer").style.display = "block";
-            
+
             // 清除输入框中的数字
             document.getElementById("userGuess").value = "";
         }
-        
+
         // 查看玩法按钮
-        document.getElementById('toggleButton').addEventListener('click', function() {
+        document.getElementById('toggleButton').addEventListener('click', function () {
             var gameRules = document.getElementById('gameRules');
             var toggleButton = document.getElementById('toggleButton');
             var roundedBox2 = document.querySelector('.rounded-box2');
-            
+
             // 按钮内显示的文字
             if (gameRules.style.display === 'none' || gameRules.style.display === '') {
                 gameRules.style.display = 'block';
@@ -234,42 +259,61 @@
             }
         });
 
-        // 重置游戏
-        function resetGame() {
-            randomNum = Math.floor(Math.random() * 100) + 1;
-            min = 1;
-            max = 100;
-            document.getElementById("userGuess").value = "";
-            document.getElementById("hint").innerText = "提示：1~100";
-            document.getElementById("feedback").innerText = "";
-            isGameOver = false;
-            
-            // 隐藏游戏结束框
+        // 隐藏游戏结束框
+        function hideEndGameBox() {
             var gameOverBox = document.getElementById("gameOverBox");
             gameOverBox.style.opacity = "0"; // 添加渐隐动画
             setTimeout(function () {
                 gameOverBox.style.display = "none";
             }, 300); // 添加延迟以确保过渡效果生效
-            
-            // 隐藏反馈框
+        }
+
+        // 隐藏反馈框
+        function hideFeedbackBox() {
             var feedbackContainer = document.getElementById("feedbackContainer");
             feedbackContainer.style.display = "none";
-            
+        }
+
+        // 重置游戏
+        function resetGame() {
+            randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+            checkCount = 0;
+            document.getElementById("userGuess").value = "";
+            document.getElementById("hint").innerText = `提示：${min}~${max}`;
+            document.getElementById("feedback").innerText = "";
+            isGameOver = false;
+
+            hideEndGameBox();
+            hideFeedbackBox();
+
             rangeText.textContent = min + "到" + max;
         }
 
         // 设置菜单重置游戏
         function resetGameButton() {
-            resetGame();
+            randomNum = Math.floor(Math.random() * 100) + 1;
+            min = 1;
+            max = 100;
+            checkCount = 0;
+            document.getElementById("userGuess").value = "";
+            document.getElementById("hint").innerText = `提示：${min}~${max}`;
+            document.getElementById("feedback").innerText = "";
+            document.getElementById("minInput").value = "1";
+            document.getElementById("maxInput").value = "100";
+            isGameOver = false;
+
+            hideEndGameBox();
+            hideFeedbackBox();
+
+            rangeText.textContent = min + "到" + max;
             toggleSettings();
         }
-        
+
         // 显示和隐藏设置框
         function toggleSettings() {
             var settingsBox = document.getElementById('settingsBox');
             if (settingsBox.style.display === 'none' || settingsBox.style.display === '') {
                 settingsBox.style.display = 'block';
-                
                 // 添加渐显动画
                 setTimeout(function () {
                     settingsBox.style.opacity = '1';
@@ -293,27 +337,32 @@
             var maxInput = document.getElementById('maxInput');
             min = parseInt(minInput.value);
             max = parseInt(maxInput.value);
-            
-            // 重新生成随机数
-            randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-        
-            // 更新提示文本
-            var rangeText = document.getElementById('rangeText');
-            var hintText = document.getElementById('hintText');
-            rangeText.textContent = min + "到" + max;
-            hintText.textContent = min + "~" + max;
-            toggleSettings();
+
+            if (min < max) {
+                // 重新生成随机数
+                randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+                // 更新提示文本
+                var rangeText = document.getElementById("rangeText");
+                document.getElementById("hint").innerText = `提示：${min}~${max}`;
+                rangeText.textContent = min + "到" + max;
+                toggleSettings();
+                var errorDisplay = "";
+            } else {
+                var errorDisplay = "最小值必须小于最大值！";
+            }
+
+            document.getElementById("errorText").innerText = errorDisplay;
         }
 
         // 设置返回主页的按钮
-        backHome.addEventListener("click", function() {
-        
+        backHome.addEventListener("click", function () {
+
             // 获取当前页面的URL
             var currentURL = window.location.href;
-            
+
             // 构建另一个文件的URL
-            var targetURL = currentURL.substring(0, currentURL.lastIndexOf("/") + 1) + "../index.html";    
-            
+            var targetURL = currentURL.substring(0, currentURL.lastIndexOf("/") + 1) + "../index.html";
+
             // 进行页面跳转
             window.location.href = targetURL;
         });
@@ -324,4 +373,5 @@
         document.getElementById("currentYear").textContent = currentYear;
     </script>
 </body>
+
 </html>

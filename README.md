@@ -1,11 +1,17 @@
 # Courage Luo的网站
 
-一个并不完整的网站构想，现在网页上有一个猜数游戏，您可以通过[点击此处](https://courageluo.github.io/index.html)访问。
+一个并不完整的网站构想，现在网页上有几个简单的功能，您可以通过[点击此处](https://courageluo.github.io/index.html)访问。
 
-An incomplete conception of a website, now there's a number guessing game on it. You can visit it [here](https://courageluo.github.io/index.html).
+An incomplete conception of a website, now it owns few functions. You can visit it [here](https://courageluo.github.io/index.html).
 
 ## 猜数游戏
 
-一个非常简单的猜数小游戏。
+一个非常简单的[猜数小游戏](https://courageluo.github.io/page/guessnum.html)。
 
-A very simple game of guessing a number.
+A very simple game to [guess a number](https://courageluo.github.io/page/guessnum.html).
+
+## 因式分解
+
+一个可以用于[练习因式分解](https://courageluo.github.io/page/factorize.html)的小程序，目前功能还未完全实现。
+
+A program to [practice factorizing](https://courageluo.github.io/page/factorize.html). All the functions hasn't completed yet.

@@ -1,8 +1,8 @@
 # Courage Luo的网站
 
-一个并不完整的网站构想，现在网页上有几个简单的功能，您可以通过[点击此处](https://courageluo.github.io/index.html)访问。
+一个并不完整的网站构想，作为我从零开始学习HTML的记录。现在网页上有几个简单的功能，您可以通过[点击此处](https://courageluo.github.io/index.html)访问。
 
-An incomplete conception of a website, now it owns few functions. You can visit it [here](https://courageluo.github.io/index.html).
+An incomplete conception of a website, as a record of my progress learning HTML from the very beginning. Now it owns few functions. You can visit it [here](https://courageluo.github.io/index.html).
 
 ## 猜数游戏
 

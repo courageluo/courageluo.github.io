@@ -319,7 +319,7 @@
             min = parseInt(minInput.value);
             max = parseInt(maxInput.value);
 
-            if (min < max) {
+            if (min <= max) {
                 // 重新生成随机数
                 randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
                 // 更新提示文本
@@ -329,7 +329,7 @@
                 toggleSettings();
                 var errorDisplay = "";
             } else {
-                var errorDisplay = "最小值必须小于最大值！";
+                var errorDisplay = "最小值不得大于最大值！";
             }
 
             document.getElementById("errorText").innerText = errorDisplay;
@@ -337,15 +337,7 @@
 
         // 设置返回主页的按钮
         backHome.addEventListener("click", function () {
-
-            // 获取当前页面的URL
-            var currentURL = window.location.href;
-
-            // 构建另一个文件的URL
-            var targetURL = currentURL.substring(0, currentURL.lastIndexOf("/") + 1) + "../index.html";
-
-            // 进行页面跳转
-            window.location.href = targetURL;
+            window.location.href = "../index.html";
         });
 
         // 获取页脚内容

@@ -450,14 +450,7 @@
 
         // 设置返回主页的按钮
         backHome.addEventListener("click", function() {
-            // 获取当前页面的URL
-            var currentURL = window.location.href;
-
-            // 构建另一个文件的URL
-            var targetURL = currentURL.substring(0, currentURL.lastIndexOf("/") + 1) + "../index.html";
-
-            // 进行页面跳转
-            window.location.href = targetURL;
+            window.location.href = "../index.html";
         });
 
         // 获取页脚内容

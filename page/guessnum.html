@@ -74,15 +74,10 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- 页脚 -->
-    <div class="footer">
-        <p class="copyright">
-            Copyright (C) 2023-<span id="currentYear">2023</span> Courage Luo <br> All Rights Reserved.
-        </p>
-    </div>
+    <div id="footer"></div>
 
     <!-- 内部CSS文件 -->
     <style>
@@ -102,12 +97,9 @@
             min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
-            background-image: url('../img/day-guessbackground.svg');
-            /* 白天模式下的背景图片 */
-            background-repeat: repeat;
-            /* 重复填充背景图片 */
-            background-size: 250%;
-            /* 按比例缩放图片以填满整个容器 */
+            background-image: url('../img/background/day-guessbackground.svg'); /* 白天模式下的背景图片 */
+            background-repeat: repeat; /* 重复填充背景图片 */
+            background-size: 250%; /* 按比例缩放图片以填满整个容器 */
             background-attachment: fixed;
         }
 
@@ -115,8 +107,7 @@
             body {
                 background-color: var(--bg-color-dark);
                 color: var(--text-color-dark);
-                background-image: url('../img/night-guessbackground.svg');
-                /* 夜晚模式下的背景图片 */
+                background-image: url('../img/background/night-guessbackground.svg'); /* 夜晚模式下的背景图片 */
             }
         }
 
@@ -129,13 +120,10 @@
             transform: translate(-50%, -50%);
             width: 75%;
             max-width: 400px;
-            background-color: var(--bg-color-light);
-            /* 白天模式下的背景色 */
+            background-color: var(--bg-color-light); /* 白天模式下的背景色 */
             color: var(--text-color-light);
-            opacity: 0;
-            /* 初始透明度为0，隐藏 */
-            transition: opacity 0.3s ease-in-out;
-            /* 添加透明度过渡效果 */
+            opacity: 0; /* 初始透明度为0，隐藏 */
+            transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -144,13 +132,10 @@
         /* 根据夜晚模式更改背景色 */
         @media (prefers-color-scheme: dark) {
             .rounded-box-settings {
-                background-color: var(--bg-color-dark);
-                /* 夜晚模式下的背景色 */
+                background-color: var(--bg-color-dark); /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
-                opacity: 0;
-                /* 初始透明度为0，隐藏 */
-                transition: opacity 0.3s ease-in-out;
-                /* 添加透明度过渡效果 */
+                opacity: 0; /* 初始透明度为0，隐藏 */
+                transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
         }
@@ -164,8 +149,7 @@
             transform: translate(-50%, -50%);
             width: 75%;
             max-width: 400px;
-            background-color: var(--bg-color-light);
-            /* 白天模式下的背景色 */
+            background-color: var(--bg-color-light); /* 白天模式下的背景色 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -175,13 +159,10 @@
         /* 根据夜晚模式更改背景色 */
         @media (prefers-color-scheme: dark) {
             #gameOverBox {
-                background-color: var(--bg-color-dark);
-                /* 夜晚模式下的背景色 */
+                background-color: var(--bg-color-dark); /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
-                opacity: 0;
-                /* 初始透明度为0，隐藏 */
-                transition: opacity 0.3s ease-in-out;
-                /* 添加透明度过渡效果 */
+                opacity: 0; /* 初始透明度为0，隐藏 */
+                transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
         }
@@ -367,10 +348,14 @@
             window.location.href = targetURL;
         });
 
-        // 获取当前年份
-        const currentYear = new Date().getFullYear();
-        // 更新页脚中的年份
-        document.getElementById("currentYear").textContent = currentYear;
+        // 获取页脚内容
+        window.onload = function() {
+            fetch('../footer/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        };
     </script>
 </body>
 

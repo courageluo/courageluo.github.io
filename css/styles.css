@@ -60,43 +60,6 @@ h1 {
     flex: 1;
 }
 
-.footer {
-    background-color: #42aaba;
-    padding: 1px;
-    text-align: center;
-    flex-shrink: 0;
-    position: relative;
-}
-
-#verticalLine {
-    display: inline-block;
-    width: 2px;
-    height: 19px;
-    background-color: #24292f;
-}
-
-.footerHref {
-    margin-top: -5px;
-    margin-bottom: 5px;
-}
-
-#bilibiliIcon {
-    height: 20px;
-    width: 20px;
-}
-
-@media (prefers-color-scheme: dark) {
-    .footer {
-        background-color: #1C538E;
-    }
-    .copyright {
-        color: white;
-    }
-    #iconCarrier {
-        fill: #1c538e;
-    }
-}
-
 /* 调整输入框和按钮字体 */
 input, button {
     font-family: text;

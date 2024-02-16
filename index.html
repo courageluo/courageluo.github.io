@@ -77,38 +77,22 @@
     
         // 设置猜数游戏的按钮
         button1.addEventListener("click", function() {
-        
-            // 获取当前页面的URL
-            var currentURL = window.location.href;
-            
-            // 构建另一个文件的URL
-            var targetURL = currentURL.substring(0, currentURL.lastIndexOf("/") + 1) + "page/guessnum.html";    
-            
-            // 进行页面跳转
-            window.location.href = targetURL;
+            window.open("https://courageluo.github.io/page/guessnum.html")
         });
     
-        // 设置Rickroll的按钮
+        // 设置因式分解的按钮
         button2.addEventListener("click", function() {
-            window.open("https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4")
+            window.open("https://courageluo.github.io/page/factorize.html")
         });
     
         // 设置更新日志的按钮
-            button3.addEventListener("click", function() {
-            
-            // 获取当前页面的URL
-            var currentURL = window.location.href;
-            
-            // 构建另一个文件的URL
-            var targetURL = currentURL.substring(0, currentURL.lastIndexOf("/") + 1) + "page/update.html";    
-            
-            // 进行页面跳转
-            window.location.href = targetURL;
+        button3.addEventListener("click", function() {
+            window.open("https://courageluo.github.io/page/update.html")    
         });
         
-        // 设置跳转Github的按钮
+        // 设置Rickroll的按钮
         button4.addEventListener("click", function() {
-            window.open("https://github.com/courageluo/courageluo.github.io/tree/main")
+            window.open("https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4")
         });
         
         // 获取当前时间

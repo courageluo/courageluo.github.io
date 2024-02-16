@@ -84,11 +84,7 @@
     </div>
 
     <!-- 页脚 -->
-    <div class="footer">
-        <p class="copyright">
-            Copyright (C) 2023-<span id="currentYear">2023</span> Courage Luo <br> All Rights Reserved.
-        </p>
-    </div>
+    <div id="footer"></div>
 
     <!-- 内部CSS文件 -->
     <style>
@@ -109,7 +105,7 @@
             min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
-            background-image: url('../img/day-factorizebackground.svg');
+            background-image: url('../img/background/day-factorizebackground.svg');
             /* 白天模式下的背景图片 */
             background-repeat: repeat;
             /* 重复填充背景图片 */
@@ -122,7 +118,7 @@
             body {
                 background-color: var(--bg-color-dark);
                 color: var(--text-color-dark);
-                background-image: url('../img/night-factorizebackground.svg');
+                background-image: url('../img/background/night-factorizebackground.svg');
                 /* 夜晚模式下的背景图片 */
             }
         }
@@ -464,10 +460,14 @@
             window.location.href = targetURL;
         });
 
-        // 获取当前年份
-        const currentYear = new Date().getFullYear();
-        // 更新页脚中的年份
-        document.getElementById("currentYear").textContent = currentYear;
+        // 获取页脚内容
+        window.onload = function() {
+            fetch("../footer/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        };
     </script>
 </body>
 

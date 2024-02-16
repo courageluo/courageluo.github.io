@@ -61,11 +61,28 @@ h1 {
 }
 
 .footer {
-    background-color: #55CCDD;
-    padding: 0;
+    background-color: #42aaba;
+    padding: 1px;
     text-align: center;
     flex-shrink: 0;
     position: relative;
+}
+
+#verticalLine {
+    display: inline-block;
+    width: 2px;
+    height: 19px;
+    background-color: #24292f;
+}
+
+.footerHref {
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+
+#bilibiliIcon {
+    height: 20px;
+    width: 20px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -75,8 +92,10 @@ h1 {
     .copyright {
         color: white;
     }
+    #iconCarrier {
+        fill: #1c538e;
+    }
 }
-
 
 /* 调整输入框和按钮字体 */
 input, button {
@@ -135,32 +154,15 @@ input, button {
     padding: 5px 20px 5px 20px; /* 从上、右、下、左添加内边距 */
     color: white; /* 文字颜色 */
 }
+
 .rounded-box2 {
-    margin: 10px;
     background-color: rgba(255, 209, 140, 0.5);
-    border-radius: 10px;
-    padding: 5px 20px 5px 20px;
-    color: black;
-    margin-top: 10px; /* 上部垂直间距 */
 }
-@media (prefers-color-scheme: dark) {
-    .rounded-box2 {
-        color: white;
-    }
-}
+
 .rounded-box3 {
-    margin: 10px;
     background-color: rgba(100, 107, 140, 0.5);
-    border-radius: 10px;
-    padding: 5px 20px 20px 20px;
-    color: black;
-    margin-top: 10px;
 }
-@media (prefers-color-scheme: dark) {
-    .rounded-box3 {
-        color: white;
-    }
-}
+
 .rounded-box3p {
     margin: 10px;
     background-color: rgba(100, 107, 140, 0.5);
@@ -169,47 +171,29 @@ input, button {
     color: black;
     margin-top: 20px;
 }
-@media (prefers-color-scheme: dark) {
-    .rounded-box3p {
-        color: white;
-    }
-}
+
 .rounded-box4 {
-    margin: 10px;
     background-color: rgba(50, 200, 150, 0.5);
-    border-radius: 10px;
-    padding: 5px 20px 5px 20px;
-    color: black;
-    margin-top: 10px;
 }
-@media (prefers-color-scheme: dark) {
-    .rounded-box4 {
-        color: white;
-    }
-}
+
 .rounded-box5 {
-    margin: 10px;
     background-color: rgba(50, 200, 250, 0.5);
-    border-radius: 10px;
-    padding: 5px 20px 5px 20px;
-    color: black;
-    margin-top: 10px;
 }
-@media (prefers-color-scheme: dark) {
-    .rounded-box5 {
-        color: white;
-    }
-}
+
 .rounded-box6 {
-    margin: 10px;
     background-color: rgba(20, 100, 100, 0.5);
+}
+
+.rounded-box2, .rounded-box3, .rounded-box4, .rounded-box5, .rounded-box6 {
+    margin: 10px;
     border-radius: 10px;
     padding: 5px 20px 5px 20px;
     color: black;
     margin-top: 10px;
 }
+
 @media (prefers-color-scheme: dark) {
-    .rounded-box6 {
+    .rounded-box2, .rounded-box3, .rounded-box3p, .rounded-box4, .rounded-box5, .rounded-box6 {
         color: white;
     }
 }
@@ -296,10 +280,4 @@ input {
 .constSetting {
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-/* 页脚内容 */
-.pageFooter {
-    margin-top: 20px;
-    fill: #FFFFFF;
 }

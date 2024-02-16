@@ -19,6 +19,7 @@
     
     <!-- 文本框 -->
     <div class="rounded-box6">
+        <p>ver 0.4.4 2024.02.16 19:37 <br> 修改页脚样式和文件结构。</p>
         <p>ver 0.4.3 2024.02.15 19:01 <br> 修复一些问题。</p>
         <p>ver 0.4.2 2024.02.12 15:32 <br> 改进部分细节，优化因式分解游戏。</p>
         <p>ver 0.4.1 2024.02.11 23:01 <br> 改进因式分解游戏。</p>
@@ -38,11 +39,7 @@
     </div>
     
     <!-- 页脚 -->
-    <div class="footer">
-        <p class="copyright">
-            Copyright (C) 2023-<span id="currentYear">2023</span> Courage Luo <br> All Rights Reserved.
-        </p>
-    </div>
+    <div id="footer"></div>
     
     <!-- 内部CSS文件 -->
     <style>
@@ -62,7 +59,7 @@
             min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
-            background-image: url('../img/day-updatebackground.svg'); /* 白天模式下的背景图片 */
+            background-image: url('../img/background/day-updatebackground.svg'); /* 白天模式下的背景图片 */
             background-repeat: repeat-y; /* 竖直重复填充背景图片 */
             background-size: 150%; /* 按比例缩放图片以填满整个容器 */
         }
@@ -70,17 +67,21 @@
             body {
                 background-color: var(--bg-color-dark);
                 color: var(--text-color-dark);
-                background-image: url('../img/night-updatebackground.svg'); /* 夜晚模式下的背景图片 */
+                background-image: url('../img/background/night-updatebackground.svg'); /* 夜晚模式下的背景图片 */
             }
         }
     </style>
 
     <!-- 内部JS文件 -->
     <script>
-       // 获取当前年份
-       const currentYear = new Date().getFullYear();
-       // 更新页脚中的年份
-       document.getElementById("currentYear").textContent = currentYear;
+       // 获取页脚内容
+       window.onload = function() {
+            fetch("../footer/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        };
    </script>
 </body>
 </html>

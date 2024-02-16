@@ -19,34 +19,24 @@
             <h1 id="greeting" style="text-align: center;"></h1>
         </div>
 
-        <p style="text-align: center;">这里目前还什么都没有，按下面的按钮玩玩吧</p>
+        <p style="text-align: center;">这里目前还什么都没有，按下面的按钮玩玩吧<br>(广告请手动屏蔽cloudflare-app元素)</p>
     
         <!-- 按钮整体 -->
         <div class="buttonSet">
             <!-- 上面两个按钮 -->
             <div style="display: flex; justify-content: center; height: 30px;">
                 <button id="button1">玩玩猜数游戏</button>
-                <button id="button2">自愿被Rickroll</button>
+                <button id="button2">练习因式分解</button>
+            </div>
+            <div style="display: flex; justify-content: center; height: 30px; margin-top: 10px;">
+                <button id="button3">更新日志</button>
+                <button id="button4">自愿被Rickroll</button>
             </div>
         </div>
-    
-        <!-- 依旧是按钮整体 -->
-        <div class="buttonSet">
-            <!-- 下面两个按钮 -->
-            <div style="display: flex; justify-content: center; height: 30px;">
-                <button id="button3">查看更新日志</button>
-                <button id="button4">查看Github仓库</button>
-            </div>
-        </div>
-    
     </div>
     
     <!-- 页脚 -->
-    <div class="footer">
-        <p class="copyright">
-            Copyright (C) 2023-<span id="currentYear">2023</span> Courage Luo <br> All Rights Reserved.
-        </p>
-    </div>
+    <div id="footer"></div>
 
     <!-- 内部CSS文件 -->
     <style>
@@ -63,7 +53,7 @@
             min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
-            background-image: url('img/day-background.svg'); /* 白天模式下的背景图片 */
+            background-image: url('img/background/day-background.svg'); /* 白天模式下的背景图片 */
             background-repeat: repeat; /* 重复填充背景图片 */
             background-size: 250%; /* 按比例缩放图片以填满整个容器 */
             background-attachment: fixed;
@@ -72,7 +62,7 @@
             body {
                 background-color: var(--bg-color-dark);
                 color: var(--text-color-dark);
-                background-image: url('img/night-background.svg'); /* 夜晚模式下的背景图片 */
+                background-image: url('img/background/night-background.svg'); /* 夜晚模式下的背景图片 */
             }
         }
     </style>
@@ -129,7 +119,7 @@
         var greetingElement = document.getElementById('greeting');
         var welcomeText = "";
 
-        /* if (hours >= 7 && hours < 11) {
+        if (hours >= 7 && hours < 11) {
             welcomeText = "早上好";
         } else if (hours >= 11 && hours < 12) {
             welcomeText = "中午好";
@@ -137,18 +127,22 @@
             welcomeText = "下午好";
         } else {
             welcomeText = "晚上好";
-        } */
+        }
 
-        welcomeText = "新春快乐";
+        // welcomeText = "新春快乐";
 
         // 设置问候语和标题
         greetingElement.innerText = welcomeText + "! 欢迎来到我的网站";
         document.title = "Courage Luo的网站 - " + welcomeText;
 
-        // 获取当前年份
-        const currentYear = new Date().getFullYear();
-        // 更新页脚中的年份
-        document.getElementById("currentYear").textContent = currentYear;
+        // 获取页脚内容
+        window.onload = function() {
+            fetch("footer/footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        };
     </script>
 </body>
 </html>

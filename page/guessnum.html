@@ -199,7 +199,7 @@
                 }, 10); // 添加延迟以确保过渡效果生效
                 document.getElementById("feedback").innerText = "恭喜你，猜测正确！";
                 document.getElementById("hint").innerText = `答案数字为${randomNum}`;
-                document.getElementById("endGameDisplay").innerText = `游戏结束，你一共猜测了${checkCount}次。`;
+                document.getElementById("endGameDisplay").innerText = `猜测正确，你共猜了${checkCount}次。`;
                 isGameOver = true;
             } else if (guess > randomNum && guess <= max) {
                 checkCount += 1;

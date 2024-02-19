@@ -49,11 +49,6 @@ h1 {
     font-family: "title";
 }
 
-a {
-    text-decoration: none;
-    color: #551a8b;
-}
-
 .copyright {
     font-family: "copyright";
     font-size: 12px;

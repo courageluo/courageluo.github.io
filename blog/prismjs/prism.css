@@ -10,7 +10,12 @@ code[class*="language-"],
 pre[class*="language-"] {
 	color: #ccc;
 	background: none;
+<<<<<<< HEAD
 	font-family: "text";
+=======
+	font-family: "text", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 16px;
+>>>>>>> e6f07a75e1620dd950211f2cb6e2d623fe4a0ba5
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;

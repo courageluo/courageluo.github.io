@@ -60,6 +60,10 @@ a {
     text-align: center;
 }
 
+.code {
+    font-family: "text";
+}
+
 /* 全局设定 */
 .content {
     flex: 1;

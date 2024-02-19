@@ -14,4 +14,4 @@ A very simple game to [guess a number](https://courageluo.github.io/page/guessnu
 
 一个可以用于[练习因式分解](https://courageluo.github.io/page/factorize.html)的小程序，目前功能还未完全实现。
 
-A program to [practice factorizing](https://courageluo.github.io/page/factorize.html). All the functions hasn't completed yet.
+A program to [practice factorizing](https://courageluo.github.io/page/factorize.html). Not all the functions are completed.

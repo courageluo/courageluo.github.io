@@ -55,6 +55,11 @@ h1 {
     text-align: center;
 }
 
+code {
+    font-family: "text";
+    font-size: 15px;
+}
+
 /* 全局设定 */
 .content {
     flex: 1;

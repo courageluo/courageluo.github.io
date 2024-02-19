@@ -1,0 +1,100 @@
+<!-- blog主页 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人博客</title>
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 标题框 -->
+        <div class="rounded-box1">
+            <h1 style="text-align: center;">个人博客</h1>
+        </div>
+
+        <!-- 介绍 -->
+        <div class="rounded-box2">
+            <p>
+                欢迎来到我的个人博客！虽然还没什么东西，但我计划分享我的学习、生活、思考等方面的内容，希望你能喜欢。
+            </p>
+        </div>
+
+        <!-- 文章列表 -->
+        <div class="rounded-box3">
+            <h3 style="text-align: center;">文章列表</h3>
+            <hr>
+            <a href="content/Contest1009(Div.2).html">
+                <p>Contest 1009 - 下北泽奥林匹克信息雷厉风行科普赛(Div.2场)部分题解 - NZOJ</p>
+            </a>
+            <p style="text-align: right;">修改时间：<span  id="lastModifiedContest1009"></span></p>
+            <hr>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 颜色主题设置 */
+        :root {
+            --bg-color-light: #D2D5D9;
+            --text-color-light: black;
+            --bg-color-dark: #18323F;
+            --text-color-dark: #BBBBBB;
+        }
+
+        /* 背景图片设置 */
+        body {
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            background-image: url('../img/background/day-guessbackground.svg'); /* 白天模式下的背景图片 */
+            background-repeat: repeat; /* 重复填充背景图片 */
+            background-size: 250%; /* 按比例缩放图片以填满整个容器 */
+            background-attachment: fixed;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--bg-color-dark);
+                color: var(--text-color-dark);
+                background-image: url('../img/background/night-guessbackground.svg'); /* 夜晚模式下的背景图片 */
+            }
+        }
+
+        a {
+            color: #21acac;
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script>
+        // 获取修改时间
+        fetch('content/Contest1009(Div.2).html')
+            .then(response => response.headers.get('last-modified'))
+            .then(lastModified => {
+                const lastModifiedDate = new Date(lastModified);
+                document.getElementById("lastModifiedContest1009").textContent = lastModifiedDate.toLocaleString();
+            })
+
+        // 获取页脚内容
+        window.onload = function() {
+            fetch('../footer/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        };
+    </script>
+</body>
+
+</html>

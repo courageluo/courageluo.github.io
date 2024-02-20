@@ -1,0 +1,326 @@
+<!-- jQuery实现的时钟 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery实现的时钟</title>
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="../../../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../../prismjs/prism.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 标题框 -->
+        <div class="rounded-box1">
+            <h1 style="text-align: center;">jQuery实现的时钟</h1>
+        </div>
+
+        <!-- 内容框 -->
+        <div class="rounded-box3">
+            <div class="container">
+                <div class="rectangle">
+                    <div class="left-side active" onclick="selectMode('clock')">时钟</div>
+                    <div class="middle-side" onclick="selectMode('stopwatch')">秒表</div>
+                    <div class="right-side" onclick="selectMode('countdown')">倒计时</div>
+                </div>
+            </div>
+            <div id="formalBtnSet" class="hidden">
+                <button id="clockBtn">时钟</button>
+                <button id="stopwatchBtn">秒表</button>
+                <button id="countdownBtn">倒计时</button>
+            </div>
+        </div>
+        <div class="rounded-box3">
+            <div id="clock" class="hidden">
+                <div id="clockDisplay" style="font-size: 50px; font-family: time; text-align: center;"></div>
+            </div>
+            <div id="stopwatch" class="hidden">
+                <div id="stopwatchDisplay" style="font-size: 50px; font-family: time; text-align: center;">00:00:00.00</div>
+                <div id="stopwatchCtrlBtn" style="display: flex; justify-content: center; margin-bottom: 10px;">
+                    <button id="startStopwatch">开始</button>
+                    <button id="stopStopwatch" style="margin-left: 10px;">停止</button>
+                    <button id="resetStopwatch" style="margin-left: 10px;">重置</button>
+                </div>
+            </div>
+            <div id="countdown" class="hidden">
+                <div id="countdownDisplay" style="font-size: 50px; font-family: time; text-align: center;">00:00:00</div>
+                <div id="countdownCtrlBtn" style="display: flex; justify-content: center; margin-bottom: 10px;">
+                    <button id="startCountdown">开始</button>
+                    <button id="pauseCountdown" style="margin-left: 10px;">暂停</button>
+                    <button id="resetCountdown" style="margin-left: 10px;">重置</button>
+                    <input type="number" id="countdownInput" placeholder="秒数" style="margin-left: 10px; width: 50px;">
+                    <button id="setCountdownBtn" style="margin-left: 10px;">确定</button>
+                </div>
+            </div>
+        </div>
+        <div class="rounded-box2">
+            <p id="jqueryVersionDisplay"></p>
+            <p>
+                您可以在<a href="../../jquery/jquery-3.7.1.js">这里</a>查看或下载，也可以点击<a href="https://jquery.com">这里</a>访问官网。
+            </p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        /* 模式设置样式 */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .rectangle {
+            width: 400px;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+        }
+
+        .left-side, .right-side, .middle-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .left-side, .middle-side {
+            border-right: 2px solid #ccc;
+        }
+
+        .left-side.active, .middle-side.active, .right-side.active {
+            background-color: #555;
+            color: #fff;
+        }
+        
+        /* 颜色主题设置 */
+        :root {
+            --bg-color-light: #D2D5D9;
+            --text-color-light: black;
+            --bg-color-dark: #18323F;
+            --text-color-dark: #BBBBBB;
+        }
+
+        /* 背景图片设置 */
+        body {
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            background-image: url('../../../img/background/day-blogbackground.svg'); /* 白天模式下的背景图片 */
+            background-repeat: repeat; /* 重复填充背景图片 */
+            background-size: 100%; /* 按比例缩放图片以填满整个容器 */
+            background-attachment: fixed;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--bg-color-dark);
+                color: var(--text-color-dark);
+                background-image: url('../../../img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
+            }
+        }
+
+        @font-face {
+            font-family: time;
+            src: url(font.ttf);
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="../../prismjs/prism.js"></script>
+    <script src="../../jquery/jquery-3.7.1.js"></script>
+    <script>
+        function selectMode(mode) {
+            if (mode === 'clock') {
+                document.querySelector('.left-side').classList.add('active');
+                document.querySelector('.middle-side').classList.remove('active');
+                document.querySelector('.right-side').classList.remove('active');
+                $('#clockBtn').click();
+            } else if (mode === 'stopwatch') {
+                document.querySelector('.middle-side').classList.add('active');
+                document.querySelector('.right-side').classList.remove('active');
+                document.querySelector('.left-side').classList.remove('active');
+                $('#stopwatchBtn').click();
+            } else if (mode === 'countdown') {
+                document.querySelector('.right-side').classList.add('active');
+                document.querySelector('.middle-side').classList.remove('active');
+                document.querySelector('.left-side').classList.remove('active');
+                $('#countdownBtn').click();
+            }
+        }
+
+        $(document).ready(function() {
+            // 调试用
+            $("#clock").show();
+            // $("#stopwatch").show();
+            // $("#countdown").show();
+
+            var jqueryVersion = $.fn.jquery;
+            $("#jqueryVersionDisplay").html("当前页面引用了jQuery库" + jqueryVersion + "版本。");
+
+            // 处理事件
+            $("#clockBtn").click(function() {
+                $(".hidden").fadeOut("100");
+                setTimeout(function() {
+                    $("#clock").fadeIn("100");
+                }, 500);
+            });
+
+            $("#stopwatchBtn").click(function() {
+                $(".hidden").fadeOut("100");
+                setTimeout(function() {
+                    $("#stopwatch").fadeIn("100");
+                }, 500);
+            });
+
+            $("#countdownBtn").click(function () {
+                $(".hidden").fadeOut("100");
+                setTimeout(function() {
+                    $("#countdown").fadeIn("100");
+                }, 500);
+            });
+
+            // 时钟功能
+            function displayClock() {
+                var currentTime = new Date();
+                var hours = currentTime.getHours();
+                var minutes = currentTime.getMinutes();
+                var seconds = currentTime.getSeconds();
+                // 添加前导零
+                hours = (hours < 10 ? "0" : "") + hours;
+                minutes = (minutes < 10 ? "0" : "") + minutes;
+                seconds = (seconds < 10 ? "0" : "") + seconds;
+                // 将时间显示在页面上
+                $("#clockDisplay").html(hours + ":" + minutes + ":" + seconds);
+                // 计算更新的时间点
+                var nextUpdate = 1000 - (currentTime.getTime() % 1000);
+                setTimeout(displayClock, nextUpdate); // 每秒更新一次
+            }
+            displayClock();
+
+            // 秒表功能
+            var stopwatchStartTime;
+            var stopwatchIsRunning = false;
+
+            $("#startStopwatch").click(function () {
+                if (!stopwatchIsRunning) {
+                    stopwatchStartTime = new Date().getTime();
+                    stopwatchIsRunning = true;
+                    updateStopwatch();
+                }
+            });
+
+            $("#stopStopwatch").click(function () {
+                stopwatchIsRunning = false;
+            });
+
+            $("#resetStopwatch").click(function () {
+                stopwatchIsRunning = false;
+                $("#stopwatchDisplay").html("00:00:00.00");
+            });
+
+            function updateStopwatch() {
+                if (stopwatchIsRunning) {
+                    var currentTime = new Date().getTime();
+                    var elapsedTime = currentTime - stopwatchStartTime;
+                    var hours = Math.floor(elapsedTime / 3600000);
+                    var minutes = Math.floor((elapsedTime % 3600000) / 60000);
+                    var seconds = Math.floor((elapsedTime % 60000) / 1000);
+                    var milliseconds = Math.floor((elapsedTime % 1000) / 10);
+                    // 添加前导零和格式化毫秒部分
+                    hours = (hours < 10 ? "0" : "") + hours;
+                    minutes = (minutes < 10 ? "0" : "") + minutes;
+                    seconds = (seconds < 10 ? "0" : "") + seconds;
+                    milliseconds = (milliseconds < 10 ? "0" : "") + milliseconds;
+                    // 将时间显示在页面上
+                    $("#stopwatchDisplay").html(hours + ":" + minutes + ":" + seconds + "." + milliseconds);
+                    setTimeout(updateStopwatch, 10); // 更新频率设为10毫秒
+                }
+            }
+
+            // 倒计时器功能
+            var countdownTime = 0; // 设置倒计时时长为300秒（即5分钟）
+            var countdownIsRunning = false;
+
+            $("#setCountdownBtn").click(function () {
+                var inputValue = parseInt($("#countdownInput").val());
+                if (!isNaN(inputValue)) {
+                    countdownTime = inputValue;
+                    updateCountdownDisplay();
+                }
+            });
+
+            $("#startCountdown").click(function () {
+                if (!countdownIsRunning) {
+                    countdownIsRunning = true;
+                    updateCountdown();
+                }
+            });
+
+            $("#pauseCountdown").click(function () {
+                countdownIsRunning = false;
+            });
+
+            $("#resetCountdown").click(function () {
+                countdownIsRunning = false;
+                countdownTime = 0;
+                updateCountdownDisplay();
+            });
+
+            function updateCountdownDisplay() {
+                var hours = Math.floor(countdownTime / 3600);
+                var minutes = Math.floor((countdownTime % 3600) / 60);
+                var seconds = countdownTime % 60;
+                // 添加前导零
+                hours = (hours < 10 ? "0" : "") + hours;
+                minutes = (minutes < 10 ? "0" : "") + minutes;
+                seconds = (seconds < 10 ? "0" : "") + seconds;
+                // 将剩余时间显示在页面上
+                $("#countdownDisplay").html(hours + ":" + minutes + ":" + seconds);
+            }
+
+            function updateCountdown() {
+                if (countdownIsRunning && countdownTime > 0) {
+                    countdownTime--; // 每秒减少1秒
+                    updateCountdownDisplay(); // 更新显示
+                    setTimeout(updateCountdown, 1000); // 每秒更新一次
+                } else if (countdownTime === 0) {
+                    countdownIsRunning = false;
+                    // 倒计时结束时执行的操作
+                    alert("倒计时结束！");
+                }
+            }
+        });
+
+        // 获取页脚内容
+        window.onload = function () {
+            fetch('../../../footer/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        };
+    </script>
+</body>
+
+</html>

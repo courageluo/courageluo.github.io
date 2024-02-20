@@ -31,12 +31,17 @@
             <a href="content/Contest1009(Div.2)/index.html">
                 <p>Contest 1009 - 下北泽奥林匹克信息雷厉风行科普赛(Div.2场)部分题解 - NZOJ</p>
             </a>
-            <p style="text-align: right;">修改时间：<span  id="lastModifiedContest1009"></span></p>
+            <p style="text-align: right;">修改时间：<span id="lastModifiedContest1009"></span></p>
             <hr>
             <a href="content/SearchAndTrace/index.html">
                 <p>搜索与回溯算法</p>
             </a>
-            <p style="text-align: right;">修改时间：<span  id="lastModifiedSearchTrace"></span></p>
+            <p style="text-align: right;">修改时间：<span id="lastModifiedSearchTrace"></span></p>
+            <hr>
+            <a href="content/jQueryClock/index.html">
+                <p>使用jQuery实现的时钟</p>
+            </a>
+            <p style="text-align: right;">修改时间：<span id="lastModifiedJqueryClock"></span></p>
             <hr>
         </div>
     </div>
@@ -103,6 +108,9 @@
 
                 const modifiedSearchTrace = data['search.trace'];
                 document.getElementById("lastModifiedSearchTrace").textContent = modifiedSearchTrace;
+                
+                const modifiedJqueryClock = data['jquery.clock'];
+                document.getElementById("lastModifiedJqueryClock").textContent = modifiedJqueryClock;
             })
 
         // 获取页脚内容

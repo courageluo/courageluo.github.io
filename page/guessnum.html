@@ -22,7 +22,7 @@
             <p>请在<span id="rangeText">1到100</span>之间猜一个数字。</p>
             <p id="hint">提示：<span id="hintText">1~100</span></p>
             <!-- 输入框 -->
-            <input type="number" id="userGuess" min="1" max="100">
+            <input type="number" id="userGuess" min="1" max="100" placeholder="你的猜测...">
             <br>
             <!-- 提交按钮 -->
             <button id="submitButton" onclick="checkGuess()">提交</button>
@@ -173,6 +173,7 @@
     </style>
 
     <!-- 内部JS文件 -->
+    <script src="../blog/jquery/jquery-3.7.1.js"></script>
     <script>
         // 生成随机数
         let randomNum = Math.floor(Math.random() * 100) + 1;
@@ -338,6 +339,14 @@
         // 设置返回主页的按钮
         backHome.addEventListener("click", function () {
             window.location.href = "../index.html";
+        });
+
+        $(document).ready(function() {
+            $("#userGuess").keypress(function(event) {
+                if (event.keyCode === 13) {
+                    $("#submitButton").click();
+                }
+            });
         });
 
         // 获取页脚内容

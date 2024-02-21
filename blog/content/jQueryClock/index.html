@@ -1,11 +1,11 @@
-<!-- jQuery实现的时钟 -->
+<!-- 使用jQuery实现的时钟 -->
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jQuery实现的时钟</title>
+    <title>使用jQuery实现的时钟</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="../../../css/styles.css">
     <link rel="stylesheet" type="text/css" href="../../prismjs/prism.css">
@@ -15,7 +15,7 @@
     <div class="content">
         <!-- 标题框 -->
         <div class="rounded-box1">
-            <h1 style="text-align: center;">jQuery实现的时钟</h1>
+            <h1 style="text-align: center;">使用jQuery实现的时钟</h1>
         </div>
 
         <!-- 内容框 -->
@@ -32,33 +32,30 @@
                 <button id="stopwatchBtn">秒表</button>
                 <button id="countdownBtn">倒计时</button>
             </div>
-        </div>
-        <div class="rounded-box3">
-            <div id="clock" class="hidden">
+            <div id="clock" class="hidden" style="text-align: center;">
                 <div id="clockDisplay" style="font-size: 50px; font-family: time; text-align: center;"></div>
+                <div id="currentDate" style="margin-bottom: 10px;"></div>
             </div>
             <div id="stopwatch" class="hidden">
                 <div id="stopwatchDisplay" style="font-size: 50px; font-family: time; text-align: center;">00:00:00.00</div>
                 <div id="stopwatchCtrlBtn" style="display: flex; justify-content: center; margin-bottom: 10px;">
-                    <button id="startStopwatch">开始</button>
-                    <button id="stopStopwatch" style="margin-left: 10px;">停止</button>
+                    <button id="toggleStopwatch">开始</button>
                     <button id="resetStopwatch" style="margin-left: 10px;">重置</button>
                 </div>
             </div>
             <div id="countdown" class="hidden">
                 <div id="countdownDisplay" style="font-size: 50px; font-family: time; text-align: center;">00:00:00</div>
                 <div id="countdownCtrlBtn" style="display: flex; justify-content: center; margin-bottom: 10px;">
-                    <button id="startCountdown">开始</button>
-                    <button id="pauseCountdown" style="margin-left: 10px;">暂停</button>
+                    <button id="toggleCountdown">开始</button>
                     <button id="resetCountdown" style="margin-left: 10px;">重置</button>
                     <input type="number" id="countdownInput" placeholder="秒数" style="margin-left: 10px; width: 50px;">
-                    <button id="setCountdownBtn" style="margin-left: 10px;">确定</button>
+                    <button id="setCountdown" style="margin-left: 10px;">确定</button>
                 </div>
             </div>
         </div>
         <div class="rounded-box2">
             <p id="jqueryVersionDisplay"></p>
-            <p>
+            <p style="margin-top: -1em;">
                 您可以在<a href="../../jquery/jquery-3.7.1.js">这里</a>查看或下载，也可以点击<a href="https://jquery.com">这里</a>访问官网。
             </p>
         </div>
@@ -193,7 +190,7 @@
                 }, 500);
             });
 
-            $("#countdownBtn").click(function () {
+            $("#countdownBtn").click(function() {
                 $(".hidden").fadeOut("100");
                 setTimeout(function() {
                     $("#countdown").fadeIn("100");
@@ -206,6 +203,10 @@
                 var hours = currentTime.getHours();
                 var minutes = currentTime.getMinutes();
                 var seconds = currentTime.getSeconds();
+                var days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+                var dayOfWeek = days[currentTime.getDay()];
+                var date = currentTime.getFullYear() + '年' + (currentTime.getMonth() + 1) + '月' + currentTime.getDate() + '日';
+                $("#currentDate").text(date + " " + dayOfWeek);
                 // 添加前导零
                 hours = (hours < 10 ? "0" : "") + hours;
                 minutes = (minutes < 10 ? "0" : "") + minutes;
@@ -221,28 +222,35 @@
             // 秒表功能
             var stopwatchStartTime;
             var stopwatchIsRunning = false;
+            var elapsedTime = 0;
 
-            $("#startStopwatch").click(function () {
+            $("#toggleStopwatch").click(function() {
                 if (!stopwatchIsRunning) {
-                    stopwatchStartTime = new Date().getTime();
+                    if (elapsedTime === 0) {
+                        stopwatchStartTime = new Date().getTime();
+                    } else {
+                        stopwatchStartTime = new Date().getTime() - elapsedTime;
+                    }
                     stopwatchIsRunning = true;
+                    $(this).text("暂停");
                     updateStopwatch();
+                } else {
+                    stopwatchIsRunning = false;
+                    $(this).text("继续");
                 }
             });
 
-            $("#stopStopwatch").click(function () {
+            $("#resetStopwatch").click(function() {
                 stopwatchIsRunning = false;
-            });
-
-            $("#resetStopwatch").click(function () {
-                stopwatchIsRunning = false;
+                elapsedTime = 0;
                 $("#stopwatchDisplay").html("00:00:00.00");
+                $("#toggleStopwatch").text("开始");
             });
 
             function updateStopwatch() {
                 if (stopwatchIsRunning) {
                     var currentTime = new Date().getTime();
-                    var elapsedTime = currentTime - stopwatchStartTime;
+                    elapsedTime = currentTime - stopwatchStartTime;
                     var hours = Math.floor(elapsedTime / 3600000);
                     var minutes = Math.floor((elapsedTime % 3600000) / 60000);
                     var seconds = Math.floor((elapsedTime % 60000) / 1000);
@@ -259,56 +267,74 @@
             }
 
             // 倒计时器功能
-            var countdownTime = 0; // 设置倒计时时长为300秒（即5分钟）
+            var countdownTime = 0;
+            var initialCountdownTime = 0;
             var countdownIsRunning = false;
+            var countdownInterval;
+            var isTip = false;
 
-            $("#setCountdownBtn").click(function () {
-                var inputValue = parseInt($("#countdownInput").val());
-                if (!isNaN(inputValue)) {
-                    countdownTime = inputValue;
-                    updateCountdownDisplay();
+            function tipNaN() {
+                if (isNaN(countdownTime) || countdownTime <= 0) {
+                    alert("请输入大于0的秒数");
+                    isTip = true;
+                    return;
+                } else {
+                    isTip = false;
                 }
+            }
+
+            $("#setCountdown").click(function() {
+                countdownTime = parseInt($("#countdownInput").val());
+                tipNaN();
+                initialCountdownTime = countdownTime;
+                $("#toggleCountdown").text("开始");
+                $("#countdownDisplay").text(formatTime(countdownTime));
             });
 
-            $("#startCountdown").click(function () {
-                if (!countdownIsRunning) {
-                    countdownIsRunning = true;
-                    updateCountdown();
+            $("#toggleCountdown").click(function() {
+                tipNaN();
+                if (countdownIsRunning) {
+                    clearInterval(countdownInterval);
+                    $(this).text("继续");
+                } else {
+                    $(this).text("暂停");
+                    countdownInterval = setInterval(updateCountdown, 1000);
                 }
+                countdownIsRunning = !countdownIsRunning;
             });
 
-            $("#pauseCountdown").click(function () {
+            $("#resetCountdown").click(function() {
+                clearInterval(countdownInterval);
                 countdownIsRunning = false;
+                $("#toggleCountdown").text("开始");
+                countdownTime = initialCountdownTime;
+                $("#countdownDisplay").text(formatTime(countdownTime));
             });
 
-            $("#resetCountdown").click(function () {
-                countdownIsRunning = false;
-                countdownTime = 0;
-                updateCountdownDisplay();
-            });
+            function updateCountdown() {
+                if (countdownTime > 0) {
+                    countdownTime--;
+                    $("#countdownDisplay").text(formatTime(countdownTime));
+                } else {
+                    clearInterval(countdownInterval);
+                    countdownIsRunning = false;
+                    $("#toggleCountdown").text("开始");
+                    if (isTip === false) {
+                        alert("倒计时结束！");
+                    }
+                }
+            }
 
-            function updateCountdownDisplay() {
-                var hours = Math.floor(countdownTime / 3600);
-                var minutes = Math.floor((countdownTime % 3600) / 60);
-                var seconds = countdownTime % 60;
+            function formatTime(time) {
+                var hours = Math.floor(time / 3600);
+                var minutes = Math.floor((time % 3600) / 60);
+                var seconds = time % 60;
                 // 添加前导零
                 hours = (hours < 10 ? "0" : "") + hours;
                 minutes = (minutes < 10 ? "0" : "") + minutes;
                 seconds = (seconds < 10 ? "0" : "") + seconds;
-                // 将剩余时间显示在页面上
-                $("#countdownDisplay").html(hours + ":" + minutes + ":" + seconds);
-            }
-
-            function updateCountdown() {
-                if (countdownIsRunning && countdownTime > 0) {
-                    countdownTime--; // 每秒减少1秒
-                    updateCountdownDisplay(); // 更新显示
-                    setTimeout(updateCountdown, 1000); // 每秒更新一次
-                } else if (countdownTime === 0) {
-                    countdownIsRunning = false;
-                    // 倒计时结束时执行的操作
-                    alert("倒计时结束！");
-                }
+                // 格式化时间
+                return hours + ":" + minutes + ":" + seconds;
             }
         });
 

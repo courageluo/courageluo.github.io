@@ -43,6 +43,11 @@
             </a>
             <p style="text-align: right;">修改时间：<span id="lastModifiedJqueryClock"></span></p>
             <hr>
+            <a href="content/math-10s-review/index.html">
+                <p>高一上数学复习</p>
+            </a>
+            <p style="text-align: right;">修改时间：<span id="lastModifiedMath10sReview"></span></p>
+            <hr>
         </div>
     </div>
 
@@ -111,6 +116,9 @@
                 
                 const modifiedJqueryClock = data['jquery.clock'];
                 document.getElementById("lastModifiedJqueryClock").textContent = modifiedJqueryClock;
+
+                const modifiedMath10sReview = data['math10s.review'];
+                document.getElementById("lastModifiedMath10sReview").textContent = modifiedMath10sReview;
             })
 
         // 获取页脚内容

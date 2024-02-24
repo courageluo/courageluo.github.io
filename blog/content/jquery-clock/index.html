@@ -55,7 +55,7 @@
         <div class="rounded-box2">
             <p id="jqueryVersionDisplay"></p>
             <p style="margin-top: -1em;">
-                您可以在<a href="../../jquery/jquery-3.7.1.js">这里</a>查看或点击<a href="../../jquery/jquery-3.7.1.js" download="">这里</a>下载，也可以点击<a href="https://jquery.com">这里</a>访问官网。
+                您可以在<a href="../../quote-js/jquery/jquery-3.7.1.js">这里</a>查看或点击<a href="../../quote-js/jquery/jquery-3.7.1.js" download="">这里</a>下载，也可以点击<a href="https://jquery.com">这里</a>访问官网。
             </p>
         </div>
     </div>
@@ -65,6 +65,10 @@
 
     <!-- 内部CSS文件 -->
     <style>
+        a {
+            color: #643092;
+        }
+        
         .hidden {
             display: none;
         }
@@ -143,7 +147,7 @@
     </style>
 
     <!-- 内部JS文件 -->
-    <script src="../../jquery/jquery-3.7.1.js"></script>
+    <script src="../../quote-js/jquery/jquery-3.7.1.js"></script>
     <script>
         function selectMode(mode) {
             if (mode === 'clock') {
@@ -175,24 +179,24 @@
 
             // 处理事件
             $("#clockBtn").click(function() {
-                $(".hidden").fadeOut("100");
+                $(".hidden").fadeOut(100);
                 setTimeout(function() {
-                    $("#clock").fadeIn("100");
-                }, 500);
+                    $("#clock").fadeIn(100);
+                }, 100);
             });
 
             $("#stopwatchBtn").click(function() {
-                $(".hidden").fadeOut("100");
+                $(".hidden").fadeOut(100);
                 setTimeout(function() {
-                    $("#stopwatch").fadeIn("100");
-                }, 500);
+                    $("#stopwatch").fadeIn(100);
+                }, 100);
             });
 
             $("#countdownBtn").click(function() {
-                $(".hidden").fadeOut("100");
+                $(".hidden").fadeOut(100);
                 setTimeout(function() {
-                    $("#countdown").fadeIn("100");
-                }, 500);
+                    $("#countdown").fadeIn(100);
+                }, 100);
             });
 
             // 时钟功能

@@ -19,48 +19,75 @@
 
         <!-- 内容框 -->
         <div class="rounded-box3">
-            <h3>函数</h3>
+            <h3>抽象函数</h3>
+            <hr>
+            <ol>
+                <li>
+                    \( f(x) \)关于\( x=a \)对称 <br>
+                    \( \Leftrightarrow f(a+x)=f(a-x) \) <br>
+                    \( \Leftrightarrow f(2a+x)=f(-x) \)
+                </li>
+                <li>
+                    \( f(x) \)关于\( (a,b) \)对称 <br>
+                    \( \Leftrightarrow f(a+x)+f(a-x)=2b \) <br>
+                    \( \Leftrightarrow f(x)+f(2a-x)=2b \)
+                </li>
+                <li>
+                    \( f(x+a) \)是偶函数 <br>
+                    \( \Leftrightarrow f(x) \)关于\( x=a \)对称 <br>
+                </li>
+                <li>
+                    \( f(x+a) \)是奇函数 <br>
+                    \( \Leftrightarrow f(x) \)关于\( (a,0) \)对称 <br>
+                </li>
+                <li>
+                    \( f(x)=f(x+T) \)，周期为\( T \) <br>
+                    \( f(x+a)=f(x-b) \)，周期为\( a+b \) <br>
+                    \( f(x+T)=-f(x)+k \)，周期为\( 2T \) <br>
+                    \( f(x+a)=-f(x-b) \)，周期为\( 2(a+b) \)
+                </li>
+            </ol>
+            <h3>对数</h3>
             <hr>
             <p>
-                \( f(x) \)关于\( x=a \)对称 <br>
-                \( \Leftrightarrow f(a+x)=f(a-x) \) <br>
-                \( \Leftrightarrow f(2a+x)=f(-x) \)
+                <ol>
+                    <li>\( \log_a(1)=0 \)，\( \log_a(a)=1 \) </li>
+                    <li>\( \log_a(MN)=\log_a(M)+\log_a(N) \) </li>
+                    <li>\( \log_a(\displaystyle\frac{M}{N})=\log_a(M)-\log_a(N) \) </li>
+                    <li>\( \log_a(M^N)=N\log_a(M) \) </li>
+                    <li>\( \log_a(a^k)=k \)，\( a^{\log_a(k)}=k \) </li>
+                    <li>\( \log_a(b)=\displaystyle\frac{\log_c(b)}{\log_c(a)} \) </li>
+                    <li>\( \log_{a^m}(b^n)=\displaystyle\frac{n}{m}\log_a(b) \) </li>
+                </ol>
             </p>
+            <h3>不等式</h3>
+            <hr>
             <p>
-                \( f(x) \)关于\( (a,b) \)对称 <br>
-                \( \Leftrightarrow f(a+x)+f(a-x)=2b \) <br>
-                \( \Leftrightarrow f(x)+f(2a-x)=2b \)
-            </p>
-            <p>
-                \( f(x+a) \)是偶函数 <br>
-                \( \Leftrightarrow f(x) \)关于\( x=a \)对称 <br>
-            </p>
-            <p>
-                \( f(x+a) \)是奇函数 <br>
-                \( \Leftrightarrow f(x) \)关于\( (a,0) \)对称 <br>
-            </p>
-            <p>
-                \( f(x)=f(x+T) \)，周期为\( T \) <br>
-                \( f(x+a)=f(x-b) \)，周期为\( a+b \) <br>
-                \( f(x+T)=-f(x)+k \)，周期为\( 2T \) <br>
-                \( f(x+a)=-f(x-b) \)，周期为\( 2(a+b) \)
+                <ol>
+                    <li>均值不等式(一正二定三相等)：\( a+b\ge 2\sqrt{ab} \)，\( a,b>0 \) </li>
+                    <li>二定三相等：\( a^2+b^2\ge 2ab \)，\( a,b\in \mathbf{R} \) </li>
+                    <li>原型：\( \displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i\ge\sqrt[n]{\prod_{i=1}^{n}x_i} \) </li>
+                    <li>扩展：\( \displaystyle\sqrt{\frac{a^2+b^2}{2}}\ge\frac{a+b}{2}\ge\sqrt{ab}\ge\frac{2}{\displaystyle\frac{1}{a}+\frac{1}{b}} \)，\( a,b>0 \) </li>
+                    <li>柯西不等式：\( (a^2+b^2)(x^2+y^2)\ge(ax+by)^2 \)</li>
+                </ol>
             </p>
             <h3>统计</h3>
             <hr>
-            <p>
-                \( \bar{x}=\displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i=\sum_{i=1}^{n}x_ip_i \) <br>
-                \( s^2=\displaystyle\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar{x})^2 \) <br>
-                \( =\displaystyle\sum_{i=1}^{n}(x_i-\bar{x})^2p_i=\frac{1}{n}\sum_{i=1}^{n}x_i^2-n\bar{x} \)
-            </p>
-            <p>
-                <strong>分层抽样</strong>，若第一层\( m \)个样本，平均数为\( \bar{x} \)，方差为\( s^2 \)；第二层\( n \)个样本，平均数为\( \bar{y} \)，方差为\( t^2 \)，则有：<br>
-                总体平均数\( \bar{a}=\displaystyle\frac{m\bar{x}+n\bar{y}}{m+n} \)，<br>
-                方差\( b^2=\displaystyle\frac{m(s^2+(\bar{x}-\bar{a})^2)+n(t^2+(\bar{y}-\bar{a})^2)}{m+n} \)
-            </p>
-            <p>
-                <strong>等额本息</strong>，若借款\( x \)元，月息为\( a\% \)，分\( m \)个月还清，设每月还\( n \)元，则有：<br>
-                \( x(1+a\%)^m=\displaystyle\sum_{i=0}^{m-1}n(1+a\%)^i \)
-            </p>
+            <ol>
+                <li>
+                    \( \bar{x}=\displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i=\sum_{i=1}^{n}x_ip_i \) <br>
+                    \( s^2=\displaystyle\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar{x})^2=\sum_{i=1}^{n}(x_i-\bar{x})^2p_i=\frac{1}{n}\sum_{i=1}^{n}x_i^2-n\bar{x} \)
+                </li>
+                <li>
+                    <strong>分层抽样</strong>，若第一层\( m \)个样本，平均数为\( \bar{x} \)，方差为\( s^2 \)；第二层\( n \)个样本，平均数为\( \bar{y} \)，方差为\( t^2 \)，则有：<br>
+                    总体平均数\( \bar{a}=\displaystyle\frac{m\bar{x}+n\bar{y}}{m+n} \)，<br>
+                    方差\( b^2=\displaystyle\frac{m(s^2+(\bar{x}-\bar{a})^2)+n(t^2+(\bar{y}-\bar{a})^2)}{m+n} \)
+                </li>
+                <li>
+                    <strong>等额本息</strong>，若借款\( x \)元，月息为\( a\% \)，分\( m \)个月还清，设每月还\( n \)元，则有：<br>
+                    \( x(1+a\%)^m=\displaystyle\sum_{i=0}^{m-1}n(1+a\%)^i \)
+                </li>
+            </ol>
         </div>
     </div>
 
@@ -105,7 +132,7 @@
     </style>
 
     <!-- 内部JS文件 -->
-    <script id="MathJax-script" src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+    <script id="MathJax-script" src="../../quote-js/mathjax/es5/tex-mml-chtml.js"></script>
     <script>
         // 获取页脚内容
         window.onload = function () {

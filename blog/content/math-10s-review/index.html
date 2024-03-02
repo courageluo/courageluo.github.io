@@ -47,36 +47,67 @@
                     \( f(x+a)=-f(x-b) \)，周期为\( 2(a+b) \)
                 </li>
             </ol>
+            <h3>指数</h3>
+            <hr>
+            <ol>
+                <li>
+                    \( a^sa^t=a^{s+t} \)，\( (a^s)^t=a^{st} \)，\( (ab)^s=a^sb^s \) <br>
+                </li>
+                <li>
+                    \( a^{\frac{m}{n}}=\sqrt[n]{a^m} \)，\( n,m\in\mathbf{N}_+ \)
+                </li>
+            </ol>
             <h3>对数</h3>
             <hr>
-            <p>
-                <ol>
-                    <li>\( \log_a(1)=0 \)，\( \log_a(a)=1 \) </li>
-                    <li>\( \log_a(MN)=\log_a(M)+\log_a(N) \) </li>
-                    <li>\( \log_a(\displaystyle\frac{M}{N})=\log_a(M)-\log_a(N) \) </li>
-                    <li>\( \log_a(M^N)=N\log_a(M) \) </li>
-                    <li>\( \log_a(a^k)=k \)，\( a^{\log_a(k)}=k \) </li>
-                    <li>\( \log_a(b)=\displaystyle\frac{\log_c(b)}{\log_c(a)} \) </li>
-                    <li>\( \log_{a^m}(b^n)=\displaystyle\frac{n}{m}\log_a(b) \) </li>
-                </ol>
-            </p>
+            <ol>
+                <li>
+                    \( \log_a(MN)=\log_a(M)+\log_a(N) \) <br>
+                    \( \log_a(M^\alpha)=\alpha\log_a(M) \) <br>
+                    \( \log_a(\displaystyle\frac{M}{N})=\log_a(M)-\log_a(N) \)
+                </li>
+                <li>
+                    推论：\( \log_a(\displaystyle\prod_{i=1}^{k}N_i)=\sum_{i=1}^{k}\log_aN_i \)
+                </li>
+                <li>
+                    \( \log_a(a^k)=k \)，\( a^{\log_a(k)}=k \)
+                </li>
+                <li>
+                    换底公式：\( \log_a(b)=\displaystyle\frac{\log_c(b)}{\log_c(a)} \) <br>
+                    \( \log_{a^m}(b^n)=\displaystyle\frac{n}{m}\log_a(b) \)
+                </li>
+            </ol>
             <h3>不等式</h3>
             <hr>
-            <p>
-                <ol>
-                    <li>均值不等式(一正二定三相等)：\( a+b\ge 2\sqrt{ab} \)，\( a,b>0 \) </li>
-                    <li>二定三相等：\( a^2+b^2\ge 2ab \)，\( a,b\in \mathbf{R} \) </li>
-                    <li>原型：\( \displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i\ge\sqrt[n]{\prod_{i=1}^{n}x_i} \) </li>
-                    <li>扩展：\( \displaystyle\sqrt{\frac{a^2+b^2}{2}}\ge\frac{a+b}{2}\ge\sqrt{ab}\ge\frac{2}{\displaystyle\frac{1}{a}+\frac{1}{b}} \)，\( a,b>0 \) </li>
-                    <li>柯西不等式：\( (a^2+b^2)(x^2+y^2)\ge(ax+by)^2 \)</li>
-                </ol>
-            </p>
+            <ol>
+                <li>
+                    均值不等式(一正二定三相等)：\( a+b\ge 2\sqrt{ab} \)，\( a,b>0 \) <br>
+                    二定三相等：\( a^2+b^2\ge 2ab \)，\( a,b\in \mathbf{R} \)
+                </li>
+                <li>
+                    原型：\( \displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i\ge\sqrt[n]{\prod_{i=1}^{n}x_i} \)
+                </li>
+                <li>
+                    扩展：\( \displaystyle\sqrt{\frac{a^2+b^2}{2}}\ge\frac{a+b}{2}\ge\sqrt{ab}\ge\frac{2}{\displaystyle\frac{1}{a}+\frac{1}{b}} \)，\( a,b>0 \)
+                </li>
+                <li>
+                    柯西不等式：\( (a^2+b^2)(x^2+y^2)\ge(ax+by)^2 \)
+                </li>
+            </ol>
             <h3>统计</h3>
             <hr>
             <ol>
                 <li>
                     \( \bar{x}=\displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i=\sum_{i=1}^{n}x_ip_i \) <br>
                     \( s^2=\displaystyle\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar{x})^2=\sum_{i=1}^{n}(x_i-\bar{x})^2p_i=\frac{1}{n}\sum_{i=1}^{n}x_i^2-n\bar{x} \)
+                </li>
+                <li>
+                    \( \displaystyle\sum_{i=1}^{n}(x_i+y_i)=\sum_{i=1}^{n}x_i+\sum_{i=1}^{n}y_i \) <br>
+                    \( \displaystyle\sum_{i=1}^{n}(kx_i)=k\sum_{i=1}^{n}x_i \) <br>
+                    \( \displaystyle\sum_{i=1}^{n}t=nt \)
+                </li>
+                <li>
+                    若一组数据\( x_1 \)，\( x_2 \)，…，\( x_n \)的平均数为\( \bar{x} \)，方差为\( s^2 \)，且\( a,b \)为常数：<br>
+                    则\( ax_1+b \)，\( ax_2+b \)，…，\( ax_n+b \)的平均数为\( a\bar{x}+b \)，方差为\( a^2s^2 \)
                 </li>
                 <li>
                     <strong>分层抽样</strong>，若第一层\( m \)个样本，平均数为\( \bar{x} \)，方差为\( s^2 \)；第二层\( n \)个样本，平均数为\( \bar{y} \)，方差为\( t^2 \)，则有：<br>
@@ -86,6 +117,33 @@
                 <li>
                     <strong>等额本息</strong>，若借款\( x \)元，月息为\( a\% \)，分\( m \)个月还清，设每月还\( n \)元，则有：<br>
                     \( x(1+a\%)^m=\displaystyle\sum_{i=0}^{m-1}n(1+a\%)^i \)
+                </li>
+            </ol>
+            <h3>向量</h3>
+            <hr>
+            <ol>
+                <li>
+                    始点为\( A \)，终点为\( B \)的有向线段表示的向量，可以记为\( \overrightarrow{AB} \)，但不能写作\( \overleftarrow{BA} \)<br>
+                    印刷时，用\( \boldsymbol{a} \)，\( \boldsymbol{b} \)，\( \boldsymbol{c} \)等表示向量，但书写时，只能写作\( \vec{a} \)，\( \vec{b} \)，\( \vec{c} \)
+                </li>
+                <li>
+                    \( |\mathbf{0}|=0 \)，且\( \mathbf{0} \parallel \boldsymbol{a} \)
+                </li>
+                <li>
+                    \( \overrightarrow{AB}+\overrightarrow{BC}=\overrightarrow{AC} \)，\( \overrightarrow{CA}-\overrightarrow{CB}=\overrightarrow{BA} \)
+                </li>
+                <li>
+                    \( | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}+\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| \) <br>
+                    \( | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}-\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| \)
+                </li>
+                <li>
+                    \( \boldsymbol{a}+\boldsymbol{b}=\boldsymbol{b}+\boldsymbol{a} \) <br>
+                    \( (\boldsymbol{a}+\boldsymbol{b})+\boldsymbol{c}=\boldsymbol{a}+(\boldsymbol{b}+\boldsymbol{c}) \) <br>
+                    \( \lambda(\mu\boldsymbol{a})=(\lambda\mu)\boldsymbol{a}=\lambda\mu\boldsymbol{a} \)
+                </li>
+                <li>
+                    \( \lambda\boldsymbol{a}+\mu\boldsymbol{a}=(\lambda+\mu)\boldsymbol{a} \) <br>
+                    \( \lambda(\boldsymbol{a}+\boldsymbol{b})=\lambda\boldsymbol{a}+\lambda\boldsymbol{b} \)
                 </li>
             </ol>
         </div>

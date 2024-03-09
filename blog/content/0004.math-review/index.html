@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数学知识点记录</title>
+    <title>数学知识点记录 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="../../../css/styles.css">
 </head>
@@ -145,6 +145,13 @@
                     \( \lambda\boldsymbol{a}+\mu\boldsymbol{a}=(\lambda+\mu)\boldsymbol{a} \) <br>
                     \( \lambda(\boldsymbol{a}+\boldsymbol{b})=\lambda\boldsymbol{a}+\lambda\boldsymbol{b} \)
                 </li>
+                <li>
+                    <strong>共线向量基本定理</strong>：如果\( \boldsymbol{a}\ne\boldsymbol{0} \)且\( \boldsymbol{b}\parallel\boldsymbol{a} \)，则存在唯一的实数\( \lambda \)，使得\( \boldsymbol{b}=\lambda\boldsymbol{a} \)<br>
+                    <strong>平面向量基本定理</strong>：如果平面内两个向量\( \boldsymbol{a} \)与\( \boldsymbol{b} \)不共线，则对该平面内任意一个向量\( \boldsymbol{c} \)，存在唯一的实数对\( (x,y) \)，使得\( \boldsymbol{c}=x\boldsymbol{a}+y\boldsymbol{b} \)
+                </li>
+                <li>
+                    平面上有三点\( A \)，\( B \)，\( P \)，则它们共线的充要条件是\( \overrightarrow{OP}=t\overrightarrow{OA}+(1-t)\overrightarrow{OB} \)，其中\( t\in\mathbf{R} \)
+                </li>
             </ol>
         </div>
     </div>
@@ -193,13 +200,11 @@
     <script id="MathJax-script" src="../../quote-js/mathjax/es5/tex-mml-chtml.js"></script>
     <script>
         // 获取页脚内容
-        window.onload = function () {
-            fetch('../../../footer/footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("footer").innerHTML = data;
-                });
-        };
+        fetch('../../../footer/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
     </script>
 </body>
 

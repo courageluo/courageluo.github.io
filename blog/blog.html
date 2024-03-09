@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人博客</title>
+    <title>个人博客 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
@@ -19,35 +19,14 @@
 
         <!-- 介绍 -->
         <div class="rounded-box2">
-            <p>
-                欢迎来到我的个人博客！虽然目前还没有什么东西，但我计划分享我的学习生活等方面的内容，希望你能喜欢。
-            </p>
+            <p id="random-sentence"></p>
         </div>
 
         <!-- 文章列表 -->
         <div class="rounded-box3">
             <h3 style="text-align: center;">文章列表</h3>
             <hr>
-            <a href="content/contest-1009-div-2/index.html">
-                <p>Contest 1009 - 下北泽奥林匹克信息雷厉风行科普赛(Div.2场)部分题解 - NZOJ</p>
-            </a>
-            <p style="text-align: right;">修改时间：<span id="lastModifiedContest1009"></span></p>
-            <hr>
-            <a href="content/search-trace-algo/index.html">
-                <p>搜索与回溯算法</p>
-            </a>
-            <p style="text-align: right;">修改时间：<span id="lastModifiedSearchTrace"></span></p>
-            <hr>
-            <a href="content/jquery-clock/index.html">
-                <p>使用jQuery实现的时钟</p>
-            </a>
-            <p style="text-align: right;">修改时间：<span id="lastModifiedJqueryClock"></span></p>
-            <hr>
-            <a href="content/math-10s-review/index.html">
-                <p>数学知识点记录</p>
-            </a>
-            <p style="text-align: right;">修改时间：<span id="lastModifiedMath10sReview"></span></p>
-            <hr>
+            <div id="article-list"></div>
         </div>
     </div>
 
@@ -80,6 +59,7 @@
 
         a {
             color: #110c50;
+            text-decoration: none;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -98,37 +78,50 @@
 
     <!-- 内部JS文件 -->
     <script>
-        // 获取修改时间
-        // fetch('content/Contest1009(Div.2).html')
-        //     .then(response => response.headers.get('last-modified'))
-        //     .then(lastModified => {
-        //         const lastModifiedDate = new Date(lastModified);
-        //         document.getElementById("lastModifiedContest1009").textContent = lastModifiedDate.toLocaleString();
-        //     })
-        fetch('lastModified.json')
+        // 随机抽取句子
+        fetch('sentences.json')
             .then(response => response.json())
             .then(data => {
-                const modifiedContest1009 = data['contest1009.div.2'];
-                document.getElementById("lastModifiedContest1009").textContent = modifiedContest1009;
-
-                const modifiedSearchTrace = data['search.trace'];
-                document.getElementById("lastModifiedSearchTrace").textContent = modifiedSearchTrace;
-                
-                const modifiedJqueryClock = data['jquery.clock'];
-                document.getElementById("lastModifiedJqueryClock").textContent = modifiedJqueryClock;
-
-                const modifiedMath10sReview = data['math10s.review'];
-                document.getElementById("lastModifiedMath10sReview").textContent = modifiedMath10sReview;
+                const sentences = data.sentences;
+                const randomIndex = Math.floor(Math.random() * sentences.length);
+                const randomSentence = sentences[randomIndex];
+                const sentenceElement = document.getElementById('random-sentence');
+                sentenceElement.textContent = randomSentence;
             })
+            .catch(error => {
+                console.error('Error fetching JSON file:', error);
+                console.log('Unable to load the sentence.')
+            });
+
+        // 加载文章索引
+        fetch('articles.json')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(article => {
+                    // 创建文章结构
+                    const articleDiv = document.createElement('div');
+                    articleDiv.innerHTML = `
+                        <a href="${article.url}">
+                            <p>${article.title}</p>
+                        </a>
+                        <p style="text-align: right;">修改时间：${article.modified}</p>
+                        <hr>
+                    `;
+                    // 添加到页面上
+                    document.getElementById('article-list').appendChild(articleDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching JSON file:', error);
+                console.log('Unable to load the artical index.');
+            });
 
         // 获取页脚内容
-        window.onload = function() {
-            fetch('../footer/footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("footer").innerHTML = data;
-                });
-        };
+        fetch('../footer/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
     </script>
 </body>
 

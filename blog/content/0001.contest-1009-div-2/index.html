@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contest1009(Div.2场)</title>
+    <title>Contest1009(Div.2场)部分题解 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="../../../css/styles.css">
     <link rel="stylesheet" type="text/css" href="../../quote-js/prismjs/prism.css">
@@ -15,7 +15,7 @@
     <div class="content">
         <!-- 标题框 -->
         <div class="rounded-box1">
-            <h1 style="text-align: center;">Contest1009 - 下北泽奥林匹克信息雷厉风行科普赛(Div.2 场)部分题解</h1>
+            <h1 style="text-align: center;">Contest1009 - 下北泽奥林匹克信息雷厉风行科普赛(Div.2场)部分题解</h1>
         </div>
 
         <!-- 内容跳转框 -->
@@ -508,13 +508,11 @@
         }
 
         // 获取页脚内容
-        window.onload = function () {
-            fetch('../../../footer/footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("footer").innerHTML = data;
-                });
-        };
+        fetch('../../../footer/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
     </script>
 </body>
 

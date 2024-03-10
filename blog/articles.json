@@ -18,5 +18,10 @@
         "url" : "content/0004.math-review/index.html" ,
         "title" : "数学知识点记录" ,
         "modified" : "2024.03.09 21:34"
+    } ,
+    {
+        "url" : "content/0005.cpp-system/index.html" ,
+        "title" : "C++中的system函数" ,
+        "modified" : "2024.03.10 13:08"
     }
 ]

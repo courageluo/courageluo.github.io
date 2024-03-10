@@ -18,7 +18,7 @@
         </div>
 
         <!-- 介绍 -->
-        <div class="rounded-box2">
+        <div class="rounded-box2" id="sentence-box">
             <p id="random-sentence"></p>
         </div>
 
@@ -79,19 +79,39 @@
     <!-- 内部JS文件 -->
     <script>
         // 随机抽取句子
-        fetch('sentences.json')
-            .then(response => response.json())
-            .then(data => {
-                const sentences = data.sentences;
-                const randomIndex = Math.floor(Math.random() * sentences.length);
-                const randomSentence = sentences[randomIndex];
-                const sentenceElement = document.getElementById('random-sentence');
-                sentenceElement.textContent = randomSentence;
-            })
-            .catch(error => {
-                console.error('Error fetching JSON file:', error);
-                console.log('Unable to load the sentence.')
-            });
+        function displayRandomSentence() {
+            fetch('sentences.json')
+                .then(response => response.json())
+                .then(data => {
+                    const sentences = data.sentences;
+                    const randomIndex = Math.floor(Math.random() * sentences.length);
+                    const randomSentence = sentences[randomIndex];
+                    const sentenceElement = document.getElementById('random-sentence');
+                    sentenceElement.textContent = randomSentence;
+                })
+                .catch(error => {
+                    console.error('Error fetching JSON file:', error);
+                    console.log('Unable to load the sentence.')
+                });
+        }
+
+        function getRandomSentenceIndex(currentIndex, maxIndex) {
+            let newIndex = currentIndex;
+            while (newIndex === currentIndex) {
+                newIndex = Math.floor(Math.random() * maxIndex);
+            }
+            return newIndex;
+        }
+
+        displayRandomSentence();
+
+        document.getElementById('random-sentence').addEventListener('click', () => {
+            displayRandomSentence();
+        });
+
+        document.getElementById('sentence-box').addEventListener('click', () => {
+            displayRandomSentence();
+        });
 
         // 加载文章索引
         fetch('articles.json')

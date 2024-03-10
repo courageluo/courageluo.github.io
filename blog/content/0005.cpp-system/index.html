@@ -1,0 +1,228 @@
+<!-- system() in C++ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++中的system函数 - Courage Luo的网站</title>
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="../../../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../../quote-js/prismjs/prism.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 标题框 -->
+        <div class="rounded-box1">
+            <h1 style="text-align: center;">C++中的system函数</h1>
+        </div>
+
+        <!-- 内容框 -->
+        <div class="rounded-box3">
+            <p>system函数可在Windows、Unix等系统上有效，其用于在C++中执行系统命令，可以使用<code class="language-cpp">stdlib.h</code>、<code class="language-cpp">cstdlib</code>等声明。此函数原型如下：</p>
+            <pre>
+                <code class="language-cpp">
+                    int system(const char *command);
+                </code>
+            </pre>
+            <p>它的作用是执行一个命令行命令，<code class="language-cpp">command</code>是一个指向命令行命令字符串的指针。这里有一些简单的示例：</p>
+            <ol>
+                <li>
+                    清屏
+                    <pre>
+                        <code class="language-cpp">
+                            system("cls");    // Windows
+                            system("clear");  // Unix
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    查看当前目录文件
+                    <pre>
+                        <code class="language-cpp">
+                            system("dir");    // Windows
+                            system("ls -l");  // Unix
+                        </code>
+                    </pre>
+                </li>
+                <li>
+                    删除文件
+                    <pre>
+                        <code class="language-cpp">
+                            system("del file.txt");  // Windows
+                            system("rm file.txt");   // Unix
+                        </code>
+                    </pre>
+                </li>
+            </ol>
+            <p>常用的还有<code class="language-cpp">system("pause")</code>等等。但是使用时要多加考虑，因为执行该命令时有以下繁重的步骤：</p>
+            <ul>
+                <li>
+                    挂起程序，调用操作系统打开系统shell。
+                </li>
+                <li>
+                    操作系统找到等待执行的命令，并分配内存以执行命令。
+                </li>
+                <li>
+                    重新分配内存，退出shell并恢复程序。
+                </li>
+            </ul>
+            <p>
+                我们可以使用一个空指针<code class="language-cpp">NULL</code>来测试OS中是否支持<code class="language-cpp">system()</code>函数：
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;iostream&gt;
+                        #include&lt;cstdlib&gt;
+
+                        int main() {
+                            if (system(NULL)) {
+                                std::cout&lt;&lt;"支持";
+                            } else {
+                                std::cout&lt;&lt;"不支持";
+                            }
+                            return 0;
+                        }
+                    </code>
+                </pre>
+            </p>
+            <p>
+                接下来以Windows系统为例，通过一些示例体现该函数的用法。
+            </p>
+            <p>
+                这是一个实现定时关机的程序：
+            </p>
+            <pre class="line-numbers">
+                <code class="language-cpp">
+                    #include&lt;iostream&gt;
+                    #include&lt;cstdlib&gt;
+                        
+                    int main() {
+                        int seconds;
+                        std::cout&lt;&lt;"请输入一个整数（秒）：";
+                        std::cin&gt;&gt;seconds;
+                        if (seconds&lt;0) {
+                            std::cout&lt;&lt;"输入的整数无效，请输入一个非负整数。"&lt;&lt;std::endl;
+                            return 1;
+                        }
+                        std::string command="shutdown -s -t "+std::to_string(seconds);
+                        int exit_status=system(command.c_str());
+                        if (exit_status==0) {
+                            std::cout&lt;&lt;"将在"&lt;&lt;seconds&lt;&lt;"秒后关机。"&lt;&lt;std::endl;
+                        } else {
+                            std::cout&lt;&lt;"关机命令执行过程中出现错误，退出状态码："&lt;&lt;exit_status&lt;&lt;std::endl;
+                        }
+                        return 0;
+                    }
+                </code>
+            </pre>
+            <p>
+                这个程序让程序等待用户输入一个时间，然后等待该时间后关机。
+            </p>
+            <p>
+                这是一个仿Wordle的小游戏，不过使用了数字代替，这里我们用<code class="language-cpp">system("cls")</code>达到清屏效果，保证游戏体验良好。
+            </p>
+            <pre class="line-numbers">
+                <code class="language-cpp">
+                    #include&lt;bits/stdc++.h&gt;
+                    #define line "----------------"
+                    using namespace std;
+
+                    void print(int i) {
+                        cout&lt;&lt;"Guess the number"&lt;&lt;endl&lt;&lt;" within 5 times"&lt;&lt;endl&lt;&lt;"["&lt;&lt;5-i-1&lt;&lt;" chances rest]"&lt;&lt;endl&lt;&lt;line&lt;&lt;endl;
+                    }
+
+                    int main() {
+                        char answer[5];
+                        srand(time(0));
+                        for (int i=0;i&lt;5;i++) {
+                            answer[i]=rand()%10+48;
+                        }
+                        // cout&lt;&lt;answer&lt;&lt;endl;
+                        char userlog[5][5];
+                        print(-1);
+                        for (int i=0;i&lt;5;i++) {
+                            cout&lt;&lt;"     ";
+                            for (int j=0;j&lt;5;j++) {
+                                cin&gt;&gt;userlog[i][j];
+                            }
+                            system("cls");
+                            int count=0;
+                            print(i);
+                            for (int k=0;k&lt;i+1;k++) {
+                                cout&lt;&lt;"     ";
+                                for (int j=0;j&lt;5;j++) {
+                                    if (userlog[k][j]==answer[j]) {
+                                        printf("\x1b[1;32m");
+                                        cout&lt;&lt;userlog[k][j];
+                                        if (k==i) count++;
+                                        printf("\x1b[0m");
+                                    } else if (find(answer,answer+5,userlog[k][j])!=answer+5) {
+                                        printf("\x1b[1;33m");
+                                        cout&lt;&lt;userlog[k][j];
+                                        printf("\x1b[0m");
+                                    } else if (userlog[k][j]!=answer[j]) {
+                                        printf("\x1b[1;31m");
+                                        cout&lt;&lt;userlog[k][j];
+                                        printf("\x1b[0m");
+                                    }
+                                    if (count==5) {
+                                        cout&lt;&lt;endl&lt;&lt;line&lt;&lt;endl&lt;&lt;"You won!"&lt;&lt;endl&lt;&lt;"Used chances: "&lt;&lt;i+1;
+                                        return 0;
+                                    }
+                                }
+                                cout&lt;&lt;endl;
+                            }
+                        }
+                        cout&lt;&lt;line&lt;&lt;endl&lt;&lt;"You lost!"&lt;&lt;endl&lt;&lt;"The answer is: "&lt;&lt;answer;
+                        return 0;
+                    }
+                </code>
+            </pre>
+            <p>
+                这其中的<code class="language-cpp">printf("\x1b[1;32m")</code>等用于调节字符颜色，注意不能使用<code class="language-cpp">system("color [attr]")</code>来代替，因为该命令会切换全局所有文本的颜色。
+            </p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            background-image: url('../../../img/background/day-blogbackground.svg'); /* 白天模式下的背景图片 */
+            background-repeat: repeat; /* 重复填充背景图片 */
+            background-size: 100%; /* 按比例缩放图片以填满整个容器 */
+            background-attachment: fixed;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--bg-color-dark);
+                color: var(--text-color-dark);
+                background-image: url('../../../img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="../../quote-js/prismjs/prism.js"></script>
+    <script>
+        // 获取页脚内容
+        fetch('../../../footer/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    </script>
+</body>
+
+</html>

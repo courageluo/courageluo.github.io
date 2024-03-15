@@ -28,6 +28,38 @@
             <hr>
             <div id="article-list"></div>
         </div>
+
+        <div class="rounded-box3">
+            <p>以上页面引用外部库文件有：</p>
+            <ol>
+                <li>
+                    <p id="jqueryVersionDisplay"></p>
+                    <p style="text-align: right; margin-top: -1em;">
+                        <a href="./quote-js/jquery/jquery-3.7.1.js">查看</a>
+                        <a href="./quote-js/jquery/jquery-3.7.1.js" download>下载</a>
+                        <a href="https://jquery.com">访问官网</a>
+                    </p>
+                </li>
+                <li>
+                    <strong>MathJax</strong> v3.2.2<br>
+                    用于在网页中显示\( \mathrm{\LaTeX} \)公式
+                    <p style="text-align: right; margin-top: 0em;">
+                        <a href="./quote-js/mathjax/es5/tex-mml-chtml.js">查看</a>
+                        <a href="./quote-js/mathjax/es5/tex-mml-chtml.js" download>下载</a>
+                        <a href="https://www.mathjax.org/">访问官网</a>
+                    </p>
+                </li>
+                <li>
+                    <strong>Prism</strong><br>
+                    用于高亮网页中的代码
+                    <p style="text-align: right; margin-top: 0em;">
+                        <a href="./quote-js/prismjs/prism.js">查看JS</a>
+                        <a href="./quote-js/prismjs/prism.css">查看CSS</a>
+                        <a href="https://prismjs.com/">访问官网</a>
+                    </p>
+                </li>
+            </ol>
+        </div>
     </div>
 
     <!-- 页脚 -->
@@ -77,7 +109,12 @@
     </style>
 
     <!-- 内部JS文件 -->
+    <script src="./quote-js/jquery/jquery-3.7.1.js"></script>
+    <script src="./quote-js/mathjax/es5/tex-mml-chtml.js"></script>
     <script>
+        var jqueryVersion = $.fn.jquery;
+        $("#jqueryVersionDisplay").html("<strong>jQuery</strong> v" + jqueryVersion + "<br>用于简化一些网页中的操作");
+
         // 随机抽取句子
         function displayRandomSentence() {
             fetch('sentences.json')

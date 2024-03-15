@@ -20,7 +20,7 @@
 
         <!-- 内容框 -->
         <div class="rounded-box3">
-            <p>system函数可在Windows、Unix等系统上有效，其用于在C++中执行系统命令，可以使用<code class="language-cpp">stdlib.h</code>、<code class="language-cpp">cstdlib</code>等声明。此函数原型如下：</p>
+            <p>在C++中，system函数可在Windows、Unix等系统上有效，其用于执行系统命令，可以使用<code class="language-cpp">stdlib.h</code>、<code class="language-cpp">cstdlib</code>等声明。此函数原型如下：</p>
             <pre>
                 <code class="language-cpp">
                     int system(const char *command);
@@ -86,8 +86,10 @@
                     </code>
                 </pre>
             </p>
+        </div>
+        <div class="rounded-box3">
             <p>
-                接下来以Windows系统为例，通过一些示例体现该函数的用法。
+                接下来我们以Windows系统为例，通过一些示例体现该函数的用法。
             </p>
             <p>
                 这是一个实现定时关机的程序：
@@ -96,31 +98,58 @@
                 <code class="language-cpp">
                     #include&lt;iostream&gt;
                     #include&lt;cstdlib&gt;
-                        
+                    using namespace std;
+
                     int main() {
                         int seconds;
-                        std::cout&lt;&lt;"请输入一个整数（秒）：";
-                        std::cin&gt;&gt;seconds;
-                        if (seconds&lt;0) {
-                            std::cout&lt;&lt;"输入的整数无效，请输入一个非负整数。"&lt;&lt;std::endl;
+                        cout&lt;&lt;"-----定时关机设定-----"&lt;&lt;endl&lt;&lt;"[输入-1以取消关机计划]"&lt;&lt;endl&lt;&lt;"请输入关机秒数：";
+                        cin&gt;&gt;seconds;
+                        if (seconds==-1) {
+                            int exit_status=system("shutdown -a");
+                            if (exit_status==1116) {
+                                cout&lt;&lt;"[无可用关机计划]";
+                                return 1;
+                            } else {
+                                cout&lt;&lt;"[已取消关机计划]";
+                                return 0;
+                            }
+                        } else if (seconds&lt;0) {
+                            cout&lt;&lt;"[输入的数字无效]"&lt;&lt;endl;
                             return 1;
                         }
-                        std::string command="shutdown -s -t "+std::to_string(seconds);
+                        string command="shutdown -s -t "+to_string(seconds);
                         int exit_status=system(command.c_str());
                         if (exit_status==0) {
-                            std::cout&lt;&lt;"将在"&lt;&lt;seconds&lt;&lt;"秒后关机。"&lt;&lt;std::endl;
+                            cout&lt;&lt;"将在"&lt;&lt;seconds&lt;&lt;"秒后关机"&lt;&lt;endl;
                         } else {
-                            std::cout&lt;&lt;"关机命令执行过程中出现错误，退出状态码："&lt;&lt;exit_status&lt;&lt;std::endl;
+                            cout&lt;&lt;"关机命令执行过程中出现错误，退出状态码："&lt;&lt;exit_status&lt;&lt;endl;
                         }
                         return 0;
                     }
                 </code>
             </pre>
             <p>
-                这个程序让程序等待用户输入一个时间，然后等待该时间后关机。
+                这个程序让程序等待用户输入一个时间，然后等待该时间后关机。由于使用到了<code class="language-cpp">to_string()</code>函数，所以如果编译失败，请在编译选项中加入<code class="language-cpp">"-std=c++11"</code>即可正常编译。<br>
+                当然，如果只需要一个简单的关机功能，我们可以删去大部分的代码，如下所示：
             </p>
+            <pre class="line-numbers">
+                <code class="language-cpp">
+                    #include&lt;iostream&gt;
+                    #include&lt;cstdlib&gt;
+                    using namespace std;
+
+                    int main() {
+                        int seconds;
+                        cout&lt;&lt;"请输入关机秒数：";
+                        cin&gt;&gt;seconds;
+                        system(("shutdown -s -t "+to_string(seconds)).c_str());
+                        cout&lt;&lt;"将在"&lt;&lt;seconds&lt;&lt;"秒后关机"&lt;&lt; endl;
+                        return 0;
+                    }
+                </code>
+            </pre>
             <p>
-                这是一个仿Wordle的小游戏，不过使用了数字代替，这里我们用<code class="language-cpp">system("cls")</code>达到清屏效果，保证游戏体验良好。
+                下面是一个仿Wordle的小游戏，不过使用了数字代替，这里我们用<code class="language-cpp">system("cls")</code>达到清屏效果，保证游戏体验良好。
             </p>
             <pre class="line-numbers">
                 <code class="language-cpp">
@@ -180,7 +209,70 @@
                 </code>
             </pre>
             <p>
-                这其中的<code class="language-cpp">printf("\x1b[1;32m")</code>等用于调节字符颜色，注意不能使用<code class="language-cpp">system("color [attr]")</code>来代替，因为该命令会切换全局所有文本的颜色。
+                这其中的<code class="language-cpp">printf("\x1b[1;32m")</code>等用于调节字符颜色，注意不能使用<code class="language-cpp">system("color [attr]")</code>来代替，因为该命令会切换终端所有文本的颜色。<br>
+                不过在一些设备上可能无法使用上述转义字符更改颜色，我们可以用<code class="language-cpp">SetConsoleTextAttribute()</code>函数来代替。
+            </p>
+            <pre class="line-numbers">
+                <code class="language-cpp">
+                    #include&lt;bits/stdc++.h&gt;
+                    #include&lt;windows.h&gt;
+                    #define line "----------------"
+                    #define setcolor(S) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|S)
+                    using namespace std;
+
+                    void print(int i) {
+                        cout&lt;&lt;"Guess the number"&lt;&lt;endl&lt;&lt;" within 5 times"&lt;&lt;endl&lt;&lt;"["&lt;&lt;5-i-1&lt;&lt;" chances rest]"&lt;&lt;endl&lt;&lt;line&lt;&lt;endl;
+                    }
+
+                    int main() {
+                        char answer[5];
+                        srand(time(0));
+                        for (int i=0;i&lt;5;i++) {
+                            answer[i]=rand()%10+48;
+                        }
+                        // cout&lt;&lt;answer&lt;&lt;endl;
+                        char userlog[5][5];
+                        print(-1);
+                        for (int i=0;i&lt;5;i++) {
+                            cout&lt;&lt;"     ";
+                            for (int j=0;j&lt;5;j++) {
+                                cin&gt;&gt;userlog[i][j];
+                            }
+                            system("cls");
+                            int count=0;
+                            print(i);
+                            for (int k=0;k&lt;i+1;k++) {
+                                cout&lt;&lt;"     ";
+                                for (int j=0;j&lt;5;j++) {
+                                    if (userlog[k][j]==answer[j]) {
+                                        setcolor(FOREGROUND_GREEN);
+                                        cout&lt;&lt;userlog[k][j];
+                                        if (k==i) count++;
+                                        setcolor(FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);
+                                    } else if (find(answer,answer+5,userlog[k][j])!=answer+5) {
+                                        setcolor(FOREGROUND_RED|FOREGROUND_GREEN);
+                                        cout&lt;&lt;userlog[k][j];
+                                        setcolor(FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);
+                                    } else if (userlog[k][j]!=answer[j]) {
+                                        setcolor(FOREGROUND_RED);
+                                        cout&lt;&lt;userlog[k][j];
+                                        setcolor(FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);
+                                    }
+                                    if (count==5) {
+                                        cout&lt;&lt;endl&lt;&lt;line&lt;&lt;endl&lt;&lt;"You won!"&lt;&lt;endl&lt;&lt;"Used chances: "&lt;&lt;i+1;
+                                        return 0;
+                                    }
+                                }
+                                cout&lt;&lt;endl;
+                            }
+                        }
+                        cout&lt;&lt;line&lt;&lt;endl&lt;&lt;"You lost!"&lt;&lt;endl&lt;&lt;"The answer is: "&lt;&lt;answer;
+                        return 0;
+                    }
+                </code>
+            </pre>
+            <p>
+                如上所示，正常运行后效果是相同的。
             </p>
         </div>
     </div>

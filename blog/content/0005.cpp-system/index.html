@@ -274,6 +274,111 @@
             <p>
                 如上所示，正常运行后效果是相同的。
             </p>
+            <p>
+                这里是修改后的版本，与Wordle几乎相同，只是猜测时使用的是小写字母。
+            </p>
+            <pre class="line-numbers">
+                <code class="language-cpp">
+                    #include&lt;bits/stdc++.h&gt;
+                    #define streak "----------------"
+                    using namespace std;
+                        
+                    char usertemp[5],userlog[6][5];
+
+                    void print(int i) {
+                        cout&lt;&lt;"  Guess a word"&lt;&lt;endl&lt;&lt;" within 6 times"&lt;&lt;endl&lt;&lt;"["&lt;&lt;6-i-1&lt;&lt;" chances rest]"&lt;&lt;endl&lt;&lt;streak&lt;&lt;endl;
+                    }
+
+                    int main() {
+                        ifstream file("words.txt");
+                        vector&lt;string&gt; lines;
+                        string line;
+                        srand(time(0));
+                        int temp=rand()%10000;
+                        while (file&gt;&gt;line) {
+                            lines.push_back(line);
+                        }
+                        file.close();
+                        srand(time(0));
+                        int index=max(rand()%10000,temp);
+                        mt19937 rng(static_cast&lt;unsigned int&gt;(time(nullptr)));
+                        shuffle(lines.begin(),lines.end(),rng);
+                        string word=lines[index];
+                        char answer[5];
+                        index=0;
+                        for (char c:word) {
+                            answer[index++]=c;
+                        }
+                        // cout&lt;&lt;answer&lt;&lt;endl;
+                        print(-1);
+                        int i=0,exist;
+                        while (i&lt;6) {
+                            cout&lt;&lt;"     ";
+                            for (int j=0;j&lt;5;j++) {
+                                cin&gt;&gt;usertemp[j];
+                            }
+                            system("cls");
+                            int count=0;
+                            string userans;
+                            for (const auto& letter:usertemp) {
+                                userans+=letter;
+                            }
+                            auto it=find(lines.begin(),lines.end(),userans);
+                            if (it!=lines.end()) {
+                                exist=1;
+                                print(i);
+                                for (int j=0;j&lt;5;j++) {
+                                    userlog[i][j]=usertemp[j];
+                                }
+                            } else {
+                                exist=0;
+                                print(i-1);
+                            }
+                            for (int k=0;k&lt;i+1;k++) {
+                                cout&lt;&lt;"     ";
+                                for (int j=0;j&lt;5;j++) {
+                                    if (userlog[k][j]==answer[j]) {
+                                        printf("\x1b[1;32m");
+                                        cout&lt;&lt;userlog[k][j];
+                                        if (k==i) count++;
+                                        printf("\x1b[0m");
+                                    } else if (find(answer,answer+5,userlog[k][j])!=answer+5) {
+                                        printf("\x1b[1;33m");
+                                        cout&lt;&lt;userlog[k][j];
+                                        printf("\x1b[0m");
+                                    } else if (userlog[k][j]!=answer[j]) {
+                                        printf("\x1b[1;31m");
+                                        cout&lt;&lt;userlog[k][j];
+                                        printf("\x1b[0m");
+                                    }
+                                    if (count==5) {
+                                        cout&lt;&lt;endl&lt;&lt;streak&lt;&lt;endl&lt;&lt;"You won!"&lt;&lt;endl&lt;&lt;"Used chances: "&lt;&lt;i+1;
+                                        return 0;
+                                    }
+                                }
+                                if (exist==0&&k==i) {
+                                    continue;
+                                } else {
+                                    cout&lt;&lt;endl;
+                                }
+                            }
+                            if (exist==1) {
+                                i++;
+                            } else {
+                                printf("\x1b[1;31m");
+                                cout&lt;&lt;userans&lt;&lt;"  &lt;-- Not in word list"&lt;&lt;endl;
+                                printf("\x1b[0m");
+                            }
+                        }
+                        cout&lt;&lt;streak&lt;&lt;endl&lt;&lt;"You lost!"&lt;&lt;endl&lt;&lt;"The answer is: "&lt;&lt;answer;
+                        return 0;
+                    }
+                </code>
+            </pre>
+            <p>
+                由于该程序没有任何优化，所以编译速度很慢。另外，请<a href="./words.txt" download>点击此处</a>下载words.txt文件，并将其放在与该程序相同的目录下方可正常运行。<br>
+                同上，该程序的编译也需要加入<code class="language-cpp">"-std=c++11"</code>选项，并且在必要时使用<code class="language-cpp">SetConsoleTextAttribute()</code>函数代替，这里不再赘述。
+            </p>
         </div>
     </div>
 
@@ -296,11 +401,20 @@
             background-attachment: fixed;
         }
 
+        a {
+            color: #110c50;
+            text-decoration: none;
+        }
+
         @media (prefers-color-scheme: dark) {
             body {
                 background-color: var(--bg-color-dark);
                 color: var(--text-color-dark);
                 background-image: url('../../../img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
+            }
+            
+            a {
+                color: #12efef;
             }
         }
     </style>

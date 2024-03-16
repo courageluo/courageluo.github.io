@@ -157,6 +157,15 @@ input, button {
     background-color: rgba(20, 100, 100, 0.5);
 }
 
+.rounded-box7 {
+    border-radius: 10px;
+    padding: 5px 20px 5px 20px;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(7, 58, 61, 0.75);
+}
+
 .rounded-box2, .rounded-box3, .rounded-box4, .rounded-box5, .rounded-box6 {
     margin: 10px;
     border-radius: 10px;
@@ -166,7 +175,7 @@ input, button {
 }
 
 @media (prefers-color-scheme: dark) {
-    .rounded-box2, .rounded-box3, .rounded-box3p, .rounded-box4, .rounded-box5, .rounded-box6 {
+    .rounded-box2, .rounded-box3, .rounded-box3p, .rounded-box4, .rounded-box5, .rounded-box6, .rounded-box7 {
         color: white;
     }
 }

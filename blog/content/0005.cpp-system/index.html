@@ -212,7 +212,7 @@
                 这其中的<code class="language-cpp">printf("\x1b[1;32m")</code>等用于调节字符颜色，注意不能使用<code class="language-cpp">system("color [attr]")</code>来代替，因为该命令会切换终端所有文本的颜色。<br>
                 不过在一些设备上可能无法使用上述转义字符更改颜色，我们可以用<code class="language-cpp">SetConsoleTextAttribute()</code>函数来代替。
             </p>
-            <pre class="line-numbers">
+            <pre class="line-numbers" style="height: 250px;">
                 <code class="language-cpp">
                     #include&lt;bits/stdc++.h&gt;
                     #include&lt;windows.h&gt;

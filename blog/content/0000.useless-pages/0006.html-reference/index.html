@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML参考手册 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
-    <link rel="stylesheet" type="text/css" href="../../../css/styles.css">
-    <link rel="stylesheet" type="text/css" href="../../quote-js/prismjs/prism.css">
+    <link rel="stylesheet" type="text/css" href="../../../../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../../../quote-js/prismjs/prism.css">
 </head>
 
 <body>
@@ -210,8 +210,8 @@
                 <div class="rounded-box7">
                     <div id="target"><p>定位到这里 - div id="target"</p></div>
                     <p><a href="https://courageluo.github.io">网站链接 - courageluo.github.io</a></p>
-                    <p><a href="../../../index.html">站内链接 - ../../../index.html</a></p>
-                    <p><a href="../../../index.html" target="_blank">在新窗口打开链接 - target="_blank"</a></p>
+                    <p><a href="../../../../index.html">站内链接 - ../../../index.html</a></p>
+                    <p><a href="../../../../index.html" target="_blank">在新窗口打开链接 - target="_blank"</a></p>
                     <p><a href="mailto:someone@example.com?Subject=Hello%20again" target="_top">Email链接 - 发送“Hello again”</a></p>
                     <p><a href="#target" class="scroll-link">锚点链接 - #target</a></p>
                 </div>
@@ -316,7 +316,7 @@
             min-height: 100vh;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
-            background-image: url('../../../img/background/day-blogbackground.svg'); /* 白天模式下的背景图片 */
+            background-image: url('../../../../img/background/day-blogbackground.svg'); /* 白天模式下的背景图片 */
             background-repeat: repeat; /* 重复填充背景图片 */
             background-size: 100%; /* 按比例缩放图片以填满整个容器 */
             background-attachment: fixed;
@@ -331,7 +331,7 @@
             body {
                 background-color: var(--bg-color-dark);
                 color: var(--text-color-dark);
-                background-image: url('../../../img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
+                background-image: url('../../../../img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
             }
 
             a {
@@ -357,7 +357,7 @@
     </style>
 
     <!-- 内部JS文件 -->
-    <script src="../../quote-js/prismjs/prism.js"></script>
+    <script src="../../../quote-js/prismjs/prism.js"></script>
     <script>
         // 获取所有带有特定类名的链接元素
         var scrollLinks = document.querySelectorAll('.scroll-link');
@@ -378,7 +378,7 @@
         });
 
         // 获取页脚内容
-        fetch('../../../footer/footer.html')
+        fetch('../../../../footer/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById("footer").innerHTML = data;

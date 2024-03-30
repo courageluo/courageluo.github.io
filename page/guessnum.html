@@ -258,6 +258,13 @@
 
         // 重置游戏
         function resetGame() {
+            if (document.getElementById("minInput").value!=1 || document.getElementById("maxInput").value!=100) {
+                min = parseInt(document.getElementById("minInput").value);
+                max = parseInt(document.getElementById("maxInput").value);
+            } else {
+                min = 1;
+                max = 100;
+            }
             randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
             checkCount = 0;
             document.getElementById("userGuess").value = "";

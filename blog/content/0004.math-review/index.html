@@ -17,9 +17,28 @@
             <h1 style="text-align: center;">数学知识点</h1>
         </div>
 
+        <!-- 索引框 -->
+        <div class="rounded-box3">
+            <h3 id="index">索引目录</h3>
+            <hr>
+            <ul style="column-count: 2;">
+                <li><a href="#abstract-function" class="scroll-link">抽象函数</a></li>
+                <li><a href="#exp" class="scroll-link">指数</a></li>
+                <li><a href="#log" class="scroll-link">对数</a></li>
+                <li><a href="#inequality" class="scroll-link">不等式</a></li>
+                <li><a href="#statistic" class="scroll-link">统计</a></li>
+                <li><a href="#vector" class="scroll-link">向量</a></li>
+                <li><a href="#angle" class="scroll-link">角</a></li>
+                <li><a href="#trig-function" class="scroll-link">三角函数</a></li>
+            </ul>
+        </div>
+
         <!-- 内容框 -->
         <div class="rounded-box3">
-            <h3>抽象函数</h3>
+            <div class="container">
+                <h3 id="abstract-function" class="section-title">抽象函数</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
             <hr>
             <ol>
                 <li>
@@ -47,7 +66,10 @@
                     \( f(x+a)=-f(x-b) \)，周期为\( 2(a+b) \)
                 </li>
             </ol>
-            <h3>指数</h3>
+            <div class="container">
+                <h3 id="exp" class="section-title">指数</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
             <hr>
             <ol>
                 <li>
@@ -57,7 +79,10 @@
                     \( a^{\frac{m}{n}}=\sqrt[n]{a^m} \)，\( n,m\in\mathbf{N}_+ \)
                 </li>
             </ol>
-            <h3>对数</h3>
+            <div class="container">
+                <h3 id="log" class="section-title">对数</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
             <hr>
             <ol>
                 <li>
@@ -76,7 +101,10 @@
                     \( \log_{a^m}(b^n)=\displaystyle\frac{n}{m}\log_a(b) \)
                 </li>
             </ol>
-            <h3>不等式</h3>
+            <div class="container">
+                <h3 id="inequality" class="section-title">不等式</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
             <hr>
             <ol>
                 <li>
@@ -93,7 +121,10 @@
                     柯西不等式：\( (a^2+b^2)(x^2+y^2)\ge(ax+by)^2 \)
                 </li>
             </ol>
-            <h3>统计</h3>
+            <div class="container">
+                <h3 id="statistic" class="section-title">统计</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
             <hr>
             <ol>
                 <li>
@@ -119,7 +150,10 @@
                     \( x(1+a\%)^m=\displaystyle\sum_{i=0}^{m-1}n(1+a\%)^i \)
                 </li>
             </ol>
-            <h3>向量</h3>
+            <div class="container">
+                <h3 id="vector" class="section-title">向量</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
             <hr>
             <ol>
                 <li>
@@ -163,7 +197,10 @@
                     \( \boldsymbol{a}\parallel\boldsymbol{b}\Leftrightarrow x_1y_2=x_2y_1 \)
                 </li>
             </ol>
-            <h3>角</h3>
+            <div class="container">
+                <h3 id="angle" class="section-title">角</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
             <hr>
             <ol>
                 <li>
@@ -181,84 +218,143 @@
                     角\( \alpha \)的终边与角\( \beta \)的终边关于角\( \displaystyle\frac{\alpha+\beta}{2} \)的终边对称
                 </li>
             </ol>
-            <h3>三角函数</h3>
+            <div class="container">
+                <h3 id="trig-function" class="section-title">三角函数</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
             <hr>
             <ol>
+                <li>
+                    特殊值<br>
+                    <table border="2" style="width: 100%; text-align: center; margin: 3px 0;">
+                        <tr>
+                            <td>\( \alpha \)</td>
+                            <td>\( 0 \)</td>
+                            <td>\( \displaystyle\frac{\pi}{6} \)</td>
+                            <td>\( \displaystyle\frac{\pi}{4} \)</td>
+                            <td>\( \displaystyle\frac{\pi}{3} \)</td>
+                            <td>\( \displaystyle\frac{\pi}{2} \)</td>
+                        </tr>
+                        <tr>
+                            <td>\( \sin\alpha \)</td>
+                            <td>\( 0 \)</td>
+                            <td>\( \displaystyle\frac{1}{2} \)</td>
+                            <td>\( \displaystyle\frac{\sqrt{2}}{2} \)</td>
+                            <td>\( \displaystyle\frac{\sqrt{3}}{2} \)</td>
+                            <td>\( 1 \)</td>
+                        </tr>
+                        <tr>
+                            <td>\( \cos\alpha \)</td>
+                            <td>\( 1 \)</td>
+                            <td>\( \displaystyle\frac{\sqrt{3}}{2} \)</td>
+                            <td>\( \displaystyle\frac{\sqrt{2}}{2} \)</td>
+                            <td>\( \displaystyle\frac{1}{2} \)</td>
+                            <td>\( 0 \)</td>
+                        </tr>
+                        <tr>
+                            <td>\( \tan\alpha \)</td>
+                            <td>\( 0 \)</td>
+                            <td>\( \displaystyle\frac{\sqrt{3}}{3} \)</td>
+                            <td>\( 1 \)</td>
+                            <td>\( \displaystyle\sqrt{3} \)</td>
+                            <td>\( / \)</td>
+                        </tr>
+                    </table>
+                </li>
                 <li>
                     同角三角函数基本关系式<br>
                     \( \sin^2\alpha+\cos^2\alpha=1 \)<br>
                     \( \tan\alpha=\displaystyle\frac{\sin\alpha}{\cos\alpha} \)
                 </li>
                 <li>
-                    诱导公式
-                    <div style="height: 5px;"></div>
-                    ①\( \left \{
+                    诱导公式<br>
+                    (奇变偶不变，符号看象限)<br>
+                    ①<div class="formula-rectangle">
+                    \( 
                         \begin{align*}
                             &\sin(\alpha+k\cdot 2\pi)=\sin\alpha \\
                             &\cos(\alpha+k\cdot 2\pi)=\cos\alpha \\
-                            &\tan(\alpha+k\cdot 2\pi)=\tan\alpha
+                            &\tan(\alpha+k\cdot 2\pi)=\tan\alpha \\
+                            &(k\in \mathbf{Z})
                         \end{align*}
-                        \right .
                     \)
-                    <div style="height: 5px;"></div>
-                    ②\( \left \{
+                    </div>
+                    <br>
+                    ②<div class="formula-rectangle">
+                    \( 
                         \begin{align*}
                             &\sin(-\alpha)=-\sin\alpha \\
                             &\cos(-\alpha)=\cos\alpha \\
                             &\tan(-\alpha)=-\tan\alpha 
                         \end{align*}
-                        \right .
                     \)
-                    <div style="height: 5px;"></div>
-                    ③\( \left \{
+                    </div>
+                    <br>
+                    ③<div class="formula-rectangle">
+                    \( 
                         \begin{align*}
                             &\sin(\pi-\alpha)=\sin\alpha \\
                             &\cos(\pi-\alpha)=-\cos\alpha \\
                             &\tan(\pi-\alpha)=-\tan\alpha
-                        \end{align*}
-                        \right. 
+                        \end{align*} 
                     \)
-                    <div style="height: 5px;"></div>
-                    ④\( \left \{
+                    </div>
+                    <br>
+                    ④<div class="formula-rectangle">
+                    \( 
                         \begin{align*}
                             &\sin(\pi+\alpha)=-\sin\alpha \\
                             &\cos(\pi+\alpha)=-\cos\alpha \\
                             &\tan(\pi+\alpha)=\tan\alpha
-                        \end{align*}
-                        \right. 
+                        \end{align*} 
                     \)
-                    <div style="height: 5px;"></div>
-                    ⑤\( \left \{
+                    </div>
+                    <br>
+                    ⑤<div class="formula-rectangle">
+                    \( 
                         \begin{align*}
                             &\sin(\displaystyle\frac{\pi}{2}-\alpha)=\cos\alpha \\
                             &\cos(\displaystyle\frac{\pi}{2}-\alpha)=\sin\alpha
-                        \end{align*}
-                        \right. 
+                        \end{align*} 
                     \)
-                    <div style="height: 5px;"></div>
-                    ⑥\( \left \{
+                    </div>
+                    <br>
+                    ⑥<div class="formula-rectangle">
+                    \( 
                         \begin{align*}
                             &\sin(\displaystyle\frac{\pi}{2}+\alpha)=\cos\alpha \\
                             &\cos(\displaystyle\frac{\pi}{2}+\alpha)=-\sin\alpha
-                        \end{align*}
-                        \right. 
+                        \end{align*} 
                     \)
-                    <div style="height: 5px;"></div>
-                    ⑦\( \left \{
+                    </div>
+                    <br>
+                    ⑦<div class="formula-rectangle">
+                    \(
                         \begin{align*}
                             &\sin(\displaystyle\frac{3\pi}{2}+\alpha)=\sin\alpha \\
                             &\cos(\displaystyle\frac{3\pi}{2}+\alpha)=-\cos\alpha
                         \end{align*}
-                        \right. 
                     \)
-                    <div style="height: 5px;"></div>
-                    ⑧\( \left \{
-                        \begin{align*}
-                            &\sin(\displaystyle\frac{3\pi}{2}-\alpha)=-\sin\alpha \\
-                            &\cos(\displaystyle\frac{3\pi}{2}-\alpha)=-\cos\alpha
-                        \end{align*}
-                        \right. 
-                    \)
+                    </div>
+                    <br>
+                    ⑧<div class="formula-rectangle">
+                        \(
+                            \begin{align*}
+                                &\sin(\displaystyle\frac{3\pi}{2}-\alpha)=-\sin\alpha \\
+                                &\cos(\displaystyle\frac{3\pi}{2}-\alpha)=-\cos\alpha
+                            \end{align*}
+                        \)
+                    </div>
+                </li>
+                <li>
+                    正弦函数<br>
+                    \( y=\sin x \)称作正弦函数，定义域为\( \mathbf{R} \)，是一个奇函数，最小正周期是\( 2\pi \)<br>
+                    它在\( \displaystyle \left [ -\frac{\pi}{2}+2k\pi,\frac{\pi}{2}+2k\pi \right ] (k\in \mathbf{Z}) \)上递增，在\( \displaystyle \left [ \frac{\pi}{2}+2k\pi,\frac{3\pi}{2}+2k\pi \right ] (k\in \mathbf{Z}) \)上递减<br>
+                    <img src="./sin.svg" alt="正弦函数图像" width="100%">
+                </li>
+                <li>
+                    正弦型函数<br>
+                    \( y=A\sin(\omega x+\varphi) \)称为正弦型函数，其中\( A\ne 0,\omega\ne 0 \)，它的定义域为\( \mathbf{R} \)，值域为\( [-|A|,|A|] \)，周期是\( \displaystyle\frac{2\pi}{|\omega|} \)
                 </li>
             </ol>
         </div>
@@ -270,7 +366,26 @@
     <!-- 内部CSS文件 -->
     <style>
         a {
-            color: #643092;
+            color: #110c50;
+            text-decoration: none;
+        }
+
+        .formula-rectangle {
+            display: inline-block;
+            border: 2px solid black;
+            padding: 5px;
+            margin: 4px;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        #text-right {
+            position: absolute;
+            bottom: 0px;
+            right: -60px;
+            transform: translateX(-100%);
         }
         
         /* 颜色主题设置 */
@@ -301,12 +416,54 @@
                 color: var(--text-color-dark);
                 background-image: url('../../../img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
             }
+            a {
+                color: #50d2d2;
+            }
+            .formula-rectangle {
+                border: 2px solid var(--text-color-dark);
+            }
         }
     </style>
 
     <!-- 内部JS文件 -->
     <script id="MathJax-script" src="../../quote-js/mathjax/es5/tex-mml-chtml.js"></script>
     <script>
+        function updateColumnCount() {
+            // 获取页面宽度
+            var pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+            // 设定每列的最小宽度
+            var columnMinWidth = 150;
+
+            // 计算列数
+            var columnCount = Math.floor(pageWidth / columnMinWidth);
+
+            // 设置列数
+            document.querySelector('ul').style.columnCount = columnCount;
+        }
+
+        // 页面加载时和窗口大小改变时调用更新列数函数
+        window.addEventListener('load', updateColumnCount);
+        window.addEventListener('resize', updateColumnCount);
+
+        // 获取所有带有特定类名的链接元素
+        var scrollLinks = document.querySelectorAll('.scroll-link');
+
+        // 定义滚动函数
+        function scrollToTarget(targetId) {
+            var targetElement = document.getElementById(targetId);
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 为每个链接添加点击事件监听器
+        scrollLinks.forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var targetId = this.getAttribute('href').substring(1); // 去掉 "#" 符号
+                scrollToTarget(targetId);
+            });
+        });
+
         // 获取页脚内容
         fetch('../../../footer/footer.html')
             .then(response => response.text())

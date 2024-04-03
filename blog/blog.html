@@ -41,9 +41,9 @@
                     </p>
                 </li>
                 <li>
-                    <strong>MathJax</strong> v3.2.2<br>
-                    用于在网页中显示\( \mathrm{\LaTeX} \)公式
-                    <p style="text-align: right; margin-top: 0em;">
+                    <p id="mathjaxVersionDisplay"></p>
+                    <p style="margin-top: -1em;">用于在网页中显示\( \mathrm{\LaTeX} \)公式</p>
+                    <p style="text-align: right; margin-top: -1em;">
                         <a href="./quote-js/mathjax/es5/tex-mml-chtml.js">查看</a>
                         <a href="./quote-js/mathjax/es5/tex-mml-chtml.js" download>下载</a>
                         <a href="https://www.mathjax.org/">访问官网</a>
@@ -114,6 +114,9 @@
     <script>
         var jqueryVersion = $.fn.jquery;
         $("#jqueryVersionDisplay").html("<strong>jQuery</strong> v" + jqueryVersion + "<br>用于简化一些网页中的操作");
+
+        var mathjaxVersion = MathJax.version;
+        $("#mathjaxVersionDisplay").html("<strong>MathJax</strong> v" + mathjaxVersion + "<br>");
 
         // 随机抽取句子
         function displayRandomSentence() {

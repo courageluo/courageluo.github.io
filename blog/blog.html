@@ -105,7 +105,6 @@
                 color: #12efef;
             }
         }
-   
     </style>
 
     <!-- 内部JS文件 -->
@@ -131,7 +130,7 @@
                 })
                 .catch(error => {
                     console.error('Error fetching JSON file:', error);
-                    console.log('Unable to load the sentence.')
+                    console.warn('Unable to load the sentence.')
                 });
         }
 
@@ -144,10 +143,6 @@
         }
 
         displayRandomSentence();
-
-        // document.getElementById('random-sentence').addEventListener('click', () => {
-        //     displayRandomSentence();
-        // });
 
         document.getElementById('sentence-box').addEventListener('click', () => {
             displayRandomSentence();
@@ -173,7 +168,7 @@
             })
             .catch(error => {
                 console.error('Error fetching JSON file:', error);
-                console.log('Unable to load the artical index.');
+                console.warn('Unable to load the artical index.');
             });
 
         // 获取页脚内容

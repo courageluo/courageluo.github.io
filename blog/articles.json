@@ -23,5 +23,10 @@
         "url" : "content/0005.cpp-system/index.html" ,
         "title" : "C++中的system函数" ,
         "modified" : "2024.03.16 21:37"
+    } ,
+    {
+        "url" : "content/0006.contest-1011/index.html" ,
+        "title" : "Contest 1011 - 2024年4月测试部分题解 - NZOJ" ,
+        "modified" : "2024.04.13 21:08"
     }
 ]

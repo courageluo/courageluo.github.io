@@ -1,0 +1,318 @@
+<!-- Contest1011 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contest1011部分题解 - Courage Luo的网站</title>
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 标题框 -->
+        <div class="rounded-box1">
+            <h1 style="text-align: center;">Contest1011 - 2024年4月测试部分题解</h1>
+        </div>
+
+        <!-- 内容跳转框 -->
+        <div class="rounded-box2">
+            <p>题目来自NZOJ，原页面在<a href="http://182.43.200.0:6548/contest.php?cid=1011">这里</a>。</p>
+        </div>
+
+        <!-- 内容框 -->
+        <div class="rounded-box3">
+            <p>题目比较简单，都是一些很经典的题，不过大多数都要输入多组数据，所以可以用<code class="language-cpp">while(scanf("%d",&n)!=EOF)</code>或者<code class="language-cpp">while(std::cin>>n)</code>来实现循环读入数据。</p>
+        </div>
+        <div class="rounded-box3">
+            <h3>Problem A 互质</h3>
+            <hr>
+            <h4>[题目描述]</h4>
+            <p>
+                给你一个正整数n，请问有多少个比n小的且与n互质的正整数？<br>
+                两个整数互质的意思是，这两个整数没有比1大的公约数。
+            </p>
+            <h4>[输入]</h4>
+            <p>
+                输入包含多组测试数据。每组输入是一个正整数n（n&lt;=1000000000）。当n=0时，输入结束。
+            </p>
+            <h4>[输出]</h4>
+            <p>
+                对于每组输入，输出比n小的且与n互质的正整数个数。
+            </p>
+            <h4>[解答]</h4>
+            <p>
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;bits/stdc++.h&gt;
+                        int main() {
+                            int N,n;
+                            while (scanf("%d",&N)!=EOF) {
+                                if (N==0) break;
+                                n=N;
+                                for (int i=2;i&lt;=sqrt(N);i++) {
+                                    if(N%i==0) {
+                                        n=n/i*(i-1);
+                                        while (N%i==0) N/=i;
+                                    }
+                                }
+                                if (N&gt;1) n=n/N*(N-1);
+                                std::cout&lt;&lt;n&lt;&lt;'\n';
+                            }
+                            return 0;
+                        }
+                    </code>
+                </pre>
+            </p>
+        </div>
+        <div class="rounded-box3">
+            <h3>Problem B 美丽数</h3>
+            <hr>
+            <h4>[题目描述]</h4>
+            <p>
+                小明很喜欢3和5这两个数字，他将能被3或5整除的数叫做美丽数。现在给你一个整数N（1&lt;=N&lt;=100000），你能告诉小明第N个美丽数是多少吗？
+            </p>
+            <h4>[输入]</h4>
+            <p>
+                输入包含多组测试数据。每组输入一个整数N（1&lt;=N&lt;=100000）。
+            </p>
+            <h4>[输出]</h4>
+            <p>
+                对于每组输入，输出第N个美丽数。
+            </p>
+            <h4>[解答]</h4>
+            <p>
+                由于100000并不大，所以可以求出前100000个美丽数，然后根据需求输出第N个美丽数即可。
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;iostream&gt;
+                        #include&lt;vector&gt;
+                        int main() {
+                            int i=0;
+                            std::vector&lt;int&gt; nums;
+                            import:
+                                if (i%3==0||i%5==0) nums.push_back(i);
+                                i++;
+                            if (nums.size()&lt;=100000) goto import;
+                            int a;
+                            while (scanf("%d",&a)!=EOF) {
+                                std::cout&lt;&lt;nums[a]&lt;&lt;'\n';
+                            }
+                            return 0;
+                        }
+                    </code>
+                </pre>
+                这里的<code class="language-cpp">goto</code>语句就是一个循环，以上循环等价于
+                <pre>
+                    <code class="language-cpp">
+                        while (nums.size()&lt;=100000) {
+                            if (i%3==0||i%5==0) nums.push_back(i);
+                            i++;
+                        }
+                    </code>
+                </pre>
+            </p>
+        </div>
+        <div class="rounded-box3">
+            <h3>Problem C 开灯关灯</h3>
+            <hr>
+            <h4>[题目描述]</h4>
+            <p>
+                有n盏灯，编号为1~n，第1个人把所有灯打开，第2个人按下所有编号为2的倍数的开关（这些灯将被关掉），第3个人按下所有编号为3的倍数的开关（其中关掉的灯将被打开，开着的灯将被关闭），以此类推。一共有k个人，问最后有哪些灯开着？
+            </p>
+            <h4>[输入]</h4>
+            <p>
+                输入数据有多组，输入n盏灯以及k（k≤n≤1000）。
+            </p>
+            <h4>[输出]</h4>
+            <p>
+                输出开着的灯的编号，参照样例输出。
+            </p>
+            <h4>[样例输入]</h4>
+            <p>
+                <pre>
+                    <code class="language-">
+                        7 3
+                        8 2
+                    </code>
+                </pre>
+            </p>
+            <h4>[样例输出]</h4>
+            <p>
+                <pre>
+                    <code class="language-">
+                        1
+                        5
+                        6
+                        7
+                        1
+                        3
+                        5
+                        7
+                    </code>
+                </pre>
+            </p>
+            <h4>[解答]</h4>
+            <p>
+                只需要用循环模拟这个开关灯过程就可以了。
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;iostream&gt;
+                        int main() {
+                            int n,k,m=1;
+                            while (scanf("%d%d",&n,&k)!=EOF) {
+                                for (int i=1;i&lt;=n;i++) {
+                                    for (int p=2;p&lt;=k;p++)
+                                        if (i%p==0) m=!m;
+                                    if (m) std::cout&lt;&lt;i&lt;&lt;'\n';
+                                    m=1;
+                                }
+                            }
+                            return 0;
+                        }
+                    </code>
+                </pre>
+            </p>
+        </div>
+        <div class="rounded-box3">
+            <h3>Problem D 大数取模</h3>
+            <hr>
+            <h4>[题目描述]</h4>
+            <p>
+                现给你两个正整数A和B，请你计算\( A \: \mathrm{mod} \: B \)。<br>
+                为了使问题简单，保证B小于100000。
+            </p>
+            <h4>[输入]</h4>
+            <p>
+                输入包含多组测试数据。每行输入包含两个正整数A和B。A的长度不超过1000，并且0&lt;B&lt;100000。
+            </p>
+            <h4>[输出]</h4>
+            <p>
+                对于每一个测试样例，输出\( A \: \mathrm{mod} \: B \)。
+            </p>
+            <h4>[解答]</h4>
+            <p>
+                经典的高精度算法。
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;iostream&gt;
+                        #include&lt;algorithm&gt;
+
+                        int mod(std::string a,int b) {
+                            int d=0;
+                            for (int i=0;i&lt;a.size();i++)
+                                d=(d*10+(a[i]-'0'))%b;
+                            return d;
+                        }
+
+                        int main() {
+                            std::string a;
+                            int b;
+                            while (std::cin&gt;&gt;a&gt;&gt;b)
+                                std::cout&lt;&lt;mod(a,b)&lt;&lt;'\n';
+                            return 0;
+                        }
+                    </code>
+                </pre>
+            </p>
+        </div>
+        <div class="rounded-box3">
+            <h3>Problem F 人见人爱\( \boldsymbol{A^B} \: \mathbf{mod} \: \boldsymbol{C} \)</h3>
+            <hr>
+            <h4>[题目描述]</h4>
+            <p>
+                计算A的B次幂对C取模(\( A^B \: \mathrm{mod} \: C \))并且1≤A，B,C≤32768。输入三个整数A,B,C，输入文件每一行依次三个整数A,B,C用空格隔开，每行输出一个运算结果。
+            </p>
+            <h4>[样例输入]</h4>
+            <p>
+                <pre>
+                    <code class="language-">
+                        3 4 5
+                        10 10 100
+                        45 67 89
+                        5 55555555 3
+                        6 12345678 123 
+                    </code>
+                </pre>
+            </p>
+            <h4>[样例输出]</h4>
+            <p>
+                <pre>
+                    <code class="language-">
+                        1
+                        0
+                        45
+                        2
+                        90
+                    </code>
+                </pre>
+            </p>
+            <h4>[解答]</h4>
+            <p>
+                经典的快速幂。
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;iostream&gt;
+                        int main() {
+                            int a,b,c,j;
+                            while (scanf("%d %d %d",&a,&b,&c)!=EOF) {
+                                j=1;
+                                while (b&gt;0) {
+                                    if (b%2!=0) j=(j*a)%c;
+                                    b=b/2;
+                                    a=(a*a)%c;
+                                }
+                                std::cout&lt;&lt;j&lt;&lt;'\n';
+                            }
+                        }
+                    </code>
+                </pre>
+            </p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            background-image: url('/img/background/day-blogbackground.svg'); /* 白天模式下的背景图片 */
+            background-repeat: repeat; /* 重复填充背景图片 */
+            background-size: 100%; /* 按比例缩放图片以填满整个容器 */
+            background-attachment: fixed;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--bg-color-dark);
+                color: var(--text-color-dark);
+                background-image: url('/img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/blog/quote-js/prismjs/prism.js"></script>
+    <script src="/blog/quote-js/mathjax/es5/tex-chtml-full.js"></script>
+    <script>
+        // 获取页脚内容
+        fetch('/footer/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    </script>
+</body>
+
+</html>

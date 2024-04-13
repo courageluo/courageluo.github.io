@@ -121,12 +121,12 @@
                 页脚内容
                 <pre class="line-numbers">
                     <code class="language-js">
-                        // 获取页脚内容
-                        fetch('../../../../footer/footer.html')
-                            .then(response => response.text())
-                            .then(data => {
-                                document.getElementById("footer").innerHTML = data;
-                            });
+                        // 禁止复制
+                        document.addEventListener("copy", e=> {
+                            e.preventDefault();
+                            e.clipboardData.setData("text/plain", '无法查看复制内容');
+                            alert('复制不了捏');
+                        });
                     </code>
                 </pre>
             </p>
@@ -170,6 +170,12 @@
             .then(data => {
                 document.getElementById("footer").innerHTML = data;
             });
+
+        document.addEventListener("copy", e=> {
+            e.preventDefault();
+            e.clipboardData.setData("text/plain", '无法查看复制内容');
+            alert('复制不了捏');
+        });
     </script>
 </body>
 

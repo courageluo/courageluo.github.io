@@ -129,7 +129,7 @@
             <ol>
                 <li>
                     \( \bar{x}=\displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i=\sum_{i=1}^{n}x_ip_i \) <br>
-                    \( s^2=\displaystyle\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar{x})^2=\sum_{i=1}^{n}(x_i-\bar{x})^2p_i=\frac{1}{n}\sum_{i=1}^{n}x_i^2-n\bar{x} \)
+                    \( s^2=\displaystyle\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar{x})^2=\sum_{i=1}^{n}(x_i-\bar{x})^2p_i=\frac{1}{n}\sum_{i=1}^{n}x_i^2-n\bar{x}^2 \)
                 </li>
                 <li>
                     \( \displaystyle\sum_{i=1}^{n}(x_i+y_i)=\sum_{i=1}^{n}x_i+\sum_{i=1}^{n}y_i \) <br>
@@ -350,14 +350,61 @@
                     </div>
                 </li>
                 <li>
-                    正弦函数<br>
-                    \( y=\sin x \)称作正弦函数，定义域为\( \mathbf{R} \)，是一个奇函数，最小正周期是\( 2\pi \)<br>
-                    它在\( \displaystyle \left [ -\frac{\pi}{2}+2k\pi,\frac{\pi}{2}+2k\pi \right ] (k\in \mathbf{Z}) \)上递增，在\( \displaystyle \left [ \frac{\pi}{2}+2k\pi,\frac{3\pi}{2}+2k\pi \right ] (k\in \mathbf{Z}) \)上递减<br>
-                    <img src="./sin.svg" alt="正弦函数图像" width="100%">
+                    三角函数（以下所有\( k\in \mathbf{Z} \)）<br>
+                    <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                        <li>
+                            <strong>正弦函数</strong>\( y=\sin x \)<br>
+                            定义域：\( \mathbf{R} \)<br>
+                            &emsp;值域：\( [-1,1] \)<br>
+                            奇偶性：奇<br>
+                            周期性：\( T=2\pi \)<br>
+                            单调性：\(
+                                \begin{align*}
+                                    &\displaystyle \left [ -\frac{\pi}{2}+2k\pi,\frac{\pi}{2}+2k\pi \right ] (k\in \mathbf{Z}) \nearrow \\
+                                    &\displaystyle \left [ \frac{\pi}{2}+2k\pi,\frac{3\pi}{2}+2k\pi \right ] (k\in \mathbf{Z}) \searrow
+                                \end{align*}
+                            \)<br>
+                            &emsp;零点：\( k\pi \)<br>
+                            &emsp;图像：<br>
+                            <img src="./sin.svg" alt="正弦函数图像" width="100%">
+                        </li>
+                        <li>
+                            <strong>余弦函数</strong>\( y=\cos x \)<br>
+                            定义域：\( \mathbf{R} \)<br>
+                            &emsp;值域：\( [-1,1] \)<br>
+                            奇偶性：偶<br>
+                            周期性：\( T=2\pi \)<br>
+                            单调性：\(
+                                \begin{align*}
+                                    &\displaystyle \left [ -\pi+2k\pi,2k\pi \right ] (k\in \mathbf{Z}) \nearrow \\
+                                    &\displaystyle \left [ 2k\pi,\pi+2k\pi \right ] (k\in \mathbf{Z}) \searrow
+                                \end{align*}
+                            \)<br>
+                            &emsp;零点：\( \displaystyle\frac{\pi}{2}+k\pi \)<br>
+                            &emsp;图像：<br>
+                            <img src="./cos.svg" alt="余弦函数图像" width="100%">
+                        </li>
+                        <li>
+                            <strong>正切函数</strong>\( y=\tan x \)<br>
+                            定义域：\(
+                                \left \{ x \left | x\ne \displaystyle\frac{\pi}{2}+k\pi \right . \right \}
+                            \)<br>
+                            &emsp;值域：\( \mathbf{R} \)<br>
+                            奇偶性：奇<br>
+                            周期性：\( T=\pi \)<br>
+                            单调性：\(
+                                \displaystyle \left ( -\frac{\pi}{2}+2k\pi,\frac{\pi}{2}+2k\pi \right ) (k\in \mathbf{Z}) \nearrow
+                            \)<br>
+                            &emsp;零点：\( k\pi \)<br>
+                            &emsp;图像：<br>
+                            <img src="./tan.png" alt="正切函数图像" width="100%">
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     正弦型函数<br>
-                    \( y=A\sin(\omega x+\varphi) \)称为正弦型函数，其中\( A\ne 0,\omega\ne 0 \)，它的定义域为\( \mathbf{R} \)，值域为\( [-|A|,|A|] \)，周期是\( \displaystyle\frac{2\pi}{|\omega|} \)
+                    \( y=A\sin(\omega x+\varphi) \)称为正弦型函数，其中<br>
+                    \( |A| \)称为振幅，\( \varphi \)称为初相，\( T=\displaystyle\frac{2\pi}{|\omega|} \)称为周期，\( f=\displaystyle\frac{1}{T} \)称为频率。<br>
                 </li>
             </ol>
         </div>

@@ -9,6 +9,7 @@
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="../../../../css/styles.css">
     <link rel="stylesheet" type="text/css" href="../../../quote-js/prismjs/prism.css">
+    <link rel="stylesheet" type="text/css" href="../../../quote-js/katex/katex.css">
 </head>
 
 <body>
@@ -131,6 +132,50 @@
                 </pre>
             </p>
         </div>
+        <div class="rounded-box3">
+            <p>
+                \(
+                    \begin{align} 
+                        \require{AMScd} 
+                        \begin{CD} 
+                            \rm\LaTeX@>>>
+                            \rm K\kern-.2em\raise.21em{\scriptstyle{A}}\kern-.17emT\kern-.14em\lower.5ex{E}\kern-.115em X\\
+                            @VVV \text{VS Code}@VVV@>>>e^{i\theta}=\cos \theta+i\sin\theta\\ 
+                            \text{MathJax} @>>> \text{markdown} 
+                        \end{CD} 
+                    \end{align}
+                \)
+            </p>
+            <p>
+                鬼畜竖式：
+                \(
+                    \require{enclose}
+                    \begin{array}{r}
+                                    13  \\[-3pt]
+                    4 \enclose{longdiv}{52} \\[-3pt]
+                        \underline{4}\phantom{2} \\[-3pt]
+                                    12  \\[-3pt]
+                        \underline{12}\\0
+                    \end{array}\\
+                \)
+            </p>
+            <p>
+                Mathjax不支持：
+                \(
+                    \R,\AA,\alef,\alefsym,\Alpha,\and,\ang,\Bbb,\Beta,\bold,\bull,\C,\Chi,\clubs,\cnums,\\
+                    \Complex,\coppa,\Coppa,\Dagger,\Digamma,\darr,\dArr,\Darr,\dashint,\ddashint,\diamonds,\empty,\Epsilon,\Eta,\euro,\\
+                    \exist,\geneuro,\geneuronarrow,\geneurowide,\H,\hAar,\harr,\Harr,\hearts,\image,\infin,\Iota,\isin,\Kappa,\koppa,\\
+                    \Koppa,\lang,\larr,\Larr,\lArr,\lrarr,\Lrarr,\lrArr,\Mu,\N,\natnums,\Nu,\O,\oint,\oiint,\\
+                    \oiiint,\ointctrclockwise,\officialeuro,\Omicron,\or,\P,\pagecolor,\part,\plusmn,\Q,\R,\rang,\rarr,\Rarr,\rArr,\\
+                    \real,\reals,\Reals,\Rho,\sdot,\sampi,\Sampi,\sect,\spades,\stigma,\Stigma,\sub,\sube,\supe,\Tau,\\
+                    \textvisiblespace,\thetasym,\uarr,\uArr,\Uarr,\varcoppa,\varstigma,\varointclockwise,\vline,\weierp,\Z,\Zeta
+                \)
+                <br>
+                不过KaTeX支持一些：
+                <br>
+                <span id="math"></span>
+            </p>
+        </div>
     </div>
 
     <!-- 页脚 -->
@@ -162,7 +207,9 @@
     </style>
 
     <!-- 内部JS文件 -->
+    <script src="/blog/quote-js/mathjax/es5/tex-chtml-full.js"></script>
     <script src="../../../quote-js/prismjs/prism.js"></script>
+    <script src="../../../quote-js/katex/katex.js"></script>
     <script>
         // 获取页脚内容
         fetch('../../../../footer/footer.html')
@@ -170,6 +217,8 @@
             .then(data => {
                 document.getElementById("footer").innerHTML = data;
             });
+
+        katex.render("\\R,\\AA,\\alef,\\alefsym,\\Alpha", document.getElementById("math"));
 
         document.addEventListener("copy", e=> {
             e.preventDefault();

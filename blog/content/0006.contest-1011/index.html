@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contest1011部分题解 - Courage Luo的网站</title>
+    <title>Contest1011题解 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
@@ -15,7 +15,7 @@
     <div class="content">
         <!-- 标题框 -->
         <div class="rounded-box1">
-            <h1 style="text-align: center;">Contest1011 - 2024年4月测试部分题解</h1>
+            <h1 style="text-align: center;">Contest1011 - 2024年4月测试题解</h1>
         </div>
 
         <!-- 内容跳转框 -->
@@ -37,7 +37,7 @@
             </p>
             <h4>[输入]</h4>
             <p>
-                输入包含多组测试数据。每组输入是一个正整数n（n&lt;=1000000000）。当n=0时，输入结束。
+                输入包含多组测试数据。每组输入是一个正整数n（n≤1000000000）。当n=0时，输入结束。
             </p>
             <h4>[输出]</h4>
             <p>
@@ -47,7 +47,7 @@
             <p>
                 <pre class="line-numbers">
                     <code class="language-cpp">
-                        #include&lt;bits/stdc++.h&gt;
+                        #include&lt;iostream&gt;
                         int main() {
                             int N,n;
                             while (scanf("%d",&N)!=EOF) {
@@ -73,11 +73,11 @@
             <hr>
             <h4>[题目描述]</h4>
             <p>
-                小明很喜欢3和5这两个数字，他将能被3或5整除的数叫做美丽数。现在给你一个整数N（1&lt;=N&lt;=100000），你能告诉小明第N个美丽数是多少吗？
+                小明很喜欢3和5这两个数字，他将能被3或5整除的数叫做美丽数。现在给你一个整数N（1≤N≤100000），你能告诉小明第N个美丽数是多少吗？
             </p>
             <h4>[输入]</h4>
             <p>
-                输入包含多组测试数据。每组输入一个整数N（1&lt;=N&lt;=100000）。
+                输入包含多组测试数据。每组输入一个整数N（1≤N≤100000）。
             </p>
             <h4>[输出]</h4>
             <p>
@@ -213,6 +213,75 @@
                             int b;
                             while (std::cin&gt;&gt;a&gt;&gt;b)
                                 std::cout&lt;&lt;mod(a,b)&lt;&lt;'\n';
+                            return 0;
+                        }
+                    </code>
+                </pre>
+            </p>
+        </div>
+        <div class="rounded-box3">
+            <h3>Problem E 同余问题</h3>
+            <hr>
+            <h4>[题目描述]</h4>
+            <p>
+                给n个数，现在想知道有多少个大于1的整数被这n个数除得到的余数相同，请你帮他~
+            </p>
+            <h4>[输入]</h4>
+            <p>
+                第一个数为T，表示case数，每个case第一行输入一个2≤n≤100，表示数字个数。之后输入n个数，每个数都小于10^9。
+            </p>
+            <h4>[输出]</h4>
+            <p>
+                每个case输出一个数，表示大于1且满足除这n个已给出的数结果余数相同的数的个数。
+            </p>
+            <h4>[提示]</h4>
+            <p>
+                第一个样例三个数除以2都余0，除以4都余2，所以符合条件的有两个数。
+            </p>
+            <h4>[解答]</h4>
+            <p>
+                对于每数据逐一判断即可。
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;iostream&gt;
+                        #include&lt;algorithm&gt;
+                        
+                        int a[101],b[101];
+                        
+                        int gcd(int a, int b) {
+                            return b ? gcd(b,a%b) : a;
+                        }
+                        
+                        int res(int n) {
+                            int res=0;
+                            for (int i=2;i*i&lt;=n;i++) {
+                                if (n%i==0) {
+                                    if (i*i!=n) res++;
+                                    res++;
+                                }
+                            }
+                            if (n!=1) res++;
+                            return res;
+                        }
+                        
+                        int main() {
+                            int n,t;
+                            std::cin&gt;&gt;t;
+                            while (t--) {
+                                std::cin&gt;&gt;n;
+                                for (int i=1;i&lt;=n;i++) {
+                                    std::cin&gt;&gt;a[i];
+                                }
+                                std::sort(a+1,a+1+n);
+                                for (int i=1;i&lt;n;i++) {
+                                    b[i]=a[i+1]-a[i];
+                                }
+                                int t=0;
+                                for (int i=1;i&lt;n;i++) {
+                                    t=gcd(b[i],t);
+                                }
+                                std::cout&lt;&lt;res(t)&lt;&lt;'\n';
+                            }
                             return 0;
                         }
                     </code>

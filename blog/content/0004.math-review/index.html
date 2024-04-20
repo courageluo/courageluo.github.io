@@ -161,22 +161,18 @@
                     印刷时，用\( \boldsymbol{a} \)，\( \boldsymbol{b} \)，\( \boldsymbol{c} \)等表示向量，但书写时，只能写作\( \vec{a} \)，\( \vec{b} \)，\( \vec{c} \)
                 </li>
                 <li>
-                    \( |\mathbf{0}|=0 \)，且\( \mathbf{0} \parallel \boldsymbol{a} \)，\( \mathbf{0} \perp \boldsymbol{a} \)
+                    \( |\mathbf{0}|=0 \)，且规定\( \mathbf{0} \parallel \boldsymbol{a} \)，\( \mathbf{0} \perp \boldsymbol{a} \)
                 </li>
                 <li>
                     \( \overrightarrow{AB}+\overrightarrow{BC}=\overrightarrow{AC} \)，<br>
-                    \( \overrightarrow{CA}-\overrightarrow{CB}=\overrightarrow{BA} \)，\( \overrightarrow{AC}-\overrightarrow{BC}=\overrightarrow{AB} \)
-                </li>
-                <li>
+                    \( \overrightarrow{CA}-\overrightarrow{CB}=\overrightarrow{BA} \)，\( \overrightarrow{AC}-\overrightarrow{BC}=\overrightarrow{AB} \) <br>
                     \( | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}+\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| \) <br>
                     \( | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}-\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| \)
                 </li>
                 <li>
                     \( \boldsymbol{a}+\boldsymbol{b}=\boldsymbol{b}+\boldsymbol{a} \) <br>
                     \( (\boldsymbol{a}+\boldsymbol{b})+\boldsymbol{c}=\boldsymbol{a}+(\boldsymbol{b}+\boldsymbol{c}) \) <br>
-                    \( \lambda(\mu\boldsymbol{a})=(\lambda\mu)\boldsymbol{a}=\lambda\mu\boldsymbol{a} \)
-                </li>
-                <li>
+                    \( \lambda(\mu\boldsymbol{a})=(\lambda\mu)\boldsymbol{a}=\lambda\mu\boldsymbol{a} \) <br>
                     \( \lambda\boldsymbol{a}+\mu\boldsymbol{a}=(\lambda+\mu)\boldsymbol{a} \) <br>
                     \( \lambda(\boldsymbol{a}+\boldsymbol{b})=\lambda\boldsymbol{a}+\lambda\boldsymbol{b} \)
                 </li>
@@ -198,6 +194,13 @@
                 </li>
                 <li>
                     <strong>奔驰定理</strong>：在\( \triangle ABC \)内部有一点\( O \)，则\( \overrightarrow{OA}\cdot S_{\triangle OBC}+\overrightarrow{OB}\cdot S_{\triangle OCA}+\overrightarrow{OC}\cdot S_{\triangle OAB}=\boldsymbol{0} \)
+                </li>
+                <li>
+                    内积（数量积）：\( \boldsymbol{a\cdot b} = |\boldsymbol{a}||\boldsymbol{b}|\cos \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle \)<br>
+                    外积（矢量积）：\( |\boldsymbol{a\times b}|=|\boldsymbol{a}||\boldsymbol{b}|\sin \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle  \)
+                </li>
+                <li>
+                    \( \boldsymbol{a}\perp \boldsymbol{b} \Leftrightarrow \boldsymbol{a\cdot b}=0 \)
                 </li>
             </ol>
             <div class="container">
@@ -272,81 +275,82 @@
                 <li>
                     诱导公式<br>
                     (奇变偶不变，符号看象限)<br>
-                    ①<div class="formula-rectangle">
-                    \( 
-                        \begin{align*}
+                    <div class="induction-formula" style="column-count: 1;">
+                        ①<div class="formula-rectangle">
+                            \(
+                            \begin{align*}
                             &\sin(\alpha+k\cdot 2\pi)=\sin\alpha \\
                             &\cos(\alpha+k\cdot 2\pi)=\cos\alpha \\
-                            &\tan(\alpha+k\cdot 2\pi)=\tan\alpha \\
-                            &(k\in \mathbf{Z})
-                        \end{align*}
-                    \)
-                    </div>
-                    <br>
-                    ②<div class="formula-rectangle">
-                    \( 
-                        \begin{align*}
+                            &\tan(\alpha+k\cdot 2\pi)=\tan\alpha
+                            \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ②<div class="formula-rectangle">
+                            \(
+                            \begin{align*}
                             &\sin(-\alpha)=-\sin\alpha \\
                             &\cos(-\alpha)=\cos\alpha \\
-                            &\tan(-\alpha)=-\tan\alpha 
-                        \end{align*}
-                    \)
-                    </div>
-                    <br>
-                    ③<div class="formula-rectangle">
-                    \( 
-                        \begin{align*}
+                            &\tan(-\alpha)=-\tan\alpha
+                            \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ③<div class="formula-rectangle">
+                            \(
+                            \begin{align*}
                             &\sin(\pi-\alpha)=\sin\alpha \\
                             &\cos(\pi-\alpha)=-\cos\alpha \\
                             &\tan(\pi-\alpha)=-\tan\alpha
-                        \end{align*} 
-                    \)
-                    </div>
-                    <br>
-                    ④<div class="formula-rectangle">
-                    \( 
-                        \begin{align*}
+                            \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ④<div class="formula-rectangle">
+                            \(
+                            \begin{align*}
                             &\sin(\pi+\alpha)=-\sin\alpha \\
                             &\cos(\pi+\alpha)=-\cos\alpha \\
                             &\tan(\pi+\alpha)=\tan\alpha
-                        \end{align*} 
-                    \)
-                    </div>
-                    <br>
-                    ⑤<div class="formula-rectangle">
-                    \( 
-                        \begin{align*}
+                            \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ⑤<div class="formula-rectangle">
+                            \(
+                            \begin{align*}
                             &\sin(\displaystyle\frac{\pi}{2}-\alpha)=\cos\alpha \\
                             &\cos(\displaystyle\frac{\pi}{2}-\alpha)=\sin\alpha
-                        \end{align*} 
-                    \)
-                    </div>
-                    <br>
-                    ⑥<div class="formula-rectangle">
-                    \( 
-                        \begin{align*}
+                            \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ⑥<div class="formula-rectangle">
+                            \(
+                            \begin{align*}
                             &\sin(\displaystyle\frac{\pi}{2}+\alpha)=\cos\alpha \\
                             &\cos(\displaystyle\frac{\pi}{2}+\alpha)=-\sin\alpha
-                        \end{align*} 
-                    \)
-                    </div>
-                    <br>
-                    ⑦<div class="formula-rectangle">
-                    \(
-                        \begin{align*}
+                            \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ⑦<div class="formula-rectangle">
+                            \(
+                            \begin{align*}
                             &\sin(\displaystyle\frac{3\pi}{2}+\alpha)=\sin\alpha \\
                             &\cos(\displaystyle\frac{3\pi}{2}+\alpha)=-\cos\alpha
-                        \end{align*}
-                    \)
-                    </div>
-                    <br>
-                    ⑧<div class="formula-rectangle">
-                        \(
-                            \begin{align*}
-                                &\sin(\displaystyle\frac{3\pi}{2}-\alpha)=-\sin\alpha \\
-                                &\cos(\displaystyle\frac{3\pi}{2}-\alpha)=-\cos\alpha
                             \end{align*}
-                        \)
+                            \)
+                        </div>
+                        <br>
+                        ⑧<div class="formula-rectangle">
+                            \(
+                            \begin{align*}
+                            &\sin(\displaystyle\frac{3\pi}{2}-\alpha)=-\sin\alpha \\
+                            &\cos(\displaystyle\frac{3\pi}{2}-\alpha)=-\cos\alpha
+                            \end{align*}
+                            \)
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -481,15 +485,15 @@
         function updateColumnCount() {
             // 获取页面宽度
             var pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
             // 设定每列的最小宽度
-            var columnMinWidth = 200;
-
+            var ulColumnMinWidth = 200;
+            var ifColumnMinWidth = 300;
             // 计算列数
-            var columnCount = Math.floor(pageWidth / columnMinWidth);
-
+            var ulColumnCount = Math.floor(pageWidth / ulColumnMinWidth);
+            var ifColumnCount = Math.floor(pageWidth / ifColumnMinWidth);
             // 设置列数
-            document.querySelector('ul').style.columnCount = columnCount;
+            document.querySelector('ul').style.columnCount = ulColumnCount;
+            document.querySelector('.induction-formula').style.columnCount = ifColumnCount;
         }
 
         // 页面加载时和窗口大小改变时调用更新列数函数

@@ -111,7 +111,7 @@
         }
 
         .settingBtnRectangle {
-            width: 300px;
+            width: 200px;
             height: 100%;
             display: flex;
             overflow: hidden;
@@ -198,6 +198,16 @@
     <script src="//widget.time.is/zh.js"></script>
     <script src="../../quote-js/jquery/jquery-3.7.1.js"></script>
     <script>
+        // 调试用
+        $("#clock").show();
+        $("#systemTimeDescription").show();
+        $("#atomicTimeDescription").hide();
+        // $("#atomicTimeDescription").show();
+        $("#systemTimeContainer").show();
+        $("#atomicTimeContainer").hide();
+        // $("#stopwatch").show();
+        // $("#countdown").show();
+        
         // 获取来自time.is的时间
         time_is_widget.init({
             CST_z43d : {} ,
@@ -244,16 +254,6 @@
         }
 
         $(document).ready(function() {
-            // 调试用
-            $("#clock").show();
-            $("#systemTimeDescription").show();
-            $("#atomicTimeDescription").hide();
-            // $("#atomicTimeDescription").show();
-            $("#systemTimeContainer").show();
-            $("#atomicTimeContainer").hide();
-            // $("#stopwatch").show();
-            // $("#countdown").show();
-
             // 处理事件
             $("#clockBtn").click(function() {
                 $(".hidden").fadeOut(100);

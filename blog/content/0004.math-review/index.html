@@ -189,8 +189,7 @@
                 <li>
                     若\( \boldsymbol{a}=(x_1,y_1) \)，\( \boldsymbol{b}=(x_2,y_2) \)，则有：<br>
                     \( \boldsymbol{a}+\boldsymbol{b}=(x_1+x_2,y_1+y_2) \)，<br>
-                    \( u\boldsymbol{a}+v\boldsymbol{b}=(ux_1+vx_2,uy_1+vy_2) \)<br>
-                    \( \boldsymbol{a}\parallel\boldsymbol{b}\Leftrightarrow x_1y_2=x_2y_1 \)
+                    \( u\boldsymbol{a}+v\boldsymbol{b}=(ux_1+vx_2,uy_1+vy_2) \)
                 </li>
                 <li>
                     <strong>奔驰定理</strong>：在\( \triangle ABC \)内部有一点\( O \)，则\( \overrightarrow{OA}\cdot S_{\triangle OBC}+\overrightarrow{OB}\cdot S_{\triangle OCA}+\overrightarrow{OC}\cdot S_{\triangle OAB}=\boldsymbol{0} \)
@@ -200,7 +199,8 @@
                     外积（矢量积）：\( |\boldsymbol{a\times b}|=|\boldsymbol{a}||\boldsymbol{b}|\sin \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle  \)
                 </li>
                 <li>
-                    \( \boldsymbol{a}\perp \boldsymbol{b} \Leftrightarrow \boldsymbol{a\cdot b}=0 \)
+                    \( \boldsymbol{a}\parallel\boldsymbol{b}\Leftrightarrow x_1y_2=x_2y_1 \)<br>
+                    \( \boldsymbol{a}\perp \boldsymbol{b} \Leftrightarrow \boldsymbol{a\cdot b}=x_1x_2+y_1y_2=0 \)
                 </li>
             </ol>
             <div class="container">
@@ -268,92 +268,6 @@
                     </table>
                 </li>
                 <li>
-                    同角三角函数基本关系式<br>
-                    \( \sin^2\alpha+\cos^2\alpha=1 \)<br>
-                    \( \tan\alpha=\displaystyle\frac{\sin\alpha}{\cos\alpha} \)
-                </li>
-                <li>
-                    诱导公式<br>
-                    (奇变偶不变，符号看象限)<br>
-                    <div class="induction-formula" style="column-count: 1;">
-                        ①<div class="formula-rectangle">
-                            \(
-                            \begin{align*}
-                            &\sin(\alpha+k\cdot 2\pi)=\sin\alpha \\
-                            &\cos(\alpha+k\cdot 2\pi)=\cos\alpha \\
-                            &\tan(\alpha+k\cdot 2\pi)=\tan\alpha
-                            \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ②<div class="formula-rectangle">
-                            \(
-                            \begin{align*}
-                            &\sin(-\alpha)=-\sin\alpha \\
-                            &\cos(-\alpha)=\cos\alpha \\
-                            &\tan(-\alpha)=-\tan\alpha
-                            \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ③<div class="formula-rectangle">
-                            \(
-                            \begin{align*}
-                            &\sin(\pi-\alpha)=\sin\alpha \\
-                            &\cos(\pi-\alpha)=-\cos\alpha \\
-                            &\tan(\pi-\alpha)=-\tan\alpha
-                            \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ④<div class="formula-rectangle">
-                            \(
-                            \begin{align*}
-                            &\sin(\pi+\alpha)=-\sin\alpha \\
-                            &\cos(\pi+\alpha)=-\cos\alpha \\
-                            &\tan(\pi+\alpha)=\tan\alpha
-                            \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ⑤<div class="formula-rectangle">
-                            \(
-                            \begin{align*}
-                            &\sin(\displaystyle\frac{\pi}{2}-\alpha)=\cos\alpha \\
-                            &\cos(\displaystyle\frac{\pi}{2}-\alpha)=\sin\alpha
-                            \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ⑥<div class="formula-rectangle">
-                            \(
-                            \begin{align*}
-                            &\sin(\displaystyle\frac{\pi}{2}+\alpha)=\cos\alpha \\
-                            &\cos(\displaystyle\frac{\pi}{2}+\alpha)=-\sin\alpha
-                            \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ⑦<div class="formula-rectangle">
-                            \(
-                            \begin{align*}
-                            &\sin(\displaystyle\frac{3\pi}{2}+\alpha)=\sin\alpha \\
-                            &\cos(\displaystyle\frac{3\pi}{2}+\alpha)=-\cos\alpha
-                            \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ⑧<div class="formula-rectangle">
-                            \(
-                            \begin{align*}
-                            &\sin(\displaystyle\frac{3\pi}{2}-\alpha)=-\sin\alpha \\
-                            &\cos(\displaystyle\frac{3\pi}{2}-\alpha)=-\cos\alpha
-                            \end{align*}
-                            \)
-                        </div>
-                    </div>
-                </li>
-                <li>
                     三角函数（以下所有\( k\in \mathbf{Z} \)）<br>
                     <ul style="list-style-type: lower-alpha; white-space: nowrap;">
                         <li>
@@ -368,9 +282,9 @@
                                     &\displaystyle \left [ \frac{\pi}{2}+2k\pi,\frac{3\pi}{2}+2k\pi \right ] (k\in \mathbf{Z}) \searrow
                                 \end{align*}
                             \)<br>
-                            &emsp;零点：\( k\pi \)<br>
+                            &emsp;零点：\( k\pi \) <!-- <br>
                             &emsp;图像：<br>
-                            <img src="./sin.svg" alt="正弦函数图像" width="100%">
+                            <img src="./sin.svg" alt="正弦函数图像" width="100%"> -->
                         </li>
                         <li>
                             <strong>余弦函数</strong>\( y=\cos x \)<br>
@@ -384,9 +298,9 @@
                                     &\displaystyle \left [ 2k\pi,\pi+2k\pi \right ] (k\in \mathbf{Z}) \searrow
                                 \end{align*}
                             \)<br>
-                            &emsp;零点：\( \displaystyle\frac{\pi}{2}+k\pi \)<br>
+                            &emsp;零点：\( \displaystyle\frac{\pi}{2}+k\pi \) <!-- <br>
                             &emsp;图像：<br>
-                            <img src="./cos.svg" alt="余弦函数图像" width="100%">
+                            <img src="./cos.svg" alt="余弦函数图像" width="100%"> -->
                         </li>
                         <li>
                             <strong>正切函数</strong>\( y=\tan x \)<br>
@@ -399,9 +313,9 @@
                             单调性：\(
                                 \displaystyle \left ( -\frac{\pi}{2}+2k\pi,\frac{\pi}{2}+2k\pi \right ) (k\in \mathbf{Z}) \nearrow
                             \)<br>
-                            &emsp;零点：\( k\pi \)<br>
+                            &emsp;零点：\( k\pi \) <!-- <br>
                             &emsp;图像：<br>
-                            <img src="./tan.png" alt="正切函数图像" width="100%">
+                            <img src="./tan.png" alt="正切函数图像" width="100%"> -->
                         </li>
                     </ul>
                 </li>
@@ -409,6 +323,214 @@
                     正弦型函数<br>
                     \( y=A\sin(\omega x+\varphi) \)称为正弦型函数，其中<br>
                     \( |A| \)称为振幅，\( \varphi \)称为初相，\( T=\displaystyle\frac{2\pi}{|\omega|} \)称为周期，\( f=\displaystyle\frac{1}{T} \)称为频率。<br>
+                </li>
+                <li>
+                    同角三角函数基本关系式<br>
+                    <div class="formula-container" style="column-count: 1;">
+                        <div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\sin^2\alpha+\cos^2\alpha=1 \\
+                                    &\tan\alpha=\displaystyle\frac{\sin\alpha}{\cos\alpha}
+                                \end{align*}
+                            \)
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    诱导公式<br>
+                    (奇变偶不变，符号看象限)<br>
+                    <div class="formula-container" style="column-count: 1;">
+                        ①<div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\sin(\alpha+k\cdot 2\pi)=\sin\alpha \\
+                                    &\cos(\alpha+k\cdot 2\pi)=\cos\alpha \\
+                                    &\tan(\alpha+k\cdot 2\pi)=\tan\alpha
+                                \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ②<div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\sin(-\alpha)=-\sin\alpha \\
+                                    &\cos(-\alpha)=\cos\alpha \\
+                                    &\tan(-\alpha)=-\tan\alpha
+                                \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ③<div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\sin(\pi-\alpha)=\sin\alpha \\
+                                    &\cos(\pi-\alpha)=-\cos\alpha \\
+                                    &\tan(\pi-\alpha)=-\tan\alpha
+                                \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ④<div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\sin(\pi+\alpha)=-\sin\alpha \\
+                                    &\cos(\pi+\alpha)=-\cos\alpha \\
+                                    &\tan(\pi+\alpha)=\tan\alpha
+                                \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ⑤<div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\sin(\displaystyle\frac{\pi}{2}-\alpha)=\cos\alpha \\
+                                    &\cos(\displaystyle\frac{\pi}{2}-\alpha)=\sin\alpha
+                                \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ⑥<div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\sin(\displaystyle\frac{\pi}{2}+\alpha)=\cos\alpha \\
+                                    &\cos(\displaystyle\frac{\pi}{2}+\alpha)=-\sin\alpha
+                                \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ⑦<div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\sin(\displaystyle\frac{3\pi}{2}+\alpha)=\sin\alpha \\
+                                    &\cos(\displaystyle\frac{3\pi}{2}+\alpha)=-\cos\alpha
+                                \end{align*}
+                            \)
+                        </div>
+                        <br>
+                        ⑧<div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\sin(\displaystyle\frac{3\pi}{2}-\alpha)=-\sin\alpha \\
+                                    &\cos(\displaystyle\frac{3\pi}{2}-\alpha)=-\cos\alpha
+                                \end{align*}
+                            \)
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    两角的和与差<br>
+                    <div class="formula-container" style="column-count: 1;">
+                        <div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    & \mathrm{C}_{\alpha-\beta}:\cos (\alpha-\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta \\
+                                    & \mathrm{C}_{\alpha+\beta}:\cos (\alpha+\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta
+                                \end{align*}
+                            \)
+                        </div>
+                        <div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    & \mathrm{S}_{\alpha+\beta}:\cos (\alpha-\beta)=\sin\alpha\cos\beta+\cos\alpha\sin\beta \\
+                                    & \mathrm{S}_{\alpha-\beta}:\cos (\alpha+\beta)=\sin\alpha\cos\beta-\cos\alpha\sin\beta
+                                \end{align*}
+                            \)
+                        </div>
+                        <div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    & \mathrm{T}_{\alpha+\beta}:\tan(\alpha+\beta)=\displaystyle\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta} \\
+                                    & \mathrm{T}_{\alpha-\beta}:\tan(\alpha-\beta)=\displaystyle\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}
+                                \end{align*}
+                            \)
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    倍角公式<br>
+                    <div class="formula-container">
+                        <div class="formula-rectangle">
+                            \(
+                                \begin{align*}
+                                    &\mathrm{S}_{2\alpha}:\sin 2\alpha=2\sin\alpha\cos\alpha \\
+                                    &\mathrm{C}_{2\alpha}:\cos 2\alpha=\cos^2\alpha-\sin^2\alpha \\
+                                    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\:\,\,\:\:\:=2\cos^2\alpha-1=1-2\sin^2\alpha \\
+                                    &\mathrm{T}_{2\alpha}:\tan 2\alpha=\displaystyle\frac{2\tan\alpha}{1-\tan^2\alpha}
+                                \end{align*}
+                            \)
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    半角公式（即积化和差公式之①②③）
+                    <div class="formula-container">
+                        ①<div class="formula-rectangle">
+                            \( \mathrm{S}_{\alpha/2}: \sin\displaystyle\frac{\alpha}2=\pm\sqrt{\frac{1-\cos\alpha}2} \)
+                        </div>
+                        <br>
+                        ②<div class="formula-rectangle">
+                            \( \mathrm{C}_{\alpha/2}: \cos\displaystyle\frac{\alpha}2=\pm\sqrt{\frac{1+\cos\alpha}2} \)
+                        </div>
+                        <br>
+                        ③<div class="formula-rectangle">
+                            \( \mathrm{T}_{\alpha/2}: \tan\displaystyle\frac{\alpha}2=\pm\sqrt{\frac{1-\cos\alpha}{1+\cos\alpha}} \)
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    积化和差公式<br>
+                    <div class="formula-container">
+                        ①<div class="formula-rectangle">
+                            \( \sin^2\displaystyle\frac{\alpha}2=\frac{1-\cos\alpha}2 \)
+                        </div>
+                        <br>
+                        ②<div class="formula-rectangle">
+                            \( \cos^2\displaystyle\frac{\alpha}2=\frac{1+\cos\alpha}2 \)
+                        </div>
+                        <br>
+                        ③<div class="formula-rectangle">
+                            \( \tan^2\displaystyle\frac{\alpha}2=\frac{1-\cos\alpha}{1+\cos\alpha} \)
+                        </div>
+                        <br>
+                        <div style="display: inline-flex; align-items: center;">
+                            ④<div class="formula-rectangle">
+                                \( \cos\alpha\cos\beta=\displaystyle\frac12(\cos(\alpha+\beta)+\cos(\alpha-\beta)) \)
+                            </div>
+                        </div>
+                        <div style="display: inline-flex; align-items: center;">
+                            ⑤<div class="formula-rectangle">
+                                \( \sin\alpha\sin\beta=-\displaystyle\frac12(\cos(\alpha+\beta)-\cos(\alpha-\beta)) \)
+                            </div>
+                        </div>
+                        <div style="display: inline-flex; align-items: center;">
+                            ⑥<div class="formula-rectangle">
+                                \( \sin\alpha\cos\beta=\displaystyle\frac12(\sin(\alpha+\beta)+\sin(\alpha-\beta)) \)
+                            </div>
+                        </div>
+                        <div style="display: inline-flex; align-items: center;">
+                            ⑦<div class="formula-rectangle">
+                                \( \cos\alpha\sin\beta=\displaystyle\frac12(\sin(\alpha+\beta)-\sin(\alpha-\beta)) \)
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    和差化积公式<br>
+                    <div class="formula-container">
+                        <div class="formula-rectangle">
+                            令\( x=\alpha+\beta \)，\( y=\alpha-\beta \)，则
+                            <div style="height: 5px;"></div>
+                            \(
+                                \begin{align*}
+                                    &\cos x+\cos y=2\cos\displaystyle\frac{x+y}2\cos\frac{x-y}2 \\
+                                    &\cos x-\cos y=-2\sin\displaystyle\frac{x+y}2\sin\frac{x-y}2 \\
+                                    &\sin x+\sin y=2\sin\displaystyle\frac{x+y}2\cos\frac{x-y}2 \\
+                                    &\sin x-\sin y=2\cos\displaystyle\frac{x+y}2\sin\frac{x-y}2
+                                \end{align*}
+                            \)
+                        </div>
+                    </div>
                 </li>
             </ol>
         </div>
@@ -493,7 +615,7 @@
             var ifColumnCount = Math.floor(pageWidth / ifColumnMinWidth);
             // 设置列数
             document.querySelector('ul').style.columnCount = ulColumnCount;
-            document.querySelector('.induction-formula').style.columnCount = ifColumnCount;
+            document.querySelector('.formula-container').style.columnCount = ifColumnCount;
         }
 
         // 页面加载时和窗口大小改变时调用更新列数函数

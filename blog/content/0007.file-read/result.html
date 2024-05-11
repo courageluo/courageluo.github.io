@@ -1,4 +1,4 @@
-<!-- 网页端读取文件效果 -->
+﻿<!-- 网页端读取文件效果 -->
 <!DOCTYPE html>
 <html>
 
@@ -87,18 +87,21 @@
                 reader.onload = (event) => {
                     let content = event.target.result.replace(/</g, "&lt;");
                     content = content.replace(/>/g, "&gt;");
-                    displaytFileContent(content, ext);
+                    displayFileContent(content, ext);
                 }
             }
         }
 
         // 获取文件后缀
         function getFileExtension(filename) {
-            return filename.split('.').pop();
+            let ext = filename.split('.').pop();
+            if (ext === "htm") ext = "html";
+            else if (ext === "config") ext = "ini";
+            return ext;
         }
 
         // 显示内容
-        function displaytFileContent(content, ext) {
+        function displayFileContent(content, ext) {
             let container = document.getElementById("fileContainer");
             container.innerHTML = `
                 <p></p>

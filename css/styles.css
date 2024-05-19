@@ -31,10 +31,10 @@ h1 {
     src: url('../font/Intel One Mono Medium.ttf')
 }
 
-@font-face{
+/* @font-face{
     font-family: copyright;
     src: url('../font/JiangChengHei-500W.ttf')
-}
+} */
 
 @font-face {
     font-family: copyright;

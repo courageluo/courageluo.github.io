@@ -20,9 +20,39 @@
 
         <!-- 内容框 -->
         <div class="rounded-box3">
-            <p></p>
-            <input type="file" onchange="ofs(event)" style="width: 100%;">
-            <p></p>
+            <p><input type="file" onchange="ofs(event)" style="width: 100%;"></p>
+            <p style="display: flex; width: 100%;">编码:
+                <select id="decoding">
+                    <option>UTF-8</option>
+                    <option>UTF-16BE</option>
+                    <option>UTF-16LE</option>
+                    <option>UTF-32BE</option>
+                    <option>UTF-32LE</option>
+                    <option>GBK</option>
+                    <option>GB18030</option>
+                    <option>BIG5</option>
+                    <option>ISO-8859-1</option>
+                    <option>ISO-8859-2</option>
+                    <option>ISO-8859-3</option>
+                    <option>ISO-8859-4</option>
+                    <option>ISO-8859-5</option>
+                    <option>ISO-8859-6</option>
+                    <option>ISO-8859-7</option>
+                    <option>ISO-8859-8</option>
+                    <option>ISO-8859-9</option>
+                    <option>ISO-8859-10</option>
+                    <option>ISO-8859-11</option>
+                    <option>ISO-8859-13</option>
+                    <option>ISO-8859-14</option>
+                    <option>ISO-8859-15</option>
+                    <option>ISO-8859-16</option>
+                </select>
+                &emsp;字体:
+                <select id="font">
+                    <option>Intel One Mono</option>
+                    <option>Jetbrains Mono</option>
+                </select>
+            </p>
         </div>
         <div class="rounded-box3" id="imgContainer" style="display: none;">
             <p></p>
@@ -40,6 +70,13 @@
         input {
             border-radius: 5px;
             font-family: text;
+            font-size: 16px;
+        }
+
+        select {
+            flex-grow: 1;
+            margin: 0 5px;
+            border-radius: 5px;
             font-size: 16px;
         }
 
@@ -70,20 +107,28 @@
     <script src="./prism.js"></script>
     <script>
         // 处理文件选择事件
+        let encoding = 'UTF-8';
+        let selectedFile = null;
+
         let ofs = (e) => {
+            selectedFile = e.target.files[0];
+            readFile(selectedFile,encoding);
+        }
+
+        function readFile(file, encoding) {
             let reader = new FileReader();
-            let ext = getFileExtension(e.target.files[0].name);
+            let ext = getFileExtension(file.name);
             if (/^(jpg|jpeg|png|bmp|webp|ico|gif)$/.test(ext)) {
                 document.getElementById("imgContainer").style.display = "block";
                 document.getElementById("fileContainer").style.display = "none";
-                reader.readAsDataURL(e.target.files[0]);
+                reader.readAsDataURL(file);
                 reader.onload = (event) => {
                     document.querySelector("img").src = event.target.result;
                 }
             } else {
                 document.getElementById("imgContainer").style.display = "none";
                 document.getElementById("fileContainer").style.display = "block";
-                reader.readAsText(e.target.files[0], 'utf-8');
+                reader.readAsText(file, encoding);
                 reader.onload = (event) => {
                     let content = event.target.result.replace(/</g, "&lt;");
                     content = content.replace(/>/g, "&gt;");
@@ -92,11 +137,31 @@
             }
         }
 
+        document.getElementById("decoding").addEventListener('change', function(event) {
+            encoding = event.target.value;
+            if (selectedFile) {
+                readFile(selectedFile, encoding);
+            }
+        });
+
+        document.getElementById("font").addEventListener('change', function() {
+            var font = this.options[this.selectedIndex].text;
+            if (font === "Jetbrains Mono") {
+                document.getElementById("codeDisplay").style.fontFamily = "copyright";
+            } else {
+                document.getElementById("codeDisplay").style.fontFamily = "text";
+            }
+        });
+
         // 获取文件后缀
         function getFileExtension(filename) {
-            let ext = filename.split('.').pop();
-            if (ext === "htm") ext = "html";
-            else if (ext === "config") ext = "ini";
+            let ext = filename.split('.').pop().toLowerCase();
+            switch (ext) {
+                case "htm":    ext = "html"; break;
+                case "inf":    ext = "ini";  break;
+                case "cfg":    ext = "ini";  break;
+                case "config": ext = "ini";  break;
+            }
             return ext;
         }
 
@@ -106,7 +171,7 @@
             container.innerHTML = `
                 <p></p>
                 <pre class="line-numbers">
-                    <code class="language-${ext}">${content}</code>
+                    <code class="language-${ext}" id="codeDisplay">${content}</code>
                 </pre>
                 <p></p>
             `;

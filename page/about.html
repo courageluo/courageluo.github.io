@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>更新日志 - Courage Luo的网站</title>
+    <title>关于 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
@@ -14,11 +14,71 @@
     <div class="content">
     <!-- 标题框 -->
     <div class="rounded-box1">
-        <h1 style="text-align: center;">更新日志</h1>
+        <h1 style="text-align: center;">关于本站</h1>
     </div>
     
     <!-- 文本框 -->
     <div class="rounded-box6">
+        <p>这是一个使用Github Pages搭建的网站，您可以<a href="https://github.com/courageluo/courageluo.github.io?tab=readme-ov-file#courage-luo%E7%9A%84%E7%BD%91%E7%AB%99">点击此处</a>查看Github上的自述文档。</p>
+    </div>
+
+    <div class="rounded-box6">
+        <h3 style="text-align: center;">致谢</h3>
+        <hr>
+        <p>该网站的所有背景图片均由<a href="https://bgjar.com/">BGJar</a>生成。</p>
+        <p>该网站所使用的字体有：</p>
+        <ol>
+            <li>
+                <p>正文字体：<a href="https://www.maoken.com/freefonts/5275.html">江城黑体500W</a><br>
+                &emsp;&emsp;&emsp;&emsp;&emsp;<a href="https://www.intel.com/content/www/us/en/company-overview/one-monospace-font.html">Intel One Mono Medium</a></p>
+            </li>
+            <li>
+                <p>标题字体：<a href="https://atelier-anchor.com/typefaces/smiley-sans">得意黑（Smiley Sans）</a></p>
+            </li>
+            <li>
+                <p>页脚字体：<a href="https://www.jetbrains.com/lp/mono/">Jetbrains Mono Medium</a></p>
+            </li>
+        </ol>
+    </div>
+
+    <div class="rounded-box6">
+        <h3 style="text-align: center;">引用</h3>
+        <hr>
+        <p>该网站引用外部库文件有：</p>
+        <ol>
+            <li>
+                <p id="jqueryVersionDisplay"></p>
+                <p style="text-align: right; margin-top: -1em;">
+                    <a href="/blog/quote-js/jquery/jquery-3.7.1.js">查看</a>
+                    <a href="/blog/quote-js/jquery/jquery-3.7.1.js" download>下载</a>
+                    <a href="https://jquery.com">访问官网</a>
+                </p>
+            </li>
+            <li>
+                <p id="mathjaxVersionDisplay"></p>
+                <p style="margin-top: -1em;">用于在网页中显示\( \mathrm{\LaTeX} \)公式</p>
+                <p style="text-align: right; margin-top: -1em;">
+                    <a href="/blog/quote-js/mathjax/es5/tex-mml-chtml.js">查看</a>
+                    <a href="/blog/quote-js/mathjax/es5/tex-mml-chtml.js" download>下载</a>
+                    <a href="https://www.mathjax.org/">访问官网</a>
+                </p>
+            </li>
+            <li>
+                <strong>Prism</strong> v1.29.0<br>
+                用于高亮网页中的代码
+                <p style="text-align: right; margin-top: 0em;">
+                    <a href="/blog/quote-js/prismjs/prism.js">查看JS</a>
+                    <a href="/blog/quote-js/prismjs/prism.css">查看CSS</a>
+                    <a href="https://prismjs.com/">访问官网</a>
+                </p>
+            </li>
+        </ol>
+    </div>
+
+    <div class="rounded-box6">
+        <h3 style="text-align: center;">更新日志</h3>
+        <hr>
+        <p>ver 0.5.9 2024.06.01 19:45 <br> 修改本页内容。</p>
         <p>ver 0.5.8 2024.05.12 00:07 <br> 修正一些错误，优化数学公式排版。</p>
         <p>ver 0.5.7 2024.05.05 14:53 <br> 加入一个文件预览器，更新prism。</p>
         <p>ver 0.5.6 2024.04.21 14:58 <br> 更新时钟，修复一些问题。</p>
@@ -60,6 +120,10 @@
             --text-color-dark: white;
         }
 
+        a {
+            color: #25626b;
+        }
+
         /* 背景图片设置 */
         body {
             margin: 0px;
@@ -78,12 +142,24 @@
                 color: var(--text-color-dark);
                 background-image: url('../img/background/night-updatebackground.svg'); /* 夜晚模式下的背景图片 */
             }
+            a {
+                color: #27a8b9;
+            }
         }
     </style>
 
     <!-- 内部JS文件 -->
+    <script src="/blog/quote-js/jquery/jquery-3.7.1.js"></script>
+    <script src="/blog/quote-js/mathjax/es5/tex-chtml-full.js"></script>
     <script>
-       // 获取页脚内容
+        // 获取引用库内容
+        var jqueryVersion = $.fn.jquery;
+        $("#jqueryVersionDisplay").html("<strong>jQuery</strong> v" + jqueryVersion + "<br>用于简化一些网页中的操作");
+
+        var mathjaxVersion = MathJax.version;
+        $("#mathjaxVersionDisplay").html("<strong>MathJax</strong> v" + mathjaxVersion + "<br>");
+
+        // 获取页脚内容
         fetch("../footer/footer.html")
             .then(response => response.text())
             .then(data => {

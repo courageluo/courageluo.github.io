@@ -20,14 +20,13 @@
 
         <!-- 内容框 -->
         <div class="rounded-box3">
-            <p><input type="file" onchange="ofs(event)" style="width: 100%;"></p>
-            <p style="display: flex; width: 100%;">编码:
-                <select id="decoding">
+            <p id="container" style="display: flex; align-items: center; width: 100%;">
+                <input id="reading" type="file" onchange="ofs(event)" style="width: auto; flex: 1;">
+                <span style="white-space: nowrap;">编码：</span>
+                <select id="decoding" style="flex: 0 1 auto; white-space: nowrap;">
                     <option>UTF-8</option>
                     <option>UTF-16BE</option>
                     <option>UTF-16LE</option>
-                    <option>UTF-32BE</option>
-                    <option>UTF-32LE</option>
                     <option>GBK</option>
                     <option>GB18030</option>
                     <option>BIG5</option>
@@ -47,12 +46,7 @@
                     <option>ISO-8859-15</option>
                     <option>ISO-8859-16</option>
                 </select>
-                &emsp;字体:
-                <select id="font">
-                    <option>Intel One Mono</option>
-                    <option>Jetbrains Mono</option>
-                </select>
-            </p>
+            </p>        
         </div>
         <div class="rounded-box3" id="imgContainer" style="display: none;">
             <p></p>
@@ -67,17 +61,27 @@
 
     <!-- 内部CSS文件 -->
     <style>
-        input {
-            border-radius: 5px;
-            font-family: text;
-            font-size: 16px;
+        #container {
+            display: flex;
+            align-items: center;
+            width: 100%;
         }
 
-        select {
-            flex-grow: 1;
-            margin: 0 5px;
+        input[type="file"] {
+            border-radius: 5px;
+            margin-right: 10px;
+            font-family: text;
+            font-size: 16px;
+            width: auto;
+            flex: 1;
+        }
+
+        select#decoding {
+            flex: 0 1 auto;
+            white-space: nowrap;
             border-radius: 5px;
             font-size: 16px;
+            height: 25px;
         }
 
         /* 背景图片设置 */
@@ -104,8 +108,13 @@
     </style>
 
     <!-- 内部JS文件 -->
+    <!-- <script src="../../quote-js/jquery/jquery-3.7.1.js"></script> -->
     <script src="./prism.js"></script>
     <script>
+        // 设置选择框样式
+        let height = window.getComputedStyle(document.getElementById("reading")).height;
+        document.getElementById("decoding").style.height = height;
+
         // 处理文件选择事件
         let encoding = 'UTF-8';
         let selectedFile = null;
@@ -144,14 +153,19 @@
             }
         });
 
-        document.getElementById("font").addEventListener('change', function() {
-            var font = this.options[this.selectedIndex].text;
-            if (font === "Jetbrains Mono") {
-                document.getElementById("codeDisplay").style.fontFamily = "copyright";
-            } else {
-                document.getElementById("codeDisplay").style.fontFamily = "text";
-            }
-        });
+        // 设置字体
+        // document.getElementById("font").addEventListener('change', function() {
+        //     var font = this.options[this.selectedIndex].text;
+        //     if (font === "Jetbrains Mono") {
+        //         $('#codeDisplay').removeAttr('font-family');
+        //         $('#codeDisplay').css('font-family', 'copyright');
+        //         Prism.highlightAll();
+        //     } else {
+        //         $('#codeDisplay').removeAttr('font-family');
+        //         $('#codeDisplay').css('font-family', 'text');
+        //         Prism.highlightAll();
+        //     }
+        // });
 
         // 获取文件后缀
         function getFileExtension(filename) {

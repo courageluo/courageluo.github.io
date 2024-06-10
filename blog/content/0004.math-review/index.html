@@ -31,6 +31,7 @@
                 <li><a href="#angle" class="scroll-link">角</a></li>
                 <li><a href="#trig-function" class="scroll-link">三角函数</a></li>
                 <li><a href="#complex-num" class="scroll-link">复数</a></li>
+                <li><a href="#ext" class="scroll-link">扩展</a></li>
             </ul>
         </div>
 
@@ -113,9 +114,6 @@
                     二定三相等：\( a^2+b^2\ge 2ab \)，\( a,b\in \mathbf{R} \)
                 </li>
                 <li>
-                    原型：\( \displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i\ge\sqrt[n]{\prod_{i=1}^{n}x_i} \)
-                </li>
-                <li>
                     扩展：\( \displaystyle\sqrt{\frac{a^2+b^2}{2}}\ge\frac{a+b}{2}\ge\sqrt{ab}\ge\frac{2}{\displaystyle\frac{1}{a}+\frac{1}{b}} \)，\( a,b>0 \)
                 </li>
                 <li>
@@ -196,8 +194,7 @@
                     <strong>奔驰定理</strong>：在\( \triangle ABC \)内部有一点\( O \)，则\( \overrightarrow{OA}\cdot S_{\triangle OBC}+\overrightarrow{OB}\cdot S_{\triangle OCA}+\overrightarrow{OC}\cdot S_{\triangle OAB}=\boldsymbol{0} \)
                 </li>
                 <li>
-                    内积（数量积）：\( \boldsymbol{a\cdot b} = |\boldsymbol{a}||\boldsymbol{b}|\cos \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle \)<br>
-                    外积（矢量积）：\( |\boldsymbol{a\times b}|=|\boldsymbol{a}||\boldsymbol{b}|\sin \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle  \)
+                    内积（数量积）：\( \boldsymbol{a\cdot b} = |\boldsymbol{a}||\boldsymbol{b}|\cos \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle \)
                 </li>
                 <li>
                     \( \boldsymbol{a}\parallel\boldsymbol{b}\Leftrightarrow x_1y_2=x_2y_1 \)<br>
@@ -603,6 +600,85 @@
                 </li>
                 <li>
                     复数的模\( |\kern0.1pt z\kern0.7pt |=\displaystyle\sqrt{a^2+b^2}=|\kern0.1pt \bar{z}\kern0.7pt | \)
+                </li>
+            </ol>
+            <div class="container">
+                <h3 id="ext" class="section-title">扩展</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
+            <hr>
+            <ol>
+                <li>
+                    均值不等式的原型：\( \displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i\ge\sqrt[n]{\prod_{i=1}^{n}x_i} \)
+                </li>
+                <li>
+                    两个向量的外积（矢量积）是一个向量，满足\( |\boldsymbol{a\times b}|=|\boldsymbol{a}||\boldsymbol{b}|\sin \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle  \)
+                </li>
+                <li>
+                    对于\( \triangle ABC \)，记三个顶点\( A\left(x_1,y_1\right) \)，\( B\left(x_2,y_2\right) \)，\( C\left(x_3,y_3\right) \)所对的边为\( a \)，\( b \)，\( c \)，则有：
+                    <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                        <li>
+                            重心\( G \)的向量式为\( \overrightarrow{GA}+\overrightarrow{GB}+\overrightarrow{GC}=\boldsymbol{0} \)<br>
+                            坐标为\( G\left( \displaystyle\frac{x_1+x_2+x_3}3,\frac{y_1+y_2+y_3}3 \right) \)
+                        </li>
+                        <li>
+                            内心\( I \)的向量式为\( a\cdot\overrightarrow{IA}+b\cdot\overrightarrow{IB}+c\cdot\overrightarrow{IC}=\boldsymbol{0} \)<br>
+                            坐标为\( I\left( \displaystyle\frac{ax_1+bx_2+cx_3}{a+b+c},\frac{ay_1+by_2+cy_3}{a+b+c} \right) \)
+                        </li>
+                        <li>
+                            垂心\( H \)的向量式为\( \tan A\cdot\overrightarrow{HA}+\tan B\cdot\overrightarrow{HB}+\tan C\cdot\overrightarrow{HC}=\boldsymbol{0} \)<br>
+                            坐标为\( H\left( \displaystyle\frac{\tan A\cdot x_1+\tan B\cdot x_2+\tan C\cdot cx_3}{\tan A+\tan B+\tan C},\frac{\tan A\cdot y_1+\tan B\cdot y_2+\tan C\cdot y_3}{\tan A+\tan B+\tan C} \right) \)
+                        </li>
+                        <li>
+                            外心\( O \)的向量式为\( \sin 2A\cdot\overrightarrow{OA}+\sin 2B\cdot\overrightarrow{OB}+\sin 2C\cdot\overrightarrow{OC}=\boldsymbol{0} \)<br>
+                            坐标为\( O\left( \displaystyle\frac{\sin 2A\cdot x_1+\sin 2B\cdot x_2+\sin 2C\cdot x_3}{\sin 2A+\sin 2B+\sin 2C},\frac{\sin 2A\cdot y_1+\sin 2B\cdot y_2+\sin 2C\cdot y_3}{\sin 2A+\sin 2B+\sin 2C} \right) \)
+                        </li>
+                    </ul>
+                    如果仅以顶点坐标表达，则有：
+                    <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                        <li>
+                            \( G\left( \displaystyle\frac{x_1+x_2+x_3}3,\frac{y_1+y_2+y_3}3 \right) \)
+                        </li>
+                        <div style="height: 10px;"></div>
+                        <li>
+                            \( I\left( \displaystyle\frac{ax_1+bx_2+cx_3}{a+b+c},\frac{ay_1+by_2+cy_3}{a+b+c} \right) \)<br>
+                            其中：<br>
+                            \(
+                                \begin{align*}
+                                    a&=\displaystyle\sqrt{(x_2-x_3)^2+(y_2-y_3)^2} \\
+                                    b&=\displaystyle\sqrt{(x_3-x_1)^2+(y_3-y_1)^2} \\
+                                    c&=\displaystyle\sqrt{(x_1-x_2)^2+(y_1-y_2)^2} \\
+                                \end{align*}
+                            \)
+                        </li>
+                        <div style="height: 10px;"></div>
+                        <li>
+                            \( H\left( \displaystyle\frac{\displaystyle\prod_{cyc}\left(y_1-y_2\right)+\sum_{cyc}x_1x_2\left(y_1-y_2\right)}{\displaystyle\sum_{cyc}^{}(x_1y_3-x_1y_2)},\displaystyle\frac{\displaystyle\prod_{cyc}\left(x_1-x_2\right)+\sum_{cyc}y_1y_2\left(x_1-x_2\right)}{\displaystyle\sum_{cyc}^{}(x_1y_3-x_1y_2)} \right) \)<br>
+                            其中：<br>
+                            \(
+                                \begin{align*}
+                                    &\displaystyle\prod_{cyc}\left(x_1-x_2\right)=\left(x_1-x_2\right)\left(x_2-x_3\right)\left(x_3-x_1\right) \\
+                                    &\displaystyle\prod_{cyc}\left(y_1-y_2\right)=\left(y_1-y_2\right)\left(y_2-y_3\right)\left(y_3-y_1\right) \\
+                                    &\displaystyle\sum_{cyc}x_1x_2\left(y_1-y_2\right)=x_1x_2\left(y_1-y_2\right)+x_2x_3\left(y_2-y_3\right)+x_3x_1\left(y_3-y_1\right) \\
+                                    &\displaystyle\sum_{cyc}y_1y_2\left(x_1-x_2\right)=y_1y_2\left(x_1-x_2\right)+y_2y_3\left(x_2-x_3\right)+y_3y_1\left(x_3-x_1\right) \\
+                                    &\displaystyle\sum_{cyc}\left(x_1y_3-x_1y_2\right)=\left(x_1y_3-x_1y_2\right)+\left(x_2y_1-x_2y_3\right)+\left(x_3y_2-x_3y_1\right)
+                                \end{align*}
+                            \)
+                        </li>
+                        <div style="height: 10px;"></div>
+                        <li>
+                            \( O\left( \displaystyle\frac{\displaystyle\prod_{cyc}\left(y_1-y_2\right)+\sum_{cyc}x_1x_2\left(y_1-y_2\right)}{2\displaystyle\sum_{cyc}^{}\left(x_1y_2-x_1y_3\right)}+\frac{\sum x}2,\displaystyle\frac{\displaystyle\prod_{cyc}\left(x_1-x_2\right)+\sum_{cyc}y_1y_2\left(x_1-x_2\right)}{2\displaystyle\sum_{cyc}^{}\left(x_1y_3-x_1y_2\right)}+\frac{\sum y}2 \right) \)<br>
+                            其中：<br>
+                            \(
+                                \begin{align*}
+                                    &\textstyle\sum x=x_1+x_2+x_3 \\
+                                    &\textstyle\sum y=y_1+y_2+y_3 \\
+                                    &\displaystyle\sum_{cyc}^{}\left(x_1y_2-x_1y_3\right)=\left(x_1y_2-x_1y_3\right)+\left(x_2y_3-x_2y_1\right)+\left(x_3y_1-x_3y_2\right)
+                                \end{align*}
+                            \)<br>
+                            其余与上相同
+                        </li>
+                    </ul>
                 </li>
             </ol>
         </div>

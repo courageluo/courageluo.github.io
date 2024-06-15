@@ -599,7 +599,11 @@
                     \( z=a+b\mathrm i\leftrightarrow Z\left(a,b\right)\leftrightarrow\overrightarrow{OZ}=\left(a,b\right) \)
                 </li>
                 <li>
-                    复数的模\( |\kern0.1pt z\kern0.7pt |=\displaystyle\sqrt{a^2+b^2}=|\kern0.1pt \bar{z}\kern0.7pt | \)
+                    复数的模\( |\kern0.1pt z\kern0.7pt |=\displaystyle\sqrt{a^2+b^2}=|\kern0.1pt \bar{z}\kern0.7pt | \)<br>
+                    \( |z||\bar z\kern0.6pt|=|z|^2=|\bar z\kern0.6pt|^2=a^2+b^2 \)
+                </li>
+                <li>
+                    \( |z_1z_2|=|z_1||z_2| \)，\( \left|\displaystyle\frac{z_1}{z_2}\right|=\displaystyle\frac{|z_1|}{|z_2|} \)
                 </li>
             </ol>
             <div class="container">
@@ -679,6 +683,30 @@
                             其余与上相同
                         </li>
                     </ul>
+                </li>
+                <li>
+                    \( n \)倍角公式<br>
+                    <div style="height: 5px;"></div>
+                    \(
+                        \begin{align*}
+                            \sin n\theta&=\begin{vmatrix}
+                            \sin\theta & 1 & 0 & \cdots & 0 & 0\\
+                            1 & 2\cos\theta & 1 & \cdots & 0 & 0\\
+                            0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
+                            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+                            0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
+                            0 & 0 & 0 & \cdots & 1 & 2\cos\theta
+                            \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\sin\frac{\left ( n-k \right )\pi }2 \\
+                            \cos n\theta&=\begin{vmatrix}
+                            \cos\theta & 1 & 0 & \cdots & 0 & 0\\
+                            1 & 2\cos\theta & 1 & \cdots & 0 & 0\\
+                            0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
+                            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+                            0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
+                            0 & 0 & 0 & \cdots & 1 & 2\cos\theta
+                            \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\cos\frac{\left ( n-k \right )\pi }2
+                        \end{align*}
+                    \)
                 </li>
             </ol>
         </div>

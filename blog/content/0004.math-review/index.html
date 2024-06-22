@@ -23,14 +23,14 @@
             <hr>
             <ul style="column-count: 2;">
                 <li><a href="#abstract-function" class="scroll-link">抽象函数</a></li>
-                <li><a href="#exp" class="scroll-link">指数</a></li>
-                <li><a href="#log" class="scroll-link">对数</a></li>
+                <li><a href="#explog" class="scroll-link">指数与对数</a></li>
                 <li><a href="#inequality" class="scroll-link">不等式</a></li>
                 <li><a href="#statistic" class="scroll-link">统计</a></li>
                 <li><a href="#vector" class="scroll-link">向量</a></li>
                 <li><a href="#angle" class="scroll-link">角</a></li>
                 <li><a href="#trig-function" class="scroll-link">三角函数</a></li>
                 <li><a href="#complex-num" class="scroll-link">复数</a></li>
+                <li><a href="#3d-geometry" class="scroll-link">立体几何</a></li>
                 <li><a href="#ext" class="scroll-link">扩展</a></li>
             </ul>
         </div>
@@ -69,7 +69,7 @@
                 </li>
             </ol>
             <div class="container">
-                <h3 id="exp" class="section-title">指数</h3>
+                <h3 id="explog" class="section-title">指数与对数</h3>
                 <a href="#index" id="text-right" class="scroll-link">返回索引</a>
             </div>
             <hr>
@@ -80,13 +80,6 @@
                 <li>
                     \( a^{\frac{m}{n}}=\displaystyle\sqrt[n]{a^m} \)，\( n,m\in\mathbf{N}_+ \)
                 </li>
-            </ol>
-            <div class="container">
-                <h3 id="log" class="section-title">对数</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
-            </div>
-            <hr>
-            <ol>
                 <li>
                     \( \log_a\left(MN\right)=\log_a\left(M\right)+\log_a\left(N\right) \) <br>
                     \( \log_a\left(M^\alpha\right)=\alpha\log_a\left(M\right) \) <br>
@@ -604,6 +597,107 @@
                 </li>
                 <li>
                     \( |z_1z_2|=|z_1||z_2| \)，\( \left|\displaystyle\frac{z_1}{z_2}\right|=\displaystyle\frac{|z_1|}{|z_2|} \)
+                </li>
+                <li>
+                    \( z=a+b\mathrm i=r(\cos\theta+\mathrm i\sin\theta) \)，其中\( a,b\in \mathbf R \)，\( r=\displaystyle\sqrt{a^2+b^2}=|z| \)，等号左边称为复数的代数形式，右边称为复数的三角形式。若\( \theta\in[\kern1pt0,2\pi) \)，则称\( \theta \)是\( z \)的辐角主值，记作\( \arg z \)<br>
+                </li>
+                <li>
+                    复数三角形式的运算
+                    <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                        <li>
+                            乘法：\( r_1\left(\cos\theta_1+\mathrm i\sin\theta_1\right) \times r_2\left(\cos\theta_2+\mathrm i\sin\theta_2\right)=r_1r_2\left(\cos\left(\theta_1+\theta_2\right)+\mathrm i\sin\left(\theta_1+\theta_2\right)\right) \)
+                        </li>
+                        <div style="height: 5px;"></div>
+                        <li>
+                            除法：\( \displaystyle\frac{r_1\left(\cos\theta_1+\mathrm i\sin\theta_1\right)}{r_2\left(\cos\theta_2+\mathrm i\sin\theta_2\right)}=\frac{r_1}{r_2}\left(\cos\left(\theta_1-\theta_2\right)+\mathrm i\sin\left(\theta_1-\theta_2\right)\right) \)
+                        </li>
+                        <div style="height: 5px;"></div>
+                        <li>
+                            乘方：\( (r(\cos\theta+\mathrm i\sin\theta))^n=r^n(\cos (n\theta)+\mathrm i\sin (n\theta)) \)
+                        </li>
+                        <div style="height: 5px;"></div>
+                        <li>
+                            开方：若\( n\ge 2 \)，则非零复数\( z=r(\cos\theta+\mathrm i\sin\theta) \)的\(n\)次方根有\(n\)个，分别是<br>
+                            \( \displaystyle\sqrt[n]{r}\left(\cos\frac{\theta+2k\pi}n+\mathrm i\sin\frac{\theta+2k\pi}2\right) \)，\( k=0,1,\cdots,n-1 \)，\( r>0 \)
+                        </li>
+                    </ul>
+                </li>
+                </li>
+            </ol>
+            <div class="container">
+                <h3 id="3d-geometry" class="section-title">立体几何</h3>
+                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            </div>
+            <hr>
+            <ol>
+                <li>
+                    使用斜二测画法绘制的平面图形面积\( S' \)等于在平面直角坐标系中这个图形面积\( S \)的\( \displaystyle\frac 12\cdot\sin\frac{\pi}4\)倍<br>
+                    即\( S'=\displaystyle\frac{\sqrt 2}4S \)
+                </li>
+                <div style="height: 5px;"></div>
+                <li>
+                    空间中基本要素的位置关系
+                    <div style="height: 5px;"></div>
+                    <table border="2" style="width: 100%; text-align: center;">
+                        <tr>
+                            <th>类别</th>
+                            <th>描述</th>
+                            <th>符号语言</th>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">点与线</td>
+                            <td>点在直线上</td>
+                            <td>\( A\in l \)</td>
+                        </tr>
+                        <tr>
+                            <td>点在直线外</td>
+                            <td>\( B\notin l \)</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">点与面</td>
+                            <td>点在平面内</td>
+                            <td>\( A\in \alpha \)</td>
+                        </tr>
+                        <tr>
+                            <td>点在平面外</td>
+                            <td>\( B\notin \alpha \)</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">线与线</td>
+                            <td>相交</td>
+                            <td>\( l \cap m=A \)</td>
+                        </tr>
+                        <tr>
+                            <td>平行</td>
+                            <td>\( l \parallel m \)</td>
+                        </tr>
+                        <tr>
+                            <td>异面</td>
+                            <td>\( / \)</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">线与面</td>
+                            <td>在平面内</td>
+                            <td>\( a \subset \alpha \)</td>
+                        </tr>
+                        <tr>
+                            <td>平行</td>
+                            <td>\( b \parallel \alpha \)</td>
+                        </tr>
+                        <tr>
+                            <td>相交</td>
+                            <td>\( c \cap \alpha = A \)</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">面与面</td>
+                            <td>平行</td>
+                            <td>\( \alpha \parallel \beta \)</td>
+                        </tr>
+                        <tr>
+                            <td>相交</td>
+                            <td>\( \beta \cap \gamma=l \)</td>
+                        </tr>
+                    </table>
                 </li>
             </ol>
             <div class="container">

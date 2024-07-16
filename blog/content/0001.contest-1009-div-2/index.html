@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contest1009(Div.2场)部分题解 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
-    <link rel="stylesheet" type="text/css" href="../../../css/styles.css">
-    <link rel="stylesheet" type="text/css" href="../../quote-js/prismjs/prism.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
 </head>
 
 <body>
@@ -434,42 +434,18 @@
 
     <!-- 内部CSS文件 -->
     <style>
-        /* 颜色主题设置 */
-        :root {
-            --bg-color-light: #D2D5D9;
-            --text-color-light: black;
-            --bg-color-dark: #18323F;
-            --text-color-dark: #BBBBBB;
-        }
-
         /* 背景图片设置 */
         body {
-            margin: 0px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: var(--bg-color-light);
-            color: var(--text-color-light);
-            background-image: url('../../../img/background/day-blogbackground.svg');
-            /* 白天模式下的背景图片 */
-            background-repeat: repeat;
-            /* 重复填充背景图片 */
-            background-size: 100%;
-            /* 按比例缩放图片以填满整个容器 */
-            background-attachment: fixed;
+            background-image: url('/img/background/day-blogbackground.svg');
         }
 
         @media (prefers-color-scheme: dark) {
             body {
-                background-color: var(--bg-color-dark);
-                color: var(--text-color-dark);
-                background-image: url('../../../img/background/night-blogbackground.svg');
-                /* 夜晚模式下的背景图片 */
+                background-image: url('/img/background/night-blogbackground.svg');
             }
         }
 
-        #selectC,
-        #selectD {
+        #selectC, #selectD {
             margin-left: 10px;
         }
 
@@ -477,16 +453,13 @@
         #questionA {
             display: block;
         }
-        #questionC {
-            display: none;
-        }
-        #questionD {
+        #questionC, #questionD {
             display: none;
         }
     </style>
 
     <!-- 内部JS文件 -->
-    <script src="../../quote-js/prismjs/prism.js"></script>
+    <script src="/quote-js/prismjs/prism.js"></script>
     <script>
         // 设置按钮
         function clickA() {
@@ -508,7 +481,7 @@
         }
 
         // 获取页脚内容
-        fetch('../../../footer/footer.html')
+        fetch('/footer/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById("footer").innerHTML = data;

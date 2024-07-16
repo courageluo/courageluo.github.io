@@ -40,30 +40,26 @@
 
     <!-- 内部CSS文件 -->
     <style>
-        /* 按键垂直间距设置*/
-        .buttonSet {
-            margin-bottom: 10px;
-        }
-
         /* 背景图片设置 */
         body {
-            margin: 0px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: var(--bg-color-light);
-            color: var(--text-color-light);
-            background-image: url('img/background/day-background.svg'); /* 白天模式下的背景图片 */
-            background-repeat: repeat; /* 重复填充背景图片 */
-            background-size: 250%; /* 按比例缩放图片以填满整个容器 */
-            background-attachment: fixed;
+            background-image: url('img/background/day-background.svg');
+            background-size: 175%;
         }
         @media (prefers-color-scheme: dark) {
             body {
-                background-color: var(--bg-color-dark);
-                color: var(--text-color-dark);
                 background-image: url('img/background/night-background.svg'); /* 夜晚模式下的背景图片 */
             }
+        }
+
+        /* 按键间距设置 */
+        .buttonSet {
+            margin-bottom: 10px;
+        }
+        #button2 {
+            margin-left: 10px;
+        }
+        #button4 {
+            margin-left: 10px;
         }
     </style>
 

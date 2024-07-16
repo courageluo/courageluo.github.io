@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>关于 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
 <body>
@@ -80,6 +80,7 @@
     <div class="rounded-box6">
         <h3 style="text-align: center;">更新日志</h3>
         <hr>
+        <p>ver 0.6.0 2024.07.16 13:32 <br> 改写屎山代码，减轻网页负担（）</p>
         <p>ver 0.5.9 2024.06.30 11:23 <br> 小更改，修改一些内容。</p>
         <p>ver 0.5.8 2024.05.12 00:07 <br> 修正一些错误，优化数学公式排版。</p>
         <p>ver 0.5.7 2024.05.05 14:53 <br> 加入文件查看器，更新prism。</p>
@@ -114,34 +115,16 @@
     
     <!-- 内部CSS文件 -->
     <style>
-        /* 颜色主题设置 */
-        :root {
-            --bg-color-light: white;
-            --text-color-light: black;
-            --bg-color-dark: black;
-            --text-color-dark: white;
-        }
-
+        /* 主题设置 */
         a {
             color: #25626b;
         }
 
-        /* 背景图片设置 */
         body {
-            margin: 0px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: var(--bg-color-light);
-            color: var(--text-color-light);
-            background-image: url('../img/background/day-updatebackground.svg'); /* 白天模式下的背景图片 */
-            background-repeat: repeat-y; /* 竖直重复填充背景图片 */
-            background-size: 150%; /* 按比例缩放图片以填满整个容器 */
+            background-image: url('/img/background/day-updatebackground.svg');
         }
         @media (prefers-color-scheme: dark) {
             body {
-                background-color: var(--bg-color-dark);
-                color: var(--text-color-dark);
                 background-image: url('../img/background/night-updatebackground.svg'); /* 夜晚模式下的背景图片 */
             }
             a {

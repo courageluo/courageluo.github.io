@@ -350,23 +350,12 @@
     <style>
         /* 背景图片设置 */
         body {
-            margin: 0px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: var(--bg-color-light);
-            color: var(--text-color-light);
-            background-image: url('/img/background/day-blogbackground.svg'); /* 白天模式下的背景图片 */
-            background-repeat: repeat; /* 重复填充背景图片 */
-            background-size: 100%; /* 按比例缩放图片以填满整个容器 */
-            background-attachment: fixed;
+            background-image: url('/img/background/day-blogbackground.svg');
         }
 
         @media (prefers-color-scheme: dark) {
             body {
-                background-color: var(--bg-color-dark);
-                color: var(--text-color-dark);
-                background-image: url('/img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
+                background-image: url('/img/background/night-blogbackground.svg');
             }
         }
     </style>

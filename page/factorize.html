@@ -27,6 +27,7 @@
             <button id="toggleButton">查看玩法</button>
             <button id="abandonButton" onclick="abandonGame()">直接重开</button>
             <img src="../img/settings.svg" alt="Settings" id="settingsIcon" onclick="toggleSettings()">
+            <div style="height: 10px;"></div>
         </div>
 
         <!-- 游戏设置框 -->
@@ -88,38 +89,14 @@
 
     <!-- 内部CSS文件 -->
     <style>
-        /* 颜色主题设置 */
-        :root {
-            --bg-color-light: #D2D5D9;
-            --text-color-light: black;
-            --bg-color-dark: #18323F;
-            --text-color-dark: #BBBBBB;
-        }
-
         /* 背景图片设置 */
         body {
-            margin: 0px;
-            padding: 0px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: var(--bg-color-light);
-            color: var(--text-color-light);
             background-image: url('../img/background/day-factorizebackground.svg');
-            /* 白天模式下的背景图片 */
-            background-repeat: repeat;
-            /* 重复填充背景图片 */
-            background-size: 100%;
-            /* 按比例缩放图片以填满整个容器 */
-            background-attachment: fixed;
         }
 
         @media (prefers-color-scheme: dark) {
             body {
-                background-color: var(--bg-color-dark);
-                color: var(--text-color-dark);
                 background-image: url('../img/background/night-factorizebackground.svg');
-                /* 夜晚模式下的背景图片 */
             }
         }
 
@@ -133,12 +110,9 @@
             width: 75%;
             max-width: 400px;
             background-color: var(--bg-color-light);
-            /* 白天模式下的背景色 */
             color: var(--text-color-light);
             opacity: 0;
-            /* 初始透明度为0，隐藏 */
             transition: opacity 0.3s ease-in-out;
-            /* 添加透明度过渡效果 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -190,12 +164,9 @@
         @media (prefers-color-scheme: dark) {
             .rounded-box-settings {
                 background-color: var(--bg-color-dark);
-                /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
                 opacity: 0;
-                /* 初始透明度为0，隐藏 */
                 transition: opacity 0.3s ease-in-out;
-                /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
         }
@@ -216,7 +187,6 @@
             width: 75%;
             max-width: 400px;
             background-color: var(--bg-color-light);
-            /* 白天模式下的背景色 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -227,14 +197,42 @@
         @media (prefers-color-scheme: dark) {
             #gameOverBox {
                 background-color: var(--bg-color-dark);
-                /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
                 opacity: 0;
-                /* 初始透明度为0，隐藏 */
                 transition: opacity 0.3s ease-in-out;
-                /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
+        }
+
+        /* 设置框 */
+        .minSetting {
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .maxSetting {
+            margin-bottom: 15px;
+        }
+
+        .cancelSetting {
+            margin-left: 5px;
+        }
+
+        .resetGameButton {
+            margin-left: 5px;
+        }
+
+        .endGameButtons {
+            margin-top: 15px;
+        }
+
+        .coeffSetting {
+            margin-top: 10px;
+        }
+
+        .constSetting {
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
     </style>
 

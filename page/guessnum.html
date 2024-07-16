@@ -81,33 +81,15 @@
 
     <!-- 内部CSS文件 -->
     <style>
-        /* 颜色主题设置 */
-        :root {
-            --bg-color-light: #D2D5D9;
-            --text-color-light: black;
-            --bg-color-dark: #18323F;
-            --text-color-dark: #BBBBBB;
-        }
-
         /* 背景图片设置 */
         body {
-            margin: 0px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: var(--bg-color-light);
-            color: var(--text-color-light);
-            background-image: url('../img/background/day-guessbackground.svg'); /* 白天模式下的背景图片 */
-            background-repeat: repeat; /* 重复填充背景图片 */
-            background-size: 250%; /* 按比例缩放图片以填满整个容器 */
-            background-attachment: fixed;
+            background-image: url('/img/background/day-guessbackground.svg');
+            background-size: 200%;
         }
 
         @media (prefers-color-scheme: dark) {
             body {
-                background-color: var(--bg-color-dark);
-                color: var(--text-color-dark);
-                background-image: url('../img/background/night-guessbackground.svg'); /* 夜晚模式下的背景图片 */
+                background-image: url('/img/background/night-guessbackground.svg'); /* 夜晚模式下的背景图片 */
             }
         }
 
@@ -169,6 +151,49 @@
 
         .errorText {
             margin-bottom: 10px;
+        }
+
+        /* 调整输入框大小 */
+        #userGuess {
+            width: 135px;
+            height: 25px;
+        }
+
+        #minInput, #maxInput {
+            width: 135px;
+            height: 20px;
+        }
+        
+        /* 调整按钮位置 */
+        #submitButton {
+            margin-top: 10px;
+        }
+        #toggleButton {
+            margin-top: 10px;
+            margin-left: 5px;
+            margin-bottom: 10px;
+        }
+        #abandonButton {
+            margin-left: 5px;
+        }
+        #exitGame {
+            margin-left: 10px;
+        }
+        
+        /* 再来一局按钮设置 */
+        #endGameButtons {
+            margin-top: 20px;
+        }
+
+        /* 状态反馈框 */
+        .feedback-container {
+            margin: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 5px 20px 5px 20px;
+            color: white;
+            margin-top: 10px;
+            display: inline-block; /* 让容器根据内容大小自动调整宽度 */
         }
     </style>
 

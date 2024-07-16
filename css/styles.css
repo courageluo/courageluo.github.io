@@ -2,11 +2,30 @@
 
 /* 颜色主题设置 */
 :root {
---bg-color-light: white;
---text-color-light: black;
---bg-color-dark: black;
---text-color-dark: white;
---bg-color-loader-dark: #000000; /* 夜晚模式下的加载动画背景颜色 */
+    --bg-color-light: white;
+    --text-color-light: black;
+    --bg-color-dark: black;
+    --text-color-dark: white;
+}
+
+/* 背景图片设置 */
+body {
+    margin: 0px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    background-repeat: repeat-y; /* 重复填充背景图片 */
+    background-size: 100%; /* 按比例缩放图片以填满整个容器 */
+    background-attachment: scroll;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--bg-color-dark);
+        color: var(--text-color-dark);
+    }
 }
 
 /* 给标题一点小震撼 */
@@ -84,44 +103,11 @@ input, button {
     font-size: 16px;
 }
 
-/* 调整输入框大小 */
-#userGuess {
-    width: 135px;
-    height: 25px;
-}
-
-#minInput, #maxInput {
-    width: 135px;
-    height: 20px;
-}
-
 #coeff1, #coeff2, #factor1, #factor2 {
     width: 30px;
     height: 20px;
     margin-left: 3px;
     margin-right: 3px;
-}
-
-/* 调整按钮位置 */
-#submitButton {
-    margin-top: 10px;
-}
-#toggleButton {
-    margin-top: 10px;
-    margin-left: 5px;
-    margin-bottom: 10px;
-}
-#abandonButton {
-    margin-left: 5px;
-}
-#button2 {
-    margin-left: 10px;
-}
-#button4 {
-    margin-left: 10px;
-}
-#exitGame {
-    margin-left: 10px;
 }
 
 /* 圆角矩形底文字 */
@@ -213,22 +199,6 @@ input {
     }
 }
 
-/* 再来一局按钮设置 */
-#endGameButtons {
-    margin-top: 20px;
-}
-
-/* 状态反馈框 */
-.feedback-container {
-    margin: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding: 5px 20px 5px 20px;
-    color: white;
-    margin-top: 10px;
-    display: inline-block; /* 让容器根据内容大小自动调整宽度 */
-}
-
 /* 设置图标 */
 #settingsIcon {
     position: absolute;
@@ -236,35 +206,4 @@ input {
     right: 20px;
     cursor: pointer;
     width: 20px;
-}
-
-/* 设置框 */
-.minSetting {
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-.maxSetting {
-    margin-bottom: 15px;
-}
-
-.cancelSetting {
-    margin-left: 5px;
-}
-
-.resetGameButton {
-    margin-left: 5px;
-}
-
-.endGameButtons {
-    margin-top: 15px;
-}
-
-.coeffSetting {
-    margin-top: 10px;
-}
-
-.constSetting {
-    margin-top: 10px;
-    margin-bottom: 10px;
 }

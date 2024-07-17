@@ -7,18 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
 <body>
     <!-- 网页内容 -->
     <div class="content">
-    
         <!-- 标题和问候语 -->
         <div id="greetingContainer">
             <h1 id="greeting" style="text-align: center;"></h1>
         </div>
-
         <p style="text-align: center;">这里目前还什么都没有，按下面的按钮玩玩吧<br>(广告请手动屏蔽cloudflare-app元素)</p>
     
         <!-- 按钮整体 -->
@@ -42,12 +40,12 @@
     <style>
         /* 背景图片设置 */
         body {
-            background-image: url('img/background/day-background.svg');
+            background-image: url('/img/background/day-background.svg');
             background-size: 175%;
         }
         @media (prefers-color-scheme: dark) {
             body {
-                background-image: url('img/background/night-background.svg'); /* 夜晚模式下的背景图片 */
+                background-image: url('/img/background/night-background.svg'); /* 夜晚模式下的背景图片 */
             }
         }
 
@@ -55,10 +53,7 @@
         .buttonSet {
             margin-bottom: 10px;
         }
-        #button2 {
-            margin-left: 10px;
-        }
-        #button4 {
+        #button2, #button4 {
             margin-left: 10px;
         }
     </style>
@@ -73,17 +68,17 @@
     
         // 设置猜数游戏的按钮
         button1.addEventListener("click", function() {
-            window.location.href = "page/guessnum.html"
+            window.location.href = "/page/guessnum.html"
         });
     
         // 设置因式分解的按钮
         button2.addEventListener("click", function() {
-            window.location.href = "page/factorize.html"
+            window.location.href = "/page/factorize.html"
         });
     
         // 设置个人博客的按钮
         button3.addEventListener("click", function() {
-            window.location.href = "blog/blog.html"
+            window.location.href = "/blog/blog.html"
         });
         
         // 设置Rickroll的按钮

@@ -89,14 +89,23 @@
 
     <!-- 内部CSS文件 -->
     <style>
+        /* 颜色变量 */
+        :root {
+            --bg-color-light: #D2D5D9;
+            --text-color-light: #000000;
+            --bg-color-dark: #18323F;
+            --text-color-dark: #BBBBBB;
+        }
+
         /* 背景图片设置 */
         body {
-            background-image: url('../img/background/day-factorizebackground.svg');
+            background-image: url('/img/background/day-factorizebackground.svg');
+            background-size: 100%;
         }
 
         @media (prefers-color-scheme: dark) {
             body {
-                background-image: url('../img/background/night-factorizebackground.svg');
+                background-image: url('/img/background/night-factorizebackground.svg');
             }
         }
 
@@ -176,6 +185,13 @@
             width: 35px;
             height: 20px;
         }
+        
+        #coeff1, #coeff2, #factor1, #factor2 {
+            width: 30px;
+            height: 20px;
+            margin-left: 3px;
+            margin-right: 3px;
+        }
 
         /* 游戏结束矩形框样式 */
         #gameOverBox {
@@ -251,7 +267,24 @@
 
         // 生成需要分解的多项式
         let ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;
-        let poly = `${randomCoeff1 * randomCoeff2}x²+${randomCoeff1 * randomConst2 + randomCoeff2 * randomConst1}x+${randomConst1 * randomConst2}`;
+        let bincoeff = randomCoeff1 * randomCoeff2;
+        let moncoeff = randomCoeff1 * randomConst2 + randomCoeff2 * randomConst1;
+
+        let poly;
+
+        if (bincoeff === 1) {
+            if (moncoeff === 1) {
+                poly = `x²+x+${randomConst1 * randomConst2}`;
+            } else {
+                poly = `x²+${moncoeff}x+${randomConst1 * randomConst2}`;
+            }
+        } else {
+            if (moncoeff === 1) {
+                poly = `${bincoeff}x²+x+${randomConst1 * randomConst2}`;
+            } else {
+                poly = `${bincoeff}x²+${moncoeff}x+${randomConst1 * randomConst2}`;
+            }
+        }
 
         // 将多项式显示在页面上
         document.getElementById("poly").innerText = poly;
@@ -337,8 +370,23 @@
             randomConst2 = randomInt(1, 10);
 
             // 生成新的多项式
-            ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;
-            poly = `${randomCoeff1 * randomCoeff2}x²+${randomCoeff1 * randomConst2 + randomCoeff2 * randomConst1}x+${randomConst1 * randomConst2}`;
+            let ans = `(${randomCoeff1}x+${randomConst1})*(${randomCoeff2}x+${randomConst2})`;
+            let bincoeff = randomCoeff1 * randomCoeff2;
+            let moncoeff = randomCoeff1 * randomConst2 + randomCoeff2 * randomConst1;
+
+            if (bincoeff === 1) {
+                if (moncoeff === 1) {
+                    poly = `x²+x+${randomConst1 * randomConst2}`;
+                } else {
+                    poly = `x²+${moncoeff}x+${randomConst1 * randomConst2}`;
+                }
+            } else {
+                if (moncoeff === 1) {
+                    poly = `${bincoeff}x²+x+${randomConst1 * randomConst2}`;
+                } else {
+                    poly = `${bincoeff}x²+${moncoeff}x+${randomConst1 * randomConst2}`;
+                }
+            }
 
             // 将多项式显示在页面上
             document.getElementById("poly").innerText = poly;
@@ -448,11 +496,11 @@
 
         // 设置返回主页的按钮
         backHome.addEventListener("click", function() {
-            window.location.href = "../index.html";
+            window.location.href = "/index.html";
         });
 
         // 获取页脚内容
-        fetch("../footer/footer.html")
+        fetch("/footer/footer.html")
             .then(response => response.text())
             .then(data => {
                 document.getElementById("footer").innerHTML = data;

@@ -14,10 +14,9 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: var(--bg-color-light);
     color: var(--text-color-light);
+    background-color: var(--bg-color-light);
     background-repeat: repeat; /* 重复填充背景图片 */
-    background-size: 100%; /* 按比例缩放图片以填满整个容器 */
     background-attachment: scroll;
 }
 
@@ -37,35 +36,31 @@ h1 {
 /* 自定义字体 */
 @font-face{
     font-family: title;
-    src: url('../font/SmileySans-Oblique.ttf')
+    src: url('/font/SmileySans-Oblique.ttf')
 }
 
 @font-face{
     font-family: text;
-    src: url('../font/JiangChengHei-500W.ttf')
+    src: url('/font/JiangChengHei-500W.ttf')
 }
 
 @font-face{
     font-family: text;
-    src: url('../font/Intel One Mono Medium.ttf')
+    src: url('/font/Intel One Mono Medium.ttf')
 }
 
-/* @font-face{
-    font-family: copyright;
-    src: url('../font/JiangChengHei-500W.ttf')
-} */
+@font-face{
+    font-family: copy;
+    src: url('/font/JiangChengHei-500W.ttf')
+}
 
 @font-face {
     font-family: copyright;
-    src: url('../font/JetBrainsMono-Medium.ttf')
+    src: url('/font/JetBrainsMono-Medium.ttf')
 }
 
 /* 调整网页字体 */
-body {
-    font-family: "text";
-}
-
-p {
+body, p {
     font-family: "text";
 }
 
@@ -75,8 +70,8 @@ h1 {
 
 .copyright {
     font-family: "copyright";
-    font-size: 12px;
     text-align: center;
+    font-size: 12px;
 }
 
 code {
@@ -93,21 +88,10 @@ label {
     flex: 1;
 }
 
-/* 调整输入框和按钮字体 */
+/* 输入框和按钮字体和文字大小 */
 input, button {
     font-family: text;
-}
-
-/* 调整输入框和按钮文字大小 */
-input, button {
     font-size: 16px;
-}
-
-#coeff1, #coeff2, #factor1, #factor2 {
-    width: 30px;
-    height: 20px;
-    margin-left: 3px;
-    margin-right: 3px;
 }
 
 /* 圆角矩形底文字 */

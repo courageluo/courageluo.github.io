@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>猜数游戏 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
 <body>
@@ -81,6 +81,14 @@
 
     <!-- 内部CSS文件 -->
     <style>
+        /* 颜色变量 */
+        :root {
+            --bg-color-light: #D2D5D9;
+            --text-color-light: #000000;
+            --bg-color-dark: #18323F;
+            --text-color-dark: #BBBBBB;
+        }
+
         /* 背景图片设置 */
         body {
             background-image: url('/img/background/day-guessbackground.svg');
@@ -168,14 +176,17 @@
         #submitButton {
             margin-top: 10px;
         }
+
         #toggleButton {
             margin-top: 10px;
             margin-left: 5px;
             margin-bottom: 10px;
         }
+
         #abandonButton {
             margin-left: 5px;
         }
+
         #exitGame {
             margin-left: 10px;
         }
@@ -195,10 +206,32 @@
             margin-top: 10px;
             display: inline-block; /* 让容器根据内容大小自动调整宽度 */
         }
+
+        /* 设置框 */
+        .minSetting {
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .maxSetting {
+            margin-bottom: 15px;
+        }
+
+        .cancelSetting {
+            margin-left: 5px;
+        }
+
+        .resetGameButton {
+            margin-left: 5px;
+        }
+
+        .endGameButtons {
+            margin-top: 15px;
+        }
     </style>
 
     <!-- 内部JS文件 -->
-    <script src="../blog/quote-js/jquery/jquery-3.7.1.js"></script>
+    <script src="/blog/quote-js/jquery/jquery-3.7.1.js"></script>
     <script>
         // 生成随机数
         let randomNum = Math.floor(Math.random() * 100) + 1;
@@ -370,9 +403,10 @@
 
         // 设置返回主页的按钮
         backHome.addEventListener("click", function () {
-            window.location.href = "../index.html";
+            window.location.href = "/index.html";
         });
 
+        // 按下Enter提交猜测
         $(document).ready(function() {
             $("#userGuess").keypress(function(event) {
                 if (event.keyCode === 13) {
@@ -382,7 +416,7 @@
         });
 
         // 获取页脚内容
-        fetch('../footer/footer.html')
+        fetch('/footer/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById("footer").innerHTML = data;

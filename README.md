@@ -11,7 +11,7 @@ An incomplete conception of a website, as a record of my progress learning HTML 
 Clone the repo to your computer, then get into the root content and run `run.py`.
 
 ```powershell
-git clone https://github.com/courageluo
+git clone https://github.com/courageluo/courageluo.github.io.git
 cd courageluo.github.io
 python run.py
 ```

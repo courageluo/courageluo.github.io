@@ -6,9 +6,19 @@ An incomplete conception of a website, as a record of my progress learning HTML 
 
 ## 运行
 
-您可以通过运行`run.py`后打开`run.url`或访问`http://127.0.0.1:8000/`来运行这个网站。当然，也可以通过打开`index.html`运行，但这样可能无法动态加载内容。
+克隆仓库到本地，进入目录并运行`run.py`。
 
-You can run this website by running `run.py` and then opening `run.url` or accessing `http://127.0.0.1:8000/`. Of course, you can also run it by opening `index.html`, but this may not load the content dynamically.
+Clone the repo to your computer, then get into the root content and run `run.py`.
+
+```powershell
+git clone https://github.com/courageluo
+cd courageluo.github.io
+python run.py
+```
+
+然后打开`run.url`或访问`http://127.0.0.1:8000/`来运行这个网站。当然，也可以通过直接打开`index.html`运行，但这样可能无法动态加载内容。
+
+Then open `run.url` or access `http://127.0.0.1:8000/`. Of course, you can also run it by opening `index.html` directly, but this may not load the content dynamically.
 
 ## 猜数游戏
 

@@ -9,6 +9,7 @@
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/katex/katex.min.css"
 </head>
 
 <body>
@@ -182,7 +183,7 @@
             <hr>
             <h4>[题目描述]</h4>
             <p>
-                现给你两个正整数A和B，请你计算\( A \: \mathrm{mod} \: B \)。<br>
+                现给你两个正整数A和B，请你计算$ A \: \mathrm{mod} \: B $。<br>
                 为了使问题简单，保证B小于100000。
             </p>
             <h4>[输入]</h4>
@@ -191,7 +192,7 @@
             </p>
             <h4>[输出]</h4>
             <p>
-                对于每一个测试样例，输出\( A \: \mathrm{mod} \: B \)。
+                对于每一个测试样例，输出$ A \: \mathrm{mod} \: B $。
             </p>
             <h4>[解答]</h4>
             <p>
@@ -289,11 +290,11 @@
             </p>
         </div>
         <div class="rounded-box3">
-            <h3>Problem F 人见人爱\( \boldsymbol{A^B} \: \mathbf{mod} \: \boldsymbol{C} \)</h3>
+            <h3>Problem F 人见人爱$ \boldsymbol{A^B} \: \mathbf{mod} \: \boldsymbol{C} $</h3>
             <hr>
             <h4>[题目描述]</h4>
             <p>
-                计算A的B次幂对C取模(\( A^B \: \mathrm{mod} \: C \))并且1≤A，B,C≤32768。输入三个整数A,B,C，输入文件每一行依次三个整数A,B,C用空格隔开，每行输出一个运算结果。
+                计算A的B次幂对C取模($ A^B \: \mathrm{mod} \: C $)并且1≤A，B,C≤32768。输入三个整数A,B,C，输入文件每一行依次三个整数A,B,C用空格隔开，每行输出一个运算结果。
             </p>
             <h4>[样例输入]</h4>
             <p>
@@ -348,6 +349,10 @@
 
     <!-- 内部CSS文件 -->
     <style>
+        a {
+            color: #110c50;
+        }
+
         /* 背景图片设置 */
         body {
             background-image: url('/img/background/day-blogbackground.svg');
@@ -358,13 +363,33 @@
             body {
                 background-image: url('/img/background/night-blogbackground.svg');
             }
+
+            a {
+                color: #20e3d6;
+            }
         }
     </style>
 
     <!-- 内部JS文件 -->
     <script src="/blog/quote-js/prismjs/prism.js"></script>
-    <script src="/blog/quote-js/mathjax/es5/tex-chtml-full.js"></script>
+    <script src="/blog/quote-js/katex/katex.min.js"></script>
+    <script src="/blog/quote-js/katex/contrib/auto-render.min.js"></script>
     <script>
+        // 配置KATEX
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                // 明明没用，但是删了会出问题
+                macros: {
+                    "\\ge": "\\geqslant",
+                    "\\le": "\\geqslant"
+                }
+            })
+        });
+
         // 获取页脚内容
         fetch('/footer/footer.html')
             .then(response => response.text())

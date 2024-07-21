@@ -8,813 +8,844 @@
     <title>数学知识点记录 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/katex/katex.min.css">
 </head>
 
 <body>
     <div class="content">
-        <!-- 标题框 -->
-        <div class="rounded-box1">
-            <h1 style="text-align: center;">数学知识点</h1>
-        </div>
+        <!-- 边栏 -->
+        <aside class="sidebar">
+            <!-- 索引框 -->
+            <div class="rounded-box3">
+                <h3 id="index" style="text-align: center;">索引目录</h3>
+                <hr>
+                <ul id="target-index" style="column-count: 1;"></ul>
+            </div>
+        </aside>
 
-        <!-- 索引框 -->
-        <div class="rounded-box3">
-            <h3 id="index">索引目录</h3>
-            <hr>
-            <ul style="column-count: 2;">
-                <li><a href="#abstract-function" class="scroll-link">抽象函数</a></li>
-                <li><a href="#explog" class="scroll-link">指数对数</a></li>
-                <li><a href="#inequality" class="scroll-link">不等式</a></li>
-                <li><a href="#statistic" class="scroll-link">统计</a></li>
-                <li><a href="#vector" class="scroll-link">向量</a></li>
-                <li><a href="#angle" class="scroll-link">角</a></li>
-                <li><a href="#trig-function" class="scroll-link">三角函数</a></li>
-                <li><a href="#complex-num" class="scroll-link">复数</a></li>
-                <li><a href="#3d-geometry" class="scroll-link">立体几何</a></li>
-                <li><a href="#ext" class="scroll-link">扩展</a></li>
-            </ul>
-        </div>
+        <!-- 主要内容 -->
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">数学知识点</h1>
+            </div>
 
-        <!-- 内容框 -->
-        <div class="rounded-box3">
-            <div class="container">
-                <h3 id="abstract-function" class="section-title">抽象函数</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            <!-- 索引框 -->
+            <div id="index-box" class="rounded-box3">
+                <h3 id="index" style="text-align: center;">索引目录</h3>
+                <hr>
+                <ul id="content-index" style="column-count: 2;">
+                    <li><a href="#abstract-function" class="scroll-link">抽象函数</a></li>
+                    <li><a href="#explog" class="scroll-link">指数对数</a></li>
+                    <li><a href="#inequality" class="scroll-link">不等式</a></li>
+                    <li><a href="#statistic" class="scroll-link">统计</a></li>
+                    <li><a href="#vector" class="scroll-link">向量</a></li>
+                    <li><a href="#angle" class="scroll-link">角</a></li>
+                    <li><a href="#trig-function" class="scroll-link">三角函数</a></li>
+                    <li><a href="#complex-num" class="scroll-link">复数</a></li>
+                    <li><a href="#3d-geometry" class="scroll-link">立体几何</a></li>
+                    <li><a href="#ext" class="scroll-link">扩展</a></li>
+                </ul>
             </div>
-            <hr>
-            <ol>
-                <li>
-                    \( f\left(x\right) \)关于\( x=a \)对称 <br>
-                    \( \Leftrightarrow f\left(a+x\right)=f\left(a-x\right) \) <br>
-                    \( \Leftrightarrow f\left(2a+x\right)=f\left(-x\right) \)
-                </li>
-                <li>
-                    \( f\left(x\right) \)关于\( \left(a,b\right) \)对称 <br>
-                    \( \Leftrightarrow f\left(a+x\right)+f\left(a-x\right)=2b \) <br>
-                    \( \Leftrightarrow f\left(x\right)+f\left(2a-x\right)=2b \)
-                </li>
-                <li>
-                    \( f\left(x+a\right) \)是偶函数 <br>
-                    \( \Leftrightarrow f\left(x\right) \)关于\( x=a \)对称 <br>
-                </li>
-                <li>
-                    \( f\left(x+a\right) \)是奇函数 <br>
-                    \( \Leftrightarrow f\left(x\right) \)关于\( \left(a,0\right) \)对称 <br>
-                </li>
-                <li>
-                    \( f\left(x\right)=f\left(x+T\right) \)，周期为\( T \) <br>
-                    \( f\left(x+a\right)=f\left(x-b\right) \)，周期为\( a+b \) <br>
-                    \( f\left(x+T\right)=-f\left(x\right)+k \)，周期为\( 2T \) <br>
-                    \( f\left(x+a\right)=-f\left(x-b\right) \)，周期为\( 2\left(a+b\right) \)
-                </li>
-            </ol>
-            <div class="container">
-                <h3 id="explog" class="section-title">指数与对数</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="abstract-function" class="section-title">抽象函数</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        $ f\left(x\right) $关于$ x=a $对称 <br>
+                        $ \Leftrightarrow f\left(a+x\right)=f\left(a-x\right) $ <br>
+                        $ \Leftrightarrow f\left(2a+x\right)=f\left(-x\right) $
+                    </li>
+                    <li>
+                        $ f\left(x\right) $关于$ \left(a,b\right) $对称 <br>
+                        $ \Leftrightarrow f\left(a+x\right)+f\left(a-x\right)=2b $ <br>
+                        $ \Leftrightarrow f\left(x\right)+f\left(2a-x\right)=2b $
+                    </li>
+                    <li>
+                        $ f\left(x+a\right) $是偶函数 <br>
+                        $ \Leftrightarrow f\left(x\right) $关于$ x=a $对称 <br>
+                    </li>
+                    <li>
+                        $ f\left(x+a\right) $是奇函数 <br>
+                        $ \Leftrightarrow f\left(x\right) $关于$ \left(a,0\right) $对称 <br>
+                    </li>
+                    <li>
+                        $ f\left(x\right)=f\left(x+T\right) $，周期为$ T $ <br>
+                        $ f\left(x+a\right)=f\left(x-b\right) $，周期为$ a+b $ <br>
+                        $ f\left(x+T\right)=-f\left(x\right)+k $，周期为$ 2T $ <br>
+                        $ f\left(x+a\right)=-f\left(x-b\right) $，周期为$ 2\left(a+b\right) $
+                    </li>
+                </ol>
             </div>
-            <hr>
-            <ol>
-                <li>
-                    \( a^sa^t=a^{s+t} \)，\( \left(a^s\right)^t=a^{st} \)，\( \left(ab\right)^s=a^sb^s \) <br>
-                </li>
-                <li>
-                    \( a^{\frac{m}{n}}=\displaystyle\sqrt[n]{a^m} \)，\( n,m\in\mathbf{N}_+ \)
-                </li>
-                <li>
-                    \( \log_a\left(MN\right)=\log_a\left(M\right)+\log_a\left(N\right) \) <br>
-                    \( \log_a\left(M^\alpha\right)=\alpha\log_a\left(M\right) \) <br>
-                    \( \log_a\left(\displaystyle\frac{M}{N}\right)=\log_a\left(M\right)-\log_a\left(N\right) \)
-                </li>
-                <li>
-                    推论：\( \log_a\left(\displaystyle\prod_{i=1}^{k}N_i\right)=\displaystyle\sum_{i=1}^{k}\log_aN_i \)
-                </li>
-                <li>
-                    \( \log_a\left(a^k\right)=k \)，\( a^{\log_a\left(k\right)}=k \)
-                </li>
-                <li>
-                    换底公式：\( \log_a\left(b\right)=\displaystyle\frac{\log_c\left(b\right)}{\log_c\left(a\right)} \) <br>
-                    \( \log_{a^m}\left(b^n\right)=\displaystyle\frac{n}{m}\log_a\left(b\right) \)
-                </li>
-            </ol>
-            <div class="container">
-                <h3 id="inequality" class="section-title">不等式</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="explog" class="section-title">指数与对数</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        $ a^sa^t=a^{s+t} $，$ \left(a^s\right)^t=a^{st} $，$ \left(ab\right)^s=a^sb^s $ <br>
+                    </li>
+                    <li>
+                        $ a^{\frac{m}{n}}=\displaystyle\sqrt[n]{a^m} $，$ n,m\in\mathbf{N}_+ $
+                    </li>
+                    <li>
+                        $ \log_a\left(MN\right)=\log_a\left(M\right)+\log_a\left(N\right) $ <br>
+                        $ \log_a\left(M^\alpha\right)=\alpha\log_a\left(M\right) $ <br>
+                        $ \log_a\left(\displaystyle\frac{M}{N}\right)=\log_a\left(M\right)-\log_a\left(N\right) $
+                    </li>
+                    <li>
+                        推论：$ \log_a\left(\displaystyle\prod_{i=1}^{k}N_i\right)=\displaystyle\sum_{i=1}^{k}\log_aN_i $
+                    </li>
+                    <li>
+                        $ \log_a\left(a^k\right)=k $，$ a^{\log_a\left(k\right)}=k $
+                    </li>
+                    <li>
+                        换底公式：$ \log_a\left(b\right)=\displaystyle\frac{\log_c\left(b\right)}{\log_c\left(a\right)} $ <br>
+                        $ \log_{a^m}\left(b^n\right)=\displaystyle\frac{n}{m}\log_a\left(b\right) $
+                    </li>
+                </ol>
             </div>
-            <hr>
-            <ol>
-                <li>
-                    均值不等式(一正二定三相等)：\( a+b\ge 2\sqrt{ab} \)，\( a,b>0 \) <br>
-                    二定三相等：\( a^2+b^2\ge 2ab \)，\( a,b\in \mathbf{R} \)
-                </li>
-                <li>
-                    扩展：\( \displaystyle\sqrt{\frac{a^2+b^2}{2}}\ge\frac{a+b}{2}\ge\sqrt{ab}\ge\frac{2}{\displaystyle\frac{1}{a}+\frac{1}{b}} \)，\( a,b>0 \)
-                </li>
-                <li>
-                    柯西不等式：\( \left(a^2+b^2\right)\left(x^2+y^2\right)\ge\left(ax+by\right)^2 \)
-                </li>
-            </ol>
-            <div class="container">
-                <h3 id="statistic" class="section-title">统计</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="inequality" class="section-title">不等式</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        均值不等式(一正二定三相等)：$ a+b\ge 2\sqrt{ab} $，$ a,b>0 $ <br>
+                        二定三相等：$ a^2+b^2\ge 2ab $，$ a,b\in \mathbf{R} $
+                    </li>
+                    <li>
+                        扩展：$ \displaystyle\sqrt{\frac{a^2+b^2}{2}}\ge\frac{a+b}{2}\ge\sqrt{ab}\ge\frac{2}{\displaystyle\frac{1}{a}+\frac{1}{b}} $，$ a,b>0 $
+                    </li>
+                    <li>
+                        柯西不等式：$ \left(a^2+b^2\right)\left(x^2+y^2\right)\ge\left(ax+by\right)^2 $
+                    </li>
+                </ol>
             </div>
-            <hr>
-            <ol>
-                <li>
-                    \( \bar{x}=\displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i=\sum_{i=1}^{n}x_ip_i \) <br>
-                    \( s^2=\displaystyle\frac{1}{n}\sum_{i=1}^{n}\left(x_i-\bar{x}\right)^2=\sum_{i=1}^{n}\left(x_i-\bar{x}\right)^2p_i=\frac{1}{n}\sum_{i=1}^{n}x_i^2-n\bar{x}^2 \)
-                </li>
-                <li>
-                    \( \displaystyle\sum_{i=1}^{n}\left(x_i+y_i\right)=\sum_{i=1}^{n}x_i+\sum_{i=1}^{n}y_i \) <br>
-                    \( \displaystyle\sum_{i=1}^{n}\left(kx_i\right)=k\sum_{i=1}^{n}x_i \) <br>
-                    \( \displaystyle\sum_{i=1}^{n}t=nt \)
-                </li>
-                <li>
-                    若一组数据\( x_1 \)，\( x_2 \)，…，\( x_n \)的平均数为\( \bar{x} \)，方差为\( s^2 \)，且\( a,b \)为常数：<br>
-                    则\( ax_1+b \)，\( ax_2+b \)，…，\( ax_n+b \)的平均数为\( a\bar{x}+b \)，方差为\( a^2s^2 \)
-                </li>
-                <li>
-                    <strong>分层抽样</strong>，若第一层\( m \)个样本，平均数为\( \bar{x} \)，方差为\( s^2 \)；第二层\( n \)个样本，平均数为\( \bar{y} \)，方差为\( t^2 \)，则有：<br>
-                    总体平均数\( \bar{a}=\displaystyle\frac{m\bar{x}+n\bar{y}}{m+n} \)，<br>
-                    方差\( b^2=\displaystyle\frac{m\left(s^2+\left(\bar{x}-\bar{a}\right)^2\right)+n\left(t^2+\left(\bar{y}-\bar{a}\right)^2\right)}{m+n} \)
-                </li>
-                <li>
-                    <strong>等额本息</strong>，若借款\( x \)元，月息为\( a\% \)，分\( m \)个月还清，设每月还\( n \)元，则有：<br>
-                    \( x\left(1+a\%\right)^m=\displaystyle\sum_{i=0}^{m-1}n\left(1+a\%\right)^i \)
-                </li>
-            </ol>
-            <div class="container">
-                <h3 id="vector" class="section-title">向量</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="statistic" class="section-title">统计</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        $ \bar{x}=\displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i=\sum_{i=1}^{n}x_ip_i $ <br>
+                        $ s^2=\displaystyle\frac{1}{n}\sum_{i=1}^{n}\left(x_i-\bar{x}\right)^2=\sum_{i=1}^{n}\left(x_i-\bar{x}\right)^2p_i=\frac{1}{n}\sum_{i=1}^{n}x_i^2-n\bar{x}^2 $
+                    </li>
+                    <li>
+                        $ \displaystyle\sum_{i=1}^{n}\left(x_i+y_i\right)=\sum_{i=1}^{n}x_i+\sum_{i=1}^{n}y_i $ <br>
+                        $ \displaystyle\sum_{i=1}^{n}\left(kx_i\right)=k\sum_{i=1}^{n}x_i $ <br>
+                        $ \displaystyle\sum_{i=1}^{n}t=nt $
+                    </li>
+                    <li>
+                        若一组数据$ x_1 $，$ x_2 $，…，$ x_n $的平均数为$ \bar{x} $，方差为$ s^2 $，且$ a,b $为常数：<br>
+                        则$ ax_1+b $，$ ax_2+b $，…，$ ax_n+b $的平均数为$ a\bar{x}+b $，方差为$ a^2s^2 $
+                    </li>
+                    <li>
+                        <strong>分层抽样</strong>，若第一层$ m $个样本，平均数为$ \bar{x} $，方差为$ s^2 $；第二层$ n $个样本，平均数为$ \bar{y} $，方差为$ t^2 $，则有：<br>
+                        总体平均数$ \bar{a}=\displaystyle\frac{m\bar{x}+n\bar{y}}{m+n} $，<br>
+                        方差$ b^2=\displaystyle\frac{m\left(s^2+\left(\bar{x}-\bar{a}\right)^2\right)+n\left(t^2+\left(\bar{y}-\bar{a}\right)^2\right)}{m+n} $
+                    </li>
+                    <li>
+                        <strong>等额本息</strong>，若借款$ x $元，月息为$ a\% $，分$ m $个月还清，设每月还$ n $元，则有：<br>
+                        $ x\left(1+a\%\right)^m=\displaystyle\sum_{i=0}^{m-1}n\left(1+a\%\right)^i $
+                    </li>
+                </ol>
             </div>
-            <hr>
-            <ol>
-                <li>
-                    始点为\( A \)，终点为\( B \)的有向线段表示的向量，可以记为\( \overrightarrow{AB} \)，但不能写作\( \overleftarrow{BA} \)<br>
-                    印刷时，用\( \boldsymbol{a} \)，\( \boldsymbol{b} \)，\( \boldsymbol{c} \)等表示向量，但书写时，只能写作\( \vec{a} \)，\( \vec{b} \)，\( \vec{c} \)
-                </li>
-                <li>
-                    \( |\mathbf{0}|=0 \)，且规定\( \mathbf{0} \parallel \boldsymbol{a} \)，\( \mathbf{0} \perp \boldsymbol{a} \)
-                </li>
-                <li>
-                    \( \overrightarrow{AB}+\overrightarrow{BC}=\overrightarrow{AC} \)，<br>
-                    \( \overrightarrow{CA}-\overrightarrow{CB}=\overrightarrow{BA} \)，\( \overrightarrow{AC}-\overrightarrow{BC}=\overrightarrow{AB} \) <br>
-                    \( | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}+\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| \) <br>
-                    \( | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}-\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| \)
-                </li>
-                <li>
-                    \( \boldsymbol{a}+\boldsymbol{b}=\boldsymbol{b}+\boldsymbol{a} \) <br>
-                    \( \left(\boldsymbol{a}+\boldsymbol{b}\right)+\boldsymbol{c}=\boldsymbol{a}+\left(\boldsymbol{b}+\boldsymbol{c}\right) \) <br>
-                    \( \lambda\left(\mu\boldsymbol{a}\right)=\left(\lambda\mu\right)\boldsymbol{a}=\lambda\mu\boldsymbol{a} \) <br>
-                    \( \lambda\boldsymbol{a}+\mu\boldsymbol{a}=\left(\lambda+\mu\right)\boldsymbol{a} \) <br>
-                    \( \lambda\left(\boldsymbol{a}+\boldsymbol{b}\right)=\lambda\boldsymbol{a}+\lambda\boldsymbol{b} \)
-                </li>
-                <li>
-                    \( \displaystyle\frac{\boldsymbol{a}}{|\boldsymbol{a}|} \)表示与向量\( \boldsymbol{a} \)同向的单位向量
-                </li>
-                <li>
-                    <strong>共线向量基本定理</strong>：如果\( \boldsymbol{a}\ne\boldsymbol{0} \)且\( \boldsymbol{b}\parallel\boldsymbol{a} \)，则存在唯一的实数\( \lambda \)，使得\( \boldsymbol{b}=\lambda\boldsymbol{a} \)<br>
-                    <strong>平面向量基本定理</strong>：如果平面内两个向量\( \boldsymbol{a} \)与\( \boldsymbol{b} \)不共线，则对该平面内任意一个向量\( \boldsymbol{c} \)，存在唯一的实数对\( \left(x,y\right) \)，使得\( \boldsymbol{c}=x\boldsymbol{a}+y\boldsymbol{b} \)
-                </li>
-                <li>
-                    平面上有三点\( A \)，\( B \)，\( P \)，则它们共线的充要条件是\( \overrightarrow{OP}=t\overrightarrow{OA}+\left(1-t\right)\overrightarrow{OB} \)，其中\( t\in\mathbf{R} \)
-                </li>
-                <li>
-                    若\( \boldsymbol{a}=\left(x_1,y_1\right) \)，\( \boldsymbol{b}=\left(x_2,y_2\right) \)，则有：<br>
-                    \( \boldsymbol{a}+\boldsymbol{b}=\left(x_1+x_2,y_1+y_2\right) \)，<br>
-                    \( u\boldsymbol{a}+v\boldsymbol{b}=\left(ux_1+vx_2,uy_1+vy_2\right) \)
-                </li>
-                <li>
-                    <strong>奔驰定理</strong>：在\( \triangle ABC \)内部有一点\( O \)，则\( \overrightarrow{OA}\cdot S_{\triangle OBC}+\overrightarrow{OB}\cdot S_{\triangle OCA}+\overrightarrow{OC}\cdot S_{\triangle OAB}=\boldsymbol{0} \)
-                </li>
-                <li>
-                    内积（数量积）：\( \boldsymbol{a\cdot b} = |\boldsymbol{a}||\boldsymbol{b}|\cos \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle \)
-                </li>
-                <li>
-                    \( \boldsymbol{a}\parallel\boldsymbol{b}\Leftrightarrow x_1y_2=x_2y_1 \)<br>
-                    \( \boldsymbol{a}\perp \boldsymbol{b} \Leftrightarrow \boldsymbol{a\cdot b}=x_1x_2+y_1y_2=0 \)
-                </li>
-            </ol>
-            <div class="container">
-                <h3 id="angle" class="section-title">角</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="vector" class="section-title">向量</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        始点为$ A $，终点为$ B $的有向线段表示的向量，可以记为$ \overrightarrow{AB} $，但不能写作$ \overleftarrow{BA} $<br>
+                        印刷时，用$ \boldsymbol{a} $，$ \boldsymbol{b} $，$ \boldsymbol{c} $等表示向量，但书写时，只能写作$ \vec{a} $，$ \vec{b} $，$ \vec{c} $
+                    </li>
+                    <li>
+                        $ |\mathbf{0}|=0 $，且规定$ \mathbf{0} \parallel \boldsymbol{a} $，$ \mathbf{0} \perp \boldsymbol{a} $
+                    </li>
+                    <li>
+                        $ \overrightarrow{AB}+\overrightarrow{BC}=\overrightarrow{AC} $，<br>
+                        $ \overrightarrow{CA}-\overrightarrow{CB}=\overrightarrow{BA} $，$ \overrightarrow{AC}-\overrightarrow{BC}=\overrightarrow{AB} $ <br>
+                        $ | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}+\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| $ <br>
+                        $ | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}-\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| $
+                    </li>
+                    <li>
+                        $ \boldsymbol{a}+\boldsymbol{b}=\boldsymbol{b}+\boldsymbol{a} $ <br>
+                        $ \left(\boldsymbol{a}+\boldsymbol{b}\right)+\boldsymbol{c}=\boldsymbol{a}+\left(\boldsymbol{b}+\boldsymbol{c}\right) $ <br>
+                        $ \lambda\left(\mu\boldsymbol{a}\right)=\left(\lambda\mu\right)\boldsymbol{a}=\lambda\mu\boldsymbol{a} $ <br>
+                        $ \lambda\boldsymbol{a}+\mu\boldsymbol{a}=\left(\lambda+\mu\right)\boldsymbol{a} $ <br>
+                        $ \lambda\left(\boldsymbol{a}+\boldsymbol{b}\right)=\lambda\boldsymbol{a}+\lambda\boldsymbol{b} $
+                    </li>
+                    <li>
+                        $ \displaystyle\frac{\boldsymbol{a}}{|\boldsymbol{a}|} $表示与向量$ \boldsymbol{a} $同向的单位向量
+                    </li>
+                    <li>
+                        <strong>共线向量基本定理</strong>：如果$ \boldsymbol{a}\ne\boldsymbol{0} $且$ \boldsymbol{b}\parallel\boldsymbol{a} $，则存在唯一的实数$ \lambda $，使得$ \boldsymbol{b}=\lambda\boldsymbol{a} $<br>
+                        <strong>平面向量基本定理</strong>：如果平面内两个向量$ \boldsymbol{a} $与$ \boldsymbol{b} $不共线，则对该平面内任意一个向量$ \boldsymbol{c} $，存在唯一的实数对$ \left(x,y\right) $，使得$ \boldsymbol{c}=x\boldsymbol{a}+y\boldsymbol{b} $
+                    </li>
+                    <li>
+                        平面上有三点$ A $，$ B $，$ P $，则它们共线的充要条件是$ \overrightarrow{OP}=t\overrightarrow{OA}+\left(1-t\right)\overrightarrow{OB} $，其中$ t\in\mathbf{R} $
+                    </li>
+                    <li>
+                        若$ \boldsymbol{a}=\left(x_1,y_1\right) $，$ \boldsymbol{b}=\left(x_2,y_2\right) $，则有：<br>
+                        $ \boldsymbol{a}+\boldsymbol{b}=\left(x_1+x_2,y_1+y_2\right) $，<br>
+                        $ u\boldsymbol{a}+v\boldsymbol{b}=\left(ux_1+vx_2,uy_1+vy_2\right) $
+                    </li>
+                    <li>
+                        <strong>奔驰定理</strong>：在$ \triangle ABC $内部有一点$ O $，则$ \overrightarrow{OA}\cdot S_{\triangle OBC}+\overrightarrow{OB}\cdot S_{\triangle OCA}+\overrightarrow{OC}\cdot S_{\triangle OAB}=\boldsymbol{0} $
+                    </li>
+                    <li>
+                        内积（数量积）：$ \boldsymbol{a\cdot b} = |\boldsymbol{a}||\boldsymbol{b}|\cos \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle $
+                    </li>
+                    <li>
+                        $ \boldsymbol{a}\parallel\boldsymbol{b}\Leftrightarrow x_1y_2=x_2y_1 $<br>
+                        $ \boldsymbol{a}\perp \boldsymbol{b} \Leftrightarrow \boldsymbol{a\cdot b}=x_1x_2+y_1y_2=0 $
+                    </li>
+                </ol>
             </div>
-            <hr>
-            <ol>
-                <li>
-                    与角\( \alpha \)终边相同的角\( \beta \)构成的集合为：<br>
-                    \( \left \{ \kern1pt \beta\; |\; \beta=\alpha+k\cdot 360^{\circ},k\in\mathbf{Z} \kern1pt \right \} \)
-                </li>
-                <li>
-                    圆心角\( \alpha=\displaystyle\frac{l}{r} \)，其中\( \alpha \)的单位是\( \mathrm{rad} \)<br>
-                    \( \pi=180^{\circ} \)，\( 1=\displaystyle\frac{180}{\pi}\approx 57.3^{\circ} \)
-                </li>
-                <li>
-                    扇形的面积公式\( S=\displaystyle\frac{1}{2}\alpha r^2=\frac{1}{2}lr \)
-                </li>
-                <li>
-                    角\( \alpha \)的终边与角\( \beta \)的终边关于角\( \displaystyle\frac{\alpha+\beta}{2} \)的终边对称
-                </li>
-            </ol>
-            <div class="container">
-                <h3 id="trig-function" class="section-title">三角函数</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="angle" class="section-title">角</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        与角$ \alpha $终边相同的角$ \beta $构成的集合为：<br>
+                        $ \left \{ \kern1pt \beta\; |\; \beta=\alpha+k\cdot 360^{\circ},k\in\mathbf{Z} \kern1pt \right \} $
+                    </li>
+                    <li>
+                        圆心角$ \alpha=\displaystyle\frac{l}{r} $，其中$ \alpha $的单位是$ \mathrm{rad} $<br>
+                        $ \pi=180^{\circ} $，$ 1=\displaystyle\frac{180}{\pi}\approx 57.3^{\circ} $
+                    </li>
+                    <li>
+                        扇形的面积公式$ S=\displaystyle\frac{1}{2}\alpha r^2=\frac{1}{2}lr $
+                    </li>
+                    <li>
+                        角$ \alpha $的终边与角$ \beta $的终边关于角$ \displaystyle\frac{\alpha+\beta}{2} $的终边对称
+                    </li>
+                </ol>
             </div>
-            <hr>
-            <ol>
-                <li>
-                    特殊值<br>
-                    <table border="2" style="width: 100%; text-align: center; margin: 3px 0;">
-                        <tr>
-                            <td>\( \alpha \)</td>
-                            <td>\( 0 \)</td>
-                            <td>\( \displaystyle\frac{\pi}{6} \)</td>
-                            <td>\( \displaystyle\frac{\pi}{4} \)</td>
-                            <td>\( \displaystyle\frac{\pi}{3} \)</td>
-                            <td>\( \displaystyle\frac{\pi}{2} \)</td>
-                        </tr>
-                        <tr>
-                            <td>\( \sin\alpha \)</td>
-                            <td>\( 0 \)</td>
-                            <td>\( \displaystyle\frac{1}{2} \)</td>
-                            <td>\( \displaystyle\frac{\sqrt{2}}{2} \)</td>
-                            <td>\( \displaystyle\frac{\sqrt{3}}{2} \)</td>
-                            <td>\( 1 \)</td>
-                        </tr>
-                        <tr>
-                            <td>\( \cos\alpha \)</td>
-                            <td>\( 1 \)</td>
-                            <td>\( \displaystyle\frac{\sqrt{3}}{2} \)</td>
-                            <td>\( \displaystyle\frac{\sqrt{2}}{2} \)</td>
-                            <td>\( \displaystyle\frac{1}{2} \)</td>
-                            <td>\( 0 \)</td>
-                        </tr>
-                        <tr>
-                            <td>\( \tan\alpha \)</td>
-                            <td>\( 0 \)</td>
-                            <td>\( \displaystyle\frac{\sqrt{3}}{3} \)</td>
-                            <td>\( 1 \)</td>
-                            <td>\( \displaystyle\sqrt{3} \)</td>
-                            <td>\( / \)</td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    三角函数（以下所有\( k\in \mathbf{Z} \)）<br>
-                    <ul style="list-style-type: lower-alpha; white-space: nowrap;">
-                        <li>
-                            <strong>正弦函数</strong>\( y=\sin x \)<br>
-                            定义域：\( \mathbf{R} \)<br>
-                            &emsp;值域：\( [-1,1] \)<br>
-                            奇偶性：奇<br>
-                            周期性：\( T=2\pi \)<br>
-                            单调性：\(
-                                \begin{align*}
-                                    &\displaystyle \left [ -\frac{\pi}{2}+2k\pi,\frac{\pi}{2}+2k\pi \right ] \left(k\in \mathbf{Z}\right) \nearrow \\
-                                    &\displaystyle \left [ \frac{\pi}{2}+2k\pi,\frac{3\pi}{2}+2k\pi \right ] \left(k\in \mathbf{Z}\right) \searrow
-                                \end{align*}
-                            \)<br>
-                            &emsp;零点：\( k\pi \) <!-- <br>
-                            &emsp;图像：<br>
-                            <img src="./sin.svg" alt="正弦函数图像" width="100%"> -->
-                        </li>
-                        <li>
-                            <strong>余弦函数</strong>\( y=\cos x \)<br>
-                            定义域：\( \mathbf{R} \)<br>
-                            &emsp;值域：\( [-1,1] \)<br>
-                            奇偶性：偶<br>
-                            周期性：\( T=2\pi \)<br>
-                            单调性：\(
-                                \begin{align*}
-                                    &\displaystyle \left [ -\pi+2k\pi,2k\pi \right ] \left(k\in \mathbf{Z}\right) \nearrow \\
-                                    &\displaystyle \left [ 2k\pi,\pi+2k\pi \right ] \left(k\in \mathbf{Z}\right) \searrow
-                                \end{align*}
-                            \)<br>
-                            &emsp;零点：\( \displaystyle\frac{\pi}{2}+k\pi \) <!-- <br>
-                            &emsp;图像：<br>
-                            <img src="./cos.svg" alt="余弦函数图像" width="100%"> -->
-                        </li>
-                        <li>
-                            <strong>正切函数</strong>\( y=\tan x \)<br>
-                            定义域：\(
-                                \left \{ x \left | x\ne \displaystyle\frac{\pi}{2}+k\pi \right . \right \}
-                            \)<br>
-                            &emsp;值域：\( \mathbf{R} \)<br>
-                            奇偶性：奇<br>
-                            周期性：\( T=\pi \)<br>
-                            单调性：\(
-                                \displaystyle \left( -\frac{\pi}{2}+2k\pi,\frac{\pi}{2}+2k\pi \right) \left(k\in \mathbf{Z}\right) \nearrow
-                            \)<br>
-                            &emsp;零点：\( k\pi \) <!-- <br>
-                            &emsp;图像：<br>
-                            <img src="./tan.png" alt="正切函数图像" width="100%"> -->
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    正弦型函数<br>
-                    \( y=A\sin\left(\omega x+\varphi\right) \)称为正弦型函数，其中<br>
-                    \( |A| \)称为振幅，\( \varphi \)称为初相，\( T=\displaystyle\frac{2\pi}{|\omega|} \)称为周期，\( f=\displaystyle\frac{1}{T} \)称为频率<br>
-                </li>
-                <li>
-                    同角三角函数基本关系式<br>
-                    <div class="formula-container" style="column-count: 1;">
-                        <div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin^2\alpha+\cos^2\alpha=1 \\
-                                    &\tan\alpha=\displaystyle\frac{\sin\alpha}{\cos\alpha}
-                                \end{align*}
-                            \)
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="trig-function" class="section-title">三角函数</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        特殊值<br>
+                        <table border="2" style="width: 100%; text-align: center; margin: 3px 0;">
+                            <tr>
+                                <td>$ \alpha $</td>
+                                <td>$ 0 $</td>
+                                <td>$ \displaystyle\frac{\pi}{6} $</td>
+                                <td>$ \displaystyle\frac{\pi}{4} $</td>
+                                <td>$ \displaystyle\frac{\pi}{3} $</td>
+                                <td>$ \displaystyle\frac{\pi}{2} $</td>
+                            </tr>
+                            <tr>
+                                <td>$ \sin\alpha $</td>
+                                <td>$ 0 $</td>
+                                <td>$ \displaystyle\frac{1}{2} $</td>
+                                <td>$ \displaystyle\frac{\sqrt{2}}{2} $</td>
+                                <td>$ \displaystyle\frac{\sqrt{3}}{2} $</td>
+                                <td>$ 1 $</td>
+                            </tr>
+                            <tr>
+                                <td>$ \cos\alpha $</td>
+                                <td>$ 1 $</td>
+                                <td>$ \displaystyle\frac{\sqrt{3}}{2} $</td>
+                                <td>$ \displaystyle\frac{\sqrt{2}}{2} $</td>
+                                <td>$ \displaystyle\frac{1}{2} $</td>
+                                <td>$ 0 $</td>
+                            </tr>
+                            <tr>
+                                <td>$ \tan\alpha $</td>
+                                <td>$ 0 $</td>
+                                <td>$ \displaystyle\frac{\sqrt{3}}{3} $</td>
+                                <td>$ 1 $</td>
+                                <td>$ \displaystyle\sqrt{3} $</td>
+                                <td>$ / $</td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        三角函数（以下所有$ k\in \mathbf{Z} $）<br>
+                        <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                            <li>
+                                <strong>正弦函数</strong>$ y=\sin x $<br>
+                                定义域：$ \mathbf{R} $<br>
+                                &emsp;值域：$ [-1,1] $<br>
+                                奇偶性：奇<br>
+                                周期性：$ T=2\pi $<br>
+                                单调性：$
+                                    \begin{aligned}
+                                        &\displaystyle \left [ -\frac{\pi}{2}+2k\pi,\frac{\pi}{2}+2k\pi \right ] \left(k\in \mathbf{Z}\right) \nearrow \\
+                                        &\displaystyle \left [ \frac{\pi}{2}+2k\pi,\frac{3\pi}{2}+2k\pi \right ] \left(k\in \mathbf{Z}\right) \searrow
+                                    \end{aligned}
+                                $<br>
+                                &emsp;零点：$ k\pi $ <!-- <br>
+                                &emsp;图像：<br>
+                                <img src="./sin.svg" alt="正弦函数图像" width="100%"> -->
+                            </li>
+                            <li>
+                                <strong>余弦函数</strong>$ y=\cos x $<br>
+                                定义域：$ \mathbf{R} $<br>
+                                &emsp;值域：$ [-1,1] $<br>
+                                奇偶性：偶<br>
+                                周期性：$ T=2\pi $<br>
+                                单调性：$
+                                    \begin{aligned}
+                                        &\displaystyle \left [ -\pi+2k\pi,2k\pi \right ] \left(k\in \mathbf{Z}\right) \nearrow \\
+                                        &\displaystyle \left [ 2k\pi,\pi+2k\pi \right ] \left(k\in \mathbf{Z}\right) \searrow
+                                    \end{aligned}
+                                $<br>
+                                &emsp;零点：$ \displaystyle\frac{\pi}{2}+k\pi $ <!-- <br>
+                                &emsp;图像：<br>
+                                <img src="./cos.svg" alt="余弦函数图像" width="100%"> -->
+                            </li>
+                            <li>
+                                <strong>正切函数</strong>$ y=\tan x $<br>
+                                定义域：$
+                                    \left \{ x \left | x\ne \displaystyle\frac{\pi}{2}+k\pi \right . \right \}
+                                $<br>
+                                &emsp;值域：$ \mathbf{R} $<br>
+                                奇偶性：奇<br>
+                                周期性：$ T=\pi $<br>
+                                单调性：$
+                                    \displaystyle \left( -\frac{\pi}{2}+2k\pi,\frac{\pi}{2}+2k\pi \right) \left(k\in \mathbf{Z}\right) \nearrow
+                                $<br>
+                                &emsp;零点：$ k\pi $ <!-- <br>
+                                &emsp;图像：<br>
+                                <img src="./tan.png" alt="正切函数图像" width="100%"> -->
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        正弦型函数<br>
+                        $ y=A\sin\left(\omega x+\varphi\right) $称为正弦型函数，其中<br>
+                        $ |A| $称为振幅，$ \varphi $称为初相，$ T=\displaystyle\frac{2\pi}{|\omega|} $称为周期，$ f=\displaystyle\frac{1}{T} $称为频率<br>
+                    </li>
+                    <li>
+                        同角三角函数基本关系式<br>
+                        <div class="formula-container" style="column-count: 1;">
+                            <div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin^2\alpha+\cos^2\alpha=1 \\
+                                        &\tan\alpha=\displaystyle\frac{\sin\alpha}{\cos\alpha}
+                                    \end{aligned}
+                                $
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li>
-                    诱导公式<br>
-                    (奇变偶不变，符号看象限)<br>
-                    <div class="formula-container" style="column-count: 1;">
-                        ①<div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin\left(\alpha+k\cdot 2\pi\right)=\sin\alpha \\
-                                    &\cos\left(\alpha+k\cdot 2\pi\right)=\cos\alpha \\
-                                    &\tan\left(\alpha+k\cdot 2\pi\right)=\tan\alpha
-                                \end{align*}
-                            \)
+                    </li>
+                    <li>
+                        诱导公式<br>
+                        (奇变偶不变，符号看象限)<br>
+                        <div class="formula-container" style="column-count: 1;">
+                            ①<div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin\left(\alpha+k\cdot 2\pi\right)=\sin\alpha \\
+                                        &\cos\left(\alpha+k\cdot 2\pi\right)=\cos\alpha \\
+                                        &\tan\left(\alpha+k\cdot 2\pi\right)=\tan\alpha
+                                    \end{aligned}
+                                $
+                            </div>
+                            <br>
+                            ②<div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin\left(-\alpha\right)=-\sin\alpha \\
+                                        &\cos\left(-\alpha\right)=\cos\alpha \\
+                                        &\tan\left(-\alpha\right)=-\tan\alpha
+                                    \end{aligned}
+                                $
+                            </div>
+                            <br>
+                            ③<div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin\left(\pi-\alpha\right)=\sin\alpha \\
+                                        &\cos\left(\pi-\alpha\right)=-\cos\alpha \\
+                                        &\tan\left(\pi-\alpha\right)=-\tan\alpha
+                                    \end{aligned}
+                                $
+                            </div>
+                            <br>
+                            ④<div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin\left(\pi+\alpha\right)=-\sin\alpha \\
+                                        &\cos\left(\pi+\alpha\right)=-\cos\alpha \\
+                                        &\tan\left(\pi+\alpha\right)=\tan\alpha
+                                    \end{aligned}
+                                $
+                            </div>
+                            <br>
+                            ⑤<div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin\left(\displaystyle\frac{\pi}{2}-\alpha\right)=\cos\alpha \\
+                                        &\cos\left(\displaystyle\frac{\pi}{2}-\alpha\right)=\sin\alpha
+                                    \end{aligned}
+                                $
+                            </div>
+                            <br>
+                            ⑥<div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin\left(\displaystyle\frac{\pi}{2}+\alpha\right)=\cos\alpha \\
+                                        &\cos\left(\displaystyle\frac{\pi}{2}+\alpha\right)=-\sin\alpha
+                                    \end{aligned}
+                                $
+                            </div>
+                            <br>
+                            ⑦<div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin\left(\displaystyle\frac{3\pi}{2}+\alpha\right)=\sin\alpha \\
+                                        &\cos\left(\displaystyle\frac{3\pi}{2}+\alpha\right)=-\cos\alpha
+                                    \end{aligned}
+                                $
+                            </div>
+                            <br>
+                            ⑧<div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin\left(\displaystyle\frac{3\pi}{2}-\alpha\right)=-\sin\alpha \\
+                                        &\cos\left(\displaystyle\frac{3\pi}{2}-\alpha\right)=-\cos\alpha
+                                    \end{aligned}
+                                $
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        两角的和与差<br>
+                        <div class="formula-container" style="column-count: 1;">
+                            <div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        & \mathrm{C}_{\alpha+\beta}:\cos \left(\alpha+\beta\right)=\cos\alpha\cos\beta-\sin\alpha\sin\beta \\
+                                        & \mathrm{C}_{\alpha-\beta}:\cos \left(\alpha-\beta\right)=\cos\alpha\cos\beta+\sin\alpha\sin\beta
+                                    \end{aligned}
+                                $
+                            </div>
+                            <div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        & \mathrm{S}_{\alpha+\beta}:\sin \left(\alpha+\beta\right)=\sin\alpha\cos\beta+\cos\alpha\sin\beta \\
+                                        & \mathrm{S}_{\alpha-\beta}:\sin \left(\alpha-\beta\right)=\sin\alpha\cos\beta-\cos\alpha\sin\beta
+                                    \end{aligned}
+                                $
+                            </div>
+                            <div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        & \mathrm{T}_{\alpha+\beta}:\tan\left(\alpha+\beta\right)=\displaystyle\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta} \\
+                                        & \mathrm{T}_{\alpha-\beta}:\tan\left(\alpha-\beta\right)=\displaystyle\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}
+                                    \end{aligned}
+                                $
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        辅助角公式<br>
+                        设$ f\left(x\right)=a\sin x+b\cos x $，$ r=\displaystyle\sqrt{a^2+b^2} $，$ x_0 $为$ f\left(x\right) $的最大值点，则<br>
+                        <div class="formula-rectangle">
+                            $
+                                \begin{aligned}
+                                    f\left(x\right)&=r\left(\displaystyle\frac ar\sin x+\frac br\cos x\right) \\
+                                    &=r\left(\cos\varphi\sin x+\sin\varphi\cos x\right) \\
+                                    &=r\sin\left(x+\varphi\right) \\
+                                \end{aligned}
+                            $
                         </div>
                         <br>
-                        ②<div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin\left(-\alpha\right)=-\sin\alpha \\
-                                    &\cos\left(-\alpha\right)=\cos\alpha \\
-                                    &\tan\left(-\alpha\right)=-\tan\alpha
-                                \end{align*}
-                            \)
+                        且$ \sin x_0=\displaystyle\frac ar $，$ \cos x_0=\displaystyle\frac br $
+                    </li>
+                    <li>
+                        倍角公式<br>
+                        <div class="formula-container">
+                            <div class="formula-rectangle">
+                                $ \mathrm{S}_{2\alpha}:\sin 2\alpha=2\sin\alpha\cos\alpha $
+                                <div style="height: 2px;"></div>
+                                $
+                                    \begin{aligned}
+                                        \mathrm{C}_{2\alpha}:\cos 2\alpha&=\cos^2\alpha-\sin^2\alpha \\
+                                        &=2\cos^2\alpha-1=1-2\sin^2\alpha \\
+                                    \end{aligned}
+                                $
+                                <div style="height: 2px;"></div>
+                                $ \mathrm{T}_{2\alpha}:\tan 2\alpha=\displaystyle\frac{2\tan\alpha}{1-\tan^2\alpha} $
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        降幂公式<br>
+                        <div class="formula-container">
+                            <div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin^2\displaystyle\frac{\alpha}2=\frac{1-\cos\alpha}2 \\
+                                        &\cos^2\displaystyle\frac{\alpha}2=\frac{1+\cos\alpha}2 \\
+                                    \end{aligned}
+                                $
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        半角公式
+                        <div class="formula-container">
+                            <div class="formula-rectangle">
+                                $ 
+                                    \begin{aligned}
+                                        \mathrm{S}_{\alpha/2}: \sin\displaystyle\frac{\alpha}2=\pm\sqrt{\frac{1-\cos\alpha}2} \\
+                                        \mathrm{C}_{\alpha/2}: \cos\displaystyle\frac{\alpha}2=\pm\sqrt{\frac{1+\cos\alpha}2}
+                                    \end{aligned}
+                                $
+                                <div style="height: 2px;"></div>
+                                $
+                                    \begin{aligned}
+                                        \mathrm{T}_{\alpha/2}: \tan\displaystyle\frac{\alpha}2&=\pm\sqrt{\frac{1-\cos\alpha}{1+\cos\alpha}} \\
+                                        &=\frac{\sin\alpha}{1+\cos\alpha}=\frac{1-\cos\alpha}{\sin\alpha}
+                                    \end{aligned}
+                                $
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        积化和差公式<br>
+                        <div class="formula-container">
+                            <div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\cos\alpha\cos\beta=\displaystyle\frac12\left(\cos\left(\alpha+\beta\right)+\cos\left(\alpha-\beta\right)\right) \\
+                                        &\sin\alpha\sin\beta=-\displaystyle\frac12\left(\cos\left(\alpha+\beta\right)-\cos\left(\alpha-\beta\right)\right) \\
+                                        &\sin\alpha\cos\beta=\displaystyle\frac12\left(\sin\left(\alpha+\beta\right)+\sin\left(\alpha-\beta\right)\right) \\
+                                        &\cos\alpha\sin\beta=\displaystyle\frac12\left(\sin\left(\alpha+\beta\right)-\sin\left(\alpha-\beta\right)\right)
+                                    \end{aligned}
+                                $
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        和差化积公式<br>
+                        <div class="formula-container">
+                            <div class="formula-rectangle">
+                                令$ x=\alpha+\beta $，$ y=\alpha-\beta $，则
+                                <div style="height: 5px;"></div>
+                                $
+                                    \begin{aligned}
+                                        &\cos x+\cos y=2\cos\displaystyle\frac{x+y}2\cos\frac{x-y}2 \\
+                                        &\cos x-\cos y=-2\sin\displaystyle\frac{x+y}2\sin\frac{x-y}2 \\
+                                        &\sin x+\sin y=2\sin\displaystyle\frac{x+y}2\cos\frac{x-y}2 \\
+                                        &\sin x-\sin y=2\cos\displaystyle\frac{x+y}2\sin\frac{x-y}2
+                                    \end{aligned}
+                                $
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        万能公式<br>
+                        <div class="formula-container">
+                            <div class="formula-rectangle">
+                                $
+                                    \begin{aligned}
+                                        &\sin\alpha=\displaystyle\frac{2\tan\displaystyle\frac{\alpha}2}{1+\tan^2\displaystyle\frac{\alpha}2} \\
+                                        &\cos\alpha=\displaystyle\frac{1-\tan^2\displaystyle\frac{\alpha}2}{1+\tan^2\displaystyle\frac{\alpha}2} \\
+                                        &\tan\alpha=\displaystyle\frac{2\tan\displaystyle\frac{\alpha}2}{1-\tan^2\displaystyle\frac{\alpha}2}
+                                    \end{aligned}
+                                $
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        三角形$ \triangle ABC $中，有<br>
+                        <div class="formula-rectangle">
+                            $
+                                \begin{aligned}
+                                    & \sin \left(A+B\right)=\sin C \\
+                                    & \tan A+\tan B+\tan C=\tan A\tan B\tan C
+                                \end{aligned}
+                            $
+                        </div>
+                    </li>
+                    <li>
+                        正弦定理（两角一边、两边一对角）<br>
+                        <div class="formula-rectangle">
+                            $ \displaystyle\frac a{\sin A}=\frac b{\sin B}=\frac c{\sin C}=2R $
                         </div>
                         <br>
-                        ③<div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin\left(\pi-\alpha\right)=\sin\alpha \\
-                                    &\cos\left(\pi-\alpha\right)=-\cos\alpha \\
-                                    &\tan\left(\pi-\alpha\right)=-\tan\alpha
-                                \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ④<div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin\left(\pi+\alpha\right)=-\sin\alpha \\
-                                    &\cos\left(\pi+\alpha\right)=-\cos\alpha \\
-                                    &\tan\left(\pi+\alpha\right)=\tan\alpha
-                                \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ⑤<div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin\left(\displaystyle\frac{\pi}{2}-\alpha\right)=\cos\alpha \\
-                                    &\cos\left(\displaystyle\frac{\pi}{2}-\alpha\right)=\sin\alpha
-                                \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ⑥<div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin\left(\displaystyle\frac{\pi}{2}+\alpha\right)=\cos\alpha \\
-                                    &\cos\left(\displaystyle\frac{\pi}{2}+\alpha\right)=-\sin\alpha
-                                \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ⑦<div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin\left(\displaystyle\frac{3\pi}{2}+\alpha\right)=\sin\alpha \\
-                                    &\cos\left(\displaystyle\frac{3\pi}{2}+\alpha\right)=-\cos\alpha
-                                \end{align*}
-                            \)
-                        </div>
-                        <br>
-                        ⑧<div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin\left(\displaystyle\frac{3\pi}{2}-\alpha\right)=-\sin\alpha \\
-                                    &\cos\left(\displaystyle\frac{3\pi}{2}-\alpha\right)=-\cos\alpha
-                                \end{align*}
-                            \)
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    两角的和与差<br>
-                    <div class="formula-container" style="column-count: 1;">
+                        余弦定理（三边、两边一角）<br>
                         <div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    & \mathrm{C}_{\alpha+\beta}:\cos \left(\alpha+\beta\right)=\cos\alpha\cos\beta-\sin\alpha\sin\beta \\
-                                    & \mathrm{C}_{\alpha-\beta}:\cos \left(\alpha-\beta\right)=\cos\alpha\cos\beta+\sin\alpha\sin\beta
-                                \end{align*}
-                            \)
+                            $
+                                \begin{aligned}
+                                    & a^2=b^2+c^2-2bc\cos A \\
+                                    & b^2=a^2+c^2-2ac\cos B \\
+                                    & c^2=a^2+b^2-2ab\cos C
+                                \end{aligned}
+                            $
                         </div>
-                        <div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    & \mathrm{S}_{\alpha+\beta}:\sin \left(\alpha+\beta\right)=\sin\alpha\cos\beta+\cos\alpha\sin\beta \\
-                                    & \mathrm{S}_{\alpha-\beta}:\sin \left(\alpha-\beta\right)=\sin\alpha\cos\beta-\cos\alpha\sin\beta
-                                \end{align*}
-                            \)
-                        </div>
-                        <div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    & \mathrm{T}_{\alpha+\beta}:\tan\left(\alpha+\beta\right)=\displaystyle\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta} \\
-                                    & \mathrm{T}_{\alpha-\beta}:\tan\left(\alpha-\beta\right)=\displaystyle\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}
-                                \end{align*}
-                            \)
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    辅助角公式<br>
-                    设\( f\left(x\right)=a\sin x+b\cos x \)，\( r=\displaystyle\sqrt{a^2+b^2} \)，\( x_0 \)为\( f\left(x\right) \)的最大值点，则<br>
-                    <div class="formula-rectangle">
-                        \(
-                            \begin{align*}
-                                f\left(x\right)&=r\left(\displaystyle\frac ar\sin x+\frac br\cos x\right) \\
-                                &=r\left(\cos\varphi\sin x+\sin\varphi\cos x\right) \\
-                                &=r\sin\left(x+\varphi\right) \\
-                            \end{align*}
-                        \)
-                    </div>
-                    <br>
-                    且\( \sin x_0=\displaystyle\frac ar \)，\( \cos x_0=\displaystyle\frac br \)
-                </li>
-                <li>
-                    倍角公式<br>
-                    <div class="formula-container">
-                        <div class="formula-rectangle">
-                            \( \mathrm{S}_{2\alpha}:\sin 2\alpha=2\sin\alpha\cos\alpha \)
-                            <div style="height: 2px;"></div>
-                            \(
-                                \begin{align*}
-                                    \mathrm{C}_{2\alpha}:\cos 2\alpha&=\cos^2\alpha-\sin^2\alpha \\
-                                    &=2\cos^2\alpha-1=1-2\sin^2\alpha \\
-                                \end{align*}
-                            \)
-                            <div style="height: 2px;"></div>
-                            \( \mathrm{T}_{2\alpha}:\tan 2\alpha=\displaystyle\frac{2\tan\alpha}{1-\tan^2\alpha} \)
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    降幂公式<br>
-                    <div class="formula-container">
-                        <div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin^2\displaystyle\frac{\alpha}2=\frac{1-\cos\alpha}2 \\
-                                    &\cos^2\displaystyle\frac{\alpha}2=\frac{1+\cos\alpha}2 \\
-                                \end{align*}
-                            \)
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    半角公式
-                    <div class="formula-container">
-                        <div class="formula-rectangle">
-                            \( 
-                                \begin{align*}
-                                    \mathrm{S}_{\alpha/2}: \sin\displaystyle\frac{\alpha}2=\pm\sqrt{\frac{1-\cos\alpha}2} \\
-                                    \mathrm{C}_{\alpha/2}: \cos\displaystyle\frac{\alpha}2=\pm\sqrt{\frac{1+\cos\alpha}2}
-                                \end{align*}
-                            \)
-                            <div style="height: 2px;"></div>
-                            \(
-                                \begin{align*}
-                                    \mathrm{T}_{\alpha/2}: \tan\displaystyle\frac{\alpha}2&=\pm\sqrt{\frac{1-\cos\alpha}{1+\cos\alpha}} \\
-                                    &=\frac{\sin\alpha}{1+\cos\alpha}=\frac{1-\cos\alpha}{\sin\alpha}
-                                \end{align*}
-                            \)
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    积化和差公式<br>
-                    <div class="formula-container">
-                        <div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\cos\alpha\cos\beta=\displaystyle\frac12\left(\cos\left(\alpha+\beta\right)+\cos\left(\alpha-\beta\right)\right) \\
-                                    &\sin\alpha\sin\beta=-\displaystyle\frac12\left(\cos\left(\alpha+\beta\right)-\cos\left(\alpha-\beta\right)\right) \\
-                                    &\sin\alpha\cos\beta=\displaystyle\frac12\left(\sin\left(\alpha+\beta\right)+\sin\left(\alpha-\beta\right)\right) \\
-                                    &\cos\alpha\sin\beta=\displaystyle\frac12\left(\sin\left(\alpha+\beta\right)-\sin\left(\alpha-\beta\right)\right)
-                                \end{align*}
-                            \)
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    和差化积公式<br>
-                    <div class="formula-container">
-                        <div class="formula-rectangle">
-                            令\( x=\alpha+\beta \)，\( y=\alpha-\beta \)，则
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="complex-num" class="section-title">复数</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        $ z_1=z_2\Leftrightarrow \mathrm{Re}\left(z_1\right)=\mathrm{Re}\left(z_2\right),\mathrm{Im}\left(z_1\right)=\mathrm{Im}\left(z_2\right) $<br>
+                        复数集$ \mathbf C=\left\{ \kern1pt z\; |\; z=a+b\mathrm i,a,b\in\mathbf R \kern1pt \right\} $
+                    </li>
+                    <li>
+                        $ z=a+b\mathrm i\leftrightarrow Z\left(a,b\right)\leftrightarrow\overrightarrow{OZ}=\left(a,b\right) $
+                    </li>
+                    <li>
+                        复数的模$ |\kern0.1pt z\kern0.7pt |=\displaystyle\sqrt{a^2+b^2}=|\kern0.1pt \bar{z}\kern0.7pt | $<br>
+                        $ |z||\bar z\kern0.6pt|=|z|^2=|\bar z\kern0.6pt|^2=a^2+b^2 $
+                    </li>
+                    <li>
+                        $ |z_1z_2|=|z_1||z_2| $，$ \left|\displaystyle\frac{z_1}{z_2}\right|=\displaystyle\frac{|z_1|}{|z_2|} $
+                    </li>
+                    <li>
+                        $ z=a+b\mathrm i=r(\cos\theta+\mathrm i\sin\theta) $，其中$ a,b\in \mathbf R $，$ r=\displaystyle\sqrt{a^2+b^2}=|z| $，等号左边称为复数的代数形式，右边称为复数的三角形式。若$ \theta\in[\kern1pt0,2\pi) $，则称$ \theta $是$ z $的辐角主值，记作$ \arg z $<br>
+                    </li>
+                    <li>
+                        复数三角形式的运算
+                        <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                            <li>
+                                乘法：$ r_1\left(\cos\theta_1+\mathrm i\sin\theta_1\right) \times r_2\left(\cos\theta_2+\mathrm i\sin\theta_2\right)=r_1r_2\left(\cos\left(\theta_1+\theta_2\right)+\mathrm i\sin\left(\theta_1+\theta_2\right)\right) $
+                            </li>
                             <div style="height: 5px;"></div>
-                            \(
-                                \begin{align*}
-                                    &\cos x+\cos y=2\cos\displaystyle\frac{x+y}2\cos\frac{x-y}2 \\
-                                    &\cos x-\cos y=-2\sin\displaystyle\frac{x+y}2\sin\frac{x-y}2 \\
-                                    &\sin x+\sin y=2\sin\displaystyle\frac{x+y}2\cos\frac{x-y}2 \\
-                                    &\sin x-\sin y=2\cos\displaystyle\frac{x+y}2\sin\frac{x-y}2
-                                \end{align*}
-                            \)
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    万能公式<br>
-                    <div class="formula-container">
-                        <div class="formula-rectangle">
-                            \(
-                                \begin{align*}
-                                    &\sin\alpha=\displaystyle\frac{2\tan\displaystyle\frac{\alpha}2}{1+\tan^2\displaystyle\frac{\alpha}2} \\
-                                    &\cos\alpha=\displaystyle\frac{1-\tan^2\displaystyle\frac{\alpha}2}{1+\tan^2\displaystyle\frac{\alpha}2} \\
-                                    &\tan\alpha=\displaystyle\frac{2\tan\displaystyle\frac{\alpha}2}{1-\tan^2\displaystyle\frac{\alpha}2}
-                                \end{align*}
-                            \)
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    三角形\( \triangle ABC \)中，有<br>
-                    <div class="formula-rectangle">
-                        \(
-                            \begin{align*}
-                                & \sin \left(A+B\right)=\sin C \\
-                                & \tan A+\tan B+\tan C=\tan A\tan B\tan C
-                            \end{align*}
-                        \)
-                    </div>
-                </li>
-                <li>
-                    正弦定理（两角一边、两边一对角）<br>
-                    <div class="formula-rectangle">
-                        \( \displaystyle\frac a{\sin A}=\frac b{\sin B}=\frac c{\sin C}=2R \)
-                    </div>
-                    <br>
-                    余弦定理（三边、两边一角）<br>
-                    <div class="formula-rectangle">
-                        \(
-                            \begin{align*}
-                                & a^2=b^2+c^2-2bc\cos A \\
-                                & b^2=a^2+c^2-2ac\cos B \\
-                                & c^2=a^2+b^2-2ab\cos C
-                            \end{align*}
-                        \)
-                    </div>
-                </li>
-            </ol>
-            <div class="container">
-                <h3 id="complex-num" class="section-title">复数</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                            <li>
+                                除法：$ \displaystyle\frac{r_1\left(\cos\theta_1+\mathrm i\sin\theta_1\right)}{r_2\left(\cos\theta_2+\mathrm i\sin\theta_2\right)}=\frac{r_1}{r_2}\left(\cos\left(\theta_1-\theta_2\right)+\mathrm i\sin\left(\theta_1-\theta_2\right)\right) $
+                            </li>
+                            <div style="height: 5px;"></div>
+                            <li>
+                                乘方：$ (r(\cos\theta+\mathrm i\sin\theta))^n=r^n(\cos (n\theta)+\mathrm i\sin (n\theta)) $
+                            </li>
+                            <div style="height: 5px;"></div>
+                            <li>
+                                开方：若$ n\ge 2 $，则非零复数$ z=r(\cos\theta+\mathrm i\sin\theta) $的$n$次方根有$n$个，分别是<br>
+                                $ \displaystyle\sqrt[n]{r}\left(\cos\frac{\theta+2k\pi}n+\mathrm i\sin\frac{\theta+2k\pi}2\right) $，$ k=0,1,\cdots,n-1 $，$ r>0 $
+                            </li>
+                        </ul>
+                    </li>
+                    </li>
+                </ol>
             </div>
-            <hr>
-            <ol>
-                <li>
-                    \( z_1=z_2\Leftrightarrow \mathrm{Re}\left(z_1\right)=\mathrm{Re}\left(z_2\right),\mathrm{Im}\left(z_1\right)=\mathrm{Im}\left(z_2\right) \)<br>
-                    复数集\( \mathbf C=\left\{ \kern1pt z\; |\; z=a+b\mathrm i,a,b\in\mathbf R \kern1pt \right\} \)
-                </li>
-                <li>
-                    \( z=a+b\mathrm i\leftrightarrow Z\left(a,b\right)\leftrightarrow\overrightarrow{OZ}=\left(a,b\right) \)
-                </li>
-                <li>
-                    复数的模\( |\kern0.1pt z\kern0.7pt |=\displaystyle\sqrt{a^2+b^2}=|\kern0.1pt \bar{z}\kern0.7pt | \)<br>
-                    \( |z||\bar z\kern0.6pt|=|z|^2=|\bar z\kern0.6pt|^2=a^2+b^2 \)
-                </li>
-                <li>
-                    \( |z_1z_2|=|z_1||z_2| \)，\( \left|\displaystyle\frac{z_1}{z_2}\right|=\displaystyle\frac{|z_1|}{|z_2|} \)
-                </li>
-                <li>
-                    \( z=a+b\mathrm i=r(\cos\theta+\mathrm i\sin\theta) \)，其中\( a,b\in \mathbf R \)，\( r=\displaystyle\sqrt{a^2+b^2}=|z| \)，等号左边称为复数的代数形式，右边称为复数的三角形式。若\( \theta\in[\kern1pt0,2\pi) \)，则称\( \theta \)是\( z \)的辐角主值，记作\( \arg z \)<br>
-                </li>
-                <li>
-                    复数三角形式的运算
-                    <ul style="list-style-type: lower-alpha; white-space: nowrap;">
-                        <li>
-                            乘法：\( r_1\left(\cos\theta_1+\mathrm i\sin\theta_1\right) \times r_2\left(\cos\theta_2+\mathrm i\sin\theta_2\right)=r_1r_2\left(\cos\left(\theta_1+\theta_2\right)+\mathrm i\sin\left(\theta_1+\theta_2\right)\right) \)
-                        </li>
-                        <div style="height: 5px;"></div>
-                        <li>
-                            除法：\( \displaystyle\frac{r_1\left(\cos\theta_1+\mathrm i\sin\theta_1\right)}{r_2\left(\cos\theta_2+\mathrm i\sin\theta_2\right)}=\frac{r_1}{r_2}\left(\cos\left(\theta_1-\theta_2\right)+\mathrm i\sin\left(\theta_1-\theta_2\right)\right) \)
-                        </li>
-                        <div style="height: 5px;"></div>
-                        <li>
-                            乘方：\( (r(\cos\theta+\mathrm i\sin\theta))^n=r^n(\cos (n\theta)+\mathrm i\sin (n\theta)) \)
-                        </li>
-                        <div style="height: 5px;"></div>
-                        <li>
-                            开方：若\( n\ge 2 \)，则非零复数\( z=r(\cos\theta+\mathrm i\sin\theta) \)的\(n\)次方根有\(n\)个，分别是<br>
-                            \( \displaystyle\sqrt[n]{r}\left(\cos\frac{\theta+2k\pi}n+\mathrm i\sin\frac{\theta+2k\pi}2\right) \)，\( k=0,1,\cdots,n-1 \)，\( r>0 \)
-                        </li>
-                    </ul>
-                </li>
-                </li>
-            </ol>
-            <div class="container">
-                <h3 id="3d-geometry" class="section-title">立体几何</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
-            </div>
-            <hr>
-            <ol>
-                <li>
-                    使用斜二测画法绘制的平面图形面积\( S' \)等于在平面直角坐标系中这个图形面积\( S \)的\( \displaystyle\frac 12\cdot\sin\frac{\pi}4\)倍<br>
-                    即\( S'=\displaystyle\frac{\sqrt 2}4S \)
-                </li>
-                <div style="height: 5px;"></div>
-                <li>
-                    空间中基本要素的位置关系
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="3d-geometry" class="section-title">立体几何</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        使用斜二测画法绘制的平面图形面积$ S' $等于在平面直角坐标系中这个图形面积$ S $的$ \displaystyle\frac 12\cdot\sin\frac{\pi}4$倍<br>
+                        即$ S'=\displaystyle\frac{\sqrt 2}4S $
+                    </li>
                     <div style="height: 5px;"></div>
-                    <table border="2" style="width: 100%; text-align: center;">
-                        <tr>
-                            <th>类别</th>
-                            <th>描述</th>
-                            <th>符号语言</th>
-                        </tr>
-                        <tr>
-                            <td rowspan="2">点与线</td>
-                            <td>点在直线上</td>
-                            <td>\( A\in l \)</td>
-                        </tr>
-                        <tr>
-                            <td>点在直线外</td>
-                            <td>\( B\notin l \)</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2">点与面</td>
-                            <td>点在平面内</td>
-                            <td>\( A\in \alpha \)</td>
-                        </tr>
-                        <tr>
-                            <td>点在平面外</td>
-                            <td>\( B\notin \alpha \)</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="3">线与线</td>
-                            <td>相交</td>
-                            <td>\( l \cap m=A \)</td>
-                        </tr>
-                        <tr>
-                            <td>平行</td>
-                            <td>\( l \parallel m \)</td>
-                        </tr>
-                        <tr>
-                            <td>异面</td>
-                            <td>\( / \)</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="3">线与面</td>
-                            <td>在平面内</td>
-                            <td>\( a \subset \alpha \)</td>
-                        </tr>
-                        <tr>
-                            <td>平行</td>
-                            <td>\( b \parallel \alpha \)</td>
-                        </tr>
-                        <tr>
-                            <td>相交</td>
-                            <td>\( c \cap \alpha = A \)</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2">面与面</td>
-                            <td>平行</td>
-                            <td>\( \alpha \parallel \beta \)</td>
-                        </tr>
-                        <tr>
-                            <td>相交</td>
-                            <td>\( \beta \cap \gamma=l \)</td>
-                        </tr>
-                    </table>
-                </li>
-                <div style="height: 5px;"></div>
-                <li>
-                    对于任意凸多面体，其顶点数\(V\)、棱数\(F\)、面数\(E\)总满足关系\( V+F-E=2 \)
-                </li>
-                <li>
-                    球的表面积\( S=4\pi R^2 \)
-                </li>
-                <li>
-                    祖暅原理：幂势既同，则积不容异。<br>
-                    (“幂”是截面积，“势”是立体的高，意思是，两个同高的立体，如果等高处的截面积处处相等，则它们的体积相等)
-                </li>
-            </ol>
-            <div class="container">
-                <h3 id="ext" class="section-title">扩展</h3>
-                <a href="#index" id="text-right" class="scroll-link">返回索引</a>
-            </div>
-            <hr>
-            <ol>
-                <li>
-                    均值不等式的原型：\( \displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i\ge\sqrt[n]{\prod_{i=1}^{n}x_i} \)
-                </li>
-                <li>
-                    两个向量的外积（矢量积）是一个向量，满足\( |\boldsymbol{a\times b}|=|\boldsymbol{a}||\boldsymbol{b}|\sin \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle  \)
-                </li>
-                <li>
-                    对于\( \triangle ABC \)，记三个顶点\( A\left(x_1,y_1\right) \)，\( B\left(x_2,y_2\right) \)，\( C\left(x_3,y_3\right) \)所对的边为\( a \)，\( b \)，\( c \)，则有：
-                    <ul style="list-style-type: lower-alpha; white-space: nowrap;">
-                        <li>
-                            重心\( G \)的向量式为\( \overrightarrow{GA}+\overrightarrow{GB}+\overrightarrow{GC}=\boldsymbol{0} \)<br>
-                            坐标为\( G\left( \displaystyle\frac{x_1+x_2+x_3}3,\frac{y_1+y_2+y_3}3 \right) \)
-                        </li>
-                        <li>
-                            内心\( I \)的向量式为\( a\cdot\overrightarrow{IA}+b\cdot\overrightarrow{IB}+c\cdot\overrightarrow{IC}=\boldsymbol{0} \)<br>
-                            坐标为\( I\left( \displaystyle\frac{ax_1+bx_2+cx_3}{a+b+c},\frac{ay_1+by_2+cy_3}{a+b+c} \right) \)
-                        </li>
-                        <li>
-                            垂心\( H \)的向量式为\( \tan A\cdot\overrightarrow{HA}+\tan B\cdot\overrightarrow{HB}+\tan C\cdot\overrightarrow{HC}=\boldsymbol{0} \)<br>
-                            坐标为\( H\left( \displaystyle\frac{\tan A\cdot x_1+\tan B\cdot x_2+\tan C\cdot cx_3}{\tan A+\tan B+\tan C},\frac{\tan A\cdot y_1+\tan B\cdot y_2+\tan C\cdot y_3}{\tan A+\tan B+\tan C} \right) \)
-                        </li>
-                        <li>
-                            外心\( O \)的向量式为\( \sin 2A\cdot\overrightarrow{OA}+\sin 2B\cdot\overrightarrow{OB}+\sin 2C\cdot\overrightarrow{OC}=\boldsymbol{0} \)<br>
-                            坐标为\( O\left( \displaystyle\frac{\sin 2A\cdot x_1+\sin 2B\cdot x_2+\sin 2C\cdot x_3}{\sin 2A+\sin 2B+\sin 2C},\frac{\sin 2A\cdot y_1+\sin 2B\cdot y_2+\sin 2C\cdot y_3}{\sin 2A+\sin 2B+\sin 2C} \right) \)
-                        </li>
-                    </ul>
-                    如果仅以顶点坐标表达，则有：
-                    <ul style="list-style-type: lower-alpha; white-space: nowrap;">
-                        <li>
-                            \( G\left( \displaystyle\frac{x_1+x_2+x_3}3,\frac{y_1+y_2+y_3}3 \right) \)
-                        </li>
-                        <div style="height: 10px;"></div>
-                        <li>
-                            \( I\left( \displaystyle\frac{ax_1+bx_2+cx_3}{a+b+c},\frac{ay_1+by_2+cy_3}{a+b+c} \right) \)<br>
-                            其中：<br>
-                            \(
-                                \begin{align*}
-                                    a&=\displaystyle\sqrt{(x_2-x_3)^2+(y_2-y_3)^2} \\
-                                    b&=\displaystyle\sqrt{(x_3-x_1)^2+(y_3-y_1)^2} \\
-                                    c&=\displaystyle\sqrt{(x_1-x_2)^2+(y_1-y_2)^2} \\
-                                \end{align*}
-                            \)
-                        </li>
-                        <div style="height: 10px;"></div>
-                        <li>
-                            \( H\left( \displaystyle\frac{\displaystyle\prod_{cyc}\left(y_1-y_2\right)+\sum_{cyc}x_1x_2\left(y_1-y_2\right)}{\displaystyle\sum_{cyc}^{}(x_1y_3-x_1y_2)},\displaystyle\frac{\displaystyle\prod_{cyc}\left(x_1-x_2\right)+\sum_{cyc}y_1y_2\left(x_1-x_2\right)}{\displaystyle\sum_{cyc}^{}(x_1y_3-x_1y_2)} \right) \)<br>
-                            其中：<br>
-                            \(
-                                \begin{align*}
-                                    &\displaystyle\prod_{cyc}\left(x_1-x_2\right)=\left(x_1-x_2\right)\left(x_2-x_3\right)\left(x_3-x_1\right) \\
-                                    &\displaystyle\prod_{cyc}\left(y_1-y_2\right)=\left(y_1-y_2\right)\left(y_2-y_3\right)\left(y_3-y_1\right) \\
-                                    &\displaystyle\sum_{cyc}x_1x_2\left(y_1-y_2\right)=x_1x_2\left(y_1-y_2\right)+x_2x_3\left(y_2-y_3\right)+x_3x_1\left(y_3-y_1\right) \\
-                                    &\displaystyle\sum_{cyc}y_1y_2\left(x_1-x_2\right)=y_1y_2\left(x_1-x_2\right)+y_2y_3\left(x_2-x_3\right)+y_3y_1\left(x_3-x_1\right) \\
-                                    &\displaystyle\sum_{cyc}\left(x_1y_3-x_1y_2\right)=\left(x_1y_3-x_1y_2\right)+\left(x_2y_1-x_2y_3\right)+\left(x_3y_2-x_3y_1\right)
-                                \end{align*}
-                            \)
-                        </li>
-                        <div style="height: 10px;"></div>
-                        <li>
-                            \( O\left( \displaystyle\frac{\displaystyle\prod_{cyc}\left(y_1-y_2\right)+\sum_{cyc}x_1x_2\left(y_1-y_2\right)}{2\displaystyle\sum_{cyc}^{}\left(x_1y_2-x_1y_3\right)}+\frac{\sum x}2,\displaystyle\frac{\displaystyle\prod_{cyc}\left(x_1-x_2\right)+\sum_{cyc}y_1y_2\left(x_1-x_2\right)}{2\displaystyle\sum_{cyc}^{}\left(x_1y_3-x_1y_2\right)}+\frac{\sum y}2 \right) \)<br>
-                            其中：<br>
-                            \(
-                                \begin{align*}
-                                    &\textstyle\sum x=x_1+x_2+x_3 \\
-                                    &\textstyle\sum y=y_1+y_2+y_3 \\
-                                    &\displaystyle\sum_{cyc}^{}\left(x_1y_2-x_1y_3\right)=\left(x_1y_2-x_1y_3\right)+\left(x_2y_3-x_2y_1\right)+\left(x_3y_1-x_3y_2\right)
-                                \end{align*}
-                            \)<br>
-                            其余与上相同
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    \( n \)倍角公式<br>
+                    <li>
+                        空间中基本要素的位置关系
+                        <div style="height: 5px;"></div>
+                        <table border="2" style="width: 100%; text-align: center;">
+                            <tr>
+                                <th>类别</th>
+                                <th>描述</th>
+                                <th>符号语言</th>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">点与线</td>
+                                <td>点在直线上</td>
+                                <td>$ A\in l $</td>
+                            </tr>
+                            <tr>
+                                <td>点在直线外</td>
+                                <td>$ B\notin l $</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">点与面</td>
+                                <td>点在平面内</td>
+                                <td>$ A\in \alpha $</td>
+                            </tr>
+                            <tr>
+                                <td>点在平面外</td>
+                                <td>$ B\notin \alpha $</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">线与线</td>
+                                <td>相交</td>
+                                <td>$ l \cap m=A $</td>
+                            </tr>
+                            <tr>
+                                <td>平行</td>
+                                <td>$ l \parallel m $</td>
+                            </tr>
+                            <tr>
+                                <td>异面</td>
+                                <td>$ / $</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">线与面</td>
+                                <td>在平面内</td>
+                                <td>$ a \subset \alpha $</td>
+                            </tr>
+                            <tr>
+                                <td>平行</td>
+                                <td>$ b \parallel \alpha $</td>
+                            </tr>
+                            <tr>
+                                <td>相交</td>
+                                <td>$ c \cap \alpha = A $</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">面与面</td>
+                                <td>平行</td>
+                                <td>$ \alpha \parallel \beta $</td>
+                            </tr>
+                            <tr>
+                                <td>相交</td>
+                                <td>$ \beta \cap \gamma=l $</td>
+                            </tr>
+                        </table>
+                    </li>
                     <div style="height: 5px;"></div>
-                    \(
-                        \begin{align*}
-                            \sin n\theta&=\begin{vmatrix}
-                            \sin\theta & 0 & 0 & \cdots & 0 & 0\\
-                            0 & 2\cos\theta & 1 & \cdots & 0 & 0\\
-                            0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
-                            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
-                            0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
-                            0 & 0 & 0 & \cdots & 1 & 2\cos\theta
-                            \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\sin\frac{\left ( n-k \right )\pi }2 \\
-                            \cos n\theta&=\begin{vmatrix}
-                            \cos\theta & 1 & 0 & \cdots & 0 & 0\\
-                            1 & 2\cos\theta & 1 & \cdots & 0 & 0\\
-                            0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
-                            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
-                            0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
-                            0 & 0 & 0 & \cdots & 1 & 2\cos\theta
-                            \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\cos\frac{\left ( n-k \right )\pi }2
-                        \end{align*}
-                    \)
-                </li>
-            </ol>
-        </div>
+                    <li>
+                        对于任意凸多面体，其顶点数$V$、棱数$F$、面数$E$总满足关系$ V+F-E=2 $
+                    </li>
+                    <li>
+                        球的表面积$ S=4\pi R^2 $
+                    </li>
+                    <li>
+                        祖暅原理：幂势既同，则积不容异。<br>
+                        (“幂”是截面积，“势”是立体的高，意思是，两个同高的立体，如果等高处的截面积处处相等，则它们的体积相等)
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="ext" class="section-title">扩展</h3>
+                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        均值不等式的原型：$ \displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i\ge\sqrt[n]{\prod_{i=1}^{n}x_i} $
+                    </li>
+                    <li>
+                        两个向量的外积（矢量积）是一个向量，满足$ |\boldsymbol{a\times b}|=|\boldsymbol{a}||\boldsymbol{b}|\sin \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle  $
+                    </li>
+                    <li>
+                        对于$ \triangle ABC $，记三个顶点$ A\left(x_1,y_1\right) $，$ B\left(x_2,y_2\right) $，$ C\left(x_3,y_3\right) $所对的边为$ a $，$ b $，$ c $，则有：
+                        <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                            <li>
+                                重心$ G $的向量式为$ \overrightarrow{GA}+\overrightarrow{GB}+\overrightarrow{GC}=\boldsymbol{0} $<br>
+                                坐标为$ G\left( \displaystyle\frac{x_1+x_2+x_3}3,\frac{y_1+y_2+y_3}3 \right) $
+                            </li>
+                            <li>
+                                内心$ I $的向量式为$ a\cdot\overrightarrow{IA}+b\cdot\overrightarrow{IB}+c\cdot\overrightarrow{IC}=\boldsymbol{0} $<br>
+                                坐标为$ I\left( \displaystyle\frac{ax_1+bx_2+cx_3}{a+b+c},\frac{ay_1+by_2+cy_3}{a+b+c} \right) $
+                            </li>
+                            <li>
+                                垂心$ H $的向量式为$ \tan A\cdot\overrightarrow{HA}+\tan B\cdot\overrightarrow{HB}+\tan C\cdot\overrightarrow{HC}=\boldsymbol{0} $<br>
+                                坐标为$ H\left( \displaystyle\frac{\tan A\cdot x_1+\tan B\cdot x_2+\tan C\cdot cx_3}{\tan A+\tan B+\tan C},\frac{\tan A\cdot y_1+\tan B\cdot y_2+\tan C\cdot y_3}{\tan A+\tan B+\tan C} \right) $
+                            </li>
+                            <li>
+                                外心$ O $的向量式为$ \sin 2A\cdot\overrightarrow{OA}+\sin 2B\cdot\overrightarrow{OB}+\sin 2C\cdot\overrightarrow{OC}=\boldsymbol{0} $<br>
+                                坐标为$ O\left( \displaystyle\frac{\sin 2A\cdot x_1+\sin 2B\cdot x_2+\sin 2C\cdot x_3}{\sin 2A+\sin 2B+\sin 2C},\frac{\sin 2A\cdot y_1+\sin 2B\cdot y_2+\sin 2C\cdot y_3}{\sin 2A+\sin 2B+\sin 2C} \right) $
+                            </li>
+                        </ul>
+                        如果仅以顶点坐标表达，则有：
+                        <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                            <li>
+                                $ G\left( \displaystyle\frac{x_1+x_2+x_3}3,\frac{y_1+y_2+y_3}3 \right) $
+                            </li>
+                            <div style="height: 10px;"></div>
+                            <li>
+                                $ I\left( \displaystyle\frac{ax_1+bx_2+cx_3}{a+b+c},\frac{ay_1+by_2+cy_3}{a+b+c} \right) $<br>
+                                其中：<br>
+                                $
+                                    \begin{aligned}
+                                        a&=\displaystyle\sqrt{(x_2-x_3)^2+(y_2-y_3)^2} \\
+                                        b&=\displaystyle\sqrt{(x_3-x_1)^2+(y_3-y_1)^2} \\
+                                        c&=\displaystyle\sqrt{(x_1-x_2)^2+(y_1-y_2)^2} \\
+                                    \end{aligned}
+                                $
+                            </li>
+                            <div style="height: 10px;"></div>
+                            <li>
+                                $ H\left( \displaystyle\frac{\displaystyle\prod_{cyc}\left(y_1-y_2\right)+\sum_{cyc}x_1x_2\left(y_1-y_2\right)}{\displaystyle\sum_{cyc}^{}(x_1y_3-x_1y_2)},\displaystyle\frac{\displaystyle\prod_{cyc}\left(x_1-x_2\right)+\sum_{cyc}y_1y_2\left(x_1-x_2\right)}{\displaystyle\sum_{cyc}^{}(x_1y_3-x_1y_2)} \right) $<br>
+                                其中：<br>
+                                $
+                                    \begin{aligned}
+                                        &\displaystyle\prod_{cyc}\left(x_1-x_2\right)=\left(x_1-x_2\right)\left(x_2-x_3\right)\left(x_3-x_1\right) \\
+                                        &\displaystyle\prod_{cyc}\left(y_1-y_2\right)=\left(y_1-y_2\right)\left(y_2-y_3\right)\left(y_3-y_1\right) \\
+                                        &\displaystyle\sum_{cyc}x_1x_2\left(y_1-y_2\right)=x_1x_2\left(y_1-y_2\right)+x_2x_3\left(y_2-y_3\right)+x_3x_1\left(y_3-y_1\right) \\
+                                        &\displaystyle\sum_{cyc}y_1y_2\left(x_1-x_2\right)=y_1y_2\left(x_1-x_2\right)+y_2y_3\left(x_2-x_3\right)+y_3y_1\left(x_3-x_1\right) \\
+                                        &\displaystyle\sum_{cyc}\left(x_1y_3-x_1y_2\right)=\left(x_1y_3-x_1y_2\right)+\left(x_2y_1-x_2y_3\right)+\left(x_3y_2-x_3y_1\right)
+                                    \end{aligned}
+                                $
+                            </li>
+                            <div style="height: 10px;"></div>
+                            <li>
+                                $ O\left( \displaystyle\frac{\displaystyle\prod_{cyc}\left(y_1-y_2\right)+\sum_{cyc}x_1x_2\left(y_1-y_2\right)}{2\displaystyle\sum_{cyc}^{}\left(x_1y_2-x_1y_3\right)}+\frac{\sum x}2,\displaystyle\frac{\displaystyle\prod_{cyc}\left(x_1-x_2\right)+\sum_{cyc}y_1y_2\left(x_1-x_2\right)}{2\displaystyle\sum_{cyc}^{}\left(x_1y_3-x_1y_2\right)}+\frac{\sum y}2 \right) $<br>
+                                其中：<br>
+                                $
+                                    \begin{aligned}
+                                        &\textstyle\sum x=x_1+x_2+x_3 \\
+                                        &\textstyle\sum y=y_1+y_2+y_3 \\
+                                        &\displaystyle\sum_{cyc}^{}\left(x_1y_2-x_1y_3\right)=\left(x_1y_2-x_1y_3\right)+\left(x_2y_3-x_2y_1\right)+\left(x_3y_1-x_3y_2\right)
+                                    \end{aligned}
+                                $<br>
+                                其余与上相同
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        $ n $倍角公式<br>
+                        $
+                            \begin{aligned}
+                                \sin n\theta&=\begin{vmatrix}
+                                \sin\theta & 0 & 0 & \cdots & 0 & 0\\
+                                0 & 2\cos\theta & 1 & \cdots & 0 & 0\\
+                                0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
+                                \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+                                0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
+                                0 & 0 & 0 & \cdots & 1 & 2\cos\theta
+                                \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\sin\frac{\left ( n-k \right )\pi }2 \\
+                                \cos n\theta&=\begin{vmatrix}
+                                \cos\theta & 1 & 0 & \cdots & 0 & 0\\
+                                1 & 2\cos\theta & 1 & \cdots & 0 & 0\\
+                                0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
+                                \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+                                0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
+                                0 & 0 & 0 & \cdots & 1 & 2\cos\theta
+                                \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\cos\frac{\left ( n-k \right )\pi }2
+                            \end{aligned}
+                        $
+                    </li>
+                </ol>
+            </div>
+        </main>
     </div>
 
     <!-- 页脚 -->
@@ -824,12 +855,12 @@
     <style>
         a {
             color: #110c50;
-            text-decoration: none;
         }
 
         .formula-rectangle {
             display: inline-block;
-            border: 2px solid black;
+            border: 1.5px solid black;
+            border-radius: 3px;
             padding: 5px;
             margin: 4px;
         }
@@ -845,6 +876,48 @@
             transform: translateX(-100%);
         }
 
+        /* 一点响应式设计 */
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar {
+            display: none;
+            background-color: #a4e3e3;
+        }
+
+        .content-container {
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            #index-box {
+                display: none;
+            }
+
+            #text-right {
+                display: none;
+            }
+
+            .content {
+                flex-direction: row;
+            }
+
+            .sidebar {
+                display: block;
+                top: 0;
+                width: 35%;
+                height: 100vh;
+                position: sticky;
+                border-right: 3px dotted #649c9c;
+            }
+
+            .content-container {
+                width: 65%;
+            }
+        }
+
         /* 背景图片设置 */
         body {
             background-image: url('/img/background/day-blogbackground.svg');
@@ -855,29 +928,60 @@
             body {
                 background-image: url('/img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
             }
+
             a {
                 color: #50d2d2;
             }
+
             .formula-rectangle {
-                border: 2px solid var(--text-color-dark);
+                border: 1.5px solid var(--text-color-dark);
+            }
+
+            .sidebar {
+                background-color: #1d3853;
             }
         }
     </style>
 
     <!-- 内部JS文件 -->
-    <script id="MathJax-script" src="/blog/quote-js/mathjax/es5/tex-mml-chtml.js"></script>
+    <script src="/blog/quote-js/katex/katex.min.js"></script>
+    <script src="/blog/quote-js/katex/contrib/auto-render.min.js"></script>
+    <!-- <script id="MathJax-script" src="/blog/quote-js/mathjax/es5/tex-mml-chtml.js"></script> -->
     <script>
+        // 配置KATEX
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                // 更改大于小于的符号，更贴近教科书
+                macros: {
+                    "\\ge": "\\geqslant",
+                    "\\le": "\\geqslant"
+                }
+            })
+        });
+
+        // 一点响应式设计
+        document.addEventListener("DOMContentLoaded", function() {
+            const sourceUl = document.querySelector('#content-index');
+            const targetUl = document.querySelector('#target-index');
+            targetUl.innerHTML = sourceUl.innerHTML;
+        });
+
+        // 配置响应式列数
         function updateColumnCount() {
             // 获取页面宽度
             var pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
             // 设定每列的最小宽度
-            var ulColumnMinWidth = 200;
+            var ulColumnMinWidth = 210;
             var ifColumnMinWidth = 300;
             // 计算列数
             var ulColumnCount = Math.floor(pageWidth / ulColumnMinWidth);
             var ifColumnCount = Math.floor(pageWidth / ifColumnMinWidth);
             // 设置列数
-            document.querySelector('ul').style.columnCount = ulColumnCount;
+            document.querySelector('#content-index').style.columnCount = ulColumnCount;
             document.querySelector('.formula-container').style.columnCount = ifColumnCount;
         }
 

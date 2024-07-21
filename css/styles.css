@@ -36,27 +36,27 @@ h1 {
 /* 自定义字体 */
 @font-face{
     font-family: title;
-    src: url('/font/SmileySans-Oblique.ttf')
+    src: url('/font/SmileySans-Oblique.woff2');
 }
 
 @font-face{
     font-family: text;
-    src: url('/font/JiangChengHei-500W.ttf')
+    src: url('/font/JiangChengHei-500W.woff2');
 }
 
 @font-face{
     font-family: text;
-    src: url('/font/Intel One Mono Medium.ttf')
+    src: url('/font/Intel One Mono Medium.ttf');
 }
 
 @font-face{
     font-family: copy;
-    src: url('/font/JiangChengHei-500W.ttf')
+    src: url('/font/oswald-webfont.woff');
 }
 
 @font-face {
     font-family: copyright;
-    src: url('/font/JetBrainsMono-Medium.ttf')
+    src: url('/font/JetBrainsMono-Medium.ttf');
 }
 
 /* 调整网页字体 */
@@ -86,6 +86,11 @@ label {
 /* 全局设定 */
 .content {
     flex: 1;
+}
+
+/* 链接标签设定 */
+a {
+    text-decoration: none;
 }
 
 /* 输入框和按钮字体和文字大小 */

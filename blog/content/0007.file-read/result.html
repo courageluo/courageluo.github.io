@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网页端读取文件效果 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
 </head>
 
@@ -99,6 +99,7 @@
 
     <!-- 内部JS文件 -->
     <!-- <script src="/blog/quote-js/jquery/jquery-3.7.1.js"></script> -->
+    <script src="/href/script.js"></script>
     <script src="./prism.js"></script>
     <script>
         // 设置选择框样式
@@ -117,7 +118,7 @@
         function readFile(file, encoding) {
             let reader = new FileReader();
             let ext = getFileExtension(file.name);
-            if (/^(jpg|jpeg|png|bmp|webp|ico|gif)$/.test(ext)) {
+            if (/^(jpg|jpeg|png|bmp|webp|ico|gif|avif|jfif)$/.test(ext)) {
                 document.getElementById("imgContainer").style.display = "block";
                 document.getElementById("fileContainer").style.display = "none";
                 reader.readAsDataURL(file);
@@ -183,13 +184,6 @@
             `;
             Prism.highlightAll();
         }
-
-        // 获取页脚内容
-        fetch('/footer/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("footer").innerHTML = data;
-            });
     </script>
 </body>
 

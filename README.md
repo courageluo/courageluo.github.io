@@ -16,7 +16,7 @@ cd courageluo.github.io
 python run.py
 ```
 
-然后打开`run.url`或访问`http://127.0.0.1:8000/`来运行这个网站。当然，也可以通过直接打开`index.html`运行，但这样可能无法动态加载内容。
+然后打开`run.url`或访问`http://127.0.0.1:8000/`来运行这个网站。当然，您也可以通过直接打开`index.html`运行，但这样可能无法动态加载内容。
 
 Then open `run.url` or access `http://127.0.0.1:8000/`. Of course, you can also run it by opening `index.html` directly, but this may not load the content dynamically.
 

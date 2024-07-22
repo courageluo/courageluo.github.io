@@ -17,7 +17,7 @@
         <aside class="sidebar">
             <!-- 索引框 -->
             <div class="rounded-box3">
-                <h3 id="index" style="text-align: center;">索引目录</h3>
+                <h3 style="text-align: center;">索引目录</h3>
                 <hr>
                 <ul id="target-index" style="column-count: 1;"></ul>
             </div>
@@ -918,6 +918,16 @@
             }
         }
 
+        @media (min-width: 860px) {
+            .sidebar {
+                width: 301px;
+            }
+
+            .content-container {
+                flex-grow: 1;
+            }
+        }
+
         /* 背景图片设置 */
         body {
             background-image: url('/img/background/day-blogbackground.svg');
@@ -948,6 +958,13 @@
     <script src="/blog/quote-js/katex/contrib/auto-render.min.js"></script>
     <!-- <script id="MathJax-script" src="/blog/quote-js/mathjax/es5/tex-mml-chtml.js"></script> -->
     <script>
+        // 调试检测页面宽度
+        // function log() {
+        //     console.log(window.innerWidth);
+        // } log();
+
+        // window.addEventListener('resize', log);
+
         // 配置KATEX
         document.addEventListener("DOMContentLoaded", function() {
             renderMathInElement(document.body, {
@@ -975,7 +992,7 @@
             // 获取页面宽度
             var pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
             // 设定每列的最小宽度
-            var ulColumnMinWidth = 210;
+            var ulColumnMinWidth = 200;
             var ifColumnMinWidth = 300;
             // 计算列数
             var ulColumnCount = Math.floor(pageWidth / ulColumnMinWidth);
@@ -989,21 +1006,42 @@
         window.addEventListener('load', updateColumnCount);
         window.addEventListener('resize', updateColumnCount);
 
-        // 获取所有带有特定类名的链接元素
-        var scrollLinks = document.querySelectorAll('.scroll-link');
+        // 定义滚动函数，不过宽屏情况下似乎没用
+        function smoothScroll(target, duration) {
+            var targetElement = document.querySelector(target);
+            var targetPosition = targetElement.getBoundingClientRect().top;
+            var startPosition = window.pageYOffset;
+            var startTime = null;
 
-        // 定义滚动函数
-        function scrollToTarget(targetId) {
-            var targetElement = document.getElementById(targetId);
-            targetElement.scrollIntoView({ behavior: 'smooth' });
+            function animation(currentTime) {
+                if (startTime === null) {
+                    startTime = currentTime;
+                }
+                var timeElapsed = currentTime - startTime;
+                var run = ease(timeElapsed, startPosition, targetPosition, duration);
+                window.scrollTo(0, run);
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            }
+
+            function ease(t, b, c, d) {
+                t /= d / 2;
+                if (t < 1) {
+                    return c / 2 * t * t + b;
+                }
+                t--;
+                return -c /2 * (t * (t - 2) - 1) + b;
+            }
+
+            requestAnimationFrame(animation);
         }
 
-        // 为每个链接添加点击事件监听器
-        scrollLinks.forEach(function (link) {
+        document.querySelectorAll('.scroll-link').forEach(link => {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
-                var targetId = this.getAttribute('href').substring(1); // 去掉 "#" 符号
-                scrollToTarget(targetId);
+                var target = this.getAttribute('href');
+                smoothScroll(target, 1000);
             });
         });
 

@@ -8,109 +8,127 @@
     <title>关于 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/katex/katex.min.css">
 </head>
 
 <body>
     <div class="content">
-    <!-- 标题框 -->
-    <div class="rounded-box1">
-        <h1 style="text-align: center;">关于本站</h1>
-    </div>
-    
-    <!-- 文本框 -->
-    <div class="rounded-box6">
-        <p>这是一个使用Github Pages搭建的网站，您可以<a href="https://github.com/courageluo/courageluo.github.io?tab=readme-ov-file#courage-luo%E7%9A%84%E7%BD%91%E7%AB%99">点击此处</a>查看Github上的自述文档。</p>
-    </div>
+        <!-- 边栏 -->
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">导航</h3>
+                <hr>
+                <ul>
+                    <li><a href="#about">关于本站</a></li>
+                    <li><a href="#thanks">致谢</a></li>
+                    <li><a href="#reference">引用</a></li>
+                    <li><a href="#update">更新日志</a></li>
+                </ul>
+            </div>
+        </aside>
 
-    <div class="rounded-box6">
-        <h3 style="text-align: center;">致谢</h3>
-        <hr>
-        <!-- https://new.houlangs.com -->
-        <p>该网站域名解析(CNAME)由<a href="https://www.hlyun.org/">厚浪云</a>提供</p>
-        <p>该网站的所有背景图片均由<a href="https://bgjar.com/">BGJar</a>生成</p>
-        <p>该网站所使用的字体有：</p>
-        <ol>
-            <li>
-                <p>正文字体：<a href="https://www.maoken.com/freefonts/5275.html">江城黑体500W</a><br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;<a href="https://www.intel.com/content/www/us/en/company-overview/one-monospace-font.html">Intel One Mono</a></p>
-            </li>
-            <li>
-                <p>标题字体：<a href="https://atelier-anchor.com/typefaces/smiley-sans">得意黑</a></p>
-            </li>
-            <li>
-                <p>页脚字体：<a href="https://www.jetbrains.com/lp/mono/">Jetbrains Mono</a></p>
-            </li>
-        </ol>
-    </div>
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">关于本站</h1>
+            </div>
+            
+            <!-- 文本框 -->
+            <div class="rounded-box6">
+                <p id="about">这是一个使用Github Pages搭建的网站，您可以<a href="https://github.com/courageluo/courageluo.github.io?tab=readme-ov-file#courage-luo%E7%9A%84%E7%BD%91%E7%AB%99">点击此处</a>查看Github上的自述文档。</p>
+            </div>
 
-    <div class="rounded-box6">
-        <h3 style="text-align: center;">引用</h3>
-        <hr>
-        <p>该网站引用外部库文件有：</p>
-        <ol>
-            <li>
-                <p id="jqueryVersionDisplay"></p>
-                <p style="text-align: right; margin-top: -1em;">
-                    <a href="/blog/quote-js/jquery/jquery-3.7.1.js">查看</a>
-                    <a href="/blog/quote-js/jquery/jquery-3.7.1.js" download>下载</a>
-                    <a href="https://jquery.com">访问官网</a>
-                </p>
-            </li>
-            <li>
-                <p id="katexVersionDisplay"></p>
-                <p style="margin-top: -1em;">用于在网页中显示$ \mathrm{\LaTeX} $公式</p>
-                <p style="text-align: right; margin-top: -1em;">
-                    <a href="/blog/quote-js/mathjax/es5/tex-mml-chtml.js">查看</a>
-                    <a href="/blog/quote-js/mathjax/es5/tex-mml-chtml.js" download>下载</a>
-                    <a href="https://www.mathjax.org/">访问官网</a>
-                </p>
-            </li>
-            <li>
-                <strong>Prism</strong> v1.29.0<br>
-                用于高亮网页中的代码
-                <p style="text-align: right; margin-top: 0em;">
-                    <a href="/blog/quote-js/prismjs/prism.js">查看JS</a>
-                    <a href="/blog/quote-js/prismjs/prism.css">查看CSS</a>
-                    <a href="https://prismjs.com/">访问官网</a>
-                </p>
-            </li>
-        </ol>
-    </div>
+            <div class="rounded-box6">
+                <h3 id="thanks" style="text-align: center;">致谢</h3>
+                <hr>
+                <!-- https://new.houlangs.com -->
+                <p>该网站域名解析(CNAME)由<a href="https://www.hlyun.org/">厚浪云</a>提供</p>
+                <p>该网站的所有背景图片均由<a href="https://bgjar.com/">BGJar</a>生成</p>
+                <p>该网站所使用的字体有：</p>
+                <ol>
+                    <li>
+                        <p>正文字体：<a href="https://www.maoken.com/freefonts/5275.html">江城黑体500W</a><br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;<a href="https://www.intel.com/content/www/us/en/company-overview/one-monospace-font.html">Intel One Mono</a></p>
+                    </li>
+                    <li>
+                        <p>标题字体：<a href="https://atelier-anchor.com/typefaces/smiley-sans">得意黑</a></p>
+                    </li>
+                    <li>
+                        <p>页脚字体：<a href="https://www.jetbrains.com/lp/mono/">Jetbrains Mono</a></p>
+                    </li>
+                </ol>
+            </div>
 
-    <div class="rounded-box6">
-        <h3 style="text-align: center;">更新日志</h3>
-        <hr>
-        <p>ver 0.6.2 2024.07.23 00:57 <br> 公式渲染更换KaTeX，加快加载速度。<br>尝试了响应式设计，修复一些问题。</p>
-        <p>ver 0.6.1 2024.07.19 13:35 <br> 修复各种问题，改进一些细节。</p>
-        <p>ver 0.6.0 2024.07.16 23:39 <br> 优化屎山代码，减轻网页负担（）</p>
-        <p>ver 0.5.9 2024.06.30 11:23 <br> 小更改，修改一些内容。</p>
-        <p>ver 0.5.8 2024.05.12 00:07 <br> 修正一些错误，优化数学公式排版。</p>
-        <p>ver 0.5.7 2024.05.05 14:53 <br> 加入文件查看器，更新prism。</p>
-        <p>ver 0.5.6 2024.04.21 14:58 <br> 更新时钟，修复一些问题。</p>
-        <p>ver 0.5.5 2024.03.30 15:53 <br> 增加一些句子，修复部分bug。</p>
-        <p>ver 0.5.4 2024.03.10 13:08 <br> 更改一些页面的title部分。</p>
-        <p>ver 0.5.3 2024.02.25 12:11 <br> 引入MathJax，加入一些数学公式。</p>
-        <p>ver 0.5.2 2024.02.21 12:54 <br> 写了一个小时钟。</p>
-        <p>ver 0.5.1 2024.02.19 16:02 <br> 制作了个人博客页面。</p>
-        <p>ver 0.5.0 2024.02.19 01:33 <br> 尝试性地写了一篇小博客。</p>
-        <p>ver 0.4.4 2024.02.16 22:20 <br> 修改页脚样式和文件结构。</p>
-        <p>ver 0.4.3 2024.02.15 19:01 <br> 修复一些问题。</p>
-        <p>ver 0.4.2 2024.02.12 15:32 <br> 改进部分细节，优化因式分解游戏。</p>
-        <p>ver 0.4.1 2024.02.11 23:01 <br> 改进因式分解游戏。</p>
-        <p>ver 0.4.0 2024.02.04 17:29 <br> 加入因式分解游戏。</p>
-        <p>ver 0.3.3 2024.01.01 00:00 <br> 改进部分细节。</p>
-        <p>ver 0.3.2 2023.10.06 01:27 <br> 增加版权栏，添加首页问候语。</p>
-        <p>ver 0.3.1 2023.09.29 16:29 <br> 删库跑路（bushi <br> 源码添加文件夹，优化猜数游戏效果。</p>
-        <p>ver 0.3.0 2023.09.24 15:11 <br> 加入猜数游戏的设置功能和结束界面。</p>
-        <p>ver 0.2.2 2023.09.17 00:46 <br> 改进部分细节，完善源码可读性。</p>
-        <p>ver 0.2.1 2023.08.20 12:14 <br> 删除加载动画。加入本页面背景，修改主页背景。</p>
-        <p>ver 0.2.0 2023.08.20 10:34 <br> 加入页面背景，完善界面UI。</p>
-        <p>ver 0.1.2 2023.08.19 11:58 <br> 取消返回功能。添加“加载中”动画。</p>
-        <p>ver 0.1.1 2023.08.19 10:49 <br> 修改部分细节，修复无法退出页面的问题。</p>
-        <p>ver 0.1.0 2023.08.19 10:02 <br> 增加“更新日志”和“查看仓库”，新增字体，调整猜数游戏，优化夜晚模式。</p>
-        <p>ver 0.0.0 2023.08.18 23:54 <br> 建立网站。</p>
-    </div>
+            <div class="rounded-box6">
+                <h3 id="reference" style="text-align: center;">引用</h3>
+                <hr>
+                <p>该网站引用外部库文件有：</p>
+                <ol>
+                    <li>
+                        <p id="jqueryVersionDisplay"></p>
+                        <p style="text-align: right; margin-top: -1em;">
+                            <a href="/blog/quote-js/jquery/jquery-3.7.1.js">查看</a>
+                            <a href="/blog/quote-js/jquery/jquery-3.7.1.js" download>下载</a>
+                            <a href="https://jquery.com">访问官网</a>
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Prism</strong> v1.29.0<br>
+                        用于高亮网页中的代码
+                        <p style="text-align: right; margin-top: 0em;">
+                            <a href="/blog/quote-js/prismjs/prism.js">查看JS</a>
+                            <a href="/blog/quote-js/prismjs/prism.css">查看CSS</a>
+                            <a href="https://prismjs.com/">访问官网</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p id="katexVersionDisplay"></p>
+                        <p style="margin-top: -1em;">用于在网页中显示$ \mathrm{\LaTeX} $公式</p>
+                        <p style="text-align: right; margin-top: -1em;">
+                            <a href="/blog/quote-js/katex/katex.min.js">查看JS1</a>
+                            <a href="/blog/quote-js/katex/contrib/auto-render.min.js">查看JS2</a>
+                            <a href="/blog/quote-js/katex/katex.min.css">查看CSS</a>
+                            <a href="https://katex.org/">访问官网</a>
+                        </p>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="rounded-box6">
+                <h3 id="update" style="text-align: center;">更新日志</h3>
+                <hr>
+                <p>ver 0.6.2 2024.07.24 00:56 <br> 公式渲染完全更换为KaTeX，加快加载速度。<br>加入响应式设计，修复一些问题。</p>
+                <p>ver 0.6.1 2024.07.19 13:35 <br> 修复各种问题，改进一些细节。</p>
+                <p>ver 0.6.0 2024.07.16 23:39 <br> 优化屎山代码，减轻网页负担（）</p>
+                <p>ver 0.5.9 2024.06.30 11:23 <br> 小更改，修改一些内容。</p>
+                <p>ver 0.5.8 2024.05.12 00:07 <br> 修正一些错误，优化数学公式排版。</p>
+                <p>ver 0.5.7 2024.05.05 14:53 <br> 加入文件查看器，更新prism。</p>
+                <p>ver 0.5.6 2024.04.21 14:58 <br> 更新时钟，修复一些问题。</p>
+                <p>ver 0.5.5 2024.03.30 15:53 <br> 增加一些句子，修复部分bug。</p>
+                <p>ver 0.5.4 2024.03.10 13:08 <br> 更改一些页面的title部分。</p>
+                <p>ver 0.5.3 2024.02.25 12:11 <br> 引入MathJax渲染数学公式。</p>
+                <p>ver 0.5.2 2024.02.21 12:54 <br> 写了一个小时钟。</p>
+                <p>ver 0.5.1 2024.02.19 16:02 <br> 制作了个人博客页面。</p>
+                <p>ver 0.5.0 2024.02.19 01:33 <br> 尝试性地写了一篇小博客。</p>
+                <p>ver 0.4.4 2024.02.16 22:20 <br> 修改页脚样式和文件结构。</p>
+                <p>ver 0.4.3 2024.02.15 19:01 <br> 修复一些问题。</p>
+                <p>ver 0.4.2 2024.02.12 15:32 <br> 改进部分细节，优化因式分解游戏。</p>
+                <p>ver 0.4.1 2024.02.11 23:01 <br> 改进因式分解游戏。</p>
+                <p>ver 0.4.0 2024.02.04 17:29 <br> 加入因式分解游戏。</p>
+                <p>ver 0.3.3 2024.01.01 00:00 <br> 改进部分细节。</p>
+                <p>ver 0.3.2 2023.10.06 01:27 <br> 增加版权栏，添加首页问候语。</p>
+                <p>ver 0.3.1 2023.09.29 16:29 <br> 删库跑路（bushi <br> 源码添加文件夹，优化猜数游戏效果。</p>
+                <p>ver 0.3.0 2023.09.24 15:11 <br> 加入猜数游戏的设置功能和结束界面。</p>
+                <p>ver 0.2.2 2023.09.17 00:46 <br> 改进部分细节，完善源码可读性。</p>
+                <p>ver 0.2.1 2023.08.20 12:14 <br> 删除加载动画。加入本页面背景，修改主页背景。</p>
+                <p>ver 0.2.0 2023.08.20 10:34 <br> 加入页面背景，完善界面UI。</p>
+                <p>ver 0.1.2 2023.08.19 11:58 <br> 取消返回功能。添加“加载中”动画。</p>
+                <p>ver 0.1.1 2023.08.19 10:49 <br> 修改部分细节，修复无法退出页面的问题。</p>
+                <p>ver 0.1.0 2023.08.19 10:02 <br> 增加“更新日志”和“查看仓库”，新增字体，调整猜数游戏，优化夜晚模式。</p>
+                <p>ver 0.0.0 2023.08.18 23:54 <br> 建立网站。</p>
+            </div>
+        </main>
     </div>
     
     <!-- 页脚 -->
@@ -134,6 +152,10 @@
 
             a {
                 color: #27a8b9;
+            }
+
+            .sidebar {
+                background-color: #0E2A47;
             }
         }
     </style>

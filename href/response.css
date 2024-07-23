@@ -1,0 +1,44 @@
+/* 一点响应式设计 */
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar {
+    display: none;
+    background-color: #a4e3e3;
+}
+
+.content-container {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .content {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        display: block;
+        top: 0;
+        width: 35%;
+        height: 100vh;
+        position: sticky;
+        border-right: 3px dotted #649c9c;
+    }
+
+    .content-container {
+        width: 65%;
+    }
+}
+
+/* 页面足够宽后固定边栏宽度 */
+@media (min-width: 900px) {
+    .sidebar {
+        width: 315px;
+    }
+
+    .content-container {
+        flex-grow: 1;
+    }
+}

@@ -8,9 +8,9 @@ fetch("/footer/footer.html")
 // 控制台输出文本
 const fontSize = 10;
 const colors = [
-    '#ADD8E6', '#91C4DE', '#76B0D7', '#5B9CCF', '#4088C7',
-    '#2574BF', '#0A60B8', '#094D9E', '#083A84', '#07276A',
-    '#061450', '#040C3D', '#03082A'
+    '#ADD8E6', '#A0CCDE', '#93C0D7', '#86B4CF', '#79A8C7', 
+    '#6C9CBF', '#5F90B7', '#5284AF', '#4578A7', '#386C9F', 
+    '#2B6097', '#1E548F', '#365878'
 ];
 
 console.log("%c       _      __    __                     __         \n" +

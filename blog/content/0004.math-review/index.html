@@ -8,6 +8,7 @@
     <title>数学知识点记录 - Courage Luo的网站</title>
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/katex/katex.min.css">
 </head>
 
@@ -877,20 +878,6 @@
         }
 
         /* 一点响应式设计 */
-        .content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar {
-            display: none;
-            background-color: #a4e3e3;
-        }
-
-        .content-container {
-            width: 100%;
-        }
-
         @media (min-width: 768px) {
             #index-box {
                 display: none;
@@ -898,33 +885,6 @@
 
             #text-right {
                 display: none;
-            }
-
-            .content {
-                flex-direction: row;
-            }
-
-            .sidebar {
-                display: block;
-                top: 0;
-                width: 35%;
-                height: 100vh;
-                position: sticky;
-                border-right: 3px dotted #649c9c;
-            }
-
-            .content-container {
-                width: 65%;
-            }
-        }
-
-        @media (min-width: 860px) {
-            .sidebar {
-                width: 301px;
-            }
-
-            .content-container {
-                flex-grow: 1;
             }
         }
 
@@ -1002,44 +962,62 @@
         window.addEventListener('load', updateColumnCount);
         window.addEventListener('resize', updateColumnCount);
 
-        // 定义滚动函数，不过宽屏情况下似乎没用
-        function smoothScroll(target, duration) {
-            var targetElement = document.querySelector(target);
-            var targetPosition = targetElement.getBoundingClientRect().top;
-            var startPosition = window.pageYOffset;
-            var startTime = null;
+        // 获取所有带有特定类名的链接元素
+        var scrollLinks = document.querySelectorAll('.scroll-link');
 
-            function animation(currentTime) {
-                if (startTime === null) {
-                    startTime = currentTime;
-                }
-                var timeElapsed = currentTime - startTime;
-                var run = ease(timeElapsed, startPosition, targetPosition, duration);
-                window.scrollTo(0, run);
-                if (timeElapsed < duration) {
-                    requestAnimationFrame(animation);
-                }
-            }
-
-            function ease(t, b, c, d) {
-                t /= d / 2;
-                if (t < 1) {
-                    return c / 2 * t * t + b;
-                }
-                t--;
-                return -c /2 * (t * (t - 2) - 1) + b;
-            }
-
-            requestAnimationFrame(animation);
+        // 定义滚动函数
+        function scrollToTarget(targetId) {
+            var targetElement = document.getElementById(targetId);
+            targetElement.scrollIntoView({ behavior: 'smooth' });
         }
 
-        document.querySelectorAll('.scroll-link').forEach(link => {
+        // 为每个链接添加点击事件监听器
+        scrollLinks.forEach(function (link) {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
-                var target = this.getAttribute('href');
-                smoothScroll(target, 1000);
+                var targetId = this.getAttribute('href').substring(1); // 去掉 "#" 符号
+                scrollToTarget(targetId);
             });
         });
+
+        // 定义滚动函数，不过宽屏情况下似乎没用
+        // function smoothScroll(target, duration) {
+        //     var targetElement = document.querySelector(target);
+        //     var targetPosition = targetElement.getBoundingClientRect().top;
+        //     var startPosition = window.pageYOffset;
+        //     var startTime = null;
+
+        //     function animation(currentTime) {
+        //         if (startTime === null) {
+        //             startTime = currentTime;
+        //         }
+        //         var timeElapsed = currentTime - startTime;
+        //         var run = ease(timeElapsed, startPosition, targetPosition, duration);
+        //         window.scrollTo(0, run);
+        //         if (timeElapsed < duration) {
+        //             requestAnimationFrame(animation);
+        //         }
+        //     }
+
+        //     function ease(t, b, c, d) {
+        //         t /= d / 2;
+        //         if (t < 1) {
+        //             return c / 2 * t * t + b;
+        //         }
+        //         t--;
+        //         return -c /2 * (t * (t - 2) - 1) + b;
+        //     }
+
+        //     requestAnimationFrame(animation);
+        // }
+
+        // document.querySelectorAll('.scroll-link').forEach(link => {
+        //     link.addEventListener('click', function (e) {
+        //         e.preventDefault();
+        //         var target = this.getAttribute('href');
+        //         smoothScroll(target, 1000);
+        //     });
+        // });
     </script>
 </body>
 

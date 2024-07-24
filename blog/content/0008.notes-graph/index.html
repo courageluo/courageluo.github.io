@@ -84,7 +84,10 @@
     <script src="/href/script.js"></script>
     <script src="/blog/quote-js/pdfobject/pdfobject.js"></script>
     <script>
-        PDFObject.embed("./output.pdf", "#pdf-container");
+        var options = {
+            PDFJS_URL: "/blog/quote-js/pdfjs/pdfjs-4.4.168-dist/build/pdf.mjs",
+        };
+        PDFObject.embed("./output.pdf", "#pdf-container", options);
     </script>
 </body>
 

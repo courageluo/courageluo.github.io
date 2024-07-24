@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>关于 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
@@ -45,6 +48,7 @@
                 <!-- https://new.houlangs.com -->
                 <p>该网站域名解析(CNAME)由<a href="https://www.hlyun.org/">厚浪云</a>提供</p>
                 <p>该网站的所有背景图片均由<a href="https://bgjar.com/">BGJar</a>生成</p>
+                <p>该网站的favicon图标下载自<a href="https://lineicons.com/free-icons/vscode-icons">Line Icons</a>，其Github仓库在<a href="https://github.com/vscode-icons/vscode-icons/blob/master/icons/file_type_htmlhint.svg">这里</a>，ico文件由<a href="https://realfavicongenerator.net/">Real Favicon Generator</a>生成</p>
                 <p>该网站所使用的字体有：</p>
                 <ol>
                     <li>
@@ -65,6 +69,14 @@
                 <hr>
                 <p>该网站引用外部库文件有：</p>
                 <ol>
+                    <li>
+                        <p id="pdfobjectVersionDisplay"></p>
+                        <p style="text-align: right; margin-top: -1em;">
+                            <a href="/blog/quote-js/pdfobject/pdfobject.js">查看</a>
+                            <a href="/blog/quote-js/pdfobject/pdfobject.js" download>下载</a>
+                            <a href="https://pdfobject.com">访问官网</a>
+                        </p>
+                    </li>
                     <li>
                         <p id="jqueryVersionDisplay"></p>
                         <p style="text-align: right; margin-top: -1em;">
@@ -98,7 +110,7 @@
             <div class="rounded-box6">
                 <h3 id="update" style="text-align: center;">更新日志</h3>
                 <hr>
-                <p>ver 0.6.2 2024.07.24 00:56 <br> 公式渲染完全更换为KaTeX，加快加载速度。<br>加入响应式设计，修复一些问题。</p>
+                <p>ver 0.6.2 2024.07.24 13:43 <br> 公式渲染完全更换为KaTeX，加快加载速度。<br>加入响应式设计，修复一些问题。<br>加入网站图标，引入PDFObject。</p>
                 <p>ver 0.6.1 2024.07.19 13:35 <br> 修复各种问题，改进一些细节。</p>
                 <p>ver 0.6.0 2024.07.16 23:39 <br> 优化屎山代码，减轻网页负担（）</p>
                 <p>ver 0.5.9 2024.06.30 11:23 <br> 小更改，修改一些内容。</p>
@@ -162,12 +174,16 @@
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>
+    <script src="/blog/quote-js/pdfobject/pdfobject.js"></script>
     <script src="/blog/quote-js/jquery/jquery-3.7.1.js"></script>
     <script src="/blog/quote-js/katex/katex.min.js"></script>
     <script src="/blog/quote-js/katex/contrib/auto-render.min.js"></script>
     <!-- <script src="/blog/quote-js/mathjax/es5/tex-chtml-full.js"></script> -->
     <script>
         // 获取引用库内容
+        var pdfobjectVersion = PDFObject.pdfobjectversion;
+        $("#pdfobjectVersionDisplay").html("<strong>PDFObject</strong> v" + pdfobjectVersion + "<br>用于在网页中显示PDF文件");
+
         var jqueryVersion = $.fn.jquery;
         $("#jqueryVersionDisplay").html("<strong>jQuery</strong> v" + jqueryVersion + "<br>用于简化一些网页中的操作");
 

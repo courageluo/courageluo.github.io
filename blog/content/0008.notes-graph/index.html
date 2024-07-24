@@ -1,11 +1,11 @@
-<!-- 模板 -->
+<!-- C++ 图论 -->
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>标题 - Courage Luo的网站</title>
+    <title>图论 - Courage Luo的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -18,19 +18,28 @@
     <div class="content">
         <!-- 边栏 -->
         <aside class="sidebar">
-            <h3 style="text-align: center;">索引</h3>
-            <hr>
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引</h3>
+                <hr>
+                <ul>
+                    <li><a href="#intro">说明</a></li>
+                    <li><a href="#content">文档内容</a></li>
+                </ul>
+            </div>
         </aside>
 
         <main class="content-container">
             <!-- 标题框 -->
             <div class="rounded-box1">
-                <h1 style="text-align: center;">标题</h1>
+                <h1 style="text-align: center;">图论算法</h1>
             </div>
 
             <!-- 内容框 -->
+            <div class="rounded-box2">
+                <p id="intro">该页所包含的内容为最小生成树、最短路径、二分图匹配等内容，以PDF形式呈现。如果无法加载或需要下载PDF文件，请<a href="./output.pdf" download>点击这里</a>。</p>
+            </div>
             <div class="rounded-box3">
-                <p>内容</p>
+                <p id="content"><div id="pdf-container"></div></p>
             </div>
         </main>
     </div>
@@ -40,6 +49,16 @@
 
     <!-- 内部CSS文件 -->
     <style>
+        a {
+            color: #110c50;
+        }
+
+        .pdfobject-container {
+            width: 100%;
+            height: 1000px;
+            border: 1.5px solid #2d2d2d;
+        }
+
         /* 背景图片设置 */
         body {
             background-image: url('/img/background/day-blogbackground.svg');
@@ -51,6 +70,10 @@
                 background-image: url('/img/background/night-blogbackground.svg');
             }
 
+            a {
+                color: #17e7e7;
+            }
+
             .sidebar {
                 background-color: #1d3853;
             }
@@ -59,6 +82,10 @@
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>
+    <script src="/blog/quote-js/pdfobject/pdfobject.js"></script>
+    <script>
+        PDFObject.embed("./output.pdf", "#pdf-container");
+    </script>
 </body>
 
 </html>

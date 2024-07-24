@@ -6,22 +6,22 @@
     } ,
     {
         "url" : "content/0002.search-trace-algo/index.html" ,
-        "title" : "搜索与回溯算法" ,
+        "title" : "C++ - 学习笔记 - 搜索与回溯算法" ,
         "modified" : "2024.02.20 20:56"
     } ,
     {
         "url" : "content/0003.jquery-clock/index.html" ,
-        "title" : "使用jQuery实现的时钟" ,
+        "title" : "HTML实践 - 使用jQuery实现的时钟" ,
         "modified" : "2024.04.21 14:49"
     } ,
     {
         "url" : "content/0004.math-review/index.html" ,
-        "title" : "数学知识点记录" ,
+        "title" : "学习记录 - 数学知识点记录" ,
         "modified" : "2024.07.21 23:52"
     } ,
     {
         "url" : "content/0005.cpp-system/index.html" ,
-        "title" : "C++中的system函数" ,
+        "title" : "C++ - system函数" ,
         "modified" : "2024.03.16 21:37"
     } ,
     {
@@ -31,7 +31,12 @@
     } ,
     {
         "url" : "content/0007.file-read/result.html" ,
-        "title" : "网页端读取文件",
+        "title" : "HTML实践 - 网页端读取文件",
         "modified" : "2024.07.23 00:56"
+    } ,
+    {
+        "url" : "content/0008.notes-graph/index.html" ,
+        "title" : "C++ - 学习笔记 - 图论" ,
+        "modified" : "2024.07.24 12:50"
     }
 ]

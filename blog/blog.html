@@ -30,6 +30,7 @@
             <h3 style="text-align: center;">文章列表</h3>
             <hr>
             <div id="article-list"></div>
+            <p></p>
         </div>
     </div>
 
@@ -49,6 +50,21 @@
             text-decoration: none;
         }
 
+        .collapsible-title {
+            height: 35px;
+            background-color: #6cecaa;
+            border: 2px solid #084f6c;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            line-height: 35px;
+            padding-left: 10px;
+        }
+
+        .collapsible-content {
+            background-color: #b3c5bb;
+        }
+
         @media (prefers-color-scheme: dark) {
             body {
                 background-image: url('/img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
@@ -56,6 +72,15 @@
 
             a {
                 color: #12efef;
+            }
+
+            .collapsible-title {
+                background-color: #26376f;
+                border: 2px solid #110c50;
+            }
+
+            .collapsible-content {
+                background-color: #314174;
             }
         }
     </style>
@@ -80,13 +105,13 @@
                 });
         }
 
-        function getRandomSentenceIndex(currentIndex, maxIndex) {
-            let newIndex = currentIndex;
-            while (newIndex === currentIndex) {
-                newIndex = Math.floor(Math.random() * maxIndex);
-            }
-            return newIndex;
-        }
+        // function getRandomSentenceIndex(currentIndex, maxIndex) {
+        //     let newIndex = currentIndex;
+        //     while (newIndex === currentIndex) {
+        //         newIndex = Math.floor(Math.random() * maxIndex);
+        //     }
+        //     return newIndex;
+        // }
 
         displayRandomSentence();
 
@@ -94,27 +119,82 @@
             displayRandomSentence();
         });
 
+        // 创建折叠面板
+        function createCollapsiblePanel(category, articles) {
+            // 创建面板结构
+            const panel = document.createElement('div');
+            panel.style.width = '100%';
+            panel.style.overflow = 'hidden';
+
+            // 创建标题
+            const title = document.createElement('div');
+            title.classList.add('collapsible-title');
+            title.style.cursor = 'pointer';
+            title.textContent = '分类 - ' + category;
+            panel.appendChild(title);
+
+            // 创建内容容器
+            const content = document.createElement('div');
+            content.classList.add('collapsible-content');
+            content.style.marginTop = '-5px';
+            content.style.height = '0px';
+            content.style.transition = 'height 0.3s';
+            panel.appendChild(content);
+
+            // 添加文章链接
+            articles.forEach(article => {
+                const link = document.createElement('a');
+                link.href = article.url;
+                link.textContent = '\n' + article.title;
+                link.style.display = 'block';
+                link.style.margin = '0 10px';
+                content.appendChild(link);
+
+                const modified = document.createElement('p');
+                modified.textContent = '修改时间：' + article.modified;
+                modified.style.textAlign = 'right';
+                modified.style.marginRight = '10px';
+                content.appendChild(modified);
+
+                const hr = document.createElement('hr');
+                hr.style.margin = '10px';
+                content.appendChild(hr);
+            });
+
+            // 添加点击事件
+            title.addEventListener('click', () => {
+                content.style.height = content.offsetHeight === 0 ? content.scrollHeight + 'px' : '0px';
+                content.style.borderRadius = content.offsetHeight === 0 ? '0 0 5px 5px' : '';
+                content.previousElementSibling.style.borderRadius = content.offsetHeight === 0 ? '5px 5px 0 0' : '5px';
+            });
+
+            return panel;
+        }
+
         // 加载文章索引
         fetch('articles.json')
             .then(response => response.json())
             .then(data => {
+                const categories = {};
+
+                // 按分类组织文章
                 data.forEach(article => {
-                    // 创建文章结构
-                    const articleDiv = document.createElement('div');
-                    articleDiv.innerHTML = `
-                        <a href="${article.url}">
-                            <p>${article.title}</p>
-                        </a>
-                        <p style="text-align: right;">修改时间：${article.modified}</p>
-                        <hr>
-                    `;
-                    // 添加到页面上
-                    document.getElementById('article-list').appendChild(articleDiv);
+                    const category = article.category || '未分类';
+                    if (!categories[category]) {
+                        categories[category] = [];
+                    }
+                    categories[category].push(article);
+                });
+
+                // 创建并添加折叠面板
+                Object.keys(categories).forEach(category => {
+                    const panel = createCollapsiblePanel(category, categories[category]);
+                    document.getElementById('article-list').appendChild(panel);
                 });
             })
             .catch(error => {
                 console.error('Error fetching JSON file:', error);
-                console.warn('Unable to load the artical index.');
+                console.warn('Unable to load the article index.');
             });
     </script>
 </body>

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图论 - Courage Luo的网站</title>
+    <title>2024暑假夏令营 - Courage Luo的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -31,12 +31,12 @@
         <main class="content-container">
             <!-- 标题框 -->
             <div class="rounded-box1">
-                <h1 style="text-align: center;">图论算法</h1>
+                <h1 style="text-align: center;">信息奥赛2024暑假夏令营</h1>
             </div>
 
             <!-- 内容框 -->
             <div class="rounded-box2">
-                <p id="intro">该页所包含的内容为最小生成树、最短路径、二分图匹配等内容，以PDF形式呈现。如果无法加载或需要下载PDF文件，请<a href="./output.pdf" download>点击这里</a>。</p>
+                <p id="intro">该页所包含的内容为数论、图论等内容，以PDF形式呈现。如果无法加载或需要下载PDF文件，请<a href="./output.pdf" download>点击这里</a>。出于种种原因，难免出现谬误，请谨慎甄别或提交Issue。</p>
             </div>
             <div class="rounded-box3">
                 <p id="content"><div id="pdf-container"></div></p>
@@ -85,7 +85,7 @@
     <script src="/blog/quote-js/pdfobject/pdfobject.js"></script>
     <script>
         var options = {
-            PDFJS_URL: "/blog/quote-js/pdfjs/pdfjs-4.4.168-dist/build/pdf.mjs",
+            PDFJS_URL: "/blog/quote-js/pdfjs/build/pdf.js",
         };
         PDFObject.embed("./output.pdf", "#pdf-container", options);
     </script>

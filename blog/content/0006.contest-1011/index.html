@@ -11,340 +11,359 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/katex/katex.min.css"
 </head>
 
 <body>
     <div class="content">
-        <!-- 标题框 -->
-        <div class="rounded-box1">
-            <h1 style="text-align: center;">Contest1011 - 2024年4月测试题解</h1>
-        </div>
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">目录</h3>
+                <hr>
+                <ul>
+                    <li><a href="instruction"></a>说明</li>
+                    <li><a href="#problem-a">Problem A 互质</a></li>
+                    <li><a href="#problem-b">Problem B 美丽数</a></li>
+                    <li><a href="#problem-c">Problem C 开灯关灯</a></li>
+                    <li><a href="#problem-d">Problem D 大数取模</a></li>
+                    <li><a href="#problem-e">Problem E 同余问题</a></li>
+                    <li><a href="#problem-f">Problem F 人见人爱$ A^B \: \mathrm{mod} \: C $</a></li>
+                </ul>
+            </div>
+        </aside>
 
-        <!-- 内容跳转框 -->
-        <div class="rounded-box2">
-            <p>题目来自NZOJ，原页面在<a href="http://182.43.200.0:6548/contest.php?cid=1011">这里</a>。</p>
-        </div>
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">Contest1011 - 2024年4月测试题解</h1>
+            </div>
 
-        <!-- 内容框 -->
-        <div class="rounded-box3">
-            <p>题目比较简单，都是一些很经典的题，不过大多数都要输入多组数据，所以可以用<code class="language-cpp">while(scanf("%d",&n)!=EOF)</code>或者<code class="language-cpp">while(std::cin>>n)</code>来实现循环读入数据。</p>
-        </div>
-        <div class="rounded-box3">
-            <h3>Problem A 互质</h3>
-            <hr>
-            <h4>[题目描述]</h4>
-            <p>
-                给你一个正整数n，请问有多少个比n小的且与n互质的正整数？<br>
-                两个整数互质的意思是，这两个整数没有比1大的公约数。
-            </p>
-            <h4>[输入]</h4>
-            <p>
-                输入包含多组测试数据。每组输入是一个正整数n（n≤1000000000）。当n=0时，输入结束。
-            </p>
-            <h4>[输出]</h4>
-            <p>
-                对于每组输入，输出比n小的且与n互质的正整数个数。
-            </p>
-            <h4>[解答]</h4>
-            <p>
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        #include&lt;iostream&gt;
-                        int main() {
-                            int N,n;
-                            while (scanf("%d",&N)!=EOF) {
-                                if (N==0) break;
-                                n=N;
-                                for (int i=2;i&lt;=sqrt(N);i++) {
-                                    if(N%i==0) {
-                                        n=n/i*(i-1);
-                                        while (N%i==0) N/=i;
+            <!-- 内容跳转框 -->
+            <div id="instruction" class="rounded-box2">
+                <p>题目来自NZOJ，原页面在<a href="http://182.43.200.0:6548/contest.php?cid=1011">这里</a>。</p>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <p>题目比较简单，都是一些很经典的题，不过大多数都要输入多组数据，所以可以用<code class="language-cpp">while(scanf("%d",&n)!=EOF)</code>或者<code class="language-cpp">while(std::cin>>n)</code>来实现循环读入数据。</p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="problem-a">Problem A 互质</h3>
+                <hr>
+                <h4>[题目描述]</h4>
+                <p>
+                    给你一个正整数n，请问有多少个比n小的且与n互质的正整数？<br>
+                    两个整数互质的意思是，这两个整数没有比1大的公约数。
+                </p>
+                <h4>[输入]</h4>
+                <p>
+                    输入包含多组测试数据。每组输入是一个正整数n（n≤1000000000）。当n=0时，输入结束。
+                </p>
+                <h4>[输出]</h4>
+                <p>
+                    对于每组输入，输出比n小的且与n互质的正整数个数。
+                </p>
+                <h4>[解答]</h4>
+                <p>
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            #include&lt;iostream&gt;
+                            int main() {
+                                int N,n;
+                                while (scanf("%d",&N)!=EOF) {
+                                    if (N==0) break;
+                                    n=N;
+                                    for (int i=2;i&lt;=sqrt(N);i++) {
+                                        if(N%i==0) {
+                                            n=n/i*(i-1);
+                                            while (N%i==0) N/=i;
+                                        }
                                     }
+                                    if (N&gt;1) n=n/N*(N-1);
+                                    std::cout&lt;&lt;n&lt;&lt;'\n';
                                 }
-                                if (N&gt;1) n=n/N*(N-1);
-                                std::cout&lt;&lt;n&lt;&lt;'\n';
+                                return 0;
                             }
-                            return 0;
-                        }
-                    </code>
-                </pre>
-            </p>
-        </div>
-        <div class="rounded-box3">
-            <h3>Problem B 美丽数</h3>
-            <hr>
-            <h4>[题目描述]</h4>
-            <p>
-                小明很喜欢3和5这两个数字，他将能被3或5整除的数叫做美丽数。现在给你一个整数N（1≤N≤100000），你能告诉小明第N个美丽数是多少吗？
-            </p>
-            <h4>[输入]</h4>
-            <p>
-                输入包含多组测试数据。每组输入一个整数N（1≤N≤100000）。
-            </p>
-            <h4>[输出]</h4>
-            <p>
-                对于每组输入，输出第N个美丽数。
-            </p>
-            <h4>[解答]</h4>
-            <p>
-                由于100000并不大，所以可以求出前100000个美丽数，然后根据需求输出第N个美丽数即可。
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        #include&lt;iostream&gt;
-                        #include&lt;vector&gt;
-                        int main() {
-                            int i=0;
-                            std::vector&lt;int&gt; nums;
-                            import:
+                        </code>
+                    </pre>
+                </p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="problem-b">Problem B 美丽数</h3>
+                <hr>
+                <h4>[题目描述]</h4>
+                <p>
+                    小明很喜欢3和5这两个数字，他将能被3或5整除的数叫做美丽数。现在给你一个整数N（1≤N≤100000），你能告诉小明第N个美丽数是多少吗？
+                </p>
+                <h4>[输入]</h4>
+                <p>
+                    输入包含多组测试数据。每组输入一个整数N（1≤N≤100000）。
+                </p>
+                <h4>[输出]</h4>
+                <p>
+                    对于每组输入，输出第N个美丽数。
+                </p>
+                <h4>[解答]</h4>
+                <p>
+                    由于100000并不大，所以可以求出前100000个美丽数，然后根据需求输出第N个美丽数即可。
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            #include&lt;iostream&gt;
+                            #include&lt;vector&gt;
+                            int main() {
+                                int i=0;
+                                std::vector&lt;int&gt; nums;
+                                import:
+                                    if (i%3==0||i%5==0) nums.push_back(i);
+                                    i++;
+                                if (nums.size()&lt;=100000) goto import;
+                                int a;
+                                while (scanf("%d",&a)!=EOF) {
+                                    std::cout&lt;&lt;nums[a]&lt;&lt;'\n';
+                                }
+                                return 0;
+                            }
+                        </code>
+                    </pre>
+                    这里的<code class="language-cpp">goto</code>语句就是一个循环，以上循环等价于
+                    <pre>
+                        <code class="language-cpp">
+                            while (nums.size()&lt;=100000) {
                                 if (i%3==0||i%5==0) nums.push_back(i);
                                 i++;
-                            if (nums.size()&lt;=100000) goto import;
-                            int a;
-                            while (scanf("%d",&a)!=EOF) {
-                                std::cout&lt;&lt;nums[a]&lt;&lt;'\n';
                             }
-                            return 0;
-                        }
-                    </code>
-                </pre>
-                这里的<code class="language-cpp">goto</code>语句就是一个循环，以上循环等价于
-                <pre>
-                    <code class="language-cpp">
-                        while (nums.size()&lt;=100000) {
-                            if (i%3==0||i%5==0) nums.push_back(i);
-                            i++;
-                        }
-                    </code>
-                </pre>
-            </p>
-        </div>
-        <div class="rounded-box3">
-            <h3>Problem C 开灯关灯</h3>
-            <hr>
-            <h4>[题目描述]</h4>
-            <p>
-                有n盏灯，编号为1~n，第1个人把所有灯打开，第2个人按下所有编号为2的倍数的开关（这些灯将被关掉），第3个人按下所有编号为3的倍数的开关（其中关掉的灯将被打开，开着的灯将被关闭），以此类推。一共有k个人，问最后有哪些灯开着？
-            </p>
-            <h4>[输入]</h4>
-            <p>
-                输入数据有多组，输入n盏灯以及k（k≤n≤1000）。
-            </p>
-            <h4>[输出]</h4>
-            <p>
-                输出开着的灯的编号，参照样例输出。
-            </p>
-            <h4>[样例输入]</h4>
-            <p>
-                <pre>
-                    <code class="language-">
-                        7 3
-                        8 2
-                    </code>
-                </pre>
-            </p>
-            <h4>[样例输出]</h4>
-            <p>
-                <pre>
-                    <code class="language-">
-                        1
-                        5
-                        6
-                        7
-                        1
-                        3
-                        5
-                        7
-                    </code>
-                </pre>
-            </p>
-            <h4>[解答]</h4>
-            <p>
-                只需要用循环模拟这个开关灯过程就可以了。
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        #include&lt;iostream&gt;
-                        int main() {
-                            int n,k,m=1;
-                            while (scanf("%d%d",&n,&k)!=EOF) {
-                                for (int i=1;i&lt;=n;i++) {
-                                    for (int p=2;p&lt;=k;p++)
-                                        if (i%p==0) m=!m;
-                                    if (m) std::cout&lt;&lt;i&lt;&lt;'\n';
-                                    m=1;
+                        </code>
+                    </pre>
+                </p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="problem-c">Problem C 开灯关灯</h3>
+                <hr>
+                <h4>[题目描述]</h4>
+                <p>
+                    有n盏灯，编号为1~n，第1个人把所有灯打开，第2个人按下所有编号为2的倍数的开关（这些灯将被关掉），第3个人按下所有编号为3的倍数的开关（其中关掉的灯将被打开，开着的灯将被关闭），以此类推。一共有k个人，问最后有哪些灯开着？
+                </p>
+                <h4>[输入]</h4>
+                <p>
+                    输入数据有多组，输入n盏灯以及k（k≤n≤1000）。
+                </p>
+                <h4>[输出]</h4>
+                <p>
+                    输出开着的灯的编号，参照样例输出。
+                </p>
+                <h4>[样例输入]</h4>
+                <p>
+                    <pre>
+                        <code class="language-">
+                            7 3
+                            8 2
+                        </code>
+                    </pre>
+                </p>
+                <h4>[样例输出]</h4>
+                <p>
+                    <pre>
+                        <code class="language-">
+                            1
+                            5
+                            6
+                            7
+                            1
+                            3
+                            5
+                            7
+                        </code>
+                    </pre>
+                </p>
+                <h4>[解答]</h4>
+                <p>
+                    只需要用循环模拟这个开关灯过程就可以了。
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            #include&lt;iostream&gt;
+                            int main() {
+                                int n,k,m=1;
+                                while (scanf("%d%d",&n,&k)!=EOF) {
+                                    for (int i=1;i&lt;=n;i++) {
+                                        for (int p=2;p&lt;=k;p++)
+                                            if (i%p==0) m=!m;
+                                        if (m) std::cout&lt;&lt;i&lt;&lt;'\n';
+                                        m=1;
+                                    }
                                 }
+                                return 0;
                             }
-                            return 0;
-                        }
-                    </code>
-                </pre>
-            </p>
-        </div>
-        <div class="rounded-box3">
-            <h3>Problem D 大数取模</h3>
-            <hr>
-            <h4>[题目描述]</h4>
-            <p>
-                现给你两个正整数A和B，请你计算$ A \: \mathrm{mod} \: B $。<br>
-                为了使问题简单，保证B小于100000。
-            </p>
-            <h4>[输入]</h4>
-            <p>
-                输入包含多组测试数据。每行输入包含两个正整数A和B。A的长度不超过1000，并且0&lt;B&lt;100000。
-            </p>
-            <h4>[输出]</h4>
-            <p>
-                对于每一个测试样例，输出$ A \: \mathrm{mod} \: B $。
-            </p>
-            <h4>[解答]</h4>
-            <p>
-                经典的高精度算法。
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        #include&lt;iostream&gt;
-                        #include&lt;algorithm&gt;
+                        </code>
+                    </pre>
+                </p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="problem-d">Problem D 大数取模</h3>
+                <hr>
+                <h4>[题目描述]</h4>
+                <p>
+                    现给你两个正整数A和B，请你计算$ A \: \mathrm{mod} \: B $。<br>
+                    为了使问题简单，保证B小于100000。
+                </p>
+                <h4>[输入]</h4>
+                <p>
+                    输入包含多组测试数据。每行输入包含两个正整数A和B。A的长度不超过1000，并且0&lt;B&lt;100000。
+                </p>
+                <h4>[输出]</h4>
+                <p>
+                    对于每一个测试样例，输出$ A \: \mathrm{mod} \: B $。
+                </p>
+                <h4>[解答]</h4>
+                <p>
+                    经典的高精度算法。
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            #include&lt;iostream&gt;
+                            #include&lt;algorithm&gt;
 
-                        int mod(std::string a,int b) {
-                            int d=0;
-                            for (int i=0;i&lt;a.size();i++)
-                                d=(d*10+(a[i]-'0'))%b;
-                            return d;
-                        }
+                            int mod(std::string a,int b) {
+                                int d=0;
+                                for (int i=0;i&lt;a.size();i++)
+                                    d=(d*10+(a[i]-'0'))%b;
+                                return d;
+                            }
 
-                        int main() {
-                            std::string a;
-                            int b;
-                            while (std::cin&gt;&gt;a&gt;&gt;b)
-                                std::cout&lt;&lt;mod(a,b)&lt;&lt;'\n';
-                            return 0;
-                        }
-                    </code>
-                </pre>
-            </p>
-        </div>
-        <div class="rounded-box3">
-            <h3>Problem E 同余问题</h3>
-            <hr>
-            <h4>[题目描述]</h4>
-            <p>
-                给n个数，现在想知道有多少个大于1的整数被这n个数除得到的余数相同，请你帮他~
-            </p>
-            <h4>[输入]</h4>
-            <p>
-                第一个数为T，表示case数，每个case第一行输入一个2≤n≤100，表示数字个数。之后输入n个数，每个数都小于10^9。
-            </p>
-            <h4>[输出]</h4>
-            <p>
-                每个case输出一个数，表示大于1且满足除这n个已给出的数结果余数相同的数的个数。
-            </p>
-            <h4>[提示]</h4>
-            <p>
-                第一个样例三个数除以2都余0，除以4都余2，所以符合条件的有两个数。
-            </p>
-            <h4>[解答]</h4>
-            <p>
-                对于每数据逐一判断即可。
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        #include&lt;iostream&gt;
-                        #include&lt;algorithm&gt;
-                        
-                        int a[101],b[101];
-                        
-                        int gcd(int a, int b) {
-                            return b ? gcd(b,a%b) : a;
-                        }
-                        
-                        int res(int n) {
-                            int res=0;
-                            for (int i=2;i*i&lt;=n;i++) {
-                                if (n%i==0) {
-                                    if (i*i!=n) res++;
-                                    res++;
+                            int main() {
+                                std::string a;
+                                int b;
+                                while (std::cin&gt;&gt;a&gt;&gt;b)
+                                    std::cout&lt;&lt;mod(a,b)&lt;&lt;'\n';
+                                return 0;
+                            }
+                        </code>
+                    </pre>
+                </p>
+            </div>
+            <div class="rounded-box3">
+                <h3  id="problem-e">Problem E 同余问题</h3>
+                <hr>
+                <h4>[题目描述]</h4>
+                <p>
+                    给n个数，现在想知道有多少个大于1的整数被这n个数除得到的余数相同，请你帮他~
+                </p>
+                <h4>[输入]</h4>
+                <p>
+                    第一个数为T，表示case数，每个case第一行输入一个2≤n≤100，表示数字个数。之后输入n个数，每个数都小于10^9。
+                </p>
+                <h4>[输出]</h4>
+                <p>
+                    每个case输出一个数，表示大于1且满足除这n个已给出的数结果余数相同的数的个数。
+                </p>
+                <h4>[提示]</h4>
+                <p>
+                    第一个样例三个数除以2都余0，除以4都余2，所以符合条件的有两个数。
+                </p>
+                <h4>[解答]</h4>
+                <p>
+                    对于每数据逐一判断即可。
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            #include&lt;iostream&gt;
+                            #include&lt;algorithm&gt;
+                            
+                            int a[101],b[101];
+                            
+                            int gcd(int a, int b) {
+                                return b ? gcd(b,a%b) : a;
+                            }
+                            
+                            int res(int n) {
+                                int res=0;
+                                for (int i=2;i*i&lt;=n;i++) {
+                                    if (n%i==0) {
+                                        if (i*i!=n) res++;
+                                        res++;
+                                    }
+                                }
+                                if (n!=1) res++;
+                                return res;
+                            }
+                            
+                            int main() {
+                                int n,t;
+                                std::cin&gt;&gt;t;
+                                while (t--) {
+                                    std::cin&gt;&gt;n;
+                                    for (int i=1;i&lt;=n;i++) {
+                                        std::cin&gt;&gt;a[i];
+                                    }
+                                    std::sort(a+1,a+1+n);
+                                    for (int i=1;i&lt;n;i++) {
+                                        b[i]=a[i+1]-a[i];
+                                    }
+                                    int t=0;
+                                    for (int i=1;i&lt;n;i++) {
+                                        t=gcd(b[i],t);
+                                    }
+                                    std::cout&lt;&lt;res(t)&lt;&lt;'\n';
+                                }
+                                return 0;
+                            }
+                        </code>
+                    </pre>
+                </p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="problem-f">Problem F 人见人爱$ \boldsymbol{A^B} \: \mathbf{mod} \: \boldsymbol{C} $</h3>
+                <hr>
+                <h4>[题目描述]</h4>
+                <p>
+                    计算A的B次幂对C取模($ A^B \: \mathrm{mod} \: C $)并且1≤A，B,C≤32768。输入三个整数A,B,C，输入文件每一行依次三个整数A,B,C用空格隔开，每行输出一个运算结果。
+                </p>
+                <h4>[样例输入]</h4>
+                <p>
+                    <pre>
+                        <code class="language-">
+                            3 4 5
+                            10 10 100
+                            45 67 89
+                            5 55555555 3
+                            6 12345678 123 
+                        </code>
+                    </pre>
+                </p>
+                <h4>[样例输出]</h4>
+                <p>
+                    <pre>
+                        <code class="language-">
+                            1
+                            0
+                            45
+                            2
+                            90
+                        </code>
+                    </pre>
+                </p>
+                <h4>[解答]</h4>
+                <p>
+                    经典的快速幂。
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            #include&lt;iostream&gt;
+                            int main() {
+                                int a,b,c,j;
+                                while (scanf("%d %d %d",&a,&b,&c)!=EOF) {
+                                    j=1;
+                                    while (b&gt;0) {
+                                        if (b%2!=0) j=(j*a)%c;
+                                        b=b/2;
+                                        a=(a*a)%c;
+                                    }
+                                    std::cout&lt;&lt;j&lt;&lt;'\n';
                                 }
                             }
-                            if (n!=1) res++;
-                            return res;
-                        }
-                        
-                        int main() {
-                            int n,t;
-                            std::cin&gt;&gt;t;
-                            while (t--) {
-                                std::cin&gt;&gt;n;
-                                for (int i=1;i&lt;=n;i++) {
-                                    std::cin&gt;&gt;a[i];
-                                }
-                                std::sort(a+1,a+1+n);
-                                for (int i=1;i&lt;n;i++) {
-                                    b[i]=a[i+1]-a[i];
-                                }
-                                int t=0;
-                                for (int i=1;i&lt;n;i++) {
-                                    t=gcd(b[i],t);
-                                }
-                                std::cout&lt;&lt;res(t)&lt;&lt;'\n';
-                            }
-                            return 0;
-                        }
-                    </code>
-                </pre>
-            </p>
-        </div>
-        <div class="rounded-box3">
-            <h3>Problem F 人见人爱$ \boldsymbol{A^B} \: \mathbf{mod} \: \boldsymbol{C} $</h3>
-            <hr>
-            <h4>[题目描述]</h4>
-            <p>
-                计算A的B次幂对C取模($ A^B \: \mathrm{mod} \: C $)并且1≤A，B,C≤32768。输入三个整数A,B,C，输入文件每一行依次三个整数A,B,C用空格隔开，每行输出一个运算结果。
-            </p>
-            <h4>[样例输入]</h4>
-            <p>
-                <pre>
-                    <code class="language-">
-                        3 4 5
-                        10 10 100
-                        45 67 89
-                        5 55555555 3
-                        6 12345678 123 
-                    </code>
-                </pre>
-            </p>
-            <h4>[样例输出]</h4>
-            <p>
-                <pre>
-                    <code class="language-">
-                        1
-                        0
-                        45
-                        2
-                        90
-                    </code>
-                </pre>
-            </p>
-            <h4>[解答]</h4>
-            <p>
-                经典的快速幂。
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        #include&lt;iostream&gt;
-                        int main() {
-                            int a,b,c,j;
-                            while (scanf("%d %d %d",&a,&b,&c)!=EOF) {
-                                j=1;
-                                while (b&gt;0) {
-                                    if (b%2!=0) j=(j*a)%c;
-                                    b=b/2;
-                                    a=(a*a)%c;
-                                }
-                                std::cout&lt;&lt;j&lt;&lt;'\n';
-                            }
-                        }
-                    </code>
-                </pre>
-            </p>
-        </div>
+                        </code>
+                    </pre>
+                </p>
+            </div>
+        </main>
     </div>
 
     <!-- 页脚 -->
@@ -369,6 +388,10 @@
 
             a {
                 color: #20e3d6;
+            }
+
+            .sidebar {
+                background-color: #1d3853;
             }
         }
     </style>

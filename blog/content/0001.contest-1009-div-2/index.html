@@ -11,323 +11,383 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
 </head>
 
 <body>
     <div class="content">
-        <!-- 标题框 -->
-        <div class="rounded-box1">
-            <h1 style="text-align: center;">Contest1009 - 下北泽奥林匹克信息雷厉风行科普赛(Div.2场)部分题解</h1>
-        </div>
-
-        <!-- 内容跳转框 -->
-        <div class="rounded-box2">
-            题目来自NZOJ，原页面在<a href="http://182.43.200.0:6548/contest.php?cid=1009">这里</a>。<br>
-            题号选择：<button id="selectA" onclick="clickA()">A</button><button id="selectC"
-                onclick="clickC()">C</button><button id="selectD" onclick="clickD()">D</button>
-        </div>
-
-        <!-- 内容框 -->
-        <div id="questionA">
+        <aside class="sidebar">
             <div class="rounded-box3">
-                <h3>Problem A 密文 (code.cpp)</h3>
+                <h3 style="text-align: center;">索引</h3>
                 <hr>
-                <table style="width: 100%;">
-                    <tr>
-                        <td>Input file: code.in</td>
-                        <td>Output file: code.out</td>
-                    </tr>
-                    <tr>
-                        <td>Time limit: 1 second</td>
-                        <td>Memory limit: 128 MB</td>
-                    </tr>
-                </table>
-                <p>
-                    [题目背景]<br>
-                    “.---- .---- ....- ..... .---- ....-”远方传来密文。<br>
-                    “壹壹肆伍壹肆……没错，确定了，是接头人！准备连线回复！”
-                </p>
-                <p>
-                    [题目描述]<br>
-                    注意看，这个男人叫小帅，为了联系他在下北泽的组织，他拿出了他尘封已久的密码本，现在他需要按照如下方式回复密码。<br>
-                    密码本是一个<strong>仅含</strong>01的字符串，长度为n，从第一个字符开始，如果该位为0，则会发送该位数字所在的位置序号的摩斯密码，如果是1，则看向下一位数，每次读取0后需要跳到本位数字的下x位数（x为已经读取的0的数量），直到整个密码本被读取完毕，小帅需要在哪些位点发出摩斯密码呢？
-                </p>
-                <p>
-                    [Input]<br>
-                    第一行一个整数n，代表密码本的长度。<br>
-                    第二行一个长度为n的01字符串，代表密码本的编码。
-                </p>
-                <p>
-                    [Output]<br>
-                    输出共一行，小帅需要发出摩斯密码的位点，按从小到大排序，用空格隔开。
-                </p>
-                <p>
-                    [Examples]<br>
-                    <table border="1" style="width: 100%; border-color: #D2D5D9; border-width: 2px;">
+                <p>题目原页面在<a href="http://182.43.200.0:6548/contest.php?cid=1009">这里</a>。</p>
+                <ul>
+                    <li>
+                        题号选择
+                        <div style="height: 10px;"></div>
+                        <button id="selectA" onclick="clickA()">A</button><button id="selectC"
+                            onclick="clickC()">C</button><button id="selectD" onclick="clickD()">D</button>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">Contest1009 - 下北泽奥林匹克信息雷厉风行科普赛(Div.2场)部分题解</h1>
+            </div>
+
+            <!-- 内容跳转框 -->
+            <div class="rounded-box2" id="content-jump">
+                题目来自NZOJ，原页面在<a href="http://182.43.200.0:6548/contest.php?cid=1009">这里</a>。<br>
+                题号选择：<button id="selectA" onclick="clickA()">A</button><button id="selectC"
+                    onclick="clickC()">C</button><button id="selectD" onclick="clickD()">D</button>
+            </div>
+
+            <!-- 内容框 -->
+            <div id="questionA">
+                <div class="rounded-box3">
+                    <h3>Problem A 密文 (code.cpp)</h3>
+                    <hr>
+                    <table style="width: 100%;">
                         <tr>
-                            <td style="text-align: center;">code.in</td>
-                            <td style="text-align: center;">code.out</td>
+                            <td>Input file: code.in</td>
+                            <td>Output file: code.out</td>
                         </tr>
                         <tr>
-                            <td>10<br>0110011000</td>
-                            <td>1 4 8<br></td>
+                            <td>Time limit: 1 second</td>
+                            <td>Memory limit: 128 MB</td>
                         </tr>
                     </table>
-                </p>
-                <p>
-                    [Notes]<br>
-                    对于所有数据，满足1≤n≤10<sup>6</sup>。<br>
-                    该题目不区分测试点分数。
-                </p>
-            </div>
-            <div class="rounded-box3">
-                <h3>题目分析及解答 (AC: 100%)</h3>
-                <hr>
-                <p>
-                    翻译题目主要内容，目的还是比较明确的：读入一个只含01的字符串，然后再从头逐个地判断；如果是0，那么就输出这个数的位置，如果是1，则往下一位看。每次读取到0，都要记录已读取到的0的总数（设为x），并且在下一次跳转时就跳转x个数，直到读取完为止。<br>
-                    明了了题目意思，我们就可以开始写代码了。
-                </p>
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        #include&lt;bits/stdc++.h&gt;
-                        using namespace std;
+                    <p>
+                        [题目背景]<br>
+                        “.---- .---- ....- ..... .---- ....-”远方传来密文。<br>
+                        “壹壹肆伍壹肆……没错，确定了，是接头人！准备连线回复！”
+                    </p>
+                    <p>
+                        [题目描述]<br>
+                        注意看，这个男人叫小帅，为了联系他在下北泽的组织，他拿出了他尘封已久的密码本，现在他需要按照如下方式回复密码。<br>
+                        密码本是一个<strong>仅含</strong>01的字符串，长度为n，从第一个字符开始，如果该位为0，则会发送该位数字所在的位置序号的摩斯密码，如果是1，则看向下一位数，每次读取0后需要跳到本位数字的下x位数（x为已经读取的0的数量），直到整个密码本被读取完毕，小帅需要在哪些位点发出摩斯密码呢？
+                    </p>
+                    <p>
+                        [Input]<br>
+                        第一行一个整数n，代表密码本的长度。<br>
+                        第二行一个长度为n的01字符串，代表密码本的编码。
+                    </p>
+                    <p>
+                        [Output]<br>
+                        输出共一行，小帅需要发出摩斯密码的位点，按从小到大排序，用空格隔开。
+                    </p>
+                    <p>
+                        [Examples]<br>
+                        <table border="1" style="width: 100%; border-color: #D2D5D9; border-width: 2px;">
+                            <tr>
+                                <td style="text-align: center;">code.in</td>
+                                <td style="text-align: center;">code.out</td>
+                            </tr>
+                            <tr>
+                                <td>10<br>0110011000</td>
+                                <td>1 4 8<br></td>
+                            </tr>
+                        </table>
+                    </p>
+                    <p>
+                        [Notes]<br>
+                        对于所有数据，满足1≤n≤10<sup>6</sup>。<br>
+                        该题目不区分测试点分数。
+                    </p>
+                </div>
+                <div class="rounded-box3">
+                    <h3>题目分析及解答 (AC: 100%)</h3>
+                    <hr>
+                    <p>
+                        翻译题目主要内容，目的还是比较明确的：读入一个只含01的字符串，然后再从头逐个地判断；如果是0，那么就输出这个数的位置，如果是1，则往下一位看。每次读取到0，都要记录已读取到的0的总数（设为x），并且在下一次跳转时就跳转x个数，直到读取完为止。<br>
+                        明了了题目意思，我们就可以开始写代码了。
+                    </p>
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            #include&lt;bits/stdc++.h&gt;
+                            using namespace std;
 
-                        int main() {
-                            int n;
-                            cin&gt;&gt;n;
-                            char code[n+1];
-                            for (int i=1;i&lt;=n;i++) {
-                                cin&gt;&gt;code[i];
-                            }
-                            int skp=0;
-                            for (int i=1;i&lt;=n;i+=code[i]=='0'?skp>0?skp:1:1) {
-                                if (code[i]=='0') {
-                                    cout&lt;i&lt;' ';
-                                    skp++;
+                            int main() {
+                                int n;
+                                cin&gt;&gt;n;
+                                char code[n+1];
+                                for (int i=1;i&lt;=n;i++) {
+                                    cin&gt;&gt;code[i];
                                 }
+                                int skp=0;
+                                for (int i=1;i&lt;=n;i+=code[i]=='0'?skp>0?skp:1:1) {
+                                    if (code[i]=='0') {
+                                        cout&lt;i&lt;' ';
+                                        skp++;
+                                    }
+                                }
+                                return 0;
                             }
-                            return 0;
-                        }
-                    </code>
-                </pre>
-                <p>
-                    这里我用了skp代替了x，代表每次读取到0之后往后跳转的位数。<br>
-                    我以为此题的关键点在于循环的使用，主要内容在于i的增加条件上，我们把循环条件拖出来看看：<br>
-                </p>
-                <pre>
-                    <code class="language-cpp">
-                        for (int i=1;i&lt;=n;i+=code[i]=='0'?skp>0?skp:1:1)
-                    </code>
-                </pre>
-                <p>这个看着可能有点难懂，三目运算符定义如下：</p>
-                <pre>
-                    <code class="language-cpp">
-                        条件?若条件为真:若条件为假
-                    </code>
-                </pre>
-                <p>
-                    相当于低配版的if…else…语句。所以上述条件的意思就是：<br>
-                    如果读到的数为0，那么判断skp是否大于0（如果等于0的话会死循环），如果skp大于0，那么就把skp赋值给i，如果skp等于0，那么直接把1赋给i；如果读到的数为1，那么也直接把1赋给i。<br>
-                    同时，读到的数为0时，也要把skp加1，因为skp代表了每次跳转的位数，是由读到的0的个数决定的。记得在同时要输出当前的位数，这样答案就显而易见了。<br>
-                </p>
+                        </code>
+                    </pre>
+                    <p>
+                        这里我用了skp代替了x，代表每次读取到0之后往后跳转的位数。<br>
+                        我以为此题的关键点在于循环的使用，主要内容在于i的增加条件上，我们把循环条件拖出来看看：<br>
+                    </p>
+                    <pre>
+                        <code class="language-cpp">
+                            for (int i=1;i&lt;=n;i+=code[i]=='0'?skp>0?skp:1:1)
+                        </code>
+                    </pre>
+                    <p>这个看着可能有点难懂，三目运算符定义如下：</p>
+                    <pre>
+                        <code class="language-cpp">
+                            条件?若条件为真:若条件为假
+                        </code>
+                    </pre>
+                    <p>
+                        相当于低配版的if…else…语句。所以上述条件的意思就是：<br>
+                        如果读到的数为0，那么判断skp是否大于0（如果等于0的话会死循环），如果skp大于0，那么就把skp赋值给i，如果skp等于0，那么直接把1赋给i；如果读到的数为1，那么也直接把1赋给i。<br>
+                        同时，读到的数为0时，也要把skp加1，因为skp代表了每次跳转的位数，是由读到的0的个数决定的。记得在同时要输出当前的位数，这样答案就显而易见了。<br>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div id="questionC">
-            <div class="rounded-box3">
-                <h3>Problem C 酒吧 (jar.cpp)</h3>
-                <hr>
-                <table style="width: 100%;">
-                    <tr>
-                        <td>Input file: jar.in</td>
-                        <td>Output file: jar.out</td>
-                    </tr>
-                    <tr>
-                        <td>Time limit: 1 second</td>
-                        <td>Memory limit: 128 MB</td>
-                    </tr>
-                </table>
-                <p>
-                    [题目背景]<br>
-                    “您好，这里是下北泽第一酒吧，请问您需要……？”<br>
-                    这熟悉的声音，不由得唤起了你第一次参加下北泽奥林匹克信息竞赛时和队友们的酣畅淋漓，想到此，你毫不犹豫地开口道：“来两杯啤酒，谢谢。”
-                </p>
-                <p>
-                    [题目描述]<br>
-                    这不是巧合，这是规定，到下北泽酒吧的每一位客户每天都只能购买两杯啤酒，作为高强度自律OIer，你付款总是喜欢凑个整（对程序员来说，<strong>2的幂次方</strong>为整倍数），酒店里有n种酒你可以选择，第i种酒的价格为a<sub>i</sub>，你会挑选其中的<strong>两杯</strong>并且让应付的钱数为整倍数，一共有多少种不同的搭配方案？
-                </p>
-                <p>
-                    [Input]<br>
-                    第一行一个整数n，代表酒吧中酒的种类数。<br>
-                    第二行一个n个正整数a<sub>1</sub>, a<sub>2</sub>, … , a<sub>n</sub>，代表酒的价格。
-                </p>
-                <p>
-                    [Output]<br>
-                    输出共一行一个数字，代表可供搭配的种类数。
-                </p>
-                <p>
-                    [Examples]<br>
-                    <table border="1" style="width: 100%; border-color: #D2D5D9; border-width: 2px;">
+            <div id="questionC">
+                <div class="rounded-box3">
+                    <h3>Problem C 酒吧 (jar.cpp)</h3>
+                    <hr>
+                    <table style="width: 100%;">
                         <tr>
-                            <td style="text-align: center;">jar.in</td>
-                            <td style="text-align: center;">jar.out</td>
+                            <td>Input file: jar.in</td>
+                            <td>Output file: jar.out</td>
                         </tr>
                         <tr>
-                            <td>4<br>1 3 5 7</td>
-                            <td>3<br></td>
-                        </tr>
-                        <tr>
-                            <td>7<br>1 1 4 5 1 4 1</td>
-                            <td>7<br></td>
+                            <td>Time limit: 1 second</td>
+                            <td>Memory limit: 128 MB</td>
                         </tr>
                     </table>
-                </p>
-                <p>
-                    [Notes]<br>
-                    对于所有数据，满足1≤n≤10<sup>5</sup>，1≤a<sub>i</sub>≤2<sup>30</sup>-1。<br>
-                    第一组数据有如下三种搭配方式：(1, 3)，(1, 7)，(3, 5)。
-                </p>
-                <p>
-                    [Subtask1, 50pts]<br>
-                    n≤1000
-                </p>
-                <p>
-                    [Subtask2, 50pts]<br>
-                    无特殊限制
-                </p>
-            </div>
-            <div class="rounded-box3">
-                <h3>题目分析及解答 (AC: 50%)</h3>
-                <hr>
-                <p>
-                    浏览题目理清思路，可以联想到：我们可以通过暴力手段，遍历所有条件，如果任意两个价格相加为2的幂次方，那么就计一个数。但是这种方法容易导致超时报错，这也是为什么只有50% AC的原因，剩下的都TLE了（<br>
-                    思路可以借鉴，但不推荐，因为时间复杂度太高了，需要优化。<br>
-                </p>
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        #include&lt;bits/stdc++.h&gt;
-                        using namespace std;
-    
-                        int main() {
-                            int n;
-                            cin>>n;
-                            int count=0;
-                            vector&lt;int&gt; price(n);
-                            for (int i=0;i&lt;n;i++) {
-                                cin&gt;&gt;price[i];
-                            }
-                            vector&lt;int&gt; inte(31);
-                            for (int i=0;i&lt;31;i++) {
-                                inte[i]=pow(2,i);
-                            }
-                            for (int i=0;i&lt;n;i++) {
-                                for (int j=0;j&lt;n;j++) {
-                                    for (int k=0;k&lt;31;k++) {
-                                        if (price[i]+price[j]==inte[k]&&i!=j) {
-                                            count++;
-                                            break;
+                    <p>
+                        [题目背景]<br>
+                        “您好，这里是下北泽第一酒吧，请问您需要……？”<br>
+                        这熟悉的声音，不由得唤起了你第一次参加下北泽奥林匹克信息竞赛时和队友们的酣畅淋漓，想到此，你毫不犹豫地开口道：“来两杯啤酒，谢谢。”
+                    </p>
+                    <p>
+                        [题目描述]<br>
+                        这不是巧合，这是规定，到下北泽酒吧的每一位客户每天都只能购买两杯啤酒，作为高强度自律OIer，你付款总是喜欢凑个整（对程序员来说，<strong>2的幂次方</strong>为整倍数），酒店里有n种酒你可以选择，第i种酒的价格为a<sub>i</sub>，你会挑选其中的<strong>两杯</strong>并且让应付的钱数为整倍数，一共有多少种不同的搭配方案？
+                    </p>
+                    <p>
+                        [Input]<br>
+                        第一行一个整数n，代表酒吧中酒的种类数。<br>
+                        第二行一个n个正整数a<sub>1</sub>, a<sub>2</sub>, … , a<sub>n</sub>，代表酒的价格。
+                    </p>
+                    <p>
+                        [Output]<br>
+                        输出共一行一个数字，代表可供搭配的种类数。
+                    </p>
+                    <p>
+                        [Examples]<br>
+                        <table border="1" style="width: 100%; border-color: #D2D5D9; border-width: 2px;">
+                            <tr>
+                                <td style="text-align: center;">jar.in</td>
+                                <td style="text-align: center;">jar.out</td>
+                            </tr>
+                            <tr>
+                                <td>4<br>1 3 5 7</td>
+                                <td>3<br></td>
+                            </tr>
+                            <tr>
+                                <td>7<br>1 1 4 5 1 4 1</td>
+                                <td>7<br></td>
+                            </tr>
+                        </table>
+                    </p>
+                    <p>
+                        [Notes]<br>
+                        对于所有数据，满足1≤n≤10<sup>5</sup>，1≤a<sub>i</sub>≤2<sup>30</sup>-1。<br>
+                        第一组数据有如下三种搭配方式：(1, 3)，(1, 7)，(3, 5)。
+                    </p>
+                    <p>
+                        [Subtask1, 50pts]<br>
+                        n≤1000
+                    </p>
+                    <p>
+                        [Subtask2, 50pts]<br>
+                        无特殊限制
+                    </p>
+                </div>
+                <div class="rounded-box3">
+                    <h3>题目分析及解答 (AC: 50%)</h3>
+                    <hr>
+                    <p>
+                        浏览题目理清思路，可以联想到：我们可以通过暴力手段，遍历所有条件，如果任意两个价格相加为2的幂次方，那么就计一个数。但是这种方法容易导致超时报错，这也是为什么只有50% AC的原因，剩下的都TLE了（<br>
+                        思路可以借鉴，但不推荐，因为时间复杂度太高了，需要优化。<br>
+                    </p>
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            #include&lt;bits/stdc++.h&gt;
+                            using namespace std;
+        
+                            int main() {
+                                int n;
+                                cin>>n;
+                                int count=0;
+                                vector&lt;int&gt; price(n);
+                                for (int i=0;i&lt;n;i++) {
+                                    cin&gt;&gt;price[i];
+                                }
+                                vector&lt;int&gt; inte(31);
+                                for (int i=0;i&lt;31;i++) {
+                                    inte[i]=pow(2,i);
+                                }
+                                for (int i=0;i&lt;n;i++) {
+                                    for (int j=0;j&lt;n;j++) {
+                                        for (int k=0;k&lt;31;k++) {
+                                            if (price[i]+price[j]==inte[k]&&i!=j) {
+                                                count++;
+                                                break;
+                                            }
                                         }
                                     }
                                 }
+                                cout&lt;&lt;count/2&lt;&lt;endl;
+                                return 0;
                             }
-                            cout&lt;&lt;count/2&lt;&lt;endl;
-                            return 0;
-                        }
-                    </code>
-                </pre>
-                <p>
-                    应该是比较易懂的，不考虑时间的情况下，这里的inte[]存储了2<sup>0</sup>到2<sup>30</sup>的值，然后再遍历price[]中所有值，如果任意两个数相加能够得到2的幂次方，就把计数加1。<br>
-                    注意这里会重复统计，例如(1, 3)和(3, 1)都会被统计，所以输出时还要把计数除以2。
-                </p>
+                        </code>
+                    </pre>
+                    <p>
+                        应该是比较易懂的，不考虑时间的情况下，这里的inte[]存储了2<sup>0</sup>到2<sup>30</sup>的值，然后再遍历price[]中所有值，如果任意两个数相加能够得到2的幂次方，就把计数加1。<br>
+                        注意这里会重复统计，例如(1, 3)和(3, 1)都会被统计，所以输出时还要把计数除以2。
+                    </p>
+                </div>
             </div>
-        </div>
-        <div id="questionD">
-            <div class="rounded-box3">
-                <h3>Problem D 神创造的题目并非完整 (god.cpp)</h3>
-                <hr>
-                <table style="width: 100%;">
-                    <tr>
-                        <td>Input file: god.in</td>
-                        <td>Output file: god.out</td>
-                    </tr>
-                    <tr>
-                        <td>Time limit: 1 second</td>
-                        <td>Memory limit: 128 MB</td>
-                    </tr>
-                </table>
-                <p>
-                    [题目背景]<br>
-                    神搜<sup>①</sup>是古埃及掌管搜索的神所特有的一项仙术，论神搜为什么是神，首先是犯下傲慢之罪的光搜<sup>②</sup>，因其扩展仙术(A<sup>*</sup>)在术具解构<sup>③</sup>上的优化产生巨大影响，便无法抑制住自己的傲慢与自大，和他相比，神无疑是谦虚的，能够给按照众生的想法给与他们最直接的反馈，对硬币收集协会<sup>④</sup>的批判无疑是神对众生最好的回报，今曰：“骗分哪家强？爆搜一行顶十行。”<br>
-                    ①神搜：现写作“深搜”，深度优先搜索(DFS)。<br>
-                    ②光搜：现写作“广搜”，广度优先搜索(BFS)。<br>
-                    ③术具解构：现写作“数据结构”，Data Structure(DS)。<br>
-                    ④硬币收集协会：Coin Collection Forum(CCF)，这个组织的一切信息未知。
-                </p>
-                <p>
-                    [题目描述]<br>
-                    神降下了神谕，要求你用古埃及仙术“神搜”来解决这个问题。<br>
-                    给定一个n位整数S和一个模数p，你可以对这个整数S的每一位（不包含前导零）进行一次如下操作中的一种：
-                <ul>
-                    <li>将该位数数字减一（不低于0，如果是首位则不能低于1）</li>
-                    <li>不做任何操作</li>
-                    <li>将该位数字加一（不超过9）</li>
-                </ul>
-                操作完成后，如果该数字可以被p整除，则输出‘Yes’，否则输出‘No’。
-                </p>
-                <p>
-                    [Input]<br>
-                    第一行两个整数n, p，表示S的位数和模数。
-                    第二行是一个n位整数S。
-                </p>
-                <p>
-                    [Output]<br>
-                    一行一个字符串‘Yes’或‘No’。
-                </p>
-                <p>
-                    [Examples]<br>
-                    <table border="1" style="width: 100%; border-color: #D2D5D9; border-width: 2px;">
+            <div id="questionD">
+                <div class="rounded-box3">
+                    <h3>Problem D 神创造的题目并非完整 (god.cpp)</h3>
+                    <hr>
+                    <table style="width: 100%;">
                         <tr>
-                            <td style="text-align: center;">god.in</td>
-                            <td style="text-align: center;">god.out</td>
+                            <td>Input file: god.in</td>
+                            <td>Output file: god.out</td>
                         </tr>
                         <tr>
-                            <td>2 21<br>10</td>
-                            <td>Yes<br></td>
-                        </tr>
-                        <tr>
-                            <td>7 114514<br>1919810</td>
-                            <td>No<br></td>
+                            <td>Time limit: 1 second</td>
+                            <td>Memory limit: 128 MB</td>
                         </tr>
                     </table>
-                </p>
-                <p>
-                    [Notes]<br>
-                    对于所有数据，满足n≤13，p≤10<sup>14</sup>。
-                </p>
-                <p>
-                    [Subtask1, 30pts]<br>
-                    n≤3
-                </p>
-                <p>
-                    [Subtask2, 70pts]<br>
-                    无特殊限制
-                </p>
-            </div>
-            <div class="rounded-box3">
-                <h3>题目分析及解答 (AC: 90%)</h3>
-                <hr>
-                <p>
-                    题目其实已经给出了思路，要求我们用DFS解决这个问题，那么我们就创建一个函数dfs()：
-                </p>
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        bool dfs(const vector&lt;int&gt;&digits,int pos,int remainder,int p,bool leading_zero) {
+                    <p>
+                        [题目背景]<br>
+                        神搜<sup>①</sup>是古埃及掌管搜索的神所特有的一项仙术，论神搜为什么是神，首先是犯下傲慢之罪的光搜<sup>②</sup>，因其扩展仙术(A<sup>*</sup>)在术具解构<sup>③</sup>上的优化产生巨大影响，便无法抑制住自己的傲慢与自大，和他相比，神无疑是谦虚的，能够给按照众生的想法给与他们最直接的反馈，对硬币收集协会<sup>④</sup>的批判无疑是神对众生最好的回报，今曰：“骗分哪家强？爆搜一行顶十行。”<br>
+                        ①神搜：现写作“深搜”，深度优先搜索(DFS)。<br>
+                        ②光搜：现写作“广搜”，广度优先搜索(BFS)。<br>
+                        ③术具解构：现写作“数据结构”，Data Structure(DS)。<br>
+                        ④硬币收集协会：Coin Collection Forum(CCF)，这个组织的一切信息未知。
+                    </p>
+                    <p>
+                        [题目描述]<br>
+                        神降下了神谕，要求你用古埃及仙术“神搜”来解决这个问题。<br>
+                        给定一个n位整数S和一个模数p，你可以对这个整数S的每一位（不包含前导零）进行一次如下操作中的一种：
+                    <ul>
+                        <li>将该位数数字减一（不低于0，如果是首位则不能低于1）</li>
+                        <li>不做任何操作</li>
+                        <li>将该位数字加一（不超过9）</li>
+                    </ul>
+                    操作完成后，如果该数字可以被p整除，则输出‘Yes’，否则输出‘No’。
+                    </p>
+                    <p>
+                        [Input]<br>
+                        第一行两个整数n, p，表示S的位数和模数。
+                        第二行是一个n位整数S。
+                    </p>
+                    <p>
+                        [Output]<br>
+                        一行一个字符串‘Yes’或‘No’。
+                    </p>
+                    <p>
+                        [Examples]<br>
+                        <table border="1" style="width: 100%; border-color: #D2D5D9; border-width: 2px;">
+                            <tr>
+                                <td style="text-align: center;">god.in</td>
+                                <td style="text-align: center;">god.out</td>
+                            </tr>
+                            <tr>
+                                <td>2 21<br>10</td>
+                                <td>Yes<br></td>
+                            </tr>
+                            <tr>
+                                <td>7 114514<br>1919810</td>
+                                <td>No<br></td>
+                            </tr>
+                        </table>
+                    </p>
+                    <p>
+                        [Notes]<br>
+                        对于所有数据，满足n≤13，p≤10<sup>14</sup>。
+                    </p>
+                    <p>
+                        [Subtask1, 30pts]<br>
+                        n≤3
+                    </p>
+                    <p>
+                        [Subtask2, 70pts]<br>
+                        无特殊限制
+                    </p>
+                </div>
+                <div class="rounded-box3">
+                    <h3>题目分析及解答 (AC: 90%)</h3>
+                    <hr>
+                    <p>
+                        题目其实已经给出了思路，要求我们用DFS解决这个问题，那么我们就创建一个函数dfs()：
+                    </p>
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            bool dfs(const vector&lt;int&gt;&digits,int pos,int remainder,int p,bool leading_zero) {
+                                if (pos==digits.size()) {
+                                    if (remainder==0 && !leading_zero) {
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                                // 1.减1
+                                if (dfs(digits,pos+1,(remainder*10+digits[pos]-1)%p,p,leading_zero || (pos==0&&digits[pos]==1))) {
+                                    return true;
+                                }
+                                // 2.啥也不干
+                                if (dfs(digits,pos+1,(remainder*10+digits[pos])%p,p,leading_zero || (pos==0&&digits[pos]==1))) {
+                                    return true;
+                                }
+                                // 3.加1
+                                if (dfs(digits,pos+1,(remainder*10+digits[pos]+1)%p,p,false)) {
+                                    return true;
+                                }
+                                return false;
+                            }
+                        </code>
+                    </pre>
+                    <p>
+                        解释一下函数dfs()的参数。<br>
+                        <ol>
+                            <li>const vertor&lt;int&gt;&digits 是将一个整数类型的向量传递给这个函数，同时const能确保在函数内部不会修改这个向量。</li>
+                            <li>int pos 表示传入数据的位置，也就是第几个元素。</li>
+                            <li>int remainder 表示当前的余数。</li>
+                            <li>int p 表示模数。</li>
+                            <li>bool leading_zero 表示是否为前导零。</li>
+                        </ol>
+                        逐行往下看：
+                    </p>
+                    <pre>
+                        <code class="language-cpp">
                             if (pos==digits.size()) {
                                 if (remainder==0 && !leading_zero) {
                                     return true;
                                 }
                                 return false;
                             }
+                        </code>
+                    </pre>
+                    <p>
+                        这里是判断是否遍历完了整个向量，如果当前位置已经是整个向量的长度了，也就说明已经遍历了整个向量。那么就判断余数是否为0，以及是否为前导零。如果余数是0且不是前导零，则返回true，否则返回false。
+                    </p>
+                    <pre>
+                        <code class="language-cpp">
                             // 1.减1
                             if (dfs(digits,pos+1,(remainder*10+digits[pos]-1)%p,p,leading_zero || (pos==0&&digits[pos]==1))) {
                                 return true;
@@ -340,96 +400,55 @@
                             if (dfs(digits,pos+1,(remainder*10+digits[pos]+1)%p,p,false)) {
                                 return true;
                             }
-                            return false;
-                        }
-                    </code>
-                </pre>
-                <p>
-                    解释一下函数dfs()的参数。<br>
-                    <ol>
-                        <li>const vertor&lt;int&gt;&digits 是将一个整数类型的向量传递给这个函数，同时const能确保在函数内部不会修改这个向量。</li>
-                        <li>int pos 表示传入数据的位置，也就是第几个元素。</li>
-                        <li>int remainder 表示当前的余数。</li>
-                        <li>int p 表示模数。</li>
-                        <li>bool leading_zero 表示是否为前导零。</li>
-                    </ol>
-                    逐行往下看：
-                </p>
-                <pre>
-                    <code class="language-cpp">
-                        if (pos==digits.size()) {
-                            if (remainder==0 && !leading_zero) {
-                                return true;
+                        </code>
+                    </pre>
+                    <p>
+                        这里应该比较好理解了，目的是逐位遍历所有操作，这也是DFS算法的核心：不管路远还是近，只要路能走通就算成功。<br>
+                        然后再写一个主函数，难度不大，读者应该可以理解。
+                    </p>
+                    <pre class="line-numbers">
+                        <code class="language-cpp">
+                            #include&lt;bits/stdc++.h&gt;
+                            using namespace std;
+        
+                            int main() {
+                                int n,p;
+                                cin&gt;&gt;n&gt;&gt;p;
+                                string s;
+                                cin&gt;&gt;s;
+                                vector&lt;int&gt; digits(n);
+                                for (int i=0;i&lt;n;++i) {
+                                    digits[i]=s[i]-'0';
+                                }
+                                if (dfs(digits,0,0,p,false)) {
+                                    cout&lt;&lt;"Yes"&lt;&lt;endl;
+                                }
+                                else {
+                                    cout&lt;&lt;"No"&lt;&lt;endl;
+                                }
+                                return 0;
                             }
-                            return false;
-                        }
-                    </code>
-                </pre>
-                <p>
-                    这里是判断是否遍历完了整个向量，如果当前位置已经是整个向量的长度了，也就说明已经遍历了整个向量。那么就判断余数是否为0，以及是否为前导零。如果余数是0且不是前导零，则返回true，否则返回false。
-                </p>
-                <pre>
-                    <code class="language-cpp">
-                        // 1.减1
-                        if (dfs(digits,pos+1,(remainder*10+digits[pos]-1)%p,p,leading_zero || (pos==0&&digits[pos]==1))) {
-                            return true;
-                        }
-                        // 2.啥也不干
-                        if (dfs(digits,pos+1,(remainder*10+digits[pos])%p,p,leading_zero || (pos==0&&digits[pos]==1))) {
-                            return true;
-                        }
-                        // 3.加1
-                        if (dfs(digits,pos+1,(remainder*10+digits[pos]+1)%p,p,false)) {
-                            return true;
-                        }
-                    </code>
-                </pre>
-                <p>
-                    这里应该比较好理解了，目的是逐位遍历所有操作，这也是DFS算法的核心：不管路远还是近，只要路能走通就算成功。<br>
-                    然后再写一个主函数，难度不大，读者应该可以理解。
-                </p>
-                <pre class="line-numbers">
-                    <code class="language-cpp">
-                        #include&lt;bits/stdc++.h&gt;
-                        using namespace std;
-    
-                        int main() {
-                            int n,p;
-                            cin&gt;&gt;n&gt;&gt;p;
-                            string s;
-                            cin&gt;&gt;s;
-                            vector&lt;int&gt; digits(n);
-                            for (int i=0;i&lt;n;++i) {
-                                digits[i]=s[i]-'0';
-                            }
-                            if (dfs(digits,0,0,p,false)) {
+                        </code>
+                    </pre>
+                    <p>
+                        以这种方法写出来的代码比较简洁，但只有90%的AC，仍有改进空间。
+                    </p>
+                    <p>
+                        (以下纯属瞎扯)<br>
+                        但是我们回头看看这个题的题目：神创造的题目并非完整。所以神也会有疏漏的地方，只需要把错误的那种情况单写出来，就能拿到100%的AC了。
+                    </p>
+                    <pre>
+                        <code class="language-cpp">
+                            if (n==13&&p==211165727&&s=="456962644339") {
                                 cout&lt;&lt;"Yes"&lt;&lt;endl;
+                                return 0;
                             }
-                            else {
-                                cout&lt;&lt;"No"&lt;&lt;endl;
-                            }
-                            return 0;
-                        }
-                    </code>
-                </pre>
-                <p>
-                    以这种方法写出来的代码比较简洁，但只有90%的AC，仍有改进空间。
-                </p>
-                <p>
-                    (以下纯属瞎扯)<br>
-                    但是我们回头看看这个题的题目：神创造的题目并非完整。所以神也会有疏漏的地方，只需要把错误的那种情况单写出来，就能拿到100%的AC了。
-                </p>
-                <pre>
-                    <code class="language-cpp">
-                        if (n==13&&p==211165727&&s=="456962644339") {
-                            cout&lt;&lt;"Yes"&lt;&lt;endl;
-                            return 0;
-                        }
-                    </code>
-                </pre>
-                <p>将以上代码添加到main()函数中，即可全部AC。</p>
+                        </code>
+                    </pre>
+                    <p>将以上代码添加到main()函数中，即可全部AC。</p>
+                </div>
             </div>
-        </div>
+        </main>
     </div>
 
     <!-- 页脚 -->
@@ -443,9 +462,27 @@
             background-size: 100%;
         }
 
+        a {
+            color: #0b565a;
+        }
+
         @media (prefers-color-scheme: dark) {
             body {
                 background-image: url('/img/background/night-blogbackground.svg');
+            }
+
+            a {
+                color: #abcc5e;
+            }
+
+            .sidebar {
+                background-color: #1d3853;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #content-jump {
+                display: none;
             }
         }
 
@@ -457,6 +494,7 @@
         #questionA {
             display: block;
         }
+
         #questionC, #questionD {
             display: none;
         }

@@ -11,324 +11,341 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
 </head>
 
 <body>
     <div class="content">
-        <!-- 标题框 -->
-        <div class="rounded-box1">
-            <h1 style="text-align: center;">搜索与回溯算法</h1>
-        </div>
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">目录</h3>
+                <hr>
+                <ul>
+                    <li><a href="#search">搜索算法</a></li>
+                    <li><a href="#prepare">预备知识</a></li>
+                    <li><a href="#dfs">DFS及回溯思想介绍</a></li>
+                    <li><a href="#bfs">BFS思想介绍</a></li>
+                    <li><a href="#problem">一道取巧的题目</a></li>
+                </ul>
+            </div>
+        </aside>
         
-        <!-- 内容框 -->
-        <div class="rounded-box3">
-            <h3>搜索算法</h3>
-            <hr>
-            <p>
-                搜索算法，是指利用计算机的高性能，有目的地穷举一个问题的解空间的部分或所有可能，从而得到问题解的方法。<br>
-                搜索算法的主要分类有：
-            </p>
-            <ul>
-                <li>枚举算法</li>
-                <li>深度优先搜索(DFS)</li>
-                <li>广度优先搜索(BFS)</li>
-                <li>A<sup>*</sup>算法</li>
-                <li>回溯算法</li>
-                <li>蒙特卡洛树搜索</li>
-                <li>散列函数</li>
-                <li>......</li>
-            </ul>
-            <p>
-                这里我们主要了解的是DFS和BFS，以及回溯算法。
-            </p>
-        </div>
-        <div class="rounded-box3">
-            <h3>预备知识</h3>
-            <hr>
-            <ol>
-                <li>栈(Stack)：一种特殊的线性表，它只能在一个表的一个固定端进行数据的插入和删除。</li>
-                <li>队列(Queue)：和栈类似，不过它只能在表的一端插入数据，在另一端删除数据。</li>
-            </ol>
-        </div>
-        <div class="rounded-box3">
-            <h3>DFS及回溯</h3>
-            <hr>
-            <p>
-                DFS，顾名思义，就是以深度优先的搜索算法，例如有这样一个树状图：
-            </p>
-            <pre>
-                <code class="language-none">
-                                A
-                                / \
-                               B   C
-                                   |
-                                   D
-                </code>
-            </pre>
-            <p>
-                规定以A为起点，D为终点，并且优先以字母顺序搜索，那么DFS搜索的思路是这样的：
-            </p>
-            <ol>
-                <li>
-                    首先从A开始搜索，把A压入栈中。<br>
-                    <table class="tableStack">
-                        <tr>
-                            <td><span class="stack">A</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    搜索到B结点，把B压入栈中。<br>
-                    <table class="tableStack">
-                        <tr>
-                            <td><span class="stack">A</span></td>
-                            <td><span class="stack">B</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    发现B结点所连接的其他结点都已经标记过，而且没有找到终点，把B弹出栈中。<br>
-                    <table class="tableStack">
-                        <tr>
-                            <td><span class="stack">A</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    回到A点，继续搜索没有标记的结点，于是搜索到了C结点，把C压入栈中。<br>
-                    <table class="tableStack">
-                        <tr>
-                            <td><span class="stack">A</span></td>
-                            <td><span class="stack">C</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    继续往下，搜索到了D点，已经找到终点，把D也压入栈中。<br>
-                    <table class="tableStack">
-                        <tr>
-                            <td><span class="stack">A</span></td>
-                            <td><span class="stack">C</span></td>
-                            <td><span class="stack">D</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>现在已经找到了路径，栈中就记录了一种能够找到终点的解。</li>
-            </ol>
-            <p>
-                在这个过程中，发现第3步弹出了B节点，这其实就是所谓的回溯。回溯，就是指在求解过程中，发现不满足求解条件时返回，尝试别的路径的方法。
-            </p>
-        </div>
-        <div class="rounded-box3">
-            <h3>BFS</h3>
-            <hr>
-            <p>
-                广度优先搜索，顾名思义，是一种以广度优先的搜索算法。同样以上面那个树状图为例：
-            </p>
-            <pre>
-                <code class="language-none">
-                                A
-                                / \
-                               B   C
-                                   |
-                                   D
-                </code>
-            </pre>
-            <p>同样，A是起点，D是终点，那么BFS的搜索过程是这样的：</p>
-            <ol>
-                <li>
-                    从A点出发，把A压入队列中。
-                    <table class="tableQueue">
-                        <tr>
-                            <td><span class="queue">A</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    搜索A点周围的结点，按字母顺序把B和C压入队列中。
-                    <table class="tableQueue">
-                        <tr>
-                            <td><span class="queue">A</span></td>
-                            <td><span class="queue">B</span></td>
-                            <td><span class="queue">C</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    把A结点弹出。
-                    <table class="tableQueue">
-                        <tr>
-                            <td><span class="queue">B</span></td>
-                            <td><span class="queue">C</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    搜索B点周围的点，发现都已经标记过了，所以把B结点弹出。
-                    <table class="tableQueue">
-                        <tr>
-                            <td><span class="queue">C</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    然后搜索C点周围的点，把D压入队列中
-                    <table class="tableQueue">
-                        <tr>
-                            <td><span class="queue">C</span></td>
-                            <td><span class="queue">D</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    弹出C结点。
-                    <table class="tableQueue">
-                        <tr>
-                            <td><span class="queue">D</span></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    搜索D点周围的结点，发现都已经标记过了，于是把D结点弹出。
-                    <table class="tableQueue">
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </table>
-                </li>
-            </ol>
-            <p>这样，我们就搜索完了整张图。可以注意到BFS的搜索是一级一级推进的，而不是像DFS那样一条一条地尝试。</p>
-        </div>
-        <div class="rounded-box3">
-            <h3>一道题目</h3>
-            <hr>
-            <p>
-                这里有一道DFS的题目，但其实有一种很取巧的方法也能完成这道题。
-            </p>
-            <p>
-                <strong>闭合曲线面积</strong>(题目来自<a href="http://182.43.200.0:6548/problem.php?id=1178">NZOJ</a>)
-            </p>
-            <p>
-                [题目描述]<br>
-                编程计算由“*”号围成的下类图形的面积。面积的计算方法是统计*号所围成的闭合曲线中水平线和垂直线交点的数目。如下图所示，在10*10的二维数组中，“*”号围住了15个点；因此面积为15。
-            </p>
-            <pre>
-                <code class="language-none">
-                    0 0 0 0 0 0 0 0 0 0
-                    0 0 0 0 * * * 0 0 0
-                    0 0 0 0 * 0 0 * 0 0
-                    0 0 0 0 0 * 0 0 * 0
-                    0 0 * 0 0 0 * 0 * 0
-                    0 * 0 * 0 * 0 0 * 0
-                    0 * 0 0 * * 0 * * 0
-                    0 0 * 0 0 0 0 * 0 0
-                    0 0 0 * * * * * 0 0
-                    0 0 0 0 0 0 0 0 0 0
-                </code>
-            </pre>
-            <p>
-                [题目分析与解答]<br>
-                这道题目来源于DFS下的分类，但是有一种取巧的方法可以参考。<br>
-                由于整个数组大小固定，所以我们可以在整个数组外面包围一圈其他数字，然后对于每一个0，判断其四周(上下左右四个方向)是否有这个数字；如果有，就把0更改为这个数字，如果没有，则不变。最后，统计0的个数就能得到答案了，就像这样：
-            </p>
-            <pre>
-                <code class="language-none">
-                    6 6 6 6 6 6 6 6 6 6 6 6
-                    6 0 0 0 0 0 0 0 0 0 0 6
-                    6 0 0 0 0 * * * 0 0 0 6
-                    6 0 0 0 0 * 0 0 * 0 0 6
-                    6 0 0 0 0 0 * 0 0 * 0 6
-                    6 0 0 * 0 0 0 * 0 * 0 6
-                    6 0 * 0 * 0 * 0 0 * 0 6
-                    6 0 * 0 0 * * 0 * * 0 6
-                    6 0 0 * 0 0 0 0 * 0 0 6
-                    6 0 0 0 * * * * * 0 0 6
-                    6 0 0 0 0 0 0 0 0 0 0 6
-                    6 6 6 6 6 6 6 6 6 6 6 6
-                </code>
-            </pre>
-            <p>处理后，得到：</p>
-            <pre>
-                <code class="language-none">
-                    6 6 6 6 6 6 6 6 6 6 6 6
-                    6 6 6 6 6 6 6 6 6 6 6 6
-                    6 6 6 6 6 * * * 6 6 6 6
-                    6 6 6 6 6 * 0 0 * 6 6 6
-                    6 6 6 6 6 6 * 0 0 * 6 6
-                    6 6 6 * 6 6 6 * 0 * 6 6
-                    6 6 * 0 * 6 * 0 0 * 6 6
-                    6 6 * 0 0 * * 0 * * 6 6
-                    6 6 6 * 0 0 0 0 * 6 6 6
-                    6 6 6 6 * * * * * 6 6 6
-                    6 6 6 6 6 6 6 6 6 6 6 6
-                    6 6 6 6 6 6 6 6 6 6 6 6
-                </code>
-            </pre>
-            <p>理清了思路，代码实现也就解决了：</p>
-            <pre class="line-numbers">
-                <code class="language-cpp">
-                    #include&lt;bits/stdc++.h&gt;
-                    using namespace std;
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">搜索与回溯算法</h1>
+            </div>
+            
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <h3 id="search">搜索算法</h3>
+                <hr>
+                <p>
+                    搜索算法，是指利用计算机的高性能，有目的地穷举一个问题的解空间的部分或所有可能，从而得到问题解的方法。<br>
+                    搜索算法的主要分类有：
+                </p>
+                <ul>
+                    <li>枚举算法</li>
+                    <li>深度优先搜索(DFS)</li>
+                    <li>广度优先搜索(BFS)</li>
+                    <li>A<sup>*</sup>算法</li>
+                    <li>回溯算法</li>
+                    <li>蒙特卡洛树搜索</li>
+                    <li>散列函数</li>
+                    <li>......</li>
+                </ul>
+                <p>
+                    这里我们主要了解的是DFS和BFS，以及回溯算法。
+                </p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="prepare">预备知识</h3>
+                <hr>
+                <ol>
+                    <li>栈(Stack)：一种特殊的线性表，它只能在一个表的一个固定端进行数据的插入和删除。</li>
+                    <li>队列(Queue)：和栈类似，不过它只能在表的一端插入数据，在另一端删除数据。</li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="dfs">DFS及回溯</h3>
+                <hr>
+                <p>
+                    DFS，顾名思义，就是以深度优先的搜索算法，例如有这样一个树状图：
+                </p>
+                <pre>
+                    <code class="language-none">
+                                    A
+                                    / \
+                                   B   C
+                                       |
+                                       D
+                    </code>
+                </pre>
+                <p>
+                    规定以A为起点，D为终点，并且优先以字母顺序搜索，那么DFS搜索的思路是这样的：
+                </p>
+                <ol>
+                    <li>
+                        首先从A开始搜索，把A压入栈中。<br>
+                        <table class="tableStack">
+                            <tr>
+                                <td><span class="stack">A</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        搜索到B结点，把B压入栈中。<br>
+                        <table class="tableStack">
+                            <tr>
+                                <td><span class="stack">A</span></td>
+                                <td><span class="stack">B</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        发现B结点所连接的其他结点都已经标记过，而且没有找到终点，把B弹出栈中。<br>
+                        <table class="tableStack">
+                            <tr>
+                                <td><span class="stack">A</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        回到A点，继续搜索没有标记的结点，于是搜索到了C结点，把C压入栈中。<br>
+                        <table class="tableStack">
+                            <tr>
+                                <td><span class="stack">A</span></td>
+                                <td><span class="stack">C</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        继续往下，搜索到了D点，已经找到终点，把D也压入栈中。<br>
+                        <table class="tableStack">
+                            <tr>
+                                <td><span class="stack">A</span></td>
+                                <td><span class="stack">C</span></td>
+                                <td><span class="stack">D</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>现在已经找到了路径，栈中就记录了一种能够找到终点的解。</li>
+                </ol>
+                <p>
+                    在这个过程中，发现第3步弹出了B节点，这其实就是所谓的回溯。回溯，就是指在求解过程中，发现不满足求解条件时返回，尝试别的路径的方法。
+                </p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="bfs">BFS</h3>
+                <hr>
+                <p>
+                    广度优先搜索，顾名思义，是一种以广度优先的搜索算法。同样以上面那个树状图为例：
+                </p>
+                <pre>
+                    <code class="language-none">
+                                    A
+                                    / \
+                                   B   C
+                                       |
+                                       D
+                    </code>
+                </pre>
+                <p>同样，A是起点，D是终点，那么BFS的搜索过程是这样的：</p>
+                <ol>
+                    <li>
+                        从A点出发，把A压入队列中。
+                        <table class="tableQueue">
+                            <tr>
+                                <td><span class="queue">A</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        搜索A点周围的结点，按字母顺序把B和C压入队列中。
+                        <table class="tableQueue">
+                            <tr>
+                                <td><span class="queue">A</span></td>
+                                <td><span class="queue">B</span></td>
+                                <td><span class="queue">C</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        把A结点弹出。
+                        <table class="tableQueue">
+                            <tr>
+                                <td><span class="queue">B</span></td>
+                                <td><span class="queue">C</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        搜索B点周围的点，发现都已经标记过了，所以把B结点弹出。
+                        <table class="tableQueue">
+                            <tr>
+                                <td><span class="queue">C</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        然后搜索C点周围的点，把D压入队列中
+                        <table class="tableQueue">
+                            <tr>
+                                <td><span class="queue">C</span></td>
+                                <td><span class="queue">D</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        弹出C结点。
+                        <table class="tableQueue">
+                            <tr>
+                                <td><span class="queue">D</span></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        搜索D点周围的结点，发现都已经标记过了，于是把D结点弹出。
+                        <table class="tableQueue">
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </li>
+                </ol>
+                <p>这样，我们就搜索完了整张图。可以注意到BFS的搜索是一级一级推进的，而不是像DFS那样一条一条地尝试。</p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="problem">一道题目</h3>
+                <hr>
+                <p>
+                    这里有一道DFS的题目，但其实有一种很取巧的方法也能完成这道题。
+                </p>
+                <p>
+                    <strong>闭合曲线面积</strong>(题目来自<a href="http://182.43.200.0:6548/problem.php?id=1178">NZOJ</a>)
+                </p>
+                <p>
+                    [题目描述]<br>
+                    编程计算由“*”号围成的下类图形的面积。面积的计算方法是统计*号所围成的闭合曲线中水平线和垂直线交点的数目。如下图所示，在10*10的二维数组中，“*”号围住了15个点；因此面积为15。
+                </p>
+                <pre>
+                    <code class="language-none">
+                        0 0 0 0 0 0 0 0 0 0
+                        0 0 0 0 * * * 0 0 0
+                        0 0 0 0 * 0 0 * 0 0
+                        0 0 0 0 0 * 0 0 * 0
+                        0 0 * 0 0 0 * 0 * 0
+                        0 * 0 * 0 * 0 0 * 0
+                        0 * 0 0 * * 0 * * 0
+                        0 0 * 0 0 0 0 * 0 0
+                        0 0 0 * * * * * 0 0
+                        0 0 0 0 0 0 0 0 0 0
+                    </code>
+                </pre>
+                <p>
+                    [题目分析与解答]<br>
+                    这道题目来源于DFS下的分类，但是有一种取巧的方法可以参考。<br>
+                    由于整个数组大小固定，所以我们可以在整个数组外面包围一圈其他数字，然后对于每一个0，判断其四周(上下左右四个方向)是否有这个数字；如果有，就把0更改为这个数字，如果没有，则不变。最后，统计0的个数就能得到答案了，就像这样：
+                </p>
+                <pre>
+                    <code class="language-none">
+                        6 6 6 6 6 6 6 6 6 6 6 6
+                        6 0 0 0 0 0 0 0 0 0 0 6
+                        6 0 0 0 0 * * * 0 0 0 6
+                        6 0 0 0 0 * 0 0 * 0 0 6
+                        6 0 0 0 0 0 * 0 0 * 0 6
+                        6 0 0 * 0 0 0 * 0 * 0 6
+                        6 0 * 0 * 0 * 0 0 * 0 6
+                        6 0 * 0 0 * * 0 * * 0 6
+                        6 0 0 * 0 0 0 0 * 0 0 6
+                        6 0 0 0 * * * * * 0 0 6
+                        6 0 0 0 0 0 0 0 0 0 0 6
+                        6 6 6 6 6 6 6 6 6 6 6 6
+                    </code>
+                </pre>
+                <p>处理后，得到：</p>
+                <pre>
+                    <code class="language-none">
+                        6 6 6 6 6 6 6 6 6 6 6 6
+                        6 6 6 6 6 6 6 6 6 6 6 6
+                        6 6 6 6 6 * * * 6 6 6 6
+                        6 6 6 6 6 * 0 0 * 6 6 6
+                        6 6 6 6 6 6 * 0 0 * 6 6
+                        6 6 6 * 6 6 6 * 0 * 6 6
+                        6 6 * 0 * 6 * 0 0 * 6 6
+                        6 6 * 0 0 * * 0 * * 6 6
+                        6 6 6 * 0 0 0 0 * 6 6 6
+                        6 6 6 6 * * * * * 6 6 6
+                        6 6 6 6 6 6 6 6 6 6 6 6
+                        6 6 6 6 6 6 6 6 6 6 6 6
+                    </code>
+                </pre>
+                <p>理清了思路，代码实现也就解决了：</p>
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;bits/stdc++.h&gt;
+                        using namespace std;
 
-                    int pan[12][12];
+                        int pan[12][12];
 
-                    int main() {
-                        int sum=0;
-                        for (int i=0;i&lt;12;i++) {
-                            for (int j=0;j&lt;12;j++) {
-                                pan[i][j]=0;
+                        int main() {
+                            int sum=0;
+                            for (int i=0;i&lt;12;i++) {
+                                for (int j=0;j&lt;12;j++) {
+                                    pan[i][j]=0;
+                                }
                             }
-                        }
-                        for (int i=0;i&lt;12;i++) {
-                            pan[i][0]=-1;
-                            pan[0][i]=-1;
-                            pan[i][11]=-1;
-                            pan[11][i]=-1;
-                        }
-                        for (int i=1;i&lt;11;i++) {
-                            for (int j=1;j&lt;11;j++) {
-                                cin&gt;&gt;pan[i][j];
+                            for (int i=0;i&lt;12;i++) {
+                                pan[i][0]=-1;
+                                pan[0][i]=-1;
+                                pan[i][11]=-1;
+                                pan[11][i]=-1;
                             }
-                        }
-                        for(int i=1;i&lt;11;i++) {
-                            for(int j=1;j&lt;11;j++) {
-                                if (pan[i][j]==0&&pan[i-1][j]==-1) pan[i][j]=-1;
-                                if (pan[i][j]==0&&pan[i][j-1]==-1) pan[i][j]=-1;
-                                if (pan[i][j]==0&&pan[i+1][j]==-1) pan[i][j]=-1;
-                                if (pan[i][j]==0&&pan[i][j+1]==-1) pan[i][j]=-1;
-                            }
-                        }
-                        for (int j=1;j&lt;11;j++) {
                             for (int i=1;i&lt;11;i++) {
-                                if (pan[i][j]==0&&pan[i-1][j]==-1) pan[i][j]=-1;
-                                if (pan[i][j]==0&&pan[i][j-1]==-1) pan[i][j]=-1;
-                                if (pan[i][j]==0&&pan[i+1][j]==-1) pan[i][j]=-1;
-                                if (pan[i][j]==0&&pan[i][j+1]==-1) pan[i][j]=-1;
+                                for (int j=1;j&lt;11;j++) {
+                                    cin&gt;&gt;pan[i][j];
+                                }
                             }
-                        }
-                        for (int i=1;i&lt;11;i++) {
+                            for(int i=1;i&lt;11;i++) {
+                                for(int j=1;j&lt;11;j++) {
+                                    if (pan[i][j]==0&&pan[i-1][j]==-1) pan[i][j]=-1;
+                                    if (pan[i][j]==0&&pan[i][j-1]==-1) pan[i][j]=-1;
+                                    if (pan[i][j]==0&&pan[i+1][j]==-1) pan[i][j]=-1;
+                                    if (pan[i][j]==0&&pan[i][j+1]==-1) pan[i][j]=-1;
+                                }
+                            }
                             for (int j=1;j&lt;11;j++) {
-                                if (pan[i][j]==0) sum++;
+                                for (int i=1;i&lt;11;i++) {
+                                    if (pan[i][j]==0&&pan[i-1][j]==-1) pan[i][j]=-1;
+                                    if (pan[i][j]==0&&pan[i][j-1]==-1) pan[i][j]=-1;
+                                    if (pan[i][j]==0&&pan[i+1][j]==-1) pan[i][j]=-1;
+                                    if (pan[i][j]==0&&pan[i][j+1]==-1) pan[i][j]=-1;
+                                }
                             }
+                            for (int i=1;i&lt;11;i++) {
+                                for (int j=1;j&lt;11;j++) {
+                                    if (pan[i][j]==0) sum++;
+                                }
+                            }
+                            cout&lt;&lt;sum;
                         }
-                        cout&lt;&lt;sum;
-                    }
-                </code>
-            </pre>
-            <p>其实虽然这里没有应用DFS或BFS算法，但是其中是有一定搜索思想的体现的。</p>
-        </div>
+                    </code>
+                </pre>
+                <p>其实虽然这里没有应用DFS或BFS算法，但是其中是有一定搜索思想的体现的。</p>
+            </div>
+        </main>
     </div>
 
     <!-- 页脚 -->
@@ -387,6 +404,9 @@
             }
             a {
                 color: rgb(5, 198, 111);
+            }
+            .sidebar {
+                background-color: #1d3853;
             }
         }
 

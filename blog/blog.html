@@ -11,27 +11,41 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
 </head>
 
 <body>
     <div class="content">
-        <!-- 标题框 -->
-        <div class="rounded-box1">
-            <h1 style="text-align: center;">个人博客</h1>
-        </div>
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引</h3>
+                <hr>
+                <ul>
+                    <li><a href="#sentence">随机一句</a></li>
+                    <li><a href="#list">文章列表</a></li>
+                </ul>
+            </div>
+        </aside>
 
-        <!-- 介绍 -->
-        <div class="rounded-box2" id="sentence-box">
-            <p id="random-sentence"></p>
-        </div>
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">个人博客</h1>
+            </div>
 
-        <!-- 文章列表 -->
-        <div class="rounded-box3">
-            <h3 style="text-align: center;">文章列表</h3>
-            <hr>
-            <div id="article-list"></div>
-            <p></p>
-        </div>
+            <!-- 随机句 -->
+            <div class="rounded-box2" id="sentence-box" style="cursor: pointer;">
+                <p class="sentence" id="random-sentence"></p>
+            </div>
+
+            <!-- 文章列表 -->
+            <div class="rounded-box3">
+                <h3 class="list" style="text-align: center;">文章列表</h3>
+                <hr>
+                <div id="article-list"></div>
+                <p></p>
+            </div>
+        </main>
     </div>
 
     <!-- 页脚 -->
@@ -72,6 +86,10 @@
 
             a {
                 color: #12efef;
+            }
+
+            .sidebar {
+                background-color: #1d3853;
             }
 
             .collapsible-title {

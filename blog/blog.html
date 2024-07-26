@@ -141,6 +141,11 @@
             content.style.transition = 'height 0.3s';
             panel.appendChild(content);
 
+            // 占位优化视觉效果
+            const placeholder = document.createElement('div');
+            placeholder.style.height = '10px';
+            content.appendChild(placeholder);
+
             // 添加文章链接
             articles.forEach(article => {
                 const link = document.createElement('a');

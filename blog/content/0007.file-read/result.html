@@ -23,10 +23,10 @@
 
         <!-- 内容框 -->
         <div class="rounded-box3">
-            <p id="container" style="display: flex; align-items: center; width: 100%;">
-                <input id="reading" type="file" onchange="ofs(event)" style="width: auto; flex: 1;">
+            <input id="reading" type="file" onchange="ofs(event)" style="width: 100%; margin-top: 15px;">
+            <div id="container" style="display: flex; align-items: center; width: 100%; margin: 15px 0;">
                 <span style="white-space: nowrap;">编码：</span>
-                <select id="decoding" style="flex: 0 1 auto; white-space: nowrap;">
+                <select id="decoding" style="flex: 0 1 auto; white-space: nowrap; flex: 1;">
                     <option>UTF-8</option>
                     <option>UTF-16BE</option>
                     <option>UTF-16LE</option>
@@ -49,7 +49,12 @@
                     <option>ISO-8859-15</option>
                     <option>ISO-8859-16</option>
                 </select>
-            </p>        
+                <span style="white-space: nowrap; margin-left: 10px; font-family: ligature;">连字：</span>
+                <select id="ligature" style="flex: 0 1 auto; white-space: nowrap; flex: 1;">
+                    <option value="disabled">禁用</option>
+                    <option value="enabled">启用</option>
+                </select>
+            </div>        
         </div>
         <div class="rounded-box3" id="imgContainer" style="display: none;">
             <p></p>
@@ -64,6 +69,16 @@
 
     <!-- 内部CSS文件 -->
     <style>
+        @font-face {
+            font-family: ligature;
+            src: url('/font/JiangChengHei-500W.woff2');
+        }
+
+        @font-face {
+            font-family: ligature;
+            src: url('/font/CascadiaCode-Regular.woff2')
+        }
+
         #container {
             display: flex;
             align-items: center;
@@ -79,12 +94,15 @@
             flex: 1;
         }
 
-        select#decoding {
+        select {
             flex: 0 1 auto;
             white-space: nowrap;
             border-radius: 5px;
-            font-size: 16px;
+            font-family: text;
+            font-size: 15px;
             height: 25px;
+            color: black;
+            background-color: #bacfd7;
         }
 
         /* 背景图片设置 */
@@ -96,6 +114,11 @@
         @media (prefers-color-scheme: dark) {
             body {
                 background-image: url('/img/background/night-blogbackground.svg');
+            }
+
+            select {
+                color: white;
+                background-color: #074860;
             }
         }
     </style>
@@ -112,10 +135,11 @@
         // 处理文件选择事件
         let encoding = 'UTF-8';
         let selectedFile = null;
+        let isLigature = document.getElementById("ligature").value === 'enabled';
 
         let ofs = (e) => {
             selectedFile = e.target.files[0];
-            readFile(selectedFile,encoding);
+            readFile(selectedFile, encoding);
         }
 
         function readFile(file, encoding) {
@@ -147,19 +171,12 @@
             }
         });
 
-        // 设置字体
-        // document.getElementById("font").addEventListener('change', function() {
-        //     var font = this.options[this.selectedIndex].text;
-        //     if (font === "Jetbrains Mono") {
-        //         $('#codeDisplay').removeAttr('font-family');
-        //         $('#codeDisplay').css('font-family', 'copyright');
-        //         Prism.highlightAll();
-        //     } else {
-        //         $('#codeDisplay').removeAttr('font-family');
-        //         $('#codeDisplay').css('font-family', 'text');
-        //         Prism.highlightAll();
-        //     }
-        // });
+        document.getElementById("ligature").addEventListener('change', function(event) {
+            isLigature = event.target.value === 'enabled';
+            if (selectedFile) {
+                readFile(selectedFile, encoding);
+            }
+        });
 
         // 获取文件后缀
         function getFileExtension(filename) {
@@ -179,12 +196,13 @@
         function displayFileContent(content, ext) {
             let container = document.getElementById("fileContainer");
             container.innerHTML = `
-                <p></p>
-                <pre class="line-numbers">
-                    <code class="language-${ext}" id="codeDisplay">${content}</code>
-                </pre>
-                <p></p>
+                <p>
+                    <pre class="line-numbers">
+                        <code class="language-${ext}" id="codeDisplay">${content}</code>
+                    </pre>
+                </p>
             `;
+            document.querySelector("code").style.fontFamily = isLigature ? 'ligature' : 'text';
             Prism.highlightAll();
         }
     </script>

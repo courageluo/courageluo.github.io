@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Switcher</title>
+    <style>
+        /* 定义字体样式 */
+        .font-1 {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .font-2 {
+            font-family: 'Times New Roman', serif;
+        }
+    </style>
+</head>
+<body>
+    <label for="font-select">Choose a font:</label>
+    <select id="font-select">
+        <option value="font-1">Arial</option>
+        <option value="font-2">Times New Roman</option>
+    </select>
+
+    <div id="text-element" class="font-1">
+        This is the text whose font will be changed.
+    </div>
+
+    <script>
+        // 获取 select 元素和目标元素
+        const fontSelect = document.getElementById('font-select');
+        const textElement = document.getElementById('text-element');
+
+        // 监听 select 元素的变化事件
+        fontSelect.addEventListener('change', function() {
+            // 获取选中的值
+            const selectedFont = this.value;
+
+            // 移除目标元素的所有字体类
+            textElement.classList.remove('font-1', 'font-2');
+
+            // 添加选中的字体类
+            textElement.classList.add(selectedFont);
+        });
+    </script>
+</body>
+</html>

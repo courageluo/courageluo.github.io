@@ -34,19 +34,19 @@ h1 {
 }
 
 /* 自定义字体 */
-@font-face{
+@font-face {
     font-family: title;
     src: url('/font/SmileySans-Oblique.woff2');
 }
 
-@font-face{
+@font-face {
     font-family: text;
     src: url('/font/JiangChengHei-500W.woff2');
 }
 
-@font-face{
+@font-face {
     font-family: text;
-    src: url('/font/Intel One Mono Medium.ttf');
+    src: url('/font/CascadiaMono-Regular.woff2');
 }
 
 @font-face {

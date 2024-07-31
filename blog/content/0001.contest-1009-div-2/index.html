@@ -145,7 +145,7 @@
                         </code>
                     </pre>
                     <p>
-                        相当于低配版的if…else…语句。所以上述条件的意思就是：<br>
+                        相当于浓缩版的if…else…语句。所以上述条件的意思就是：<br>
                         如果读到的数为0，那么判断skp是否大于0（如果等于0的话会死循环），如果skp大于0，那么就把skp赋值给i，如果skp等于0，那么直接把1赋给i；如果读到的数为1，那么也直接把1赋给i。<br>
                         同时，读到的数为0时，也要把skp加1，因为skp代表了每次跳转的位数，是由读到的0的个数决定的。记得在同时要输出当前的位数，这样答案就显而易见了。<br>
                     </p>
@@ -339,7 +339,7 @@
                     </p>
                     <pre class="line-numbers">
                         <code class="language-cpp">
-                            bool dfs(const vector&lt;int&gt;&digits,int pos,int remainder,int p,bool leading_zero) {
+                            bool dfs(const vector&lt;int&gt; &digits,int pos,int remainder,int p,bool leading_zero) {
                                 if (pos==digits.size()) {
                                     if (remainder==0 && !leading_zero) {
                                         return true;
@@ -365,7 +365,7 @@
                     <p>
                         解释一下函数dfs()的参数。<br>
                         <ol>
-                            <li>const vertor&lt;int&gt;&digits 是将一个整数类型的向量传递给这个函数，同时const能确保在函数内部不会修改这个向量。</li>
+                            <li>const vector&lt;int&gt; &digits 是将一个整数类型的向量传递给这个函数，同时const能确保在函数内部不会修改这个向量。</li>
                             <li>int pos 表示传入数据的位置，也就是第几个元素。</li>
                             <li>int remainder 表示当前的余数。</li>
                             <li>int p 表示模数。</li>

@@ -83,6 +83,10 @@ label {
     flex: 1;
 }
 
+p {
+    text-align: justify;
+}
+
 /* 链接标签设定 */
 a {
     text-decoration: none;

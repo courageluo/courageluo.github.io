@@ -39,6 +39,11 @@
                     <div id="clockDisplay" style="font-size: 50px; font-family: time; text-align: center;"></div>
                     <div id="currentDate" style="margin-bottom: 10px;"></div>
                 </div>
+                <div id="atomicTimeContainer" style="margin-bottom: 10px;">
+                    <a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
+                    <span id="CST_z43d" style="font-size: 50px; font-family: time;"></span><br>
+                    <span id="Beijing_z43d" style="font-size: 16px;"></span>
+                </div>
             </div>
             <div id="stopwatch" class="hidden">
                 <div id="stopwatchDisplay" style="font-size: 50px; font-family: time; text-align: center;">00:00:00.00</div>
@@ -55,6 +60,23 @@
                     <input type="number" id="countdownInput" placeholder="秒数" style="margin-left: 10px; width: 50px;">
                     <button id="setCountdown" style="margin-left: 10px;">确定</button>
                 </div>
+            </div>
+        </div>
+        <div class="rounded-box3" id="settingContainer">
+            <div id="clocksetting">
+                <p style="text-align: center;"><strong>时钟设置</strong></p>
+                <hr>
+                <div id="timeSource" style="display: flex; justify-content: center; margin-bottom: -1em;">
+                    <p>时间来源：</p>
+                    <div class="container">
+                        <div class="settingBtnRectangle">
+                            <div class="ts-left-side active" onclick="timeSource('system')">系统时间</div>
+                            <div class="ts-right-side" onclick="timeSource('atomic')">原子钟时间</div>
+                        </div>
+                    </div>
+                </div>
+                <p id="systemTimeDescription">直接从系统中获取时间，可能会在一秒内的某个随机时间点上更新，系统繁忙时还会出现偏差，偏差积累整整一秒后就会出现时间一下走两秒的情况。</p>
+                <p id="atomicTimeDescription">使用来自<a href="https://time.is/">Time.is</a>的原子钟时间，此网站服务器与原子钟同步，在每秒起始时更新，能在最短的时间内发送数据，并提供最高的精确度。</p>
             </div>
         </div>
     </div>
@@ -91,6 +113,15 @@
             border: 2px solid #ccc;
         }
 
+        .settingBtnRectangle {
+            width: 200px;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+        }
+
         .left-side, .right-side, .middle-side {
             flex: 1;
             display: flex;
@@ -105,6 +136,24 @@
         }
 
         .left-side.active, .middle-side.active, .right-side.active {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .ts-left-side, .ts-right-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .ts-left-side, .ts-middle-side {
+            border-right: 2px solid #ccc;
+        }
+
+        .ts-left-side.active, .ts-right-side.active {
             background-color: #555;
             color: #fff;
         }
@@ -132,12 +181,26 @@
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>
+    <script src="//widget.time.is/zh.js"></script>
     <script src="/blog/quote-js/jquery/jquery-3.7.1.js"></script>
     <script>
         // 调试用
         $("#clock").show();
+        $("#systemTimeDescription").show();
+        $("#atomicTimeDescription").hide();
+        // $("#atomicTimeDescription").show();
+        $("#systemTimeContainer").show();
+        $("#atomicTimeContainer").hide();
         // $("#stopwatch").show();
         // $("#countdown").show();
+        
+        // 获取来自time.is的时间
+        time_is_widget.init({
+            CST_z43d : {} ,
+            Beijing_z43d : {
+                template:"DATE", date_format:"year年mnum月dnum日 dayname"
+            }
+        });
 
         function selectMode(mode) {
             if (mode === 'clock') {
@@ -155,6 +218,24 @@
                 document.querySelector('.middle-side').classList.remove('active');
                 document.querySelector('.left-side').classList.remove('active');
                 $('#countdownBtn').click();
+            }
+        }
+
+        function timeSource(source) {
+            if (source === 'system') {
+                document.querySelector('.ts-left-side').classList.add('active');
+                document.querySelector('.ts-right-side').classList.remove('active');
+                $("#systemTimeDescription").show();
+                $("#atomicTimeDescription").hide();
+                $("#systemTimeContainer").show();
+                $("#atomicTimeContainer").hide();
+            } else if (source === 'atomic') {
+                document.querySelector('.ts-left-side').classList.remove('active');
+                document.querySelector('.ts-right-side').classList.add('active');
+                $("#systemTimeDescription").hide();
+                $("#atomicTimeDescription").show();
+                $("#systemTimeContainer").hide();
+                $("#atomicTimeContainer").show();
             }
         }
 
@@ -187,8 +268,8 @@
                 var hours = currentTime.getHours();
                 var minutes = currentTime.getMinutes();
                 var seconds = currentTime.getSeconds();
-                var days = ['日', '一', '二', '三', '四', '五', '六'];
-                var dayOfWeek = '星期' + days[currentTime.getDay()];
+                var days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+                var dayOfWeek = days[currentTime.getDay()];
                 var date = currentTime.getFullYear() + '年' + (currentTime.getMonth() + 1) + '月' + currentTime.getDate() + '日';
                 $("#currentDate").text(date + " " + dayOfWeek);
                 // 添加前导零

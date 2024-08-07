@@ -56,12 +56,12 @@
                 </select>
             </div>        
         </div>
-        <div class="rounded-box3" id="fileContainer" style="display: none;">
-            <div id="progressContainer">
-                <progress id="progressBar" value="0" max="100"></progress>
-                <span id="progressPercentage">0%</span>
-            </div>
+        <div class="rounded-box3" id="imgContainer" style="display: none;">
+            <p></p>
+            <img width="100%" alt="无预览图">
+            <p></p>
         </div>
+        <div class="rounded-box3" id="fileContainer" style="display: none;"></div>
     </div>
 
     <!-- 页脚 -->
@@ -105,31 +105,6 @@
             background-color: #bacfd7;
         }
 
-        #fileContainer audio, #fileContainer video, #fileContainer img {
-            width: 100%;
-            margin: 15px 0;
-        }
-
-        #fileContainer progress {
-            width: 100%;
-        }
-
-        #progressContainer {
-            display: flex;
-            align-items: center;
-            margin: 15px 0;
-        }
-
-        #progressBar {
-            flex-grow: 1;
-            margin-right: 10px;
-        }
-
-        #progressPercentage {
-            max-width: 40px;
-            text-align: right;
-        }
-
         /* 背景图片设置 */
         body {
             background-image: url('/img/background/day-blogbackground.svg');
@@ -166,124 +141,29 @@
             selectedFile = e.target.files[0];
             readFile(selectedFile, encoding);
         }
-        
-        // 一些Prism不支持的高亮配置
-        function specialExtConfig(ext) {
-            const languageMap = {
-                'h':      'c',
-                'hpp':    'cpp',
-                'htm':    'html',
-                'inf':    'ini',
-                'cfg':    'ini',
-                'config': 'ini'
-            }
-            return languageMap[ext] || ext;
-        }
 
-        // 获取文件信息
-        function getFileInfo(file) {
-            let ext = specialExtConfig(file.name.split('.').pop().toLowerCase());
-            return {
-                mimeType: file.type,
-                extension: ext
-            };
-        }
-
-        // 处理文件
         function readFile(file, encoding) {
             let reader = new FileReader();
-            let fileInfo = getFileInfo(file);
-            let container = document.getElementById("fileContainer");
-            let progressContainer = document.getElementById("progressContainer");
-            let progressBar = document.getElementById("progressBar");
-            let progressPercentage = document.getElementById("progressPercentage");
-
-            // 清空之前的内容并显示容器
-            container.innerHTML = '';
-            container.appendChild(progressContainer);
-            container.style.display = "block";
-            progressContainer.style.display = "flex";
-
-            // 重置进度
-            progressBar.value = 0;
-            progressPercentage.textContent = "0%";
-
-            // 模拟进度的变量
-            let simulatedProgress = 0;
-            let progressInterval;
-
-            function updateProgress(progress) {
-                progressBar.value = progress;
-                progressPercentage.textContent = Math.round(progress) + "%";
-            }
-
-            function simulateProgress() {
-                progressInterval = setInterval(() => {
-                    simulatedProgress += 5;
-                    if (simulatedProgress > 90) {
-                        clearInterval(progressInterval);
-                    }
-                    updateProgress(simulatedProgress);
-                }, 100);
-            }
-
-            // 开始模拟进度
-            simulateProgress();
-
-            // 文件类型判断
-            reader.readAsArrayBuffer(file);
-
-            reader.onprogress = (event) => {
-                if (event.lengthComputable) {
-                    clearInterval(progressInterval);
-                    let percentLoaded = (event.loaded / event.total) * 100;
-                    updateProgress(percentLoaded);
+            let ext = getFileExtension(file.name);
+            if (/^(jpg|jpeg|png|bmp|webp|ico|gif|avif|jfif)$/.test(ext)) {
+                document.getElementById("imgContainer").style.display = "block";
+                document.getElementById("fileContainer").style.display = "none";
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    document.querySelector("img").src = event.target.result;
                 }
-            };
-
-            reader.onload = (event) => {
-                clearInterval(progressInterval);
-                updateProgress(100);
-                
-                // 根据文件类型处理内容
-                if (fileInfo.mimeType.startsWith('image/')) {
-                    let blob = new Blob([event.target.result], {type: fileInfo.mimeType});
-                    let imageUrl = URL.createObjectURL(blob);
-                    let img = document.createElement('img');
-                    img.src = imageUrl;
-                    img.style.maxWidth = '100%';
-                    container.appendChild(img);
-                } else if (fileInfo.mimeType.startsWith('audio/')) {
-                    let blob = new Blob([event.target.result], {type: fileInfo.mimeType});
-                    let audioUrl = URL.createObjectURL(blob);
-                    let audio = document.createElement('audio');
-                    audio.src = audioUrl;
-                    audio.controls = true;
-                    container.appendChild(audio);
-                } else if (fileInfo.mimeType.startsWith('video/')) {
-                    let blob = new Blob([event.target.result], {type: fileInfo.mimeType});
-                    let videoUrl = URL.createObjectURL(blob);
-                    let video = document.createElement('video');
-                    video.src = videoUrl;
-                    video.controls = true;
-                    video.style.maxWidth = '100%';
-                    container.appendChild(video);
-                } else {
-                    let decoder = new TextDecoder(encoding);
-                    let content = decoder.decode(event.target.result);
-                    content = content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                    displayFileContent(content, fileInfo.extension);
+            } else {
+                document.getElementById("imgContainer").style.display = "none";
+                document.getElementById("fileContainer").style.display = "block";
+                reader.readAsText(file, encoding);
+                reader.onload = (event) => {
+                    let content = event.target.result.replace(/</g, "&lt;");
+                    content = content.replace(/>/g, "&gt;");
+                    displayFileContent(content, ext);
                 }
-            };
-
-            reader.onloadend = () => {
-                clearInterval(progressInterval);
-                updateProgress(100);
-                progressContainer.style.display = "none";
-            };
+            }
         }
 
-        // 配置编码和连字
         document.getElementById("decoding").addEventListener('change', function(event) {
             encoding = event.target.value;
             if (selectedFile) {
@@ -298,10 +178,24 @@
             }
         });
 
+        // 获取文件后缀
+        function getFileExtension(filename) {
+            let ext = filename.split('.').pop().toLowerCase();
+            switch (ext) {
+                case "h":      ext = "c";    break;
+                case "hpp":    ext = "cpp";  break;
+                case "htm":    ext = "html"; break;
+                case "inf":    ext = "ini";  break;
+                case "cfg":    ext = "ini";  break;
+                case "config": ext = "ini";  break;
+            }
+            return ext;
+        }
+
         // 显示内容
         function displayFileContent(content, ext) {
             let container = document.getElementById("fileContainer");
-            container.innerHTML += `
+            container.innerHTML = `
                 <p>
                     <pre class="line-numbers">
                         <code class="language-${ext}" id="codeDisplay">${content}</code>
@@ -309,7 +203,6 @@
                 </p>
             `;
             document.querySelector("code").style.fontFamily = isLigature ? 'ligature' : 'text';
-            progressContainer.style.display = "none";
             Prism.highlightAll();
         }
     </script>

@@ -1,0 +1,503 @@
+<!-- 模板 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 边栏 -->
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引目录</h3>
+                <hr>
+                <ul>
+                    <li><a href="#intro">说明</a></li>
+                    <li>
+                        <a href="#score">骗分</a>
+                        <ul style="margin-left: -24px;">
+                            <li><a href="#example">样例及无解情况</a></li>
+                            <li><a href="#table">打表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#optimize">优化</a>
+                        <ul style="margin-left: -24px;">
+                            <li><a href="#frw">快读快写</a></li>
+                            <li><a href="#keyword">使用inline、register等关键字</a></li>
+                            <li><a href="#bitcalc">使用位运算</a></li>
+                            <li><a href="#loopexpand">展开循环</a></li>
+                            <li><a href="#loopmerge">增强内存访问连续性</a></li>
+                            <li><a href="#others">其它优化</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#optimizebanned">禁赛级优化</a>
+                        <ul style="margin-left: -24px;">
+                            <li><a href="#trainhead">火车头优化</a></li>
+                            <li><a href="#asm">内嵌汇编</a></li>
+                            <li><a href="#avx">使用AVX指令集</a></li>
+                            <li><a href="#simd">使用SIMD指令</a></li>
+                            <li><a href="#multithread">多线程并行化</a></li>
+                            <li><a href="#cacheoptimize">内存对齐和缓存优化</a></li>
+                            <li><a href="#io">减少I/O操作</a></li>
+                            <li><a href="#gpu">GPU加速</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">OI中的骗分及禁赛级优化</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <p id="intro">以下介绍一些在OI测试中，无法通过降低算法时间复杂度（想不出更优算法），或者根本做不出来的情况下，降低运行时间或得到一定分数的方法。</p>
+            </div>
+
+            <div class="rounded-box3">
+                <h3 id="score">骗分</h3>
+                <hr>
+                <ol>
+                    <li id="example">
+                        <strong>样例及无解情况</strong><br>
+                        直接输出样例及无解情况的答案。
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int main() {
+                                    int n;
+                                    cin&gt;&gt;n;
+                                    if (n==样例输入) {
+                                        cout&lt;&lt;样例输出;
+                                    } else {
+                                        cout&lt;&lt;无解输出;
+                                    }
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="table">
+                        <strong>打表</strong><br>
+                        如果能够通过暴力求解或者能够直接求出问题答案，并且数据都比较小的情况下，可以先写暴力程序，然后将输出写入另一个程序中直接读取对应答案。<br>
+                        例如 <a href="https://www.luogu.com.cn/problem/P1044">NOIP2003 栈</a> 这个题，由于n≤18，数据极小，所以可以直接
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int main() {
+                                    int ans[18]={1,2,5,14,42 ... 129644790,477638700};
+                                    int n;
+                                    cin&gt;&gt;n;
+                                    cout&lt;&lt;ans[n-1];
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="optimize">优化</h3>
+                <hr>
+                <p>适用于缩短暴力算法的运行时间，尽可能少TLE。</p>
+                <ol>
+                    <li id="frw">
+                        <strong>快读快写</strong><br>
+                        通过<code class="language-cpp">getchar()</code>、<code class="language-cpp">putchar()</code>等函数尽可能地降低输入输出时间。
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int read() {
+                                    int x=0,f=1;
+                                    char ch=getchar();
+                                    while (ch&lt;'0'||ch&gt;'9') {
+                                        if (ch=='-') f=-1;
+                                        ch=getchar();
+                                    }
+                                    while (ch>='0'&&ch<='9') {
+                                        x=x*10+ch-'0',ch=getchar();
+                                    }
+                                    return x*f;
+                                }
+                            </code>
+                        </pre>
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                void write(int x) {
+                                    if (x&lt;0) {
+                                        putchar('-'),x=-x;
+                                    }
+                                    if (x&gt;9) {
+                                        write(x/10);
+                                    }
+                                    putchar(x%10+'0');
+                                    return;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="keyword">
+                        <strong>使用inline、register等关键字</strong><br>
+                        在函数声明前加上<code class="language-cpp">inline</code>关键字，编译器会尽可能地将函数展开，从而减少运行时间。
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                inline int max(int a,int b) {
+                                    return a&gt;b?a:b;
+                                }
+                            </code>
+                        </pre>
+                        在一些变量前加上<code class="language-cpp">register</code>关键字，可以使变量尽可能地存储在寄存器之中，增加变量的读取速度，从而减少运行时间。一般写在循环变量之中，对普通的变量用处不大，而且它已经在C++17后被弃用。
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                for (register int i=1;i&lt;=n;i++) {
+                                    for (register int j=1;j&lt;=m;j++) {
+                                        // 循环内容
+                                    }
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="bitcalc">
+                        <strong>使用位运算</strong><br>
+                        位运算的效率通常更高，因此使用位运算可以减少运行时间。
+                        <pre>
+                            <code class="language-cpp">
+                                x<<=n      // x*=2ⁿ
+                                x>>=n      // x/=2ⁿ
+                                x&1        // x%2==1
+                                -x&1       // x%2==0
+                                y-x>>31    // x>y (int x,y)
+                                y-x>>63    // x>y (long long x,y)
+                                ~x+1       // -x
+                                x^=y^=x^=y // swap(x,y)
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="loopexpand">
+                        <strong>展开循环</strong><br>
+                        手动展开一些循环，可以刺激CPU多核的运算，从而减少运行时间。建议展开数量为4到8个。
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                for (int i=1;i&lt;=n;i+=8) {
+                                    a[i]++; a[i+1]++; a[i+2]++; a[i+3]++;
+                                    a[i+4]++; a[i+5]++; a[i+6]++; a[i+7]++;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="loopmerge">
+                        <strong>增强内存访问连续性</strong><br>
+                        在使用高维数组时，应该尽量使最后一维变化连续，可以减少内存访问时间。
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                // 建议 b[k][j]的访问相对更加连续
+                                for (int i=1;i&lt;=n;i++)
+                                    for (int k=1;k&lt;=p;k++)
+                                        for (int j=1;j&lt;=m;j++)
+                                            ans[i][j]+=a[i][k]*b[k][j];
+
+                                // 不建议 b[k][j]的访问相对不那么连续
+                                for (int i=1;i&lt;=n;i++)
+                                    for (int j=1;j&lt;=m;j++)
+                                        for (int k=1;k&lt;=p;k++)
+                                            ans[i][j]+=a[i][k]*b[k][j];
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="others">
+                        <strong>其它优化</strong><br>
+                        无法使用快读快写的情况下，可以使用
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                ios::sync_with_stdio(false);
+                                cin.tie(0);
+                                cout.tie(0);
+                            </code>
+                        </pre>
+                        来加速<code class="language-cpp">cin</code>和<code class="language-cpp">cout</code>的输入输出速度。<br>
+                        输出换行符时，使用<code class="language-cpp">'\n'</code>而不是<code class="language-cpp">endl</code>，可以减少刷新操作，提升运行效率。
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="optimizebanned">禁赛级优化</h3>
+                <hr>
+                <p id="warning">警告：以下方法不建议在比赛中使用，否则后果自负。</p>
+                <ol>
+                    <li id="trainhead">
+                        <strong>火车头优化</strong><br>
+                        将一系列GCC编译器的优化指令放在程序的预处理中，可以极大地减少运行时间。
+                        <pre class="line-numbers" style="height: 300px;">
+                            <code class="language-cpp">
+                                #pragma GCC optimize(3)
+                                #pragma GCC target("avx")
+                                #pragma GCC optimize("Ofast")
+                                #pragma GCC optimize("inline")
+                                #pragma GCC optimize("-fgcse")
+                                #pragma GCC optimize("-fgcse-lm")
+                                #pragma GCC optimize("-fipa-sra")
+                                #pragma GCC optimize("-ftree-pre")
+                                #pragma GCC optimize("-ftree-vrp")
+                                #pragma GCC optimize("-fpeephole2")
+                                #pragma GCC optimize("-ffast-math")
+                                #pragma GCC optimize("-fsched-spec")
+                                #pragma GCC optimize("unroll-loops")
+                                #pragma GCC optimize("-falign-jumps")
+                                #pragma GCC optimize("-falign-loops")
+                                #pragma GCC optimize("-falign-labels")
+                                #pragma GCC optimize("-fdevirtualize")
+                                #pragma GCC optimize("-fcaller-saves")
+                                #pragma GCC optimize("-fcrossjumping")
+                                #pragma GCC optimize("-fthread-jumps")
+                                #pragma GCC optimize("-funroll-loops")
+                                #pragma GCC optimize("-fwhole-program")
+                                #pragma GCC optimize("-freorder-blocks")
+                                #pragma GCC optimize("-fschedule-insns")
+                                #pragma GCC optimize("inline-functions")
+                                #pragma GCC optimize("-ftree-tail-merge")
+                                #pragma GCC optimize("-fschedule-insns2")
+                                #pragma GCC optimize("-fstrict-aliasing")
+                                #pragma GCC optimize("-fstrict-overflow")
+                                #pragma GCC optimize("-falign-functions")
+                                #pragma GCC optimize("-fcse-skip-blocks")
+                                #pragma GCC optimize("-fcse-follow-jumps")
+                                #pragma GCC optimize("-fsched-interblock")
+                                #pragma GCC optimize("-fpartial-inlining")
+                                #pragma GCC optimize("no-stack-protector")
+                                #pragma GCC optimize("-freorder-functions")
+                                #pragma GCC optimize("-findirect-inlining")
+                                #pragma GCC optimize("-fhoist-adjacent-loads")
+                                #pragma GCC optimize("-frerun-cse-after-loop")
+                                #pragma GCC optimize("inline-small-functions")
+                                #pragma GCC optimize("-finline-small-functions")
+                                #pragma GCC optimize("-ftree-switch-conversion")
+                                #pragma GCC optimize("-foptimize-sibling-calls")
+                                #pragma GCC optimize("-fexpensive-optimizations")
+                                #pragma GCC optimize("-funsafe-loop-optimizations")
+                                #pragma GCC optimize("inline-functions-called-once")
+                                #pragma GCC optimize("-fdelete-null-pointer-checks")
+                                #pragma GCC optimize(2)
+                            </code>
+                        </pre>
+                        不过一般OJ都自带了O2优化。
+                    </li>
+                    <li id="asm">
+                        <strong>内嵌汇编</strong><br>
+                        汇编语言执行效率在计算机中是非常高的，所以可以内嵌汇编来提高代码的执行效率。
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                #include&lt;iostream&gt;
+                                using namespace std;
+
+                                int main() {
+                                    int a,b,ans;
+                                    cin&gt;&gt;a&gt;&gt;b;
+                                    __asm__ (
+                                        "movl %1,%%eax\n\t"
+                                        "addl %2,%%eax\n\t"
+                                        "movl %%eax,%0"
+                                        : "=r"(ans)
+                                        : "r"(a),"r"(b)
+                                    ); 
+                                    cout&lt;&lt;ans&lt;&lt;endl;
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="avx">
+                        <strong>使用AVX指令集</strong><br>
+                        指令集是存储在CPU内部的一组指令，用于控制CPU的运行，它可以大大提高运行效率。AVX指令集是Intel公司推出的一种指令集。
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                #include&lt;iostream&gt;
+                                #include&lt;immintrin.h&gt;
+                                using namespace std;
+
+                                int main() {
+                                    float a,b,ans;
+                                    cin&gt;&gt;a&gt;&gt;b;
+                                    __m256 va=_mm256_set_ps(0,0,0,0,0,0,0,a);
+                                    __m256 vb=_mm256_set_ps(0,0,0,0,0,0,0,b);
+                                    __m256 vans=_mm256_add_ps(va,vb);
+                                    ans=_mm256_cvtss_f32(vans);
+                                    cout&lt;&lt;ans&lt;&lt;endl;
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="simd">
+                        <strong>使用SIMD指令</strong><br>
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                #include&lt;iostream&gt;
+                                #include&lt;immintrin.h&gt;
+                                using namespace std;
+
+                                int main() {
+                                    float a,b;
+                                    cin&gt;&gt;a&gt;&gt;b;
+                                    __m128 va=_mm_set_ss(a);
+                                    __m128 vb=_mm_set_ss(b);
+                                    __m128 vans=_mm_add_ss(va,vb);
+                                    cout&lt;&lt;_mm_cvtss_f32(vans)&lt;&lt;endl;
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="multithread">
+                        <strong>多线程并行化</strong>
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                #include&lt;iostream&gt;
+                                #include&lt;future&gt;
+                                #include&lt;thread&gt;
+                                using namespace std;
+
+                                float add(float a,float b) {
+                                    return a+b;
+                                }
+
+                                int main() {
+                                    float a,b;
+                                    cin&gt;&gt;a&gt;&gt;b;
+                                    auto future=async(launch::async,add,a,b);
+                                    cout&lt;&lt;future.get()&lt;&lt;endl;
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="cacheoptimize">
+                        <strong>内存对齐和缓存优化</strong>
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                #include&lt;iostream&gt;
+                                #include&lt;cstdlib&gt;
+                                using namespace std;
+
+                                int main() {
+                                    alignas(64) float a,b;
+                                    cin&gt;&gt;a&gt;&gt;b;
+                                    cout&lt;&lt;a+b&lt;&lt;endl;
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="io">
+                        <strong>减少I/O操作</strong>
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                #include&lt;iostream&gt;
+                                #include&lt;string&gt;
+                                using namespace std;
+
+                                int main() {
+                                    string input;
+                                    getline(cin,input);
+                                    size_t space=input.find(' ');
+                                    float a=stof(input.substr(0,space));
+                                    float b=stof(input.substr(space+1));
+                                    cout&lt;&lt;a+b&lt;&lt;endl;
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="gpu">
+                        <strong>GPU加速</strong><br>
+                        这里使用CUDA进行演示，需要NVIDIA显卡和相关驱动及软件，也可以使用OpenCL等其它库。
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                #include&lt;iostream&gt;
+                                #include&lt;cuda_runtime.h&gt;
+                                using namespace std;
+
+                                __global__ void add(float *a,float *b,float *result) {
+                                    *result=*a+*b;
+                                }
+
+                                int main() {
+                                    float a,b,result;
+                                    cin&gt;&gt;a&gt;&gt;b;
+                                    float *d_a,*d_b,*d_result;
+                                    cudaMalloc(&d_a,sizeof(float));
+                                    cudaMalloc(&d_b,sizeof(float));
+                                    cudaMalloc(&d_result,sizeof(float));
+                                    cudaMemcpy(d_a,&a,sizeof(float),cudaMemcpyHostToDevice);
+                                    cudaMemcpy(d_b,&b,sizeof(float),cudaMemcpyHostToDevice);
+                                    add&lt;&lt;&lt;1,1&gt;&gt;&gt;(d_a,d_b,d_result);
+                                    cudaMemcpy(&result,d_result,sizeof(float),cudaMemcpyDeviceToHost);
+                                    cout&lt;&lt;result&lt;&lt;endl;
+                                    cudaFree(d_a); cudaFree(d_b); cudaFree(d_result);
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                </ol>
+                <p>上面演示的都是处理a+b问题，略显小题大做，只有在真正处理大量数据和运算时才会有明显的优化。</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        a {
+            color: #110c50;
+        }
+
+        #warning {
+            color: #c90c0c;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+            
+            a {
+                color: #12efef;
+            }
+
+            #warning {
+                color: #f03131;
+            }
+
+            .sidebar {
+                background-color: #1d3853;
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script src="/blog/quote-js/prismjs/prism.js"></script>
+</body>
+
+</html>

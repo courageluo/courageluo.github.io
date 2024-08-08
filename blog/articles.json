@@ -25,7 +25,7 @@
     },
     {
         "url": "content/0005.cpp-system/index.html",
-        "title": "system函数",
+        "title": "C++中的system函数",
         "modified": "2024.03.16 21:37",
         "category": "C++学习记录"
     },
@@ -52,5 +52,11 @@
         "title": "艾点教听力答案显示脚本",
         "modified": "2024.07.30 14:21",
         "category": "Web开发实践"
+    },
+    {
+        "url": "content/0010.oi-optimize/index.html",
+        "title": "OI中的骗分和禁赛级优化方案",
+        "modified": "2024.08.08 14:21",
+        "category": "C++学习记录"
     }
 ]

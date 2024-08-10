@@ -1,0 +1,283 @@
+<!-- 音乐播放器 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 主要内容 -->
+        <div class="container">
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">简易音乐播放器</h1>
+            </div>
+            <div class="rounded-box3">
+                <input type="file" id="fileInput" style="margin: 15px 0; width: 100%;" webkitdirectory directory
+                    multiple>
+            </div>
+            <div class="rounded-box3">
+                <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
+                <audio id="audioPlayer" style="margin-top: 5px; width: 100%;" controls></audio>
+                <div class="delay-controls">
+                    <span id="delayInfo" style="margin-right: 10px;">歌词延迟: </span>
+                    <button id="decreaseDelay">-0.1秒</button>
+                    <span class="delay-display" id="delayDisplay">0.0秒</span>
+                    <button id="increaseDelay">+0.1秒</button>
+                </div>
+            </div>
+            <div class="lyrics" id="lyricsContainer" style="margin: 0 10px 10px 10px; text-align: center;"></div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .audio-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .audio-list li {
+            padding: 10px;
+            margin: 10px -5px;
+            background: #c0afaf;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .audio-list li:hover {
+            background: #e0e0e0;
+        }
+
+        .lyrics {
+            background: #222;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .lyrics p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.5;
+            opacity: 0.6;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .lyrics .highlight {
+            opacity: 1;
+            font-size: 18px;
+            transform: scale(1.1);
+        }
+
+        #fileInput {
+            margin-bottom: 20px;
+        }
+
+        .delay-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .delay-controls button:hover {
+            background-color: #1d887b;
+        }
+
+        .delay-display {
+            margin: 0 10px;
+        }
+
+        .no-lyrics {
+            text-align: center;
+            font-size: 18px;
+            color: #aaa;
+            line-height: 300px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+
+            .audio-list li {
+                background: #202020;
+            }
+
+            .audio-list li:hover {
+                background: #3a3a3a;
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const audioList = document.getElementById('audioList');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const lyricsContainer = document.getElementById('lyricsContainer');
+        const decreaseDelayBtn = document.getElementById('decreaseDelay');
+        const increaseDelayBtn = document.getElementById('increaseDelay');
+        const delayDisplay = document.getElementById('delayDisplay');
+
+        let lyricsData = [];
+        let currentLyricIndex = 0;
+        let songDelayMap = {};  // 存储每首歌的延迟
+        let currentSong = '';   // 当前播放的歌曲名称
+
+        fileInput.addEventListener('change', function (event) {
+            const files = event.target.files;
+            const audioFiles = [];
+            const lrcFiles = {};
+
+            for (let file of files) {
+                const mimeType = file.type;
+                const ext = file.name.split('.').pop().toLowerCase();
+
+                if (mimeType.startsWith('audio/')) {
+                    audioFiles.push(file);
+                } else if (ext === 'lrc') {
+                    const baseName = file.name.replace('.lrc', '');
+                    lrcFiles[baseName] = file;
+                }
+            }
+
+            audioList.innerHTML = '';
+            audioFiles.forEach(file => {
+                const listItem = document.createElement('li');
+                listItem.textContent = file.name;
+                listItem.dataset.file = file.name;
+                listItem.addEventListener('click', () => playAudio(file, lrcFiles[file.name.replace(/\.(mp3|wav|ogg|flac|m4a)$/, '')]));
+                audioList.appendChild(listItem);
+            });
+        });
+
+        function playAudio(file, lrcFile) {
+            const url = URL.createObjectURL(file);
+            audioPlayer.src = url;
+            audioPlayer.play();
+
+            const songName = file.name;
+            currentSong = songName;
+
+            // 重置或恢复当前歌曲的延迟
+            let lyricDelay = songDelayMap[songName] || 0;
+            updateDelayDisplay(lyricDelay);
+
+            if (lrcFile) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    parseLyrics(e.target.result);
+                };
+                reader.readAsText(lrcFile);
+            } else {
+                displayNoLyrics();
+            }
+
+            audioPlayer.addEventListener('timeupdate', function () {
+                updateLyrics(lyricDelay);
+            });
+
+            decreaseDelayBtn.onclick = () => {
+                lyricDelay -= 0.1;
+                songDelayMap[songName] = lyricDelay;
+                updateDelayDisplay(lyricDelay);
+            };
+
+            increaseDelayBtn.onclick = () => {
+                lyricDelay += 0.1;
+                songDelayMap[songName] = lyricDelay;
+                updateDelayDisplay(lyricDelay);
+            };
+        }
+
+        function updateDelayDisplay(delay) {
+            delayDisplay.textContent = delay.toFixed(1) + '秒';
+        }
+
+        function parseLyrics(lrcText) {
+            lyricsData = [];
+            const lines = lrcText.split('\n');
+            lines.forEach(line => {
+                const match = line.match(/\[(\d+):(\d+)\.(\d+)\](.*)/);
+                if (match) {
+                    const minutes = parseInt(match[1], 10);
+                    const seconds = parseInt(match[2], 10);
+                    const milliseconds = parseInt(match[3], 10);
+                    const time = minutes * 60 + seconds + milliseconds / 1000;
+                    const text = match[4].trim();
+                    lyricsData.push({ time, text });
+                }
+            });
+
+            displayLyrics();
+        }
+
+        function displayLyrics() {
+            lyricsContainer.innerHTML = '';
+            lyricsData.forEach((lyric, index) => {
+                const p = document.createElement('p');
+                p.textContent = lyric.text;
+                lyricsContainer.appendChild(p);
+            });
+
+            currentLyricIndex = 0;
+        }
+
+        function displayNoLyrics() {
+            lyricsContainer.innerHTML = '<p class="no-lyrics">无歌词</p>';
+        }
+
+        function updateLyrics(lyricDelay) {
+            if (!lyricsData.length) return;
+
+            const currentTime = audioPlayer.currentTime + lyricDelay;
+
+            for (let i = 0; i < lyricsData.length; i++) {
+                if (currentTime >= lyricsData[i].time && (!lyricsData[i + 1] || currentTime < lyricsData[i + 1].time)) {
+                    if (currentLyricIndex !== i) {
+                        const previousLyric = lyricsContainer.children[currentLyricIndex];
+                        if (previousLyric) previousLyric.classList.remove('highlight');
+                        const currentLyric = lyricsContainer.children[i];
+                        currentLyric.classList.add('highlight');
+                        currentLyric.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        currentLyricIndex = i;
+                    }
+                    break;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

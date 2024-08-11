@@ -58,5 +58,11 @@
         "title": "OI中的骗分和禁赛级优化方案",
         "modified": "2024.08.08 14:21",
         "category": "C++学习记录"
+    },
+    {
+        "url": "content/0011.music-player/index.html",
+        "title": "简易音乐播放器",
+        "modified": "2024.08.11 16:03",
+        "category": "Web开发实践"
     }
 ]

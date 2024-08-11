@@ -1,11 +1,15 @@
 // 获取页脚内容
+const footer = document.createElement('div');
+
 fetch("/footer/footer.html")
     .then(response => response.text())
     .then(data => {
-        document.getElementById("footer").innerHTML = data;
+        footer.innerHTML = data;
     });
 
-// 控制台输出文本
+document.body.appendChild(footer);
+
+// 控制台输出字符画
 const fontSize = 10;
 const colors = [
     '#ADD8E6', '#A0CCDE', '#93C0D7', '#86B4CF', '#79A8C7', 

@@ -1,13 +1,9 @@
 // 获取页脚内容
-const footer = document.createElement('div');
-
 fetch("/footer/footer.html")
     .then(response => response.text())
     .then(data => {
-        footer.innerHTML = data;
+        document.getElementById('footer').innerHTML = data;
     });
-
-document.body.appendChild(footer);
 
 // 控制台输出字符画
 const fontSize = 10;

@@ -158,6 +158,9 @@
         const fileInputBtn = document.getElementById('filePicker');
 
         fileInputBtn.addEventListener('click', async function () {
+            if (!('showDirectoryPicker' in window)) {
+                alert("您的浏览器不支持读取文件夹！")
+            }
             try {
                 const directoryHandle = await window.showDirectoryPicker();
                 const audioFiles = [];
@@ -187,6 +190,7 @@
                 });
             } catch (err) {
                 console.error('Failed to pick directory:', err);
+                alert("您需要允许本页面查看文件才能继续操作！");
             }
         });
 

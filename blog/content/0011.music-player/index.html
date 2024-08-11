@@ -159,7 +159,8 @@
 
         fileInputBtn.addEventListener('click', async function () {
             if (!('showDirectoryPicker' in window)) {
-                alert("您的浏览器不支持读取文件夹！")
+                alert("您的浏览器不支持读取文件夹！");
+                return;
             }
             try {
                 const directoryHandle = await window.showDirectoryPicker();

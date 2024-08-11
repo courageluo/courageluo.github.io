@@ -14,15 +14,14 @@
 </head>
 
 <body>
+    <!-- 主要内容 -->
     <div class="content">
-        <!-- 主要内容 -->
         <div class="container">
             <div class="rounded-box1">
                 <h1 style="text-align: center;">简易音乐播放器</h1>
             </div>
             <div class="rounded-box3">
-                <input type="file" id="fileInput" style="margin: 15px 0; width: 100%;" webkitdirectory directory
-                    multiple>
+                <p>使用说明：点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>选择音频文件所在的文件夹，待加载出音频列表后，点击以播放音频（歌词来源于文件夹下与音频同名的lrc文件）。</p>
             </div>
             <div class="rounded-box3">
                 <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
@@ -37,9 +36,6 @@
             <div class="lyrics" id="lyricsContainer" style="margin: 0 10px 10px 10px; text-align: center;"></div>
         </div>
     </div>
-
-    <!-- 页脚 -->
-    <div id="footer"></div>
 
     <!-- 内部CSS文件 -->
     <style>
@@ -155,6 +151,42 @@
         let songDelayMap = {};  // 存储每首歌的延迟
         let currentSong = '';   // 当前播放的歌曲名称
 
+        // 文件夹选取
+        const fileInputBtn = document.getElementById('filePicker');
+
+        fileInputBtn.addEventListener('click', async function () {
+            try {
+                const directoryHandle = await window.showDirectoryPicker();
+                const audioFiles = [];
+                const lrcFiles = {};
+
+                for await (const [name, handle] of directoryHandle.entries()) {
+                    if (handle.kind === 'file') {
+                        const file = await handle.getFile();
+                        const ext = file.name.split('.').pop().toLowerCase();
+
+                        if (file.type.startsWith('audio/')) {
+                            audioFiles.push(file);
+                        } else if (ext === 'lrc') {
+                            const baseName = file.name.replace('.lrc', '');
+                            lrcFiles[baseName] = file;
+                        }
+                    }
+                }
+
+                audioList.innerHTML = '';
+                audioFiles.forEach(file => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = file.name;
+                    listItem.dataset.file = file.name;
+                    listItem.addEventListener('click', () => playAudio(file, lrcFiles[file.name.replace(/\.(mp3|wav|ogg|flac|m4a)$/, '')]));
+                    audioList.appendChild(listItem);
+                });
+            } catch (err) {
+                console.error('Failed to pick directory:', err);
+            }
+        });
+
         fileInput.addEventListener('change', function (event) {
             const files = event.target.files;
             const audioFiles = [];
@@ -229,17 +261,24 @@
             lyricsData = [];
             const lines = lrcText.split('\n');
             lines.forEach(line => {
-                const match = line.match(/\[(\d+):(\d+)\.(\d+)\](.*)/);
-                if (match) {
-                    const minutes = parseInt(match[1], 10);
-                    const seconds = parseInt(match[2], 10);
-                    const milliseconds = parseInt(match[3], 10);
-                    const time = minutes * 60 + seconds + milliseconds / 1000;
-                    const text = match[4].trim();
-                    lyricsData.push({ time, text });
+                // 正则表达式匹配每个时间戳并获取时间和歌词文本
+                const timeMatches = line.match(/\[(\d+):(\d+)\.(\d+)\]/g);
+                const lyricText = line.replace(/\[(\d+):(\d+)\.(\d+)\]/g, '').trim();
+
+                if (timeMatches) {
+                    timeMatches.forEach(match => {
+                        const timeParts = match.match(/\[(\d+):(\d+)\.(\d+)\]/);
+                        const minutes = parseInt(timeParts[1], 10);
+                        const seconds = parseInt(timeParts[2], 10);
+                        const milliseconds = parseInt(timeParts[3], 10);
+                        const time = minutes * 60 + seconds + milliseconds / 1000;
+                        lyricsData.push({ time, text: lyricText });
+                    });
                 }
             });
 
+            // 按时间排序歌词数据
+            lyricsData.sort((a, b) => a.time - b.time);
             displayLyrics();
         }
 

@@ -64,9 +64,6 @@
         </div>
     </div>
 
-    <!-- 页脚 -->
-    <div id="footer"></div>
-
     <!-- 内部CSS文件 -->
     <style>
         @font-face {
@@ -153,6 +150,23 @@
     <script src="/href/script.js"></script>
     <script src="./prism.js"></script>
     <script>
+        // 拖拽读取文件
+        document.addEventListener('dragover', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        document.addEventListener('drop', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const files = event.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('reading').files = files;
+                ofs({ target: { files: files } });
+            }
+        });
+
         // 设置选择框样式
         let height = window.getComputedStyle(document.getElementById("reading")).height;
         document.getElementById("decoding").style.height = height;

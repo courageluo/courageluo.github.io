@@ -94,10 +94,19 @@
     <style>
         /* 颜色变量 */
         :root {
-            --bg-color-light: #D2D5D9;
+            --bg-color-light: #d2d5d94d;
             --text-color-light: #000000;
-            --bg-color-dark: #18323F;
+            --bg-color-dark: #18323fa2;
             --text-color-dark: #BBBBBB;
+        }
+
+        /* 设置图标 */
+        #settingsIcon {
+            position: absolute;
+            top: 115px;
+            right: 20px;
+            cursor: pointer;
+            width: 20px;
         }
 
         /* 背景图片设置 */
@@ -123,6 +132,7 @@
             max-width: 400px;
             background-color: var(--bg-color-light);
             color: var(--text-color-light);
+            backdrop-filter: blur(15px);
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
             padding: 20px;
@@ -177,6 +187,7 @@
             .rounded-box-settings {
                 background-color: var(--bg-color-dark);
                 color: var(--text-color-dark);
+                backdrop-filter: blur(10px);
                 opacity: 0;
                 transition: opacity 0.3s ease-in-out;
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);

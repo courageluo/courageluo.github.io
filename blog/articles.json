@@ -64,5 +64,11 @@
         "title": "简易音乐播放器",
         "modified": "2024.08.11 16:03",
         "category": "Web开发实践"
+    },
+    {
+        "url": "content/0012.oled-decompress/index.html",
+        "title": "0.91' OLED显示被压缩解决方案",
+        "modified": "2024.08.14 10:29",
+        "category": "电子小制作"
     }
 ]

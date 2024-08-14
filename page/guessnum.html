@@ -86,10 +86,19 @@
     <style>
         /* 颜色变量 */
         :root {
-            --bg-color-light: #D2D5D9;
+            --bg-color-light: #d2d5d9;
             --text-color-light: #000000;
-            --bg-color-dark: #18323F;
+            --bg-color-dark: #18323fb9;
             --text-color-dark: #BBBBBB;
+        }
+
+        /* 设置图标 */
+        #settingsIcon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            width: 20px;
         }
 
         /* 背景图片设置 */
@@ -113,10 +122,9 @@
             transform: translate(-50%, -50%);
             width: 75%;
             max-width: 400px;
-            background-color: var(--bg-color-light); /* 白天模式下的背景色 */
-            color: var(--text-color-light);
-            opacity: 0; /* 初始透明度为0，隐藏 */
-            transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
+            backdrop-filter: blur(15px);
+            opacity: 0;
+            transition: opacity 0.3s; /* 添加透明度过渡效果 */
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -127,7 +135,8 @@
             .rounded-box-settings {
                 background-color: var(--bg-color-dark); /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
-                opacity: 0; /* 初始透明度为0，隐藏 */
+                backdrop-filter: blur(5px);
+                opacity: 0;
                 transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
             }
@@ -142,7 +151,7 @@
             transform: translate(-50%, -50%);
             width: 75%;
             max-width: 400px;
-            background-color: var(--bg-color-light); /* 白天模式下的背景色 */
+            backdrop-filter: blur(20px);
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -154,6 +163,7 @@
             #gameOverBox {
                 background-color: var(--bg-color-dark); /* 夜晚模式下的背景色 */
                 color: var(--text-color-dark);
+                backdrop-filter: blur(10px);
                 opacity: 0; /* 初始透明度为0，隐藏 */
                 transition: opacity 0.3s ease-in-out; /* 添加透明度过渡效果 */
                 box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);

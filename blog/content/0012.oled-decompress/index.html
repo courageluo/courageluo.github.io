@@ -1,0 +1,866 @@
+<!-- 0.91' OLED显示被压缩解决方案 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0.91' OLED显示被压缩解决方案 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 边栏 -->
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引</h3>
+                <hr>
+                <ul>
+                    <li><a href="#problem">问题陈述</a></li>
+                    <li><a href="#solution">解决方案</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 内容 -->
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">0.91' OLED显示被压缩解决方案</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <h3 id="problem">问题陈述</h3>
+                <hr>
+                <p>使用STC15F104W单片机驱动了一块I<sup>2</sup>C的0.91寸OLED，但在显示时发现文本像是被纵向压缩了一样。</p>
+                <img src="./problem.jpg" style="width: 100%; max-width: 500px; margin: 0 auto; display: block;">
+                <p>而且这种现象并非偶然，在<a href="https://blog.csdn.net/feinifi/article/details/132134777">这篇文章</a>中也出现了一样的情况。作者所说的“6*8尺寸显示特别小”其实并非真正的小，而是被“压缩”成了6*4的尺寸，故难以看清。</p>
+                <img src="./problem.png" style="width: 100%; max-width: 650px; margin: 0 auto; display: block;">
+                <p>观察发现实际只显示了偶数行的内容，所以在不考虑修改源码的前提下有两种解决方案：</p>
+                <ol>
+                    <li>将原来的16行数据一行一行地分别插入在一行<code class="language-cpp">0x00</code>之后，变成32行数据。</li>
+                    <li>将原来16行数据的每一行都复制一遍，变成32行数据。</li>
+                </ol>
+                <p>因此就是一个“反压缩”的过程，两种方法都会增加源代码的长度。为了避免有些设备可能是只显示奇数行，所以我选择了第二种方案。</p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="solution">解决方案</h3>
+                <hr>
+                <p>由于字模的提取方式是列行式（如下图），所以手动更改是非常麻烦的，所以我们可以写一个程序来解决这个问题。</p>
+                <img src="./demo.gif" style="width: 100%; max-width: 200px; margin: 0 auto; display: block;">
+                <p>这里使用的是C++语言，需要用到C++11及以上的标准编译。</p>
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;bits/stdc++.h&gt;
+                        #pragma GCC optimize(3)
+                        using namespace std;
+
+                        int extNum;
+
+                        string input;
+                        string binStr;
+                        string extChar;
+
+                        vector&lt;string&gt; hexs;
+                        vector&lt;string&gt; bins;
+                        vector&lt;string&gt; printUp;
+                        vector&lt;string&gt; printDown;
+
+                        // 初始化 
+                        inline void init() {
+                            hexs.clear();
+                            bins.clear();
+                            printUp.clear();
+                            printDown.clear();
+                            binStr.clear();
+                        }
+
+                        // 输入并转化十六进制为字符串数组 
+                        inline void getHex() {
+                            getline(cin,input);
+                            string prefix="0x";
+                            regex pattern(R"(\{(.*)\},\/\*(\".*\"),(\d+)\*\/)");
+                            smatch matches;
+                            if (regex_search(input,matches,pattern)) {
+                                string hexData=matches[1].str();
+                                extChar=matches[2].str().substr(1,2);
+                                extNum=2*stoi(matches[3].str());
+                                stringstream ss(input);
+                                string item;
+                                while (getline(ss,item,',')) {
+                                    if (item.substr(0,prefix.size())==prefix) {
+                                        hexs.push_back(item.substr(prefix.size()));
+                                    }
+                                }
+                            }
+                        }
+
+                        // 字符串数组转化为字符数组 
+                        inline array&lt;string,8&gt; str2arr(string& str) {
+                            array&lt;string,8&gt; result;
+                            for (size_t i=0;i&lt;str.size();i++) {
+                                result[i]=string(1,str[i]);
+                            }
+                            return result;
+                        }
+
+                        // 十六进制转化为二进制 
+                        inline void hex2bin() {
+                            for (int i=0;i&lt;16;i++) {
+                                int num=stoul(hexs[i],nullptr,16);
+                                bitset&lt;8&gt; bin(num);
+                                bins.push_back(bin.to_string());
+                            }
+                        }
+
+                        // 二进制转化为十六进制
+                        inline string bin2hex(string& binary) {
+                            stringstream ss;
+                            for (size_t i=0;i&lt;binary.size();i+=4) {
+                                string fourBits=binary.substr(i,4);
+                                bitset&lt;4&gt; bits(fourBits);
+                                ss&lt;&lt;hex&lt;&lt;uppercase&lt;&lt;bits.to_ulong();
+                            }
+                            return ss.str();
+                        } 
+
+                        // 复制二进制各位 
+                        inline void copyBin() {
+                            for (int i=0;i&lt;16;i++) {
+                                array&lt;string,8&gt; result=str2arr(bins[i]);
+                                for (const auto& s:result) {
+                                    int j=2;
+                                    while (j--) {
+                                        binStr+=s;
+                                    }
+                                }
+                            }
+                        }
+
+                        // 处理二进制字符串
+                        inline void handleStr() {
+                            size_t chunk=8;
+                            vector&lt;string&gt; result;
+                            for (size_t i=0;i&lt;binStr.size();i+=chunk) {
+                                result.push_back(binStr.substr(i,chunk));
+                            }
+                            for (size_t i=0;i&lt;32;i++) {
+                                if (i%2) {
+                                    printUp.push_back(bin2hex(result[i]));
+                                } else {
+                                    printDown.push_back(bin2hex(result[i]));
+                                }
+                            }
+                        }
+
+                        // 输出处理后的十六进制字符串
+                        inline void printHex(bool typ) {
+                            cout&lt;&lt;"  {";
+                            for (int i=0;i&lt;15;i++) {
+                                cout&lt;&lt;"0x"&lt;&lt;printUp[i]&lt;&lt;",";
+                            }
+                            cout&lt;&lt;"0x"&lt;&lt;printUp[15];
+                            cout&lt;&lt;"}, // 上半部分"&lt;&lt;'\n';
+                            cout&lt;&lt;"  {";
+                            for (int i=0;i&lt;15;i++) {
+                                cout&lt;&lt;"0x"&lt;&lt;printDown[i]&lt;&lt;",";
+                            }
+                            cout&lt;&lt;"0x"&lt;&lt;printUp[15];
+                            cout&lt;&lt;"}, // 下半部分 // "&lt;&lt;(typ?extNum:extNum+1)&lt;&lt;" "&lt;&lt;extChar&lt;&lt;(typ?"^":"v")&lt;&lt;'\n';
+                        }
+
+                        // 运行一次程序
+                        inline void mainProg() {
+                            getHex();
+                            vector&lt;string&gt; upperHalf(hexs.begin(),hexs.begin()+16);
+                            vector&lt;string&gt; lowerHalf(hexs.begin()+16,hexs.end());
+                            init();
+                            hexs=upperHalf;
+                            hex2bin();
+                            copyBin();
+                            handleStr();
+                            printHex(true);
+                            init();
+                            hexs=lowerHalf;
+                            hex2bin();
+                            copyBin();
+                            handleStr();
+                            printHex(false);
+                            cout&lt;&lt;'\n';
+                        } 
+
+                        int main() {
+                            cout&lt;&lt;"退出请按Ctrl+C"&lt;&lt;'\n'&lt;&lt;'\n';
+                            while (true) {
+                                mainProg();
+                            }
+                            return 0;
+                        }
+                    </code>
+                </pre>
+                <p>当然，如果你想要使用第一种方案，只需要修改一下<code class="language-cpp">copyBin()</code>函数即可。</p>
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        // 插入空白行
+                        inline void copyBin() {
+                            for (int i=0;i&lt;16;i++) {
+                                array&lt;string,8&gt; result=str2arr(bins[i]);
+                                for (const auto& s:result) {
+                                    binStr+="00000000";
+                                    binStr+=s;
+                                }
+                            }
+                        }
+                    </code>
+                </pre>
+                <p>不过，由于这不是OI比赛，所以程序有了更高的可读性、更慢的编译速度以及时间复杂度更高的算法。（狗头保命</p>
+            </div>
+            <div class="rounded-box3">
+                <h3>使用方法</h3>
+                <hr>
+                <p>以下是关于使用方法的介绍。</p>
+                <p>驱动屏幕方面，我直接使用了<a href="https://gitee.com/Darkstar244/DarkGit">暗星整合的代码</a>，以我自己的风格格式化了一下，并且调整了一下字库文件。</p>
+                <p><strong>main.c</strong></p>
+                <pre class="line-numbers">
+                    <code class="language-c">
+                        #include "iic.h"
+
+                        int main() {
+                            oled_init(); // 初始化
+                            oled_showchinese(0,0,0); // 在x=0的第1、2个page上显示第0个字符
+                            oled_showchinese(16,0,2);
+                            oled_showchinese(32,0,2);
+                            oled_showchinese(48,0,4);
+                            oled_showchinese(0,2,1);
+                            oled_showchinese(16,2,3);
+                            oled_showchinese(32,2,3);
+                            oled_showchinese(48,2,5); // 翻译：中文文本
+                            // delay_ms(3000);
+                            oled_showstring(0,4,"!$&(*,.024",16);
+                            oled_showstring(0,6,"#%')+-/135",16); // 翻译：0123456789
+                            // oled_wr_byte(0x2e,0);  // 关滚动
+                            // oled_wr_byte(0x2a,0);  // 方向，29右，2a左
+                            // oled_wr_byte(0x00,0);  // 空字节
+                            // oled_wr_byte(0x04,0);  // 水平起始页
+                            // oled_wr_byte(0x0cf,0); // 水平滚动速度
+                            // oled_wr_byte(0x01,0);  // 水平结束页
+                            // oled_wr_byte(0x00,0);  // 每次垂直滚动位移
+                            // oled_wr_byte(0x2f,0);  // 开滚动
+                            while (1) {;}
+                        }
+                    </code>
+                </pre>
+                <p><strong>oled.h</strong></p>
+                <pre class="line-numbers" style="height: 400px;">
+                    <code class="language-c">
+                        #define uchar unsigned char
+                        #define uint unsigned int
+                        #define u16 unsigned short int
+
+                        // 汉字显示，阴码，列行式，取模为逆向（低位在前）
+
+                        const char code HzK[][32]={
+                            {0x00,0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0xFF,0xC0,0xC0,0xC0,0xC0,0xC0,0xF0,0xC0,0x00}, // 上半部分
+                            {0x00,0xFF,0x00,0x00,0x00,0x00,0x00,0xFF,0x00,0x00,0x00,0x00,0x00,0xFF,0x00,0x00}, // 下半部分 // 0 中^
+                            {0x00,0x0F,0x03,0x03,0x03,0x03,0x03,0xFF,0x03,0x03,0x03,0x03,0x03,0x0F,0x00,0x00}, // 上半部分
+                            {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // 下半部分 // 1 中v
+                            {0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0xC3,0xFC,0xC0,0xC0,0xC0,0xC0,0xC0,0xF0,0xC0,0x00}, // 上半部分
+                            {0x00,0x00,0x00,0x03,0x3C,0xC0,0x00,0x00,0x00,0x00,0xF0,0x0F,0x00,0x00,0x00,0x00}, // 下半部分 // 2 文^
+                            {0x00,0x00,0x00,0x00,0x00,0x03,0xCC,0x30,0xCC,0x03,0x00,0x00,0x00,0x00,0x00,0x00}, // 上半部分
+                            {0xC0,0xC0,0x30,0x30,0x0C,0x03,0x00,0x00,0x00,0x03,0x03,0x0C,0x30,0xF0,0x30,0x00}, // 下半部分 // 3 文v
+                            {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0x00,0x00,0x00,0x00,0xC0,0x00,0x00,0x00}, // 上半部分
+                            {0x00,0x03,0x03,0x03,0x03,0xFF,0x03,0xFF,0x03,0xFF,0x03,0x03,0x03,0x03,0x00,0x00}, // 下半部分 // 4 本^
+                            {0x00,0x00,0xC0,0x30,0xCF,0xC0,0xC0,0xFF,0xC0,0xC0,0xCF,0x30,0xC0,0xC0,0xC0,0x00}, // 上半部分
+                            {0x03,0x03,0x00,0x00,0x00,0x00,0x00,0xFF,0x00,0x00,0x00,0x00,0x00,0x03,0x00,0x00}, // 下半部分 // 5 本v
+                        };
+
+                        const uchar code F6x8[][6]={
+                            0x00,0x00,0x00,0x00,0x00,0x00, // sp
+                            0x00,0x00,0x00,0x2f,0x00,0x00, // !
+                            0x00,0x00,0x07,0x00,0x07,0x00, // "
+                            0x00,0x14,0x7f,0x14,0x7f,0x14, // #
+                            0x00,0x24,0x2a,0x7f,0x2a,0x12, // $
+                            0x00,0x62,0x64,0x08,0x13,0x23, // %
+                            0x00,0x36,0x49,0x55,0x22,0x50, // &
+                            0x00,0x00,0x05,0x03,0x00,0x00, // '
+                            0x00,0x00,0x1c,0x22,0x41,0x00, // (
+                            0x00,0x00,0x41,0x22,0x1c,0x00, // )
+                            0x00,0x14,0x08,0x3E,0x08,0x14, // *
+                            0x00,0x08,0x08,0x3E,0x08,0x08, // +
+                            0x00,0x00,0x00,0xA0,0x60,0x00, // ,
+                            0x00,0x08,0x08,0x08,0x08,0x08, // -
+                            0x00,0x00,0x60,0x60,0x00,0x00, // .
+                            0x00,0x20,0x10,0x08,0x04,0x02, // /
+                            0x00,0x3E,0x51,0x49,0x45,0x3E, // 0
+                            0x00,0x00,0x42,0x7F,0x40,0x00, // 1
+                            0x00,0x42,0x61,0x51,0x49,0x46, // 2
+                            0x00,0x21,0x41,0x45,0x4B,0x31, // 3
+                            0x00,0x18,0x14,0x12,0x7F,0x10, // 4
+                            0x00,0x27,0x45,0x45,0x45,0x39, // 5
+                            0x00,0x3C,0x4A,0x49,0x49,0x30, // 6
+                            0x00,0x01,0x71,0x09,0x05,0x03, // 7
+                            0x00,0x36,0x49,0x49,0x49,0x36, // 8
+                            0x00,0x06,0x49,0x49,0x29,0x1E, // 9
+                            0x00,0x00,0x36,0x36,0x00,0x00, // :
+                            0x00,0x00,0x56,0x36,0x00,0x00, // ;
+                            0x00,0x08,0x14,0x22,0x41,0x00, // <
+                            0x00,0x14,0x14,0x14,0x14,0x14, // =
+                            0x00,0x00,0x41,0x22,0x14,0x08, // >
+                            0x00,0x02,0x01,0x51,0x09,0x06, // ?
+                            0x00,0x32,0x49,0x59,0x51,0x3E, // @
+                            0x00,0x7C,0x12,0x11,0x12,0x7C, // A
+                            0x00,0x7F,0x49,0x49,0x49,0x36, // B
+                            0x00,0x3E,0x41,0x41,0x41,0x22, // C
+                            0x00,0x7F,0x41,0x41,0x22,0x1C, // D
+                            0x00,0x7F,0x49,0x49,0x49,0x41, // E
+                            0x00,0x7F,0x09,0x09,0x09,0x01, // F
+                            0x00,0x3E,0x41,0x49,0x49,0x7A, // G
+                            0x00,0x7F,0x08,0x08,0x08,0x7F, // H
+                            0x00,0x00,0x41,0x7F,0x41,0x00, // I
+                            0x00,0x20,0x40,0x41,0x3F,0x01, // J
+                            0x00,0x7F,0x08,0x14,0x22,0x41, // K
+                            0x00,0x7F,0x40,0x40,0x40,0x40, // L
+                            0x00,0x7F,0x02,0x0C,0x02,0x7F, // M
+                            0x00,0x7F,0x04,0x08,0x10,0x7F, // N
+                            0x00,0x3E,0x41,0x41,0x41,0x3E, // O
+                            0x00,0x7F,0x09,0x09,0x09,0x06, // P
+                            0x00,0x3E,0x41,0x51,0x21,0x5E, // Q
+                            0x00,0x7F,0x09,0x19,0x29,0x46, // R
+                            0x00,0x46,0x49,0x49,0x49,0x31, // S
+                            0x00,0x01,0x01,0x7F,0x01,0x01, // T
+                            0x00,0x3F,0x40,0x40,0x40,0x3F, // U
+                            0x00,0x1F,0x20,0x40,0x20,0x1F, // V
+                            0x00,0x3F,0x40,0x38,0x40,0x3F, // W
+                            0x00,0x63,0x14,0x08,0x14,0x63, // X
+                            0x00,0x07,0x08,0x70,0x08,0x07, // Y
+                            0x00,0x61,0x51,0x49,0x45,0x43, // Z
+                            0x00,0x00,0x7F,0x41,0x41,0x00, // [
+                            0x00,0x55,0x2A,0x55,0x2A,0x55, // 55
+                            0x00,0x00,0x41,0x41,0x7F,0x00, // ]
+                            0x00,0x04,0x02,0x01,0x02,0x04, // ^
+                            0x00,0x40,0x40,0x40,0x40,0x40, // _
+                            0x00,0x00,0x01,0x02,0x04,0x00, // '
+                            0x00,0x20,0x54,0x54,0x54,0x78, // a
+                            0x00,0x7F,0x48,0x44,0x44,0x38, // b
+                            0x00,0x38,0x44,0x44,0x44,0x20, // c
+                            0x00,0x38,0x44,0x44,0x48,0x7F, // d
+                            0x00,0x38,0x54,0x54,0x54,0x18, // e
+                            0x00,0x08,0x7E,0x09,0x01,0x02, // f
+                            0x00,0x18,0xA4,0xA4,0xA4,0x7C, // g
+                            0x00,0x7F,0x08,0x04,0x04,0x78, // h
+                            0x00,0x00,0x44,0x7D,0x40,0x00, // i
+                            0x00,0x40,0x80,0x84,0x7D,0x00, // j
+                            0x00,0x7F,0x10,0x28,0x44,0x00, // k
+                            0x00,0x00,0x41,0x7F,0x40,0x00, // l
+                            0x00,0x7C,0x04,0x18,0x04,0x78, // m
+                            0x00,0x7C,0x08,0x04,0x04,0x78, // n
+                            0x00,0x38,0x44,0x44,0x44,0x38, // o
+                            0x00,0xFC,0x24,0x24,0x24,0x18, // p
+                            0x00,0x18,0x24,0x24,0x18,0xFC, // q
+                            0x00,0x7C,0x08,0x04,0x04,0x08, // r
+                            0x00,0x48,0x54,0x54,0x54,0x20, // s
+                            0x00,0x04,0x3F,0x44,0x40,0x20, // t
+                            0x00,0x3C,0x40,0x40,0x20,0x7C, // u
+                            0x00,0x1C,0x20,0x40,0x20,0x1C, // v
+                            0x00,0x3C,0x40,0x30,0x40,0x3C, // w
+                            0x00,0x44,0x28,0x10,0x28,0x44, // x
+                            0x00,0x1C,0xA0,0xA0,0xA0,0x7C, // y
+                            0x00,0x44,0x64,0x54,0x4C,0x44, // z
+                            0x14,0x14,0x14,0x14,0x14,0x14, // horiz lines
+                        };
+
+                        const uchar code F8X16[]={                                                     // code | ascii | char
+                            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, //    0 space
+                            0x00,0xC0,0xF0,0x30,0xF0,0xC0,0x00,0x00,0xFF,0xFF,0x00,0xF0,0x00,0xFF,0xFF,0x00, // !  1 0^
+                            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // "  2 undef
+                            0x0F,0x3F,0xF0,0xC0,0xF0,0x3F,0x0F,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // #  3 0v
+                            0x00,0x00,0xC0,0xF0,0xF0,0x00,0x00,0x00,0x00,0x03,0x03,0xFF,0xFF,0x00,0x00,0x00, // $  4 1^
+                            0x00,0xC0,0xC0,0xFF,0xFF,0xC0,0xC0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // %  5 1v
+                            0xC0,0xF0,0x30,0x30,0x30,0xF0,0xC0,0x00,0x00,0x00,0xC0,0xF0,0x3C,0x0F,0x03,0x00, // &  6 2^
+                            0xFC,0xFF,0xC3,0xC0,0xC0,0xF0,0xF0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // '  7 2v
+                            0xC0,0xF0,0x30,0x30,0x30,0xF0,0xC0,0x00,0x00,0x00,0x30,0x30,0x30,0xFF,0xCF,0x00, // (  8 3^
+                            0x30,0xF0,0xC0,0xC0,0xC0,0xFF,0x3F,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // )  9 3v
+                            0x00,0x00,0x00,0xC0,0xF0,0xF0,0x00,0x00,0xF0,0xFC,0xCF,0xC3,0xFF,0xFF,0xC0,0x00, // * 10 4^
+                            0x00,0x00,0x00,0xC0,0xFF,0xFF,0xC0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // + 11 4v
+                            0xF0,0xF0,0x30,0x30,0x30,0x30,0x30,0x00,0x3F,0x3F,0x30,0x30,0x30,0xF0,0xC0,0x00, // , 12 5^
+                            0x30,0xF0,0xC0,0xC0,0xC0,0xFF,0x3F,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // - 13 5v
+                            0x00,0xC0,0xF0,0x30,0x30,0x00,0x00,0x00,0xFF,0xFF,0x30,0x30,0x30,0xF0,0xC0,0x00, // . 14 6^
+                            0x3F,0xFF,0xC0,0xC0,0xC0,0xFF,0x3F,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // / 15 6v
+                            0xF0,0xF0,0x30,0x30,0x30,0xF0,0xF0,0x00,0x00,0x00,0x00,0xC0,0xF0,0x3F,0x0F,0x00, // 0 16 7^
+                            0x00,0x00,0xFF,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // 1 17 7v
+                            0xC0,0xF0,0x30,0x30,0x30,0xF0,0xC0,0x00,0xCF,0xFF,0x30,0x30,0x30,0xFF,0xCF,0x00, // 2 18 8^
+                            0x3F,0xFF,0xC0,0xC0,0xC0,0xFF,0x3F,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // 3 19 8v
+                            0xC0,0xF0,0x30,0x30,0x30,0xF0,0xC0,0x00,0x0F,0x3F,0x30,0x30,0x30,0xFF,0xFF,0x00, // 4 20 9^
+                            0x00,0xC0,0xC0,0xC0,0xF0,0x3F,0x0F,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // 5 21 9v
+                            0x00,0xE0,0x10,0x88,0x88,0x18,0x00,0x00,0x00,0x0F,0x11,0x20,0x20,0x11,0x0E,0x00, // 6 22
+                            0x00,0x38,0x08,0x08,0xC8,0x38,0x08,0x00,0x00,0x00,0x00,0x3F,0x00,0x00,0x00,0x00, // 7 23
+                            0x00,0x70,0x88,0x08,0x08,0x88,0x70,0x00,0x00,0x1C,0x22,0x21,0x21,0x22,0x1C,0x00, // 8 24
+                            0x00,0xE0,0x10,0x08,0x08,0x10,0xE0,0x00,0x00,0x00,0x31,0x22,0x22,0x11,0x0F,0x00, // 9 25
+                            0x00,0x00,0x00,0xC0,0xC0,0x00,0x00,0x00,0x00,0x00,0x00,0x30,0x30,0x00,0x00,0x00, // : 26
+                            0x00,0x00,0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x60,0x00,0x00,0x00,0x00, // ; 27
+                            0x00,0x00,0x80,0x40,0x20,0x10,0x08,0x00,0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x00, // < 28
+                            0x40,0x40,0x40,0x40,0x40,0x40,0x40,0x00,0x04,0x04,0x04,0x04,0x04,0x04,0x04,0x00, // = 29
+                            0x00,0x08,0x10,0x20,0x40,0x80,0x00,0x00,0x00,0x20,0x10,0x08,0x04,0x02,0x01,0x00, // > 30
+                            0x00,0x70,0x48,0x08,0x08,0x08,0xF0,0x00,0x00,0x00,0x00,0x30,0x36,0x01,0x00,0x00, // ? 31
+                            0xC0,0x30,0xC8,0x28,0xE8,0x10,0xE0,0x00,0x07,0x18,0x27,0x24,0x23,0x14,0x0B,0x00, // @ 32
+                            0x00,0x00,0xC0,0x38,0xE0,0x00,0x00,0x00,0x20,0x3C,0x23,0x02,0x02,0x27,0x38,0x20, // A 33
+                            0x08,0xF8,0x88,0x88,0x88,0x70,0x00,0x00,0x20,0x3F,0x20,0x20,0x20,0x11,0x0E,0x00, // B 34
+                            0xC0,0x30,0x08,0x08,0x08,0x08,0x38,0x00,0x07,0x18,0x20,0x20,0x20,0x10,0x08,0x00, // C 35
+                            0x08,0xF8,0x08,0x08,0x08,0x10,0xE0,0x00,0x20,0x3F,0x20,0x20,0x20,0x10,0x0F,0x00, // D 36
+                            0x08,0xF8,0x88,0x88,0xE8,0x08,0x10,0x00,0x20,0x3F,0x20,0x20,0x23,0x20,0x18,0x00, // E 37
+                            0x08,0xF8,0x88,0x88,0xE8,0x08,0x10,0x00,0x20,0x3F,0x20,0x00,0x03,0x00,0x00,0x00, // F 38
+                            0xC0,0x30,0x08,0x08,0x08,0x38,0x00,0x00,0x07,0x18,0x20,0x20,0x22,0x1E,0x02,0x00, // G 39
+                            0x08,0xF8,0x08,0x00,0x00,0x08,0xF8,0x08,0x20,0x3F,0x21,0x01,0x01,0x21,0x3F,0x20, // H 40
+                            0x00,0x08,0x08,0xF8,0x08,0x08,0x00,0x00,0x00,0x20,0x20,0x3F,0x20,0x20,0x00,0x00, // I 41
+                            0x00,0x00,0x08,0x08,0xF8,0x08,0x08,0x00,0xC0,0x80,0x80,0x80,0x7F,0x00,0x00,0x00, // J 42
+                            0x08,0xF8,0x88,0xC0,0x28,0x18,0x08,0x00,0x20,0x3F,0x20,0x01,0x26,0x38,0x20,0x00, // K 43
+                            0x08,0xF8,0x08,0x00,0x00,0x00,0x00,0x00,0x20,0x3F,0x20,0x20,0x20,0x20,0x30,0x00, // L 44
+                            0x08,0xF8,0xF8,0x00,0xF8,0xF8,0x08,0x00,0x20,0x3F,0x00,0x3F,0x00,0x3F,0x20,0x00, // M 45
+                            0x08,0xF8,0x30,0xC0,0x00,0x08,0xF8,0x08,0x20,0x3F,0x20,0x00,0x07,0x18,0x3F,0x00, // N 46
+                            0xE0,0x10,0x08,0x08,0x08,0x10,0xE0,0x00,0x0F,0x10,0x20,0x20,0x20,0x10,0x0F,0x00, // O 47
+                            0x08,0xF8,0x08,0x08,0x08,0x08,0xF0,0x00,0x20,0x3F,0x21,0x01,0x01,0x01,0x00,0x00, // P 48
+                            0xE0,0x10,0x08,0x08,0x08,0x10,0xE0,0x00,0x0F,0x18,0x24,0x24,0x38,0x50,0x4F,0x00, // Q 49
+                            0x08,0xF8,0x88,0x88,0x88,0x88,0x70,0x00,0x20,0x3F,0x20,0x00,0x03,0x0C,0x30,0x20, // R 50
+                            0x00,0x70,0x88,0x08,0x08,0x08,0x38,0x00,0x00,0x38,0x20,0x21,0x21,0x22,0x1C,0x00, // S 51
+                            0x18,0x08,0x08,0xF8,0x08,0x08,0x18,0x00,0x00,0x00,0x20,0x3F,0x20,0x00,0x00,0x00, // T 52
+                            0x08,0xF8,0x08,0x00,0x00,0x08,0xF8,0x08,0x00,0x1F,0x20,0x20,0x20,0x20,0x1F,0x00, // U 53
+                            0x08,0x78,0x88,0x00,0x00,0xC8,0x38,0x08,0x00,0x00,0x07,0x38,0x0E,0x01,0x00,0x00, // V 54
+                            0xF8,0x08,0x00,0xF8,0x00,0x08,0xF8,0x00,0x03,0x3C,0x07,0x00,0x07,0x3C,0x03,0x00, // W 55
+                            0x08,0x18,0x68,0x80,0x80,0x68,0x18,0x08,0x20,0x30,0x2C,0x03,0x03,0x2C,0x30,0x20, // X 56
+                            0x08,0x38,0xC8,0x00,0xC8,0x38,0x08,0x00,0x00,0x00,0x20,0x3F,0x20,0x00,0x00,0x00, // Y 57
+                            0x10,0x08,0x08,0x08,0xC8,0x38,0x08,0x00,0x20,0x38,0x26,0x21,0x20,0x20,0x18,0x00, // Z 58
+                        };
+                    </code>
+                </pre>
+                <p><strong>iic.h</strong></p>
+                <pre class="line-numbers" style="height: 400px;">
+                    <code class="language-c">
+                        /* 本程序适用于STC15F104W系列以及89C51/C52系列单片机
+                           由暗星244结合网上资料编写而成，转载请注明出处 */
+
+                        #include "oled.h"
+                        #include&lt;reg52.h&gt;
+                        #include&lt;intrins.h&gt;
+
+                        typedef bit bool;
+                        sbit sda=P3^2; // SDA接口
+                        sbit scl=P3^3; // SCL接口
+
+                        void delay_ms(uint time) { // 毫秒延时
+                            uint x,y;
+                            for (y=0;y&lt;time;y++)
+                                for (x=0;x&lt;111;x++) {;}
+                        }
+
+                        void delay_us() { // 5微秒的延时
+                            _nop_();
+                            _nop_();
+                            _nop_();
+                            _nop_();
+                            _nop_();
+                        }
+
+                        void iic_start() { // 开始iic
+                            scl=1;
+                            sda=1;
+                            delay_us();
+                            sda=0;
+                            delay_us();
+                            scl=0;
+                        }
+
+                        void iic_stop() { // 停止iic
+                            scl=0;
+                            sda=0;
+                            scl=1;
+                            delay_us();
+                            sda=1;
+                            delay_us();
+                        }
+
+                        bit checkack(void) { // iic响应
+                            bit ack;
+                            scl=0;
+                            sda=1;
+                            delay_us();
+                            scl=1;
+                            delay_us();
+                            ack=sda;
+                            delay_us();
+                            scl=0;
+                            delay_us();
+                            return ack;
+                        }
+
+                        void write_bit(bool b) { // 写单位
+                            if (b) sda=1;
+                            else sda=0;
+                            delay_us();
+                            scl=1;
+                            delay_us();
+                            scl=0;
+                        }
+
+                        bool read_bit(void) { // 读取单位
+                            bool b;
+                            sda=1;
+                            delay_us();
+                            scl=1;
+                            delay_us();
+                            b=sda;
+                            scl=0;
+                            return b;
+                        }
+
+                        void write_byte(bool sendstart,bool sendstop,uchar byte) { // 写字节
+                            int i;
+                            if (sendstart) iic_start();
+                            for (i=0;i&lt;8;i++) {
+                                if (byte&0x80) sda=1;
+                                else sda=0;
+                                scl=1;
+                                scl=0;
+                                byte&lt;&lt;=1;
+                            }
+                            sda=1;
+                            scl=1;
+                            scl=0;
+                            if (sendstop) iic_stop();
+                        }
+
+                        uchar read_byte(bool nack, bool sendstop) { // 读取字节
+                            uchar byte=0;
+                            int i;
+                            for (i=0;i&lt;8;i++)
+                                byte=(byte&lt;&lt;1)|read_bit();
+                            write_bit(nack);
+                            if (sendstop) iic_stop();
+                            return byte;
+                        }
+                        void iic_writecommand(uint iic_cmd) { // 写命令
+                            write_byte(1,0,0x78);
+                            write_byte(0,0,0x00);
+                            write_byte(0,0,iic_cmd);
+                            iic_stop();
+                        }
+
+                        void iic_writedata(uchar iic_data) { // 写数据
+                            write_byte(1,0,0x78);
+                            write_byte(0,0,0x40);
+                            write_byte(0,0,iic_data);
+                            iic_stop();
+                        }
+
+                        void oled_wr_byte(unsigned dat,unsigned cmd) { // oled写字节
+                            if (cmd) iic_writedata(dat);
+                            else iic_writecommand(dat);
+                        }
+
+                        void fill_picture(uchar fill_data) { // 填充图像
+                            uchar m,n;
+                            for (m=0;m&lt;8;m++) {
+                                oled_wr_byte(0xb0+m,0);
+                                oled_wr_byte(0x01,0);
+                                oled_wr_byte(0x10,0);
+                                for (n=0;n&lt;128;n++)
+                                    oled_wr_byte(fill_data,1);
+                            }
+                        }
+
+                        void oled_set_pos(uchar x,uchar y) { // 设置光标位置
+                            oled_wr_byte(0xb0+y,0);
+                            oled_wr_byte(((x&0xf0)&gt;&gt;4)|0x10,0);
+                            oled_wr_byte((x&0x0f),0);
+                        }
+
+                        void oled_display_on(void) { // 开显示
+                            oled_wr_byte(0x8d,0);
+                            oled_wr_byte(0x14,0);
+                            oled_wr_byte(0xaf,0);
+                        }
+
+                        void oled_display_off(void) { // 关显示
+                            oled_wr_byte(0x8d,0);
+                            oled_wr_byte(0x10,0);
+                            oled_wr_byte(0xae,0);
+                        }
+
+                        void oled_clear(void) { // 清屏
+                            uchar i,n;
+                            for (i=0;i&lt;8;i++) {
+                                oled_wr_byte(0xb0+i,0);
+                                oled_wr_byte(0x00,0);
+                                oled_wr_byte(0x10,0);
+                                for (n=0;n&lt;128;n++)
+                                    oled_wr_byte(0,1);
+                            }
+                        }
+
+                        void oled_on(void) { // 更新显示
+                            uchar i,n;
+                            for (i=0;i&lt;8;i++) {
+                                oled_wr_byte(0xb0+i,0);
+                                oled_wr_byte(0x00,0);
+                                oled_wr_byte(0x10,0);
+                                for (n=0;n&lt;128;n++)
+                                    oled_wr_byte(1,1);
+                            }
+                        }
+
+                        void oled_showchar(uchar x,uchar y,uchar chr,uchar char_size) { // 显示一个字符，x:0-127，y:0-63，size是字体，默认填16就行
+                            uchar c=0,i=0;
+                            c=chr-' ';
+                            if (x&gt;128-1) {
+                                x=0;
+                                y=y+2;
+                            }
+                            if (char_size==16) {
+                                oled_set_pos(x,y);
+                                for (i=0;i&lt;8;i++)
+                                    oled_wr_byte(F8X16[c*16+i],1);
+                                oled_set_pos(x,y+1);
+                                for (i=0;i&lt;8;i++)
+                                    oled_wr_byte(F8X16[c*16+i+8],1);
+                            } else {
+                                oled_set_pos(x,y);
+                                for (i=0;i&lt;6;i++)
+                                    oled_wr_byte(F6x8[c][i],1);
+                            }
+                        }
+
+                        uint oled_pow(uchar m,uchar n) { // 次方函数
+                            uint result=1;
+                            while (n--) result*=m;
+                            return result;
+                        }
+
+                        void oled_shownum(uchar x,uchar y,uint num,uchar len,uchar size2) { // x,y:坐标，num数值，len位数，size2是字体，默认填16就行
+                            uchar t,temp;
+                            uchar enshow=0;
+                            for (t=0;t&lt;len;t++) {
+                                temp=(num/oled_pow(10,len-t-1))%10;
+                                if (enshow==0&&t&lt;(len-1)) {
+                                    if (temp==0) {
+                                        oled_showchar(x+(size2/2)*t,y,' ',size2);
+                                        continue;
+                                    } else enshow=1;
+                                }
+                                oled_showchar(x+(size2/2)*t,y,temp+'0',size2);
+                            }
+                        }
+
+                        void oled_showstring(uchar x,uchar y,uchar *chr,uchar char_size) { // 显示一个字符串
+                            uchar j=0;
+                            while (chr[j]!='\0') {
+                                oled_showchar(x,y,chr[j],char_size);
+                                x+=8;
+                                if (x&gt;120) {
+                                    x=0;
+                                    y+=2;
+                                }
+                                j++;
+                            }
+                        }
+
+                        void oled_showchinese(uchar x,uchar y,uchar no) { // 显示汉字，xy为坐标，no为编号
+                            uchar t,adder=0;
+                            oled_set_pos(x,y);
+                            for (t=0;t&lt;16;t++) {
+                                oled_wr_byte(HzK[2*no][t],1);
+                                adder+=1;
+                            }
+                            oled_set_pos(x,y+1);
+                            for (t=0;t&lt;16;t++) {
+                                oled_wr_byte(HzK[2*no+1][t],1);
+                                adder+=1;
+                            }
+                        }
+
+                        void oled_drawbmp(uchar x0,uchar y0,uchar x1,uchar y1,uchar bmp[]) { // 画图
+                            uint j=0;
+                            uchar x,y;
+                            if (y1%8==0) y=y1/8;
+                            else y=y1/8+1;
+                            for (y=y0;y&lt;y1;y++) {
+                                oled_set_pos(x0,y);
+                                for (x=x0;x&lt;x1;x++)
+                                    oled_wr_byte(bmp[j++],1);
+                            }
+                        }
+
+                        void oled_init(void) {    // 初始化SSD1306
+                            delay_ms(500);        // 延时（必须有）
+                            oled_wr_byte(0xAE,0); // 关闭OLED面板
+                            oled_wr_byte(0x00,0); // 设置低位列地址
+                            oled_wr_byte(0x10,0); // 设置高位列地址
+                            oled_wr_byte(0x40,0); // 设置起始行地址设置映射RAM显示起始行（0x00~0x3F）
+                            oled_wr_byte(0x81,0); // 设置对比度控制寄存器
+                            oled_wr_byte(0xCF,0); // 设置SEG输出电流亮度
+                            oled_wr_byte(0xA1,0); // 设置分段/列映射，0xA0左右反置，0xA1型正常
+                            oled_wr_byte(0xC8,0); // 设置COM/行扫描方向，0xC0上下反置，0xC8型正常
+                            oled_wr_byte(0xA6,0); // 设置正常显示
+                            oled_wr_byte(0xA8,0); // 设置复用比（1到64）
+                            oled_wr_byte(0x3F,0); // 1/64负载
+                            oled_wr_byte(0xD3,0); // 设置显示偏移映射RAM计数器（0x00~0x3F）
+                            oled_wr_byte(0x00,0); // 不补偿
+                            oled_wr_byte(0xD5,0); // 设置显示时钟分频比/振荡器频率
+                            oled_wr_byte(0x80,0); // 设置分频比，将时钟设置为100帧/秒
+                            oled_wr_byte(0xD8,0);
+                            oled_wr_byte(0x05,0);
+                            oled_wr_byte(0xD9,0); // 设置预充电时间
+                            oled_wr_byte(0xF1,0); // 将预充电设置为15个时钟，放电设置为1个时钟
+                            oled_wr_byte(0xDA,0); // 设置COM引脚硬件配置
+                            oled_wr_byte(0x12,0);
+                            oled_wr_byte(0xDB,0); // 设置VCOMH
+                            oled_wr_byte(0x40,0); // 设置VCOM取消选择级别
+                            oled_wr_byte(0x20,0); // 设置页面寻址模式（0x00/0x01/0x02）
+                            oled_wr_byte(0x02,0);
+                            oled_wr_byte(0x8D,0); // 设置电荷泵启用/禁用
+                            oled_wr_byte(0x14,0); // 设置（0x10）禁用
+                            oled_wr_byte(0xA4,0); // 禁用整个显示打开（0xA4/0xA5）
+                            oled_wr_byte(0xA6,0); // 禁用反转显示打开（0xA6/A7）
+                            oled_wr_byte(0xAF,0); // 打开OLED面板
+                            fill_picture(0x00);   // 初始清屏
+                            oled_set_pos(0,0);    // 初始光标
+                        }
+                    </code>
+                </pre>
+                <p>只需要把这些程序放到<del>礦ision</del>（划掉）μVision中编译为hex文件，再使用STC-ISP刷入单片机即可。</p>
+                <p>接下来讲讲如何使用字模转化程序。</p>
+                <p>首先在字模提取软件中设置好取模格式，然后生成字模，我们即可获得类似如下格式的文本：</p>
+                <pre>
+                    <code class="language-">
+                        {0x00,0xF8,0x08,0x08,0x08,0x08,0x08,0xFF,0x08,0x08,0x08,0x08,0x08,0xFC,0x08,0x00,0x00,0x03,0x01,0x01,0x01,0x01,0x01,0xFF,0x01,0x01,0x01,0x01,0x01,0x03,0x00,0x00},/*"中",0*/
+                        /* (16 X 16 , 宋体 )*/
+
+                        {0x08,0x08,0x08,0x18,0x68,0x88,0x09,0x0E,0x08,0x08,0xC8,0x38,0x08,0x0C,0x08,0x00,0x80,0x80,0x40,0x40,0x20,0x11,0x0A,0x04,0x0A,0x11,0x10,0x20,0x40,0xC0,0x40,0x00},/*"文",1*/
+                        /* (16 X 16 , 宋体 )*/
+                    </code>
+                </pre>
+                <p>此时只需要将带有大括号的一整行复制下来粘贴进程序作为其输入，然后按下回车键即可。</p>
+                <img src="./program.png" style="width: 100%; max-width: 800px; margin: 0 auto; display: block;">
+                <p>将程序的输出复制下来，放到<code class="language-">oled.h</code>的<code class="language-c">HzK[][32]</code>中，然后在<code class="language-">main.c</code>中使用以下格式调用即可：</p>
+                <pre class="line-numbers">
+                    <code class="language-c">
+                        oled_showchinese(   x,  y,  a);
+                        oled_showchinese(x+16,  y,  b);
+                        oled_showchinese(x+32,  y,  c);
+                        oled_showchinese(x+48,  y,  d);
+                        ...
+                        oled_showchinese(   x,y+2,a+1);
+                        oled_showchinese(x+16,y+2,b+1); // x指的是横坐标（像素，取值0~127）
+                        oled_showchinese(x+32,y+2,c+1); // y指的是页数（这里是4像素=1页，取值0~7）
+                        oled_showchinese(x+48,y+2,d+1); // a .. d指上面程序输出的数字编号 
+                        ...
+                    </code>
+                </pre>
+                <p>如果要显示数字也需要调用两次<code class="language-c">oled_showstring()</code>函数，由于我修改了字库，所以有如下的对应表格：</p>
+                <table border="2" style="margin: -5px auto; text-align: center;">
+                    <tr>
+                        <td>要显示的数字</td>
+                        <td>上半部分</td>
+                        <td>下半部分</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>!</td>
+                        <td>#</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>$</td>
+                        <td>%</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>&</td>
+                        <td>'</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>(</td>
+                        <td>)</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>*</td>
+                        <td>+</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>,</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>.</td>
+                        <td>/</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                </table>
+                <p>因此，假设我们需要显示“114514”，查表对应上半部分字符为“$$*,$*”，下半部分为“%%+-%+”，所以分别显示即可。</p>
+                <pre class="line-numbers">
+                    <code class="language-c">
+                        oled_showstring(0,4,"$$*,$*",16);
+                        oled_showstring(0,6,"%%+-%+",16);
+                    </code>
+                </pre>
+                <p></p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        a {
+            color: #110c50;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+
+            a {
+                color: #12efef;
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script src="/blog/quote-js/prismjs/prism.js"></script>
+</body>
+
+</html>

@@ -6,7 +6,7 @@
 
 .sidebar {
     display: none;
-    background-color: #a4e3e3;
+    backdrop-filter: blur(5px);
 }
 
 .content-container {

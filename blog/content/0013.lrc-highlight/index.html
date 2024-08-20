@@ -1,0 +1,249 @@
+<!-- MT管理器中高亮lrc文件 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在MT管理器中高亮lrc文件 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 边栏 -->
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引</h3>
+                <hr>
+                <ul>
+                    <li><a href="#intro">简介</a></li>
+                    <li><a href="#effect">效果</a></li>
+                    <li><a href="#code">代码</a></li>
+                    <li><a href="#principle">原理及lrc文件介绍</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 内容 -->
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">MT管理器中高亮lrc文件</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <p id="intro"><a href="https://mt2.cn">MT管理器</a>是一款非常好用的文件管理器，也提供了<a href="https://mt2.cn/guide/file/mt-syntax.html">丰富的自定义语法高亮方案</a>，而歌词文件(.lrc)也是非常常用的一类文件，这里给出一种高亮方案。</p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="effect">效果</h3>
+                <hr>
+                <p>
+                    <div id="img-container">
+                        <img src="./effect-day.jpg">
+                        <img src="./effect-night.jpg">
+                    </div>
+                </p>
+                <h3 id="code">代码</h3>
+                <hr>
+                <p><strong>Lyric.mtsx</strong></p>
+                <pre class="line-numbers">
+                    <code class="language-js">
+                        {
+                            name: ["Lyric", ".lrc"]
+                            hide: false
+                            ignoreCase: true
+                            styles: [
+                                "normalTimestamp", #748495, #508090
+                                "enhancedTimestamp", #7050E0, #6080B0
+                                "extendedTimestampF", #EF2030, #CC7832
+                                "extendedTimestampD", #DA2CEF, #9876AA
+                            ]
+                            bracketPairs: ["[]", "&lt;&gt;"]
+                            contains: [
+                                // 普通LRC
+                                {match: /\[\d+:\d+.\d+\]|\[\d+:\d+\]/, 0: "normalTimestamp"}
+                                // 增强LRC
+                                {match: /&lt;\d+:\d+.\d+&gt;|&lt;\d+:\d+&gt;/, 0: "enhancedTimestamp"}
+                                // 扩展LRC
+                                // 应用极少，故随便写写
+                                {match: /(?&lt;=\])F:.*/, 0: "extendedTimestampF"}
+                                {match: /(?&lt;=\])D:.*/, 0: "extendedTimestampD"}
+                                // ID标签，当作注释
+                                {match: /\[[a-z]+:.*\]/, 0: "comment"}
+                            ]
+                        }                        
+                    </code>
+                </pre>
+                <p></p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="principle">原理及lrc文件介绍</h3>
+                <hr>
+                <p>lrc文件是一种歌词文件，基本格式如下：</p>
+                <pre class="line-numbers">
+                    <code class="language-lrc">
+                        [mm:ss.xx]第一句歌词
+                        [mm:ss.xx]第二句歌词
+                        [mm:ss.xx]第三句歌词
+                    </code>
+                </pre>
+                <p>其中<code class="language-">[mm:ss.xx]</code>称为时间戳(timestamp)，用来告诉播放器应该在这个时间显示时间戳后面的歌词，因此我们只需要匹配前面的时间戳并配置颜色即可。不过需要注意的是，时间戳除了<code class="language-">[mm:ss.xx]</code>还有<code class="language-">[mm:ss]</code>这种格式，因此我们需要这样匹配：</p>
+                <pre>
+                    <code class="language-regex">
+                        \[\d+:\d+.\d+\]|\[\d+:\d+\]
+                    </code>
+                </pre>
+                <p>可以确保匹配到两种时间戳。</p>
+                <p>在文件的前面可能会有一些ID标签，它们通常由这些构成，大小写均可（不过并非是必要的）：</p>
+                <pre class="line-numbers">
+                    <code class="language-lrc">
+                        [ar:歌手]
+                        [ti:歌曲名]
+                        [al:专辑名]
+                        [by:歌词作者]
+                        [offset:时间偏移量]
+                        [re:资源类型]
+                        [ve:版本]
+                        [length:歌曲时长]
+                    </code>
+                </pre>
+                <p>所以只需要匹配带有数个字母与一个冒号的内容即可，当作注释处理，由于我设置了<code class="language-js">ignoreCase: true</code>，所以大小写只用管一个即可。</p>
+                <pre>
+                    <code class="language-regex">
+                        \[[a-z]+:.*\]
+                    </code>
+                </pre>
+                <p>另一种是扩展lrc，它仅在Walasoft的Walaoke上可用。它支持指定歌唱者对应的性别，M：男性、F：女性、D：合唱。</p>
+                <pre class="line-numbers">
+                    <code class="language-lrc">
+                        [mm:ss.xx]M:第一句歌词
+                        [mm:ss.xx]F:第二句歌词
+                        [mm:ss.xx]D:第三句歌词
+                    </code>
+                </pre>
+                <p>有必要注意的是，事实上它非常不常用，所以我只是随便写了一下，仅匹配带字母的那一行。</p>
+                <pre>
+                    <code class="language-regex">
+                        (?&lt;=\])F:.*
+                    </code>
+                </pre>
+                <p>还有一种是增强lrc，是由A2 Media Player开发的，它支持将时间戳精准到字。</p>
+                <pre class="line-numbers">
+                    <code class="language-lrc">
+                        [mm:ss.xx]&lt;mm:ss.xx&gt;第一行第一个词&lt;mm:ss.xx&gt;第一行第二个词&lt;mm:ss.xx&gt;...第一行最后一个词&lt;mm:ss.xx&gt;
+                        [mm:ss.xx]&lt;mm:ss.xx&gt;第二行第一个词&lt;mm:ss.xx&gt;第二行第二个词&lt;mm:ss.xx&gt;...第二行最后一个词&lt;mm:ss.xx&gt;
+                    </code>
+                </pre>
+                <p>要匹配这个也很简单，和普通的lrc时间戳相同，匹配<code class="language-">&lt;&gt;</code>即可。</p>
+                <pre>
+                    <code class="language-regex">
+                        &lt;\d+:\d+.\d+&gt;|&lt;\d+:\d+&gt;
+                    </code>
+                </pre>
+                <p>而事实上这种lrc比扩展lrc更常见，我们常用的网易云、酷狗等音乐平台都能看见精确到字的歌词，我们也可以使用类似<a href="https://github.com/chenmozhijin/LDDC">LDDC</a>这样的软件下载增强lrc歌词文件，并使用<a href="https://github.com/zhongyang219/MusicPlayer2">MusicPlayer2</a>这样的软件来显示它们。</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        a {
+            color: #110c50;
+        }
+
+        #img-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #img-container img {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 15px auto;
+        }
+
+        #img-container img:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (min-width: 600px) {
+            #img-container {
+                flex-direction: row;
+            }
+
+            #img-container img {
+                width: 48%;
+                margin-right: 2%;
+            }
+
+            #img-container img:last-child {
+                margin-right: 1%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #img-container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #img-container img {
+                width: 100%;
+                max-width: 500px;
+                margin: 0 auto 15px auto;
+            }
+
+            #img-container img:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (min-width: 900px) {
+            #img-container {
+                flex-direction: row;
+            }
+
+            #img-container img {
+                width: 48%;
+                margin-right: 2%;
+            }
+
+            #img-container img:last-child {
+                margin-right: 1%;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+
+            a {
+                color: #12efef;
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script src="/blog/content/0007.file-read/prism.js"></script>
+</body>
+
+</html>

@@ -70,11 +70,11 @@
                 <p>该网站引用外部库文件有：</p>
                 <ol>
                     <li>
-                        <p id="pdfobjectVersionDisplay"></p>
+                        <p id="pdfJsVersionDisplay"></p>
                         <p style="text-align: right; margin-top: -1em;">
-                            <a href="/blog/quote-js/pdfobject/pdfobject.js">查看</a>
-                            <a href="/blog/quote-js/pdfobject/pdfobject.js" download>下载</a>
-                            <a href="https://pdfobject.com">访问官网</a>
+                            <a href="/blog/quote-js/pdfjs/build/pdf.mjs">查看</a>
+                            <a href="/blog/quote-js/pdfjs/build/pdf.mjs" download>下载</a>
+                            <a href="https://mozilla.github.io/pdf.js/">访问官网</a>
                         </p>
                     </li>
                     <li>
@@ -109,7 +109,7 @@
             <div class="rounded-box6">
                 <h3 id="update" style="text-align: center;">更新日志</h3>
                 <hr>
-                <p>ver 0.6.6 2024.08.21 00:02 <br> 优化部分样式，更改字体为woff2。</p>
+                <p>ver 0.6.6 2024.08.22 00:13 <br> 优化部分样式，更改字体为woff2。<br>移除PDFObject，引入PDF.js显示。</p>
                 <p>ver 0.6.5 2024.08.08 16:54 <br> 文件查看器支持视频和音频。<br>修复一些错误，更改文本布局。</p>
                 <p>ver 0.6.4 2024.07.30 00:38 <br> 更换西文字体，文件查看器增加连字选项。</p>
                 <p>ver 0.6.3 2024.07.27 01:02 <br> 给所有必要的网页加入响应式设计。</p>
@@ -173,7 +173,7 @@
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>
-    <script src="/blog/quote-js/pdfobject/pdfobject.js"></script>
+    <script src="/blog/quote-js/pdfjs/build/pdf.mjs" type="module"></script>
     <script src="/blog/quote-js/jquery/jquery-3.7.1.js"></script>
     <script src="/blog/quote-js/katex/katex.min.js"></script>
     <script src="/blog/quote-js/katex/contrib/copy-tex.min.js"></script>
@@ -181,8 +181,8 @@
     <!-- <script src="/blog/quote-js/mathjax/es5/tex-chtml-full.js"></script> -->
     <script>
         // 获取引用库内容
-        var pdfobjectVersion = PDFObject.pdfobjectversion;
-        $("#pdfobjectVersionDisplay").html("<strong>PDFObject</strong> v" + pdfobjectVersion + "<br>用于在网页中显示PDF文件");
+        var pdfJsVersion = '4.5.136' /* 用pdfjsLib.version获取，但是没法显示 */;
+        $("#pdfJsVersionDisplay").html("<strong>PDF.js</strong> v" + pdfJsVersion + "<br>用于在网页中显示PDF文件");
 
         var jqueryVersion = $.fn.jquery;
         $("#jqueryVersionDisplay").html("<strong>jQuery</strong> v" + jqueryVersion + "<br>用于简化一些网页中的操作");

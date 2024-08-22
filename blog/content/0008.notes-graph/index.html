@@ -40,9 +40,7 @@
             </div>
             <div class="rounded-box3">
                 <p id="content">
-                    <div id="divPdfViewPanel2">
-                        <iframe src="/blog/quote-js/pdfjs/web/viewer.html?file=../../../../blog/content/0008.notes-graph/output.pdf" width="100%" height="700px;"></iframe>
-                    </div>
+                    <iframe src="/blog/quote-js/pdfjs/web/viewer.html?file=../../../../blog/content/0008.notes-graph/output.pdf" width="100%" height="500px"></iframe>
                 </p>
             </div>
         </main>
@@ -57,16 +55,16 @@
             color: #110c50;
         }
 
-        .pdfobject-container {
-            width: 100%;
-            height: 1000px;
-            border: 1.5px solid #2d2d2d;
-        }
-
         /* 背景图片设置 */
         body {
             background-image: url('/img/background/day-blogbackground.svg');
             background-size: 100%;
+        }
+
+        @media (min-width: 950px) {
+            iframe {
+                height: 650px;
+            }
         }
 
         @media (prefers-color-scheme: dark) {

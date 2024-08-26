@@ -1,0 +1,143 @@
+<!-- 解决Termux中的Signal 9错误 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解决Termux中的Signal 9错误 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 边栏 -->
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引</h3>
+                <hr>
+                <ul>
+                    <li><a href="#problem">问题现象</a></li>
+                    <li><a href="#solution">解决方法</a></li>
+                    <li>
+                        <a href="#appendix">附录</a>
+                        <ul style="margin-left: -24px;">
+                            <li><a href="#ppk">关于 Phantom Process Killer</a></li>
+                            <li><a href="#adb">ADB 的下载及使用</a></li>
+                            <li><a href="#honor-adb">荣耀设备无法连接 ADB 的解决方法</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 内容 -->
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">解决 Termux 中的 Signal 9 错误</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <h3 id="problem">问题现象</h3>
+                <hr>
+                <p>这几天心血来潮在 Termux 中装了个 Linux 系统，最开始是在一台 Android 8 系统上安装的，一切都正常运行。但是接着在一台 Android 14 上安装时，每当我切换到 VNC Viewer 几秒钟后就会脱离连接，并且 Termux 中输出</p>
+                <pre>
+                    <code class="language-powershell">
+                        ~ $
+                        [Process completed (signal 9) - press Enter]
+                    </code>
+                </pre>
+                <p>在查阅资料后发现是自 Android 12 后引入的 Phantom Process Killer 搞的鬼，所以只需要禁用它即可。</p>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="solution">解决方法</h3>
+                <hr>
+                <ol>
+                    <li>
+                        <p><strong>Android 12L、Android 13 及以上</strong><br>将手机的 USB 调试打开并连接电脑，打开电脑上的终端，输入</p>
+                        <pre>
+                            <code class="language-powershell">
+                                adb shell "settings put global settings_enable_monitor_phantom_procs false"
+                            </code>
+                        </pre>
+                        <p>即可禁用 Phantom Process Killer，然后重启手机。</p>
+                    </li>
+                    <li>
+                        <p><strong>Android 12</strong><br>同上，如果带有 GMS，则输入</p>
+                        <pre>
+                            <code class="language-powershell">
+                                adb shell "/system/bin/device_config set_sync_disabled_for_tests persistent; /system/bin/device_config put activity_manager max_phantom_processes 2147483647"
+                            </code>
+                        </pre>
+                        <p>不带 GMS 则输入</p>
+                        <pre>
+                            <code class="language-powershell">
+                                adb shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647"
+                            </code>
+                        </pre>
+                        <p>然后重启即可。</p>
+                    </li>
+                    <li>
+                        <p><strong>Termux 中的一些解决脚本</strong><br>如果你也和我一样，使用了 2moe 大佬封装的 Linux 安装脚本等这一类工具，那么它可能会附带有解决这些问题的工具，这些的原理也是 ADB 无线调试，跟着提示做就完事了。</p>
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="appendix">附录</h3>
+                <hr>
+                <ol>
+                    <li id="ppk">
+                        <p><strong>什么是 Phantom Process Killer</strong><br>这是一个后台进程限制器，自 Android 12 之后引入。假设父应用程序生成了超过 32 个的子进程，如果系统发现它们使用了过多的 CPU，则 Phantom Process Killer 会终止程序会启动并杀死整个应用程序层次结构。这种情况在未经用户同意的情况下发生，并且应用程序会自动终止，并给最终用户体验带来问题。</p>
+                    </li>
+                    <li id="adb">
+                        <p><strong>ADB 是什么，如何使用</strong><br>ADB (Android Debug Bridge)，安卓调试桥，是一个客户端（电脑）— 服务器端（Android 设备）程序，可以直接管理虚拟机或真实设备，其权限介于普通用户和 root 用户之间。<br>
+                        你可以在<a href="https://developer.android.com/studio/releases/platform-tools"> Android Developer 网站</a>上下载这些程序，并为其配置环境变量以方便调用。</p>
+                    </li>
+                    <li id="honor-adb">
+                        <p><strong>荣耀设备无法连接 ADB 怎么办</strong><br>在开发者选项中，找到<code class="language-">选择 USB 配置</code>这一项，选择为<code class="language-">RNDIS (USB 以太网)</code>即可。</p>
+                    </li>
+                </ol>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        a {
+            color: #110c50;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+
+            a {
+                color: #12efef;
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script src="/blog/content/0007.file-read/prism.js"></script>
+</body>
+
+</html>

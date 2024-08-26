@@ -76,5 +76,11 @@
         "title": "在MT管理器中高亮lrc文件",
         "modified": "2024.08.20 22:37",
         "category": "实用小程序"
+    },
+    {
+        "url": "content/0014.termux-signal-9/index.html",
+        "title": "解决Termux的Signal 9错误",
+        "modified": "2024.08.26 23:57",
+        "category": "实用小程序"
     }
 ]

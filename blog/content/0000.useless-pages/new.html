@@ -1,53 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Switcher</title>
-    <style>
-        /* 定义字体样式 */
-        .font-1 {
-            font-family: 'Arial', sans-serif;
-        }
-
-        .font-2 {
-            font-family: 'Times New Roman', serif;
-        }
-    </style>
+    <title>Test Page</title>
+    <style></style>
 </head>
+
 <body>
-    <label for="font-select">Choose a font:</label>
-    <select id="font-select">
-        <option value="font-1">Arial</option>
-        <option value="font-2">Times New Roman</option>
-    </select>
-
-    <div id="text-element" class="font-1">
-        This is the text whose font will be changed.
-    </div>
-
-    <div id="divPdfViewPanel2" style="margin: 5px;">
-        <iframe src="/blog/quote-js/pdfjs/web/viewer.html?file=../../../../blog/content/0008.notes-graph/output.pdf" width="100%" height="400px;"></iframe>
-    </div>
-
-    <canvas id="pdf-canvas"></canvas>
+    <p id="downlink"></p>
+    <p id="rtt"></p>
 
     <script>
-        // 获取 select 元素和目标元素
-        const fontSelect = document.getElementById('font-select');
-        const textElement = document.getElementById('text-element');
+        function updateNetworkInfo() {
+            if (navigator.onLine) {
+                let info = {
+                    downlink: navigator.connection.downlink,
+                    rtt: navigator.connection.rtt,
+                };
+                document.getElementById("downlink").textContent = '带宽' + info.downlink + "Mb/s";
+                document.getElementById("rtt").textContent = '延迟' + info.rtt + "ms";
+            } else {
+                document.getElementById("downlink").textContent = '当前';
+                document.getElementById("rtt").textContent = '离线';
+            }
+        }
 
-        // 监听 select 元素的变化事件
-        fontSelect.addEventListener('change', function() {
-            // 获取选中的值
-            const selectedFont = this.value;
+        updateNetworkInfo();
 
-            // 移除目标元素的所有字体类
-            textElement.classList.remove('font-1', 'font-2');
-
-            // 添加选中的字体类
-            textElement.classList.add(selectedFont);
-        });
+        window.addEventListener("online", updateNetworkInfo);
+        window.addEventListener("offline", updateNetworkInfo);
+        navigator.connection.addEventListener("change", updateNetworkInfo);
+        setInterval(updateNetworkInfo, 1000);
     </script>
 </body>
 </html>

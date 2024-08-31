@@ -39,16 +39,16 @@
                 <h3 id="index" style="text-align: center;">索引目录</h3>
                 <hr>
                 <ul id="content-index" style="column-count: 2;">
-                    <li><a href="#abstract-function" class="scroll-link">抽象函数</a></li>
-                    <li><a href="#explog" class="scroll-link">指数对数</a></li>
-                    <li><a href="#inequality" class="scroll-link">不等式</a></li>
-                    <li><a href="#statistic" class="scroll-link">统计</a></li>
-                    <li><a href="#vector" class="scroll-link">向量</a></li>
-                    <li><a href="#angle" class="scroll-link">角</a></li>
-                    <li><a href="#trig-function" class="scroll-link">三角函数</a></li>
-                    <li><a href="#complex-num" class="scroll-link">复数</a></li>
-                    <li><a href="#3d-geometry" class="scroll-link">立体几何</a></li>
-                    <li><a href="#ext" class="scroll-link">扩展</a></li>
+                    <li><a href="#abstract-function">抽象函数</a></li>
+                    <li><a href="#explog">指数对数</a></li>
+                    <li><a href="#inequality">不等式</a></li>
+                    <li><a href="#statistic">统计</a></li>
+                    <li><a href="#vector">向量</a></li>
+                    <li><a href="#angle">角</a></li>
+                    <li><a href="#trig-function">三角函数</a></li>
+                    <li><a href="#complex-num">复数</a></li>
+                    <li><a href="#3d-geometry">立体几何</a></li>
+                    <li><a href="#ext">扩展</a></li>
                 </ul>
             </div>
 
@@ -56,7 +56,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="abstract-function" class="section-title">抽象函数</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -89,7 +89,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="explog" class="section-title">指数与对数</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -119,7 +119,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="inequality" class="section-title">不等式</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -138,7 +138,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="statistic" class="section-title">统计</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -167,7 +167,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="vector" class="section-title">向量</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -221,7 +221,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="angle" class="section-title">角</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -244,7 +244,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="trig-function" class="section-title">三角函数</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -609,7 +609,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="complex-num" class="section-title">复数</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -657,7 +657,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="3d-geometry" class="section-title">立体几何</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -746,7 +746,7 @@
             <div class="rounded-box3">
                 <div class="container">
                     <h3 id="ext" class="section-title">扩展</h3>
-                    <a href="#index" id="text-right" class="scroll-link">返回索引</a>
+                    <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
                 <ol>
@@ -958,22 +958,22 @@
         window.addEventListener('resize', updateColumnCount);
 
         // 获取所有带有特定类名的链接元素
-        var scrollLinks = document.querySelectorAll('.scroll-link');
+        // var scrollLinks = document.querySelectorAll('.scroll-link');
 
         // 定义滚动函数
-        function scrollToTarget(targetId) {
-            var targetElement = document.getElementById(targetId);
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
+        // function scrollToTarget(targetId) {
+        //     var targetElement = document.getElementById(targetId);
+        //     targetElement.scrollIntoView({ behavior: 'smooth' });
+        // }
 
         // 为每个链接添加点击事件监听器
-        scrollLinks.forEach(function (link) {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                var targetId = this.getAttribute('href').substring(1); // 去掉 "#" 符号
-                scrollToTarget(targetId);
-            });
-        });
+        // scrollLinks.forEach(function (link) {
+        //     link.addEventListener('click', function (e) {
+        //         e.preventDefault();
+        //         var targetId = this.getAttribute('href').substring(1); // 去掉 "#" 符号
+        //         scrollToTarget(targetId);
+        //     });
+        // });
 
         // 定义滚动函数，不过宽屏情况下似乎没用
         // function smoothScroll(target, duration) {

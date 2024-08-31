@@ -15,65 +15,67 @@
 
 <body>
     <div class="content">
-        <!-- 标题框 -->
-        <div class="rounded-box1">
-            <h1 style="text-align: center;">猜数游戏</h1>
-        </div>
-
-        <!-- 操作框 -->
-        <div class="rounded-box3">
-            <p>请在<span id="rangeText">1到100</span>之间猜一个数字。</p>
-            <p id="hint">提示：<span id="hintText">1~100</span></p>
-            <!-- 输入框 -->
-            <input type="number" id="userGuess" min="1" max="100" placeholder="你的猜测...">
-            <br>
-            <!-- 提交按钮 -->
-            <button id="submitButton" onclick="checkGuess()">提交</button>
-            <button id="toggleButton">查看玩法</button>
-            <img src="../img/settings.svg" alt="Settings" id="settingsIcon" onclick="toggleSettings()">
-        </div>
-
-        <!-- 游戏设置框 -->
-        <div class="rounded-box-settings" id="settingsBox">
+        <div class="container">
+            <!-- 标题框 -->
             <div class="rounded-box1">
-                <h1 style="text-align: center;">游戏设置</h1>
+                <h1 style="text-align: center;">猜数游戏</h1>
             </div>
-            <div class="rounded-box3p">
-                <div class="minSetting">
-                    <label for="minInput">最小值：</label>
-                    <input type="number" id="minInput" value="1">
+
+            <!-- 操作框 -->
+            <div class="rounded-box3">
+                <p>请在<span id="rangeText">1到100</span>之间猜一个数字。</p>
+                <p id="hint">提示：<span id="hintText">1~100</span></p>
+                <!-- 输入框 -->
+                <input type="number" id="userGuess" min="1" max="100" placeholder="你的猜测...">
+                <br>
+                <!-- 提交按钮 -->
+                <button id="submitButton" onclick="checkGuess()">提交</button>
+                <button id="toggleButton">查看玩法</button>
+                <img src="../img/settings.svg" alt="Settings" id="settingsIcon" onclick="toggleSettings()">
+            </div>
+
+            <!-- 游戏设置框 -->
+            <div class="rounded-box-settings" id="settingsBox">
+                <div class="rounded-box1">
+                    <h1 style="text-align: center;">游戏设置</h1>
                 </div>
-                <div class="maxSetting">
-                    <label for="maxInput">最大值：</label>
-                    <input type="number" id="maxInput" value="100">
+                <div class="rounded-box3p">
+                    <div class="minSetting">
+                        <label for="minInput">最小值：</label>
+                        <input type="number" id="minInput" value="1">
+                    </div>
+                    <div class="maxSetting">
+                        <label for="maxInput">最大值：</label>
+                        <input type="number" id="maxInput" value="100">
+                    </div>
+                    <p id="errorText"></p>
+                    <button onclick="applySettings()">确定</button>
+                    <button onclick="cancelSettings()" class="cancelSetting">取消</button>
+                    <button onclick="resetGameButton()" class="resetGameButton">重置游戏</button>
                 </div>
-                <p id="errorText"></p>
-                <button onclick="applySettings()">确定</button>
-                <button onclick="cancelSettings()" class="cancelSetting">取消</button>
-                <button onclick="resetGameButton()" class="resetGameButton">重置游戏</button>
             </div>
-        </div>
 
-        <!-- 玩法提示框 -->
-        <div class="rounded-box2" style="display: none;">
-            <p id="gameRules">玩法：系统自动生成一个1到100之间的整数，你负责猜出这个数。每一次输入猜测后，系统会基于你的猜测给出相应的提示范围，直到你猜对为止。</p>
-        </div>
-
-        <!-- 状态反馈框 -->
-        <div class="feedback-container" id="feedbackContainer" style="display: none;">
-            <p id="feedback"></p>
-        </div>
-
-        <!-- 游戏结束矩形框 -->
-        <div class="rounded-box-settings" id="gameOverBox">
-            <div class="rounded-box1">
-                <h1>游戏结束</h1>
+            <!-- 玩法提示框 -->
+            <div class="rounded-box2" style="display: none;">
+                <p id="gameRules">玩法：系统自动生成一个1到100之间的整数，你负责猜出这个数。每一次输入猜测后，系统会基于你的猜测给出相应的提示范围，直到你猜对为止。</p>
             </div>
-            <div class="rounded-box3p">
-                <div class="endGameButtons">
-                    <p id="endGameDisplay"></p>
-                    <button onclick="resetGame()">再来一局</button>
-                    <button id="backHome">返回主页</button>
+
+            <!-- 状态反馈框 -->
+            <div class="feedback-container" id="feedbackContainer" style="display: none;">
+                <p id="feedback"></p>
+            </div>
+
+            <!-- 游戏结束矩形框 -->
+            <div class="rounded-box-settings" id="gameOverBox">
+                <div class="rounded-box1">
+                    <h1>游戏结束</h1>
+                </div>
+                <div class="rounded-box3p">
+                    <div class="endGameButtons">
+                        <p id="endGameDisplay"></p>
+                        <button onclick="resetGame()">再来一局</button>
+                        <button id="backHome">返回主页</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,6 +92,11 @@
             --text-color-light: #000000;
             --bg-color-dark: #18323fb9;
             --text-color-dark: #BBBBBB;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         /* 设置图标 */
@@ -117,6 +124,7 @@
         .rounded-box-settings {
             display: none;
             position: fixed;
+            z-index: 1;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -146,6 +154,7 @@
         #gameOverBox {
             display: none;
             position: fixed;
+            z-index: 2;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);

@@ -92,6 +92,11 @@ a {
     text-decoration: none;
 }
 
+/* 平滑滚动效果 */
+html {
+    scroll-behavior: smooth;
+}
+
 /* 输入框和按钮字体和文字大小 */
 input, button {
     font-family: text;

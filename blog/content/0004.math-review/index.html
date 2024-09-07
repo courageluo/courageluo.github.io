@@ -291,7 +291,7 @@
                     </li>
                     <li>
                         三角函数（以下所有$ k\in \mathbf{Z} $）<br>
-                        <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                        <ul class="scroll-ul">
                             <li>
                                 <strong>正弦函数</strong>$ y=\sin x $<br>
                                 定义域：$ \mathbf{R} $<br>
@@ -636,7 +636,7 @@
                     </li>
                     <li>
                         复数三角形式的运算
-                        <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                        <ul style="list-style-type: lower-alpha; white-space: nowrap; margin-left: -12px; overflow-x: auto; overflow-y: hidden;">
                             <li>
                                 乘法：$ r_1\left(\cos\theta_1+\mathrm i\sin\theta_1\right) \times r_2\left(\cos\theta_2+\mathrm i\sin\theta_2\right)=r_1r_2\left(\cos\left(\theta_1+\theta_2\right)+\mathrm i\sin\left(\theta_1+\theta_2\right)\right) $
                             </li>
@@ -822,7 +822,7 @@
                     </li>
                     <li>
                         对于$ \triangle ABC $，记三个顶点$ A\left(x_1,y_1\right) $，$ B\left(x_2,y_2\right) $，$ C\left(x_3,y_3\right) $所对的边为$ a $，$ b $，$ c $，则有：
-                        <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                        <ul class="scroll-ul">
                             <li>
                                 重心$ G $的向量式为$ \overrightarrow{GA}+\overrightarrow{GB}+\overrightarrow{GC}=\boldsymbol{0} $<br>
                                 坐标为$ G\left( \displaystyle\frac{x_1+x_2+x_3}3,\frac{y_1+y_2+y_3}3 \right) $
@@ -841,7 +841,7 @@
                             </li>
                         </ul>
                         如果仅以顶点坐标表达，则有：
-                        <ul style="list-style-type: lower-alpha; white-space: nowrap;">
+                        <ul class="scroll-ul">
                             <li>
                                 $ G\left( \displaystyle\frac{x_1+x_2+x_3}3,\frac{y_1+y_2+y_3}3 \right) $
                             </li>
@@ -888,26 +888,28 @@
                     </li>
                     <li>
                         $ n $倍角公式<br>
-                        $
-                            \begin{aligned}
-                                \sin n\theta&=\begin{vmatrix}
-                                \sin\theta & 0 & 0 & \cdots & 0 & 0\\
-                                0 & 2\cos\theta & 1 & \cdots & 0 & 0\\
-                                0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
-                                \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
-                                0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
-                                0 & 0 & 0 & \cdots & 1 & 2\cos\theta
-                                \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\sin\frac{\left ( n-k \right )\pi }2 \\
-                                \cos n\theta&=\begin{vmatrix}
-                                \cos\theta & 1 & 0 & \cdots & 0 & 0\\
-                                1 & 2\cos\theta & 1 & \cdots & 0 & 0\\
-                                0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
-                                \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
-                                0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
-                                0 & 0 & 0 & \cdots & 1 & 2\cos\theta
-                                \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\cos\frac{\left ( n-k \right )\pi }2
-                            \end{aligned}
-                        $
+                        <div style="overflow-x: auto; overflow-y: hidden;">
+                            $
+                                \begin{aligned}
+                                    \sin n\theta&=\begin{vmatrix}
+                                    \sin\theta & 0 & 0 & \cdots & 0 & 0\\
+                                    0 & 2\cos\theta & 1 & \cdots & 0 & 0\\
+                                    0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
+                                    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+                                    0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
+                                    0 & 0 & 0 & \cdots & 1 & 2\cos\theta
+                                    \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\sin\frac{\left ( n-k \right )\pi }2 \\
+                                    \cos n\theta&=\begin{vmatrix}
+                                    \cos\theta & 1 & 0 & \cdots & 0 & 0\\
+                                    1 & 2\cos\theta & 1 & \cdots & 0 & 0\\
+                                    0 & 1 & 2\cos\theta & \cdots & 0 & 0\\
+                                    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+                                    0 & 0 & 0 & \cdots & 2\cos\theta & 1\\
+                                    0 & 0 & 0 & \cdots & 1 & 2\cos\theta
+                                    \end{vmatrix}=\displaystyle\sum_{k=0}^nC_n^k\cos^kx\sin^{n-k}x\cos\frac{\left ( n-k \right )\pi }2
+                                \end{aligned}
+                            $
+                        </div>
                     </li>
                 </ol>
             </div>
@@ -940,6 +942,14 @@
             bottom: 0px;
             right: -60px;
             transform: translateX(-100%);
+        }
+        
+        .scroll-ul {
+            list-style-type: lower-alpha;
+            white-space: nowrap;
+            margin-left: -12px;
+            overflow-x: auto;
+            overflow-y: hidden;
         }
 
         /* 一点响应式设计 */

@@ -921,6 +921,20 @@
 
     <!-- 内部CSS文件 -->
     <style>
+        /* 调试用 */
+        /* * {
+            outline: solid rgb(255, 0, 0) 1px !important;
+            background: #000 !important;
+            color: #fff !important;
+        } */
+
+        /* 问题：在小于一定宽度时，右边会留白
+           临时解决方案如下 */
+        html {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
         a {
             color: #110c50;
         }

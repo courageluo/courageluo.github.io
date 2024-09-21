@@ -745,7 +745,7 @@
                     <li>
                         立体表面积与体积的计算<br>
                         <div style="height: 3px;"></div>
-                        <div style="white-space: nowrap; overflow-x: auto; overflow-y: hidden;">
+                        <div class="scroll-item">
                             <table border="2" style="width: 100%; height: 100%; text-align: center;">
                                 <tr>
                                     <th colspan="2">名称</th>
@@ -804,6 +804,48 @@
                         <strong>推论1</strong> 经过一条直线与直线外一点，有且只有一个平面。（直线与直线外一点确定一个平面）<br>
                         <strong>推论2</strong> 经过两条相交直线，有且只有一个平面（两条相交直线确定一个平面）<br>
                         <strong>推论3</strong> 经过两条平行直线，有且只有一个平面（两条平行直线确定一个平面）
+                    </li>
+                    <li>
+                        空间中的平行关系<br>
+                        <ul class="margin-ul" style="white-space: normal;">
+                            <li>
+                                <strong>线线平行推线面平行</strong> <br>
+                                $ l\not\subset \alpha,m\subset\alpha,l\parallel m\Rightarrow l\parallel\alpha $<br>
+                            </li>
+                            <li>
+                                <strong>线面平行推线线平行</strong> <br>
+                                $ l\parallel \alpha,l\subset\beta,\alpha\cap\beta=m\Rightarrow l\parallel m $<br>
+                            </li>
+                            <li>
+                                <strong>线线平行推面面平行</strong>(慎用) <br>
+                                $ l\parallel l',m\parallel m',l\cap m\ne\varnothing,l\subset\alpha,m\subset\alpha,l'\subset\beta,m'\subset\beta\Rightarrow\alpha\parallel\beta $<br>
+                            </li>
+                            <li>
+                                <strong>面面平行推线线平行</strong> <br>
+                                $ \alpha\parallel\beta,\alpha\cap\gamma=l,\beta\cap\gamma=m\Rightarrow l\parallel m $<br>
+                            </li>
+                            <li>
+                                <strong>线面平行推面面平行</strong> <br>
+                                $ l\subset\alpha,m\subset\alpha,l\cap m\ne\varnothing,l\parallel\beta,m\parallel\beta\Rightarrow\alpha\parallel\beta $<br>
+                            </li>
+                            <li>
+                                <strong>面面平行推线面平行</strong>(任意性) <br>
+                                $ \alpha\parallel\beta\Rightarrow\forall l\subset\alpha,l\parallel\beta $<br>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        空间中的垂直关系<br>
+                        <ul class="margin-ul" style="white-space: normal;">
+                            <li>
+                                <strong>线线垂直推线面垂直</strong> <br>
+                                $ l\perp a,l\perp b,a\cap b\ne\varnothing,a\subset\alpha,b\subset\alpha\Rightarrow l\perp\alpha $
+                            </li>
+                            <li>
+                                <strong>线面垂直推线线垂直</strong> <br>
+                                $ l\perp\alpha\Rightarrow\forall a\subset\alpha,l\perp a $
+                            </li>
+                        </ul>
                     </li>
                 </ol>
             </div>
@@ -929,7 +971,7 @@
         } */
 
         /* 问题：在小于一定宽度时，右边会留白
-           临时解决方案如下 */
+           临时解决方案如下，但似乎手机上依然这样 */
         html {
             width: 100%;
             overflow-x: hidden;

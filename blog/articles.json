@@ -82,5 +82,11 @@
         "title": "解决Termux的Signal 9错误",
         "modified": "2024.08.26 23:57",
         "category": "实用小程序"
+    },
+    {
+        "url": "content/0015.lower-readability/index.html",
+        "title": "降低程序可读性的方法",
+        "modified": "2024.10.01 23:43",
+        "category": "C++学习记录"
     }
 ]

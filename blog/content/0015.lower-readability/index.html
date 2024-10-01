@@ -1,0 +1,425 @@
+<!-- 降低程序可读性 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何降低程序可读性 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 边栏 -->
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引</h3>
+                <hr>
+                <ul>
+                    <li>
+                        <a href="#badcodinghabit">不良好的编码习惯</a>
+                        <ul style="margin-left: -24px;">
+                            <li><a href="#variable">难以理解的变量名</a></li>
+                            <li><a href="#comment">不写或乱写注释</a></li>
+                            <li><a href="#define">滥用宏定义</a></li>
+                            <li><a href="#meaninglessfunc">无意义的函数</a></li>
+                            <li><a href="#messformat">混乱的格式</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#cppfeature">滥用语言特性</a>
+                        <ul style="margin-left: -24px;">
+                            <li><a href="#goto">滥用goto语句</a></li>
+                            <li><a href="#ptr">滥用指针</a></li>
+                            <li><a href="#comma">使用逗号运算符</a></li>
+                            <li><a href="#bitcalc">滥用位运算</a></li>
+                            <li><a href="#asm">内嵌汇编</a></li>
+                            <li><a href="#operator">运算符随意重载</a></li>
+                            <li><a href="#builtinfunc">使用内建函数</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#example">例题实践</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 内容 -->
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">降低程序可读性的方法</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <h3 id="badcodinghabit">不良好的编码习惯</h3>
+                <hr>
+                <ol>
+                    <li id="variable">
+                        <strong>使用难以理解的变量名</strong><br>
+                        使用缩写或拼音代替英文单词，或者使用与代码逻辑无关的变量名，甚至可以使用五笔输入法的首字母，这样可以显著降低代码的可读性。<br>
+                        例如，将
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int data[N],sum[N],ans[N];
+                                int totalNumber,counter;
+                            </code>
+                        </pre>
+                        修改为
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int he[N];       // 和(He)
+                                int sj[N],da[N]; // 数据(ShuJu) 答案(DaAn)
+                                int uo,yok;      // 总数(UknOvt) 计数器(YfOvtKkd)
+                            </code>
+                        </pre>
+                        或者也可以使用字形相似的字符，例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int l11II[OO00O],l1IlI[OO00O],IlIl1[OO00O];
+                                int I1llI,II11I;
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="comment">
+                        <strong>不写或乱写注释</strong><br>
+                        乱写注释可以扰乱阅读者的思维，以达到降低可读性的目的。例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int a=2,b=3;    // 定义a为-2，b为3
+                                std::cout&lt;&lt;a+b; // 输出a与b的差
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="define">
+                        <strong>滥用宏定义</strong><br>
+                        滥用一些与代码逻辑无关的宏定义，可以使得程序更加难以阅读和维护。例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                #define true 0
+                                #define false 1
+
+                                bool isPrime(int x) {
+                                    for (int i=2;i<=sqrt(x);i+=false) {
+                                        if (x%i==true) return true;
+                                    }
+                                    return false;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="meaninglessfunc">
+                        <strong>写无意义的函数</strong><br>
+                        通过写一些没有意义的函数，引用时会消耗更多时间理解，例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                bool check(bool x) {
+                                    return x ? true : false;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="messformat">
+                        <strong>格式混乱</strong><br>
+                        随意格式化代码，或者随意使用空格、续行符<code class="language-cpp">\</code>等可以使代码看起来更加支离破碎，以降低代码可读性，例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int m\
+                                ain(){in\
+                                t a, b;ci\
+                                n&gt;&gt;a
+                                &gt;&gt; b;c\
+                                out&lt;&lt;a+
+                                 b;retu\
+                                rn 0;  }
+                            </code>
+                        </pre>
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="cppfeature">滥用语言特性</h3>
+                <hr>
+                <ol>
+                    <li id="goto">
+                        <strong>滥用<code class="language-cpp">goto</code>语句</strong><br>
+                        该关键字用于无条件跳转到指定的标签，可以将程序提升到一个更高的维度。例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                for (int i=0;i&lt;n;i++) {
+                                    cin>>num[i];
+                                }
+                            </code>
+                        </pre>
+                        可以修改为
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int i=0;
+                                loop:
+                                    cin>>num[i];
+                                if (i&lt;n) {
+                                    goto loop;
+                                    i++;
+                                }
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="ptr">
+                        <del>灵活</del><strong>使用指针运算</strong><br>
+                        指针是很有趣的一种运算，例如，数组元素的访问实质上就是通过指针实现的。因此，我们可以将
+                        <pre>
+                            <code class="language-cpp">
+                                int begin=a[0],end=a[15];
+                            </code>
+                        </pre>
+                        修改为
+                        <pre>
+                            <code class="language-cpp">
+                                int begin=*(a+0),end=*(a+15);
+                            </code>
+                        </pre>
+                        又因为<code class="language-cpp">*(a+0)</code>等价于<code class="language-cpp">*(0+a)</code>，且<code class="language-cpp">*(a+15)</code>等价于<code class="language-cpp">*((a+1)+14)</code>，所以我们还可以将其修改为
+                        <pre>
+                            <code class="language-cpp">
+                                int begin=0[a],end=14[a+1];
+                            </code>
+                        </pre>
+                        使用<code class="language-cpp">*&</code>也是一种不错的选择，例如
+                        <pre>
+                            <code class="language-cpp">
+                                int begin=*&1[a-1],end=&*14[a+1];
+                            </code>
+                        </pre>
+                        我们也可以使用多重指针来使程序更难以阅读，例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int var[3]={1,2,3};
+                                int *ptr=var,
+                                    **pptr=&ptr;
+                                std::cout&lt;&lt;(*pptr)[1]&lt;&lt;'\n'; // 输出var[1]，即2
+                                std::cout&lt;&lt;**pptr&lt;&lt;'\n';     // 输出var[2]，即3
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="comma">
+                        <strong>使用<code class="language-cpp">,</code>运算符</strong><br>
+                        逗号运算符用于顺序执行多个表达式，并返回最后一个表达式的值。例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int n[10],i=5;
+                                int a=n[i];
+                                return 0;
+                            </code>
+                        </pre>
+                        可以修改为
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                int (n,n)[(1,10)],i=(1,5);
+                                int a=i,(i,n)[(1,i)];
+                                return i,0;
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="bitcalc">
+                        <strong>滥用位运算</strong><br>
+                        虽然位运算可以提高程序运行效率，但是大量的位运算可以使程序可读性降低，例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                // 递归实现加法
+                                int add(int a,int b) {
+                                    if (!a) return b;
+                                    return add((a&b)&lt;&lt;1,a^b);
+                                }
+
+                                // 交换两个变量的值
+                                int a=3,b=5;
+                                a^=b^=a^=b; // a=5,b=3
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="asm">
+                        <strong>内嵌汇编</strong><br>
+                        对于不熟悉汇编语言的人来说，内嵌汇编简直是可读性的噩梦，例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                // 汇编实现加法
+                                int add(int a,int b) {
+                                    __asm__ (
+                                        "movl %1,%%eax\n\t"
+                                        "addl %2,%%eax\n\t"
+                                        "movl %%eax,%0"
+                                        : "=r"(ans)
+                                        : "r"(a),"r"(b)
+                                    );
+                                    return ans;
+                                }
+
+                                // 变量自加1
+                                int i=5;
+                                __asm { inc [i] } // i=6
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="operator">
+                        <strong>随意重载运算符</strong><br>
+                        通过将运算符重载为与意义无关的操作，可以使程序难以理解，例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                class Int {
+                                    public:
+                                        int val;
+                                        Int(int v) : val(v) {}
+                                        Int operator++(int) const { return Int(val-1); }
+                                        Int operator--(int) const { return Int(val+1); }
+                                        Int operator+(const Int& other) const { return Int(val-other.val); }
+                                        Int operator-(const Int& other) const { return Int(val+other.val); }
+                                        friend std::ostream& operator&lt;&lt;(std::ostream& os,const Int& i) { os&lt;&lt;i.val; return os; }
+                                };
+                                
+                                int main() {
+                                    Int a(3),b(5);
+                                    std::cout&lt;&lt;a+b; // 输出-2
+                                    std::cout&lt;&lt;a-b; // 输出8
+                                    std::cout&lt;&lt;a++; // 输出2
+                                    std::cout&lt;&lt;b--; // 输出6
+                                    return 0;
+                                }                                
+                            </code>
+                        </pre>
+                    </li>
+                    <li id="builtinfunc">
+                        <strong>使用内建函数</strong><br>
+                        使用内建函数可以减少头文件的引用，某种程度上可以使可读性降低，例如
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                // 一行代码实现a+b
+                                main(int a,int b){return __builtin_scanf("%d%d",&a,&b),__builtin_printf("%d",a+b),0;}
+                            </code>
+                        </pre>
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <h3 id="example">例题实践</h3>
+                <hr>
+                <p>
+                    <strong><a href="http://182.43.200.0:6548/problem.php?id=1066">NZOJ P1066 直方图</a></strong> 给定一个非负整数数组，统计里面每一个数的出现次数，我们只统计到数组里最大的数。假设 F<sub>max</sub>（F<sub>max</sub> &lt; 10000）是数组里最大的数，那么我们只统计 {0,1,2 ... F<sub>max</sub>} 里每个数出现的次数。<br>
+                    <strong>输入</strong> 第一行 n 是数组的大小（1≤n≤10000），紧接着一行是数组的n个元素。<br>
+                    <strong>输出</strong> 按顺序输出每个数的出现次数，一行一个数。如果没有出现过，则输出 0。
+                </p>
+                <p>题目很简单，正常代码如下：</p>
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        #include&lt;bits/stdc++.h&gt;
+                        using namespace std;
+
+                        const int N=10005;
+                        int maxval,num;
+                        int cnt[N];
+
+                        int max(int a,int b) {
+                            return a>b ? a : b;
+                        }
+    
+                        int main() {
+                            int n;
+                            cin&gt;&gt;n;
+                            for (int i=0;i&lt;n;i++) {
+                                cin>>num;
+                                cnt[num]++;
+                                maxval=max(maxval,num);
+                            }
+                            for (int i=0;i&lt;=maxval;i++) {
+                                cout&lt;&lt;cnt[i]&lt;&lt;endl;
+                            }
+                            return 0;
+                        }
+                    </code>
+                </pre>
+                <p>接下来，让我们利用一些上面的技巧，来让这段代码变得抽象。首先，更换变量名，使用内建函数，并简单格式化一下：</p>
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        /*  sz：数字（ShuZi）
+                           zdz：最大值（ZuiDaZhi）
+                          yoox：计数数组（YfOvtOvtXeg）
+                          orwo：数据个数（OvtRndWhOvt）
+                          fjdw：求最大值（FiyJbDdWfhg） */
+                        
+                        int sz,zdz,yoox[10005];
+
+                        int fjdw(int a,int b)
+                        { return a>b?a:b; }
+    
+                        int main() {
+                            int orwo; __builtin_scanf("%d",&orwo);
+                            for (int i=0;i&lt;orwo;i++) {
+                            __builtin_scanf("%d",&sz);
+                            yoox[sz]++; zdz=fjdw(zdz,sz); }
+                            for (int i=0;i&lt;=zdz;i++) {
+                            __builtin_printf("%d\n",yoox[i]); }
+                            return 0;
+                        }
+                    </code>
+                </pre>
+                <p>接着，让我们运用一点点指针，加上逗号运算符以及<code class="language-cpp">goto</code>语句，顺便再优化一下代码的格式：</p>
+                <pre class="line-numbers">
+                    <code class="language-cpp">
+                        int sz,zdz,yoox[10005];
+                        int fjdw(int I,int l)
+                        {return I,l,I>l?I:l;}
+                        int main(){int orwo;__bu\
+                        iltin_scanf("%d",&orwo);
+                        for(int i=0;i&lt;orwo;i++){
+                        __builtin_scanf("%d",&sz);
+                        (sz-1)[(1,yoox+1)]++;
+                        zdz=fjdw(zdz,sz);}int i(0);
+                        loop:__builtin_prin\
+                        tf("%d\n",*(i+yoox));
+                        if(i++<=zdz)goto loop;
+                        return orwo,zdz,0;}
+                    </code>
+                </pre>
+                <p>现在它就比较难以理解了。</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        a {
+            color: #110c50;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+
+            a {
+                color: #12efef;
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script src="/blog/quote-js/prismjs/prism.js"></script>
+</body>
+
+</html>

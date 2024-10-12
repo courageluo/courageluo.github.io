@@ -36,6 +36,7 @@
                     <li>
                         <a href="#cppfeature">滥用语言特性</a>
                         <ul style="margin-left: -24px;">
+                            <li><a href="#digraph">滥用合字符</a></li>
                             <li><a href="#goto">滥用goto语句</a></li>
                             <li><a href="#ptr">滥用指针</a></li>
                             <li><a href="#comma">使用逗号运算符</a></li>
@@ -141,6 +142,30 @@
                                 rn 0;  }
                             </code>
                         </pre>
+                        以及使用奇怪的空格方式也可以使程序阅读困难，例如：
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                // --&gt; 表示趋近于符号
+                                // 该程序表示x趋近于0，输出4 3 2 1 0
+                                int x=5;
+                                while (x --&gt; 0) {
+                                    cout&lt;&lt;x&lt;&lt;" ";
+                                }
+
+                                // &lt;---- 表示快速趋近于
+                                // 该程序表示x快速趋近于0，输出8 6 4 2
+                                int x=10;
+                                while (0 &lt;---- x) {
+                                    cout&lt;&lt;x&lt;&lt;" ";
+                                }
+
+                                // -=-运算用于变量自加1
+                                // 该程序表示x自加1，输出6
+                                int x=5;
+                                x -=- 1;
+                                cout&lt;&lt;x;
+                            </code>
+                        </pre>
                     </li>
                 </ol>
             </div>
@@ -148,6 +173,93 @@
                 <h3 id="cppfeature">滥用语言特性</h3>
                 <hr>
                 <ol>
+                    <li id="digraph">
+                        <strong>滥用合字符</strong><br>
+                        <a href="https://en.m.wikipedia.org/wiki/Digraphs_and_trigraphs_(programming)">Digraphs和trigraphs</a>是一些语言特性，可以用来替代一些曾经可能不便于输入的字符，在C++语言中，对应关系如下：
+                        <table border="2" style="width: 100%; text-align: center; margin: 5px 0;">
+                            <tr>
+                                <th>字符</th>
+                                <th>Digraph</th>
+                                <th>Trigraph</th>
+                            </tr>
+                            <tr>
+                                <td><code class="language-cpp">#</code></td>
+                                <td><code class="language-cpp">%:</code></td>
+                                <td><code class="language-cpp">??=</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="language-cpp">[</code></td>
+                                <td><code class="language-cpp">&lt;:</code></td>
+                                <td><code class="language-cpp">??(</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="language-cpp">]</code></td>
+                                <td><code class="language-cpp">:&gt;</code></td>
+                                <td><code class="language-cpp">??)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="language-cpp">{</code></td>
+                                <td><code class="language-cpp">&lt;%</code></td>
+                                <td><code class="language-cpp">??&lt;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="language-cpp">}</code></td>
+                                <td><code class="language-cpp">%&gt;</code></td>
+                                <td><code class="language-cpp">??&gt;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="language-cpp">\</code></td>
+                                <td rowspan="4">无</td>
+                                <td><code class="language-cpp">??/</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="language-cpp">^</code></td>
+                                <td><code class="language-cpp">??'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="language-cpp">|</code></td>
+                                <td><code class="language-cpp">??!</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="language-cpp">~</code></td>
+                                <td><code class="language-cpp">??-</code></td>
+                            </tr>
+                        </table>
+                        所以
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                #include&lt;iostream&gt;
+                                using namespace std;
+
+                                int main() {
+                                    int arr[5]={0,1,2,3,4};
+                                    for (int i=0;i&lt;5;i++) {
+                                        if (arr[i]%2) {
+                                            cout&lt;&lt;arr[i]&lt;&lt;'\n';
+                                        }
+                                    }
+                                    return 0;
+                                }
+                            </code>
+                        </pre>
+                        可以修改为
+                        <pre class="line-numbers">
+                            <code class="language-cpp">
+                                ??=include&lt;iostream&gt;
+                                using namespace std;
+
+                                int main() &lt;%
+                                    int arr??(5:&gt;=&lt;%0,1,2,3,4??&gt;;
+                                    for (int i=0;i&lt;5;i++) ??&lt;
+                                        if (arr&lt;:i??)%2) &lt;%
+                                            cout&lt;&lt;arr??(i??)&lt;&lt;'??/n';
+                                        ??&gt;
+                                    %&gt;
+                                    return 0;
+                                %&gt;
+                            </code>
+                        </pre>
+                    </li>
                     <li id="goto">
                         <strong>滥用<code class="language-cpp">goto</code>语句</strong><br>
                         该关键字用于无条件跳转到指定的标签，可以将程序提升到一个更高的维度。例如
@@ -296,13 +408,12 @@
                     </li>
                     <li id="builtinfunc">
                         <strong>使用内建函数</strong><br>
-                        使用内建函数可以减少头文件的引用，某种程度上可以使可读性降低，例如
-                        <pre class="line-numbers">
+                        使用内建函数可以减少头文件的引用，某种程度上可以使可读性降低，例如一行代码实现a+b问题：
+                        <pre>
                             <code class="language-cpp">
-                                // 一行代码实现a+b
                                 main(int a,int b){return __builtin_scanf("%d%d",&a,&b),__builtin_printf("%d",a+b),0;}
                             </code>
-                        </pre>
+                        </pre》>
                     </li>
                 </ol>
             </div>

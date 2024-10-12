@@ -1,0 +1,362 @@
+<!-- 画板 -->
+<!DOCTYPE html>
+<html>
+
+<!-- 待修改：有时画笔指示与实际绘画位置不同 -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易画板 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
+</head>
+
+<body>
+    <!-- 内容 -->
+    <div class="content">
+        <div class="container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">简易画板</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <div id="canvas-container">
+                    <canvas id="canvas"></canvas>
+                    <canvas id="brush-preview"></canvas>
+                </div>
+                <div id="controls">
+                    <div id="brushColorSetting" class="align-items">
+                        <span>画笔颜色</span>
+                        <input type="color" id="colorPicker" value="#000000">
+                    </div>
+                    <div id="brushColorPresets" class="align-items">
+                        <span>预设</span>
+                        <div id="colorPresets"></div>
+                    </div>
+                    <div id="brushSizeSetting" class="align-items">
+                        <span>画笔粗细</span>
+                        <input type="range" id="brushSize" min="1" max="20" value="5">
+                        <span id="brushSizeDisplay">5px</span>
+                    </div>
+                    <div id="bgColorSetting" class="align-items">
+                        <span>背景颜色</span>
+                        <input type="color" id="bgColorPicker" value="#ffffff">
+                    </div>
+                    <div id="functionSelect" class="align-items">
+                        <button id="eraser">橡皮擦</button>
+                        <button id="clear">清除屏幕</button>
+                        <button id="save">保存图像</button>
+                    </div>
+                    <div id="undoAndRedo" class="align-items">
+                        <button id="undo">撤销</button>
+                        <button id="redo">重做</button>
+                    </div>
+                </div>
+                <div style="height: 10px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .align-items {
+            gap: 10px;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        #canvas-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 10px auto;
+        }
+
+        #canvas {
+            border: 2px solid #000;
+            border-radius: 5px;
+            cursor: none;
+            width: 100%;
+            height: auto;
+        }
+
+        #brush-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        #controls {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        input[type="color"] {
+            width: 50px;
+            border-radius: 3px;
+        }
+
+        .color-presets {
+            margin-left: -20px;
+        }
+
+        .color-preset {
+            width: 15px;
+            height: 16px;
+            border: 2px outset;
+            cursor: pointer;
+            margin-right: 7px;
+        }
+
+        #brushSize {
+            width: 100%;
+            max-width: 200px;
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script>
+        // 获取相应的元素
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const brushPreview = document.getElementById('brush-preview');
+        const brushPreviewCtx = brushPreview.getContext('2d');
+        const colorPicker = document.getElementById('colorPicker');
+        const brushSize = document.getElementById('brushSize');
+        const brushSizeDisplay = document.getElementById('brushSizeDisplay');
+        const eraser = document.getElementById('eraser');
+        const clear = document.getElementById('clear');
+        const save = document.getElementById('save');
+        const bgColorPicker = document.getElementById('bgColorPicker');
+        const undo = document.getElementById('undo');
+        const redo = document.getElementById('redo');
+        const colorPresets = document.getElementById('colorPresets');
+
+        let isDrawing = false;
+        let isErasing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let history = [];
+        let historyIndex = -1;
+
+        window.onload = resizeCanvas;
+
+        function resizeCanvas() {
+            const container = document.getElementById('canvas-container');
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetWidth * 0.75; // 4:3 比例
+            brushPreview.width = canvas.width;
+            brushPreview.height = canvas.height;
+            redrawCanvas();
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const presetColors = ['#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+        presetColors.forEach(color => {
+            const button = document.createElement('button');
+            button.className = 'color-preset';
+            button.style.backgroundColor = color;
+            button.onclick = () => colorPicker.value = color;
+            colorPresets.appendChild(button);
+        });
+
+        // 监听触摸事件
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        canvas.addEventListener('touchstart', handleTouch);
+        canvas.addEventListener('touchmove', handleTouch);
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('mousemove', updateBrushPreview);
+
+        // 监听鼠标点击事件
+        eraser.addEventListener('click', toggleEraser);
+        clear.addEventListener('click', clearCanvas);
+        save.addEventListener('click', saveImage);
+        bgColorPicker.addEventListener('change', changeBgColor);
+        undo.addEventListener('click', undoAction);
+        redo.addEventListener('click', redoAction);
+        brushSize.addEventListener('input', updateBrushSize);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = getCoordinates(e);
+            draw(e);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const [x, y] = getCoordinates(e);
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.strokeStyle = isErasing ? bgColorPicker.value : colorPicker.value;
+            ctx.lineWidth = brushSize.value;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+            [lastX, lastY] = [x, y];
+        }
+
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                saveState();
+            }
+        }
+
+        function getCoordinates(e) {
+            const rect = canvas.getBoundingClientRect();
+            return [
+                e.clientX - rect.left,
+                e.clientY - rect.top
+            ];
+        }
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 'mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+
+        function toggleEraser() {
+            isErasing = !isErasing;
+            eraser.textContent = isErasing ? '画笔' : '橡皮擦';
+        }
+
+        function clearCanvas() {
+            ctx.fillStyle = bgColorPicker.value;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            saveState();
+        }
+
+        function saveImage() {
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = 'drawing.png';
+            link.href = dataURL;
+            link.click();
+        }
+
+        function changeBgColor() {
+            clearCanvas();
+        }
+
+        function saveState() {
+            historyIndex++;
+            history = history.slice(0, historyIndex);
+            history.push(canvas.toDataURL());
+        }
+
+        function undoAction() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                loadState();
+            }
+        }
+
+        function redoAction() {
+            if (historyIndex < history.length - 1) {
+                historyIndex++;
+                loadState();
+            }
+        }
+
+        function loadState() {
+            const img = new Image();
+            img.src = history[historyIndex];
+            img.onload = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+            };
+        }
+
+        function updateBrushPreview(e) {
+            const [x, y] = getCoordinates(e);
+            brushPreviewCtx.clearRect(0, 0, brushPreview.width, brushPreview.height);
+            brushPreviewCtx.beginPath();
+            brushPreviewCtx.arc(x, y, brushSize.value / 2, 0, Math.PI * 2);
+            brushPreviewCtx.strokeStyle = getContrastColor(bgColorPicker.value);
+            brushPreviewCtx.lineWidth = 2;
+            brushPreviewCtx.stroke();
+        }
+
+        function getContrastColor(hexcolor) {
+            let r = parseInt(hexcolor.substr(1, 2), 16);
+            let g = parseInt(hexcolor.substr(3, 2), 16);
+            let b = parseInt(hexcolor.substr(5, 2), 16);
+            let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+            return (yiq >= 128) ? 'black' : 'white';
+        }
+
+        function updateBrushSize() {
+            brushSizeDisplay.textContent = `${brushSize.value}px`;
+        }
+
+        function redrawCanvas() {
+            if (history.length > 0) {
+                const img = new Image();
+                img.src = history[historyIndex];
+                img.onload = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                };
+            } else {
+                ctx.fillStyle = bgColorPicker.value;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        // 初始化
+        clearCanvas();
+        saveState();
+    </script>
+</body>
+
+</html>

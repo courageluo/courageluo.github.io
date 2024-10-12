@@ -20,7 +20,7 @@
     {
         "url": "content/0004.math-review/index.html",
         "title": "数学知识点记录",
-        "modified": "2024.09.07 18:22",
+        "modified": "2024.10.12 18:24",
         "category": "文化课学习记录"
     },
     {
@@ -86,7 +86,13 @@
     {
         "url": "content/0015.lower-readability/index.html",
         "title": "降低程序可读性的方法",
-        "modified": "2024.10.01 23:43",
+        "modified": "2024.10.12 19:14",
         "category": "C++学习记录"
+    },
+    {
+        "url": "content/0016.drawing-board/index.html",
+        "title": "简易画板",
+        "modified": "2024.10.12 22:43",
+        "category": "Web开发实践"
     }
 ]

@@ -1,0 +1,228 @@
+<!-- 数学知识点记录 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学知识点记录 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
+    <link rel="stylesheet" type="text/css" href="/blog/quote-js/katex/katex.min.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 边栏 -->
+        <aside class="sidebar">
+            <!-- 索引框 -->
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引目录</h3>
+                <hr>
+                <ul id="target-index" style="column-count: 1;"></ul>
+            </div>
+        </aside>
+
+        <!-- 主要内容 -->
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">数学知识点</h1>
+            </div>
+
+            <div class="rounded-box3">
+                <p>适用于人教B版的选择性必修部分。</p>
+            </div>
+
+            <!-- 索引框 -->
+            <div id="index-box" class="rounded-box3">
+                <h3 id="index" style="text-align: center;">索引目录</h3>
+                <hr>
+                <ul id="content-index" style="column-count: 2;">
+                    <li><a href="#3d-vector">空间向量</a></li>
+                </ul>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="3d-vector" class="section-title">空间向量</h3>
+                    <a href="#index" id="text-right">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        空间中向量的一些约定与平面向量基本一致，可参见<a href="/blog/content/0004.math-review/index.html#vector">平面向量相关知识</a>
+                    </li>
+                </ol>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 调试用 */
+        /* * {
+            outline: solid rgb(255, 0, 0) 1px !important;
+            background: #000 !important;
+            color: #fff !important;
+        } */
+
+        /* 问题：在小于一定宽度时，右边会留白
+           临时解决方案如下，但似乎手机上依然这样 */
+        /* html {
+            width: 100%;
+            overflow-x: hidden;
+        } */
+
+        a {
+            color: #110c50;
+        }
+
+        .formula-container {
+            position: table-cell;
+            vertical-align: middle;
+        }
+
+        .formula-rectangle {
+            max-width: calc(100% - 15px);
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: inline-block;
+            vertical-align: middle;
+            border: 1.5px solid black;
+            border-radius: 3px;
+            padding: 5px;
+            margin: 4px;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        #text-right {
+            position: absolute;
+            bottom: 0px;
+            right: -60px;
+            transform: translateX(-100%);
+        }
+        
+        .margin-ul {
+            list-style-type: lower-alpha;
+            white-space: nowrap;
+            margin-left: -12px;
+        }
+
+        .scroll-item {
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        /* 一点响应式设计 */
+        @media (min-width: 768px) {
+            #index-box {
+                display: none;
+            }
+
+            #text-right {
+                display: none;
+            }
+        }
+
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
+            }
+
+            a {
+                color: #50d2d2;
+            }
+
+            .formula-rectangle {
+                border: 1.5px solid var(--text-color-dark);
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script src="/blog/quote-js/katex/katex.min.js"></script>
+    <script src="/blog/quote-js/katex/contrib/copy-tex.min.js"></script>
+    <script src="/blog/quote-js/katex/contrib/auto-render.min.js"></script>
+    <!-- <script id="MathJax-script" src="/blog/quote-js/mathjax/es5/tex-mml-chtml.js"></script> -->
+    <script>
+        // 调试检测页面宽度
+        // function log() {
+        //     console.log(window.innerWidth);
+        // } log();
+
+        // window.addEventListener('resize', log);
+
+        // 配置KATEX
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            })
+        });
+
+        // 复制索引目录
+        document.addEventListener("DOMContentLoaded", function() {
+            const sourceUl = document.querySelector('#content-index');
+            const targetUl = document.querySelector('#target-index');
+            targetUl.innerHTML = sourceUl.innerHTML;
+        });
+
+        // 配置响应式列数
+        function updateColumnCount() {
+            // 获取页面宽度
+            var pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            // 设定每列的最小宽度
+            var ifColumnMinWidth = 300;
+            // 计算列数
+            var ifColumnCount = Math.floor(pageWidth / ifColumnMinWidth);
+            // 设置列数
+            document.querySelector('.formula-container').style.columnCount = ifColumnCount;
+        }
+
+        // 页面加载时和窗口大小改变时调用更新列数函数
+        window.addEventListener('load', updateColumnCount);
+        window.addEventListener('resize', updateColumnCount);
+
+        // 获取所有带有特定类名的链接元素
+        // var scrollLinks = document.querySelectorAll('.scroll-link');
+
+        // 定义滚动函数
+        // function scrollToTarget(targetId) {
+        //     var targetElement = document.getElementById(targetId);
+        //     targetElement.scrollIntoView({ behavior: 'smooth' });
+        // }
+
+        // 为每个链接添加点击事件监听器
+        // scrollLinks.forEach(function (link) {
+        //     link.addEventListener('click', function (e) {
+        //         e.preventDefault();
+        //         var targetId = this.getAttribute('href').substring(1); // 去掉 "#" 符号
+        //         scrollToTarget(targetId);
+        //     });
+        // });
+    </script>
+</body>
+
+</html>

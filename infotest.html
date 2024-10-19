@@ -1,0 +1,142 @@
+<!-- 状态测试 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>状态测试 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+</head>
+
+<body>
+    <div class="content">
+        <div class="rounded-box1" style="max-width: 500px;">
+            <h3>状态测试</h3>
+            <hr>
+            <p><span id="network-condition"></span></p>
+            <p>设备类型：<span id="device-type"></span></p>
+            <p>浏览器类型：<span id="browser-type"></span></p>
+            <p>操作系统平台：<span id="os-platform"></span></p>
+            <p>窗口大小：<span id="windowSize"></span></p>
+            <p>IP地址：<span id="ip-address"></span></p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script>
+        // 获取网络信息
+        function updateNetworkInfo() {
+            if (navigator.onLine) {
+                let info = {
+                    downlink: navigator.connection.downlink,
+                    rtt: navigator.connection.rtt,
+                };
+                document.getElementById("network-condition").innerHTML = '带宽：' + info.downlink + 'Mb/s</p><p>延迟：' + info.rtt + 'ms';
+            } else {
+                document.getElementById("network-condition").innerHTML = '网络状态：离线';
+            }
+        }
+
+        // 获取设备类型
+        function getDeviceType() {
+            const ua = navigator.userAgent;
+            if (/android/i.test(ua)) {
+                return "Android";
+            } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+                return "iOS";
+            } else if (/Win/.test(ua)) {
+                return "Windows";
+            } else if (/Mac/i.test(ua)) {
+                return "MacOS";
+            } else if (/Linux/.test(ua)) {
+                return "Linux";
+            } else {
+                return "Unknown";
+            }
+        }
+
+        // 获取浏览器类型
+        function getBrowserType() {
+            const ua = navigator.userAgent;
+            if (ua.indexOf("Firefox") > -1) {
+                return "Firefox";
+            } else if (ua.indexOf("Chrome") > -1) {
+                return "Chrome";
+            } else if (ua.indexOf("Safari") > -1) {
+                return "Safari";
+            } else if (ua.indexOf("Opera") > -1 || ua.indexOf("OPR") > -1) {
+                return "Opera";
+            } else if (ua.indexOf("Edge") > -1) {
+                return "Edge";
+            } else if (ua.indexOf("MSIE") > -1 || ua.indexOf("Trident/") > -1) {
+                return "Internet Explorer";
+            } else {
+                return "Unknown";
+            }
+        }
+
+        function getScreenSize() {
+            const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            document.getElementById('windowSize').textContent = `${width}×${height}`;
+        }
+
+        // 获取IP地址
+        function getIPAddress() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip-address').textContent = data.ip;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('ip-address').textContent = "无法获取";
+                });
+        }
+
+        // 显示信息
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('device-type').textContent = getDeviceType();
+            document.getElementById('browser-type').textContent = getBrowserType();
+            document.getElementById('os-platform').textContent = navigator.platform;
+            getIPAddress();
+        });
+
+        updateNetworkInfo();
+
+        window.addEventListener("online", updateNetworkInfo);
+        window.addEventListener("offline", updateNetworkInfo);
+        navigator.connection.addEventListener("change", updateNetworkInfo);
+        setInterval(updateNetworkInfo, 1000);
+
+        getScreenSize();
+
+        window.addEventListener('resize', getScreenSize);
+    </script>
+</body>
+
+</html>

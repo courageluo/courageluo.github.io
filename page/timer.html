@@ -1,0 +1,372 @@
+<!-- 辩论用倒计时器 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计时器 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 自由分配环节 -->
+        <div class="rounded-box3" id="timer-bg">
+            <p class="title"><span class="title-bg">高中时期 , 爱慕之情应该表达出来 / 藏在心底</span></p>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <span class="team-display">正方</span><br>
+                    <span id="timer1" class="time-display">16:00</span><br>
+                    <button onclick="startTimer(1)">开始</button>
+                    <button onclick="stopTimer(1)">停止</button>
+                </div>
+                <div class="grid-item">
+                    <span style="font-size: 75px;">VS</span><br>
+                    <span style="font-size: 40px;">自由分配</span>
+                </div>
+                <div class="grid-item">
+                    <span class="team-display">反方</span><br>
+                    <span id="timer2" class="time-display">16:00</span><br>
+                    <button onclick="startTimer(2)">开始</button>
+                    <button onclick="stopTimer(2)">停止</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 自由辩论环节 -->
+        <div class="rounded-box3" id="debate-timer-bg">
+            <p class="title"><span class="title-bg">高中时期 , 爱慕之情应该表达出来 / 藏在心底</span></p>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <span class="team-display">正方</span><br>
+                    <span id="debateTimer1" class="time-display">06:00</span><br>
+                </div>
+                <div class="grid-item">
+                    <div style="height: 30px;"></div>
+                    <span style="font-size: 75px;">VS</span><br>
+                    <span style="font-size: 40px;">自由辩论</span>
+                </div>
+                <div class="grid-item">
+                    <span class="team-display">反方</span><br>
+                    <span id="debateTimer2" class="time-display">06:00</span><br>
+                </div>
+            </div>
+            <div style="height: 150px;"></div>
+            <div style="text-align: center;">
+                <button onclick="toggleDebateTimer()" class="debate-button">切换</button>
+                <button onclick="stopDebateTimers()" class="debate-button">停止</button>
+            </div>
+        </div>
+
+        <!-- 设置框 -->
+        <div class="rounded-box3">
+            <p>
+                <strong>时间控制</strong>
+                <label style="margin-left: 10px;">自由分配环节</label>
+                <input type="number" id="minutesInput" value="16" min="1">
+                <label>分钟</label>
+                <button onclick="setTimers()">设置</button>
+                <label style="margin-left: 10px;">自由辩论环节</label>
+                <input type="number" id="debateMinutesInput" value="6" min="1">
+                <label>分钟</label>
+                <button onclick="setDebateTimers()" class="debate-button">设置</button>
+                <strong style="margin-left: 10px;">页面选择</strong>
+                <button onclick="disp1()">自由分配</button>
+                <button onclick="disp2()">自由辩论</button>
+                <label style="margin-left: 10px;">适配 1920*1080 100% 缩放，其它尺寸可能有显示问题</label>
+            </p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-factorizebackground.svg');
+            }
+        }
+
+        @font-face {
+            font-family: time;
+            src: url('/blog/content/0003.jquery-clock/font.woff2');
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        input {
+            width: 50px;
+            margin: 0 -5px;
+        }
+
+        .title {
+            font-size: 45px;
+            font-family: title;
+            text-align: center;
+        }
+
+        .title-bg {
+            padding: 10px 15px;
+            --color: rgba(69, 102, 133, 0.5);
+            background-color: var(--color);
+            border-radius: 5px;
+        }
+
+        .grid-container {
+            margin-top: 80px;
+            display: grid;
+            align-items: center;
+            grid-template-columns: 1fr 0.75fr 1fr;
+        }
+
+        .grid-item {
+            text-align: center;
+        }
+
+        .time-display {
+            font-family: time;
+            font-size: 175px;
+        }
+
+        .team-display {
+            font-size: 70px;
+        }
+
+        #timer-bg, #debate-timer-bg {
+            height: 700px;
+            background-size: cover;
+            background-position: center;
+            background-image: url('./bg.svg');
+        }
+
+        .finished, .debate-finished {
+            color: red;
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script>
+        // 设置显示界面
+        document.getElementById('debate-timer-bg').style.display = 'none';
+
+        function disp1() {
+            document.getElementById('timer-bg').style.display = 'block';
+            document.getElementById('debate-timer-bg').style.display = 'none';
+        }
+
+        function disp2() {
+            document.getElementById('timer-bg').style.display = 'none';
+            document.getElementById('debate-timer-bg').style.display = 'block';
+        }
+
+        // 自由分配环节
+        let timers = {
+            1: {
+                seconds: 960,
+                interval: null,
+                isRunning: false,
+                originalSeconds: 960
+            },
+            2: {
+                seconds: 960,
+                interval: null,
+                isRunning: false,
+                originalSeconds: 960
+            }
+        };
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function updateDisplay(timerId) {
+            const display = document.getElementById(`timer${timerId}`);
+            display.textContent = formatTime(timers[timerId].seconds);
+
+            if (timers[timerId].seconds === 0) {
+                display.classList.add('finished');
+                stopTimer(timerId);
+            } else {
+                display.classList.remove('finished');
+            }
+        }
+
+        function startTimer(timerId) {
+            if (!timers[timerId].isRunning && timers[timerId].seconds > 0) {
+                timers[timerId].isRunning = true;
+                timers[timerId].interval = setInterval(() => {
+                    if (timers[timerId].seconds > 0) {
+                        timers[timerId].seconds--;
+                        updateDisplay(timerId);
+                    }
+                }, 1000);
+            }
+        }
+
+        function stopTimer(timerId) {
+            if (timers[timerId].isRunning) {
+                clearInterval(timers[timerId].interval);
+                timers[timerId].isRunning = false;
+            }
+        }
+
+        function setTimers() {
+            const minutes = parseInt(document.getElementById('minutesInput').value);
+            if (minutes > 0) {
+                const seconds = minutes * 60;
+                for (let id = 1; id <= 2; id++) {
+                    stopTimer(id);
+                    timers[id].seconds = seconds;
+                    timers[id].originalSeconds = seconds;
+                    updateDisplay(id);
+                }
+            }
+        }
+
+        // 自由辩论环节
+        let debateTimers = {
+            1: {
+                seconds: 360,
+                startTime: null,
+                pausedTime: 360,
+                interval: null,
+                isRunning: false,
+                originalSeconds: 360
+            },
+            2: {
+                seconds: 360,
+                startTime: null,
+                pausedTime: 360,
+                interval: null,
+                isRunning: false,
+                originalSeconds: 360
+            }
+        };
+
+        let activeDebateTimer = 1;
+
+        function formatDebateTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function updateDebateDisplay(timerId) {
+            const display = document.getElementById(`debateTimer${timerId}`);
+            display.textContent = formatDebateTime(debateTimers[timerId].seconds);
+
+            if (debateTimers[timerId].seconds === 0) {
+                display.classList.add('debate-finished');
+                stopDebateTimer(timerId);
+            } else {
+                display.classList.remove('debate-finished');
+            }
+        }
+
+        function startDebateTimer(timerId) {
+            if (!debateTimers[timerId].isRunning && debateTimers[timerId].pausedTime > 0) {
+                debateTimers[timerId].isRunning = true;
+                debateTimers[timerId].startTime = Date.now();
+                debateTimers[timerId].interval = setInterval(() => {
+                    const elapsed = Math.floor((Date.now() - debateTimers[timerId].startTime) / 1000);
+                    debateTimers[timerId].seconds = Math.max(0, debateTimers[timerId].pausedTime - elapsed);
+                    updateDebateDisplay(timerId);
+
+                    if (debateTimers[timerId].seconds === 0) {
+                        stopDebateTimer(timerId);
+                    }
+                }, 100);
+            }
+        }
+
+        function stopDebateTimer(timerId) {
+            if (debateTimers[timerId].isRunning) {
+                clearInterval(debateTimers[timerId].interval);
+                debateTimers[timerId].isRunning = false;
+                if (debateTimers[timerId].startTime) {
+                    const elapsed = Math.floor((Date.now() - debateTimers[timerId].startTime) / 1000);
+                    debateTimers[timerId].pausedTime = Math.max(0, debateTimers[timerId].pausedTime - elapsed);
+                }
+                updateDebateDisplay(timerId);
+                
+                // 当一个计时器归零时，检查并启动另一个计时器
+                if (debateTimers[timerId].seconds === 0) {
+                    const otherTimerId = timerId === 1 ? 2 : 1;
+                    if (debateTimers[otherTimerId].pausedTime > 0) {
+                        activeDebateTimer = otherTimerId;
+                        startDebateTimer(otherTimerId);
+                    }
+                }
+            }
+        }
+
+        function toggleDebateTimer() {
+            // 如果当前没有计时器在运行
+            if (!debateTimers[1].isRunning && !debateTimers[2].isRunning) {
+                // 如果是刚停止后的第一次切换，使用上一个活动的计时器
+                if (debateTimers[activeDebateTimer].pausedTime > 0) {
+                    startDebateTimer(activeDebateTimer);
+                }
+                return;
+            }
+
+            // 停止当前计时器
+            stopDebateTimer(1);
+            stopDebateTimer(2);
+
+            // 切换到另一个计时器
+            activeDebateTimer = (activeDebateTimer === 1) ? 2 : 1;
+
+            // 只有在新的计时器还有时间的情况下才启动
+            if (debateTimers[activeDebateTimer].pausedTime > 0) {
+                startDebateTimer(activeDebateTimer);
+            } else {
+                // 如果新的计时器已经为零，切换回另一个计时器
+                activeDebateTimer = (activeDebateTimer === 1) ? 2 : 1;
+                if (debateTimers[activeDebateTimer].pausedTime > 0) {
+                    startDebateTimer(activeDebateTimer);
+                }
+            }
+        }
+
+        function stopDebateTimers() {
+            stopDebateTimer(1);
+            stopDebateTimer(2);
+        }
+
+        function setDebateTimers() {
+            const minutes = parseInt(document.getElementById('debateMinutesInput').value);
+            if (minutes > 0) {
+                const seconds = minutes * 60;
+                for (let id = 1; id <= 2; id++) {
+                    stopDebateTimer(id);
+                    debateTimers[id].seconds = seconds;
+                    debateTimers[id].pausedTime = seconds;
+                    debateTimers[id].originalSeconds = seconds;
+                    updateDebateDisplay(id);
+                }
+                activeDebateTimer = 1;
+            }
+        }
+    </script>
+</body>
+
+</html>

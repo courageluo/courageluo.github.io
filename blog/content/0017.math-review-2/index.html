@@ -58,6 +58,47 @@
                     <li>
                         空间中向量的一些约定与平面向量基本一致，可参见<a href="/blog/content/0004.math-review/index.html#vector">平面向量相关知识</a>
                     </li>
+                    <li>
+                        空间向量基本定理：如果空间中三个向量$ \boldsymbol{a} $，$ \boldsymbol{b} $，$ \boldsymbol{c} $不共面，那么对空间中任意一个向量$ \boldsymbol{p} $，存在唯一的有序实数对$ \left(x,y,z\right) $，使得$ \boldsymbol{p}=x\boldsymbol{a}+y\boldsymbol{b}+z\boldsymbol{c} $
+                    </li>
+                    <li>
+                        设$ \boldsymbol{a}=\left(x_1,y_1,z_1\right) $，$ \boldsymbol{b}=\left(x_2,y_2,z_2\right) $，则：<br>
+                        $ \boldsymbol{a}+\boldsymbol{b}=\left(x_1+x_2,y_1+y_2,z_1+z_2\right) $<br>
+                        $ u\boldsymbol{a}+v\boldsymbol{b}=\left(ux_1+vx_2,uy_1+vy_2,uz_1+vz_2\right) $<br>
+                        $ \boldsymbol{a\cdot b}=x_1x_2+y_1y_2+z_1z_2 $<br>
+                        $ \boldsymbol{a}^2=|\boldsymbol{a}|=\sqrt{\boldsymbol{a\cdot a}}=\sqrt{x_1^2+y_1^2+z_1^2} $<br>
+                        $ \cos\left\langle\boldsymbol{a},\boldsymbol{b}\right\rangle=\displaystyle\frac{\boldsymbol{a\cdot b}}{|\boldsymbol{a}||\boldsymbol{b}|}=\displaystyle\frac{x_1x_2+y_1y_2+z_1z_2}{\sqrt{x_1^2+y_1^2+z_1^2}\sqrt{x_2^2+y_2^2+z_2^2}} $<br>
+                        $ \boldsymbol{a}\parallel\boldsymbol{b}\Leftrightarrow\boldsymbol{b}=\lambda\boldsymbol{a}\Leftrightarrow\displaystyle\frac{x_2}{x_1}=\displaystyle\frac{y_2}{y_1}=\displaystyle\frac{z_2}{z_1} $<br>
+                        $ \boldsymbol{a}\perp\boldsymbol{b}\Leftrightarrow\boldsymbol{a\cdot b}=0\Leftrightarrow x_1x_2+y_1y_2+z_1z_2=0 $
+                    </li>
+                    <li>
+                        记$ l_i $的方向向量为$ \boldsymbol{v}_i $，$ \alpha_i $的法向量为$ \boldsymbol{n}_i $，则：
+                        <ul class="margin-ul">
+                            <li>
+                                $ \overrightarrow{AB} $是直线$ AB $的方向向量<br>
+                                若$ \boldsymbol{v} $是$ l $的方向向量，则$ \lambda\boldsymbol{v}(\lambda\ne0) $也是<br>
+                                $ \boldsymbol{v} $与一点$ A $确定一条直线$ l $<br>
+                                $ \boldsymbol{v}_1\parallel\boldsymbol{v}_2\Leftrightarrow l_1\parallel l_2 $或$ l_1 $与$ l_2 $重合
+                            </li>
+                            <li>
+                                $ l_1 $与$ l_2 $所成角$ \theta=\left\langle\boldsymbol{v}_1,\boldsymbol{v}_2\right\rangle $或$ \pi-\left\langle\boldsymbol{v}_1,\boldsymbol{v}_2\right\rangle $ <br>
+                                且$ \cos\theta=|\cos\left\langle\boldsymbol{v}_1,\boldsymbol{v}_2\right\rangle| $ <br>
+                                $ l_1\perp l_2\Leftrightarrow\left\langle\boldsymbol{v}_1,\boldsymbol{v}_2\right\rangle=\displaystyle\frac\pi2\Leftrightarrow\boldsymbol{v}_1\boldsymbol{\cdot v}_2=0 $
+                            </li>
+                            <li>
+                                若$ \boldsymbol{v}\perp\boldsymbol{n} $，则$ l\parallel\alpha $或$ l\subset\alpha $ <br>
+                                若$ \boldsymbol{v}\parallel\boldsymbol{n} $，则$ l\perp\alpha $
+                            </li>
+                            <li>
+                                若$ \boldsymbol{n}_1\parallel\boldsymbol{n}_2 $，则$ \alpha_1\parallel\alpha_2 $或$ \alpha_1 $与$ \alpha_2 $重合 <br>
+                                若$ \boldsymbol{n}_1\perp\boldsymbol{n}_2 $，则$ \alpha_1\perp\alpha_2 $
+                            </li>
+                        </ul>
+                        <li>
+                            三垂线定理：垂直于射影，则垂直于斜线<br>
+                            三垂线定理的逆定理：垂直于斜线，则垂直于射影
+                        </li>
+                    </li>
                 </ol>
             </div>
         </main>

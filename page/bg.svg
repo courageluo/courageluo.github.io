@@ -1,14 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560" preserveAspectRatio="none" viewBox="0 0 1440 560">
 	<g mask="url(&quot;#SvgjsMask1010&quot;)" fill="none">
-		<rect width="1440" height="560" x="0" y="0" fill="rgba(7, 47, 87, 0.75)">
+		<!-- 中心 -->
+		<rect width="1440" height="560" x="0" y="0" fill="#75757566">
 		</rect>
-		<path d="M0 0L880.38 0L0 806.02z" filter="url(#SvgjsFilter1011)" fill="rgba(3, 75, 82, 1)">
+		<!-- 左上 -->
+		<path d="M0 0L880.38 0L0 806.02z" filter="url(#SvgjsFilter1011)" fill="#67707F">
 		</path>
-		<path d="M0 560L880.38 560L0 -246.01999999999998z" filter="url(#SvgjsFilter1011)" fill="rgba(130, 20, 35, 0.75)">
+		<!-- 左下 -->
+		<path d="M0 560L880.38 560L0 -246.01999999999998z" filter="url(#SvgjsFilter1011)" fill="#C32136">
 		</path>
-		<path d="M1440 560L559.62 560L1440 -246.01999999999998z" filter="url(#SvgjsFilter1011)" fill="rgba(3, 75, 82, 1)">
+		<!-- 右下 -->
+		<path d="M1440 560L559.62 560L1440 -246.01999999999998z" filter="url(#SvgjsFilter1011)" fill="#57606F">
 		</path>
-		<path d="M1440 0L559.62 0L1440 806.02z" filter="url(#SvgjsFilter1011)" fill="rgba(3, 75, 135, 1)">
+		<!-- 右上 -->
+		<path d="M1440 0L559.62 0L1440 806.02z" filter="url(#SvgjsFilter1011)" fill="#177CB0">
 		</path>
 	</g>
 	<defs>

@@ -201,11 +201,14 @@
             const display = document.getElementById(`timer${timerId}`);
             display.textContent = formatTime(timers[timerId].seconds);
 
-            if (timers[timerId].seconds === 0) {
+            if (timers[timerId].seconds <= 15) {
                 display.classList.add('finished');
-                stopTimer(timerId);
             } else {
                 display.classList.remove('finished');
+            }
+
+            if (timers[timerId].seconds === 0) {
+                stopTimer(timerId);
             }
         }
 
@@ -273,11 +276,14 @@
             const display = document.getElementById(`debateTimer${timerId}`);
             display.textContent = formatDebateTime(debateTimers[timerId].seconds);
 
-            if (debateTimers[timerId].seconds === 0) {
+            if (debateTimers[timerId].seconds <= 15) {
                 display.classList.add('debate-finished');
-                stopDebateTimer(timerId);
             } else {
                 display.classList.remove('debate-finished');
+            }
+
+            if (debateTimers[timerId].seconds === 0) {
+                stopDebateTimer(timerId);
             }
         }
 

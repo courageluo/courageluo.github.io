@@ -54,6 +54,7 @@
                     <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
+                <p>以下规定$ l_i $的方向向量为$ \boldsymbol{v}_i $，$ \alpha_i $的法向量为$ \boldsymbol{n}_i $</p>
                 <ol>
                     <li>
                         空间中向量的一些约定与平面向量基本一致，可参见<a href="/blog/content/0004.math-review/index.html#vector">平面向量相关知识</a>
@@ -72,7 +73,7 @@
                         $ \boldsymbol{a}\perp\boldsymbol{b}\Leftrightarrow\boldsymbol{a\cdot b}=0\Leftrightarrow x_1x_2+y_1y_2+z_1z_2=0 $
                     </li>
                     <li>
-                        记$ l_i $的方向向量为$ \boldsymbol{v}_i $，$ \alpha_i $的法向量为$ \boldsymbol{n}_i $，则：
+                        向量与空间中元素的关系
                         <ul class="margin-ul">
                             <li>
                                 $ \overrightarrow{AB} $是直线$ AB $的方向向量<br>
@@ -95,8 +96,48 @@
                             </li>
                         </ul>
                         <li>
+                            三余弦定理：平面$ \alpha $中有一直线$ OM $，空间中有一斜线$ OA $，射影为$ OA' $，记$ OM $与$ OA $所成角为$ \theta $，另两角为$ \theta_1 $、$ \theta_2 $，则$ \cos\theta=\cos\theta_1\cos\theta_2 $<br>
+                            令$ \theta_1=90^\circ $，则$ \cos\theta=0 $，得到：<br>
                             三垂线定理：垂直于射影，则垂直于斜线<br>
                             三垂线定理的逆定理：垂直于斜线，则垂直于射影
+                        </li>
+                        <li>
+                            空间中角的求解
+                            <ul class="margin-ul">
+                                <li>
+                                    线面角<br>
+                                    $ \theta=\displaystyle\frac\pi2-\left\langle\boldsymbol v,\boldsymbol n\right\rangle $或$ \left\langle\boldsymbol v,\boldsymbol n\right\rangle-\displaystyle\frac\pi2 $ <br>
+                                    即$ \cos\theta=\sin\left\langle\boldsymbol v,\boldsymbol n\right\rangle $，$ \sin\theta=|\cos\left\langle\boldsymbol v,\boldsymbol n\right\rangle| $
+                                </li>
+                                <li>
+                                    二面角<br>
+                                    $ \theta=\left\langle\boldsymbol n_1,\boldsymbol n_2\right\rangle $或$ \pi-\left\langle\boldsymbol n_1,\boldsymbol n_2\right\rangle $ <br>
+                                    即$ \sin\theta=\sin\left\langle\boldsymbol n_1,\boldsymbol n_2\right\rangle $
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            空间中的距离<br>
+                            <ul class="margin-ul">
+                                <li>
+                                    点与点的距离<br>
+                                    将向量表达为$ (x,y,z) $或$ x\boldsymbol a+y\boldsymbol b+z\boldsymbol c $的形式，平方开根后可得距离
+                                </li>
+                                <li>
+                                    点与线的距离<br>
+                                    $
+                                        \bigg\{
+                                        \begin{aligned}
+                                            &\overrightarrow{AD}=\lambda\overrightarrow{AB}\\
+                                            &\overrightarrow{CD}\boldsymbol{\cdot}\overrightarrow{AB}=0
+                                        \end{aligned}
+                                    $
+                                </li>
+                                <li>
+                                    点与面的距离<br>
+                                    $ d=\displaystyle\frac{|\overrightarrow{BA}\boldsymbol{\cdot\kern2ptn}|}{|\boldsymbol n|} $
+                                </li>
+                            </ul>
                         </li>
                     </li>
                 </ol>
@@ -157,7 +198,7 @@
         
         .margin-ul {
             list-style-type: lower-alpha;
-            white-space: nowrap;
+            /* white-space: nowrap; */
             margin-left: -12px;
         }
 

@@ -16,7 +16,7 @@ code[class*="language-"],
 pre[class*="language-"] {
 	color: #ccc;
 	background: none;
-	font-family: "text";
+	font-family: "code";
 	font-size: 15px;
 	text-align: left;
 	white-space: pre;

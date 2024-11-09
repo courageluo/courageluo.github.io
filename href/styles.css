@@ -46,6 +46,16 @@ h1 {
 
 @font-face {
     font-family: text;
+    src: url('/font/Figtree-Medium.ttf');
+}
+
+@font-face {
+    font-family: code;
+    src: url('/font/JiangChengHei-500W.woff2');
+}
+
+@font-face {
+    font-family: code;
     src: url('/font/CascadiaMono-Regular.woff2');
 }
 
@@ -70,7 +80,7 @@ h1 {
 }
 
 code {
-    font-family: "text";
+    font-family: "code";
     font-size: 15px;
 }
 

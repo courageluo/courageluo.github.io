@@ -44,6 +44,7 @@
                 <hr>
                 <ul id="content-index" style="column-count: 2;">
                     <li><a href="#3d-vector">空间向量</a></li>
+                    <li><a href="#line">直线</a></li>
                 </ul>
             </div>
 
@@ -142,6 +143,89 @@
                     </li>
                 </ol>
             </div>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="line" class="section-title">直线</h3>
+                    <a href="#index" id="text-right">返回索引</a>
+                </div>
+                <hr>
+                <p>记直线 $l_i$ 的方向向量为 $\boldsymbol{a}_i$，法向量为 $\boldsymbol{v}_i$</p>
+                <ol>
+                    <li>
+                        数轴上，设 $A(x_1)$，$B(x_2)$，则：<br>
+                        $|AB|=|x_2-x_1|$<br>
+                        中点 $M\left(\displaystyle\frac{x_1+x_2}{2}\right)$<br>
+                        平面直角坐标系中，设 $A(x_1,y_1)$，$B(x_2,y_2)$，则：<br>
+                        $|AB|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$<br>
+                        中点 $M\left(\displaystyle\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)$<br>
+                    </li>
+                    <li>
+                        记 $A(x_1,y_1)$，$B(x_2,y_2)$ 是倾斜角为 $\theta$ 的直线 $l$ 上的不同点，则当 $\theta\ne90^\circ$，即 $x_1\ne x_2$时，$k_{AB}=\tan\theta=\displaystyle\frac{y_2-y_1}{x_2-x_1}$<br>
+                        任意情况下，$\boldsymbol a=\overrightarrow{AB}=(x_2-x_1,y_2-y_1)=(\cos\theta,\sin\theta)$，当 $\theta\ne90^\circ$ 时，$\boldsymbol a=(1,k)$<br>
+                        若已知 $\boldsymbol a=(x_0,y_0)$，则 $\boldsymbol v=(y_0,-x_0)$ 是 $l$ 的一个法向量
+                    </li>
+                    <li>
+                        若已知 $\boldsymbol a=(u,v)$，则 $u=0$ 时，$\theta=90^\circ$，若$u\ne0$，则 $k=\tan\theta=\displaystyle\frac vu$
+                    </li>
+                    <li>
+                        记 $A(x_1,y_1)$，$B(x_2,y_2)$ 是直线 $l:y=kx+b$ 上的不相同两点，则<br>
+                        $
+                            \begin{aligned}
+                                |AB|&=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2} \\
+                                &=\sqrt{1+k^2}\,|\kern1ptx_2-x_1| \\
+                                &=\sqrt{1+k^2}\sqrt{(x_1+x_2)^2-4x_1x_2} \\
+                                &=\sqrt{1+\displaystyle\frac1{k^2}}\,|\kern1pty_2-y_1|
+                            \end{aligned}
+                        $
+                    </li>
+                    <li>
+                        直线的方程
+                        <ul class="margin-ul">
+                            <li>
+                                点斜式：$y-y_0=k(x-x_0)$<br>
+                                若斜率不存在，则方程为 $x=x_0$
+                            </li>
+                            <li>
+                                斜截式：$y=kx+b$<br>
+                                它在 $x$ 轴上的截距为 $\displaystyle-\frac{b}{k}$，截距为 $b$
+                            </li>
+                            <div style="height: 5px;"></div>
+                            <li>
+                                两点式：$\displaystyle\frac{y-y_1}{y_2-y_1}=\frac{x-x_1}{x_2-x_1}$
+                            </li>
+                            <div style="height: 7px;"></div>
+                            <li>
+                                截距式：$\displaystyle\frac{x}{a}+\frac{y}{b}=1$<br>
+                                它只在截距都不为 $0$ 时成立
+                            </li>
+                            <li>
+                                一般式：$Ax+By+C=0$<br>
+                                它在 $A^2+B^2\ne0$ 时成立<br>
+                                若 $B\ne0$，则 $k=-\displaystyle\frac{A}{B}$<br>
+                                $\boldsymbol v=(A,B)$ 是它的一个法向量
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        直线与直线的位置关系<br>
+                        假设 $l_1:y=k_1x+b_1$，$l_2:y=k_2x+b_2$ 或 $l_1:A_1x+B_1y+C_1=0$，$l_2:A_2x+B_2y+C_2=0$<br>
+                        <ul class="margin-ul">
+                            <li>
+                                $l_1$ 与 $l_2$ 相交 $\Leftrightarrow k_1\ne k_2$<br>
+                                $\Leftrightarrow A_1B_2\ne A_2B_1$
+                            </li>
+                            <li>
+                                $l_1$ 与 $l_2$ 重合 $\Leftrightarrow k_1=k_2$ 且 $b_1=b_2$<br>
+                                $\Leftrightarrow A_1=\lambda A_2$，$B_1=\lambda B_2$，$C_1=\lambda C_2$，$\lambda\ne0$
+                            </li>
+                            <li>
+                                $l_1\parallel l_2$ $\Leftrightarrow k_1=k_2$ 且 $b_1\ne b_2$<br>
+                                $\Leftrightarrow A_1=\lambda A_2$，$B_1=\lambda B_2$，$C_1\ne\lambda C_2$，$\lambda\ne0$
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
         </main>
     </div>
 
@@ -199,7 +283,7 @@
         .margin-ul {
             list-style-type: lower-alpha;
             /* white-space: nowrap; */
-            margin-left: -12px;
+            margin-left: -15px;
         }
 
         .scroll-item {

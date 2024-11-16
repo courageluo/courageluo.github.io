@@ -1,41 +1,99 @@
-<!DOCTYPE html>
-<html>
+<!-- HTML -->
+<div class="rounded-box3" id="debate-settings" style="position: relative;">
+    <p>
+        <strong>页面选择</strong>
+        <button onclick="disp1()" style="margin: 0 5px;">自由分配</button>
+        <button onclick="disp2()">自由辩论</button>
+        <strong style="margin-left: 10px;">时间控制</strong>
+        <label style="margin-left: 10px;">自由辩论环节 双方统一</label>
+        <input type="number" id="debateMinutesInput" value="6" min="1">
+        <label>分钟</label>
+        <button onclick="setDebateTimers()" style="margin-left: 5px;">设置</button>
+    </p>
+    
+    <button 
+        id="info-btn" 
+        style="
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            font-family: serif;
+        "
+        onclick="showInfoDialog()"
+    >i</button>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Page</title>
-    <style></style>
-</head>
+    <!-- 弹窗 -->
+    <div id="info-dialog" style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+        max-width: 400px;
+    ">
+        <h3 style="margin-top: 0;">使用说明</h3>
+        <p>此处可以添加关于辩论设置的详细说明和帮助信息。</p>
+        <ul>
+            <li>自由分配：用于设置辩手位置</li>
+            <li>自由辩论：进入自由辩论环节</li>
+            <li>时间控制：设置自由辩论的时长</li>
+        </ul>
+        <button 
+            onclick="hideInfoDialog()" 
+            style="
+                margin-top: 15px;
+                padding: 5px 15px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+                background: #f5f5f5;
+                cursor: pointer;
+            "
+        >关闭</button>
+    </div>
 
-<body>
-    <p id="downlink"></p>
-    <p id="rtt"></p>
+    <!-- 遮罩层 -->
+    <div id="overlay" style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    "></div>
+</div>
 
-    <script>
-        function updateNetworkInfo() {
-            if (navigator.onLine) {
-                let info = {
-                    downlink: navigator.connection.downlink,
-                    rtt: navigator.connection.rtt,
-                };
-                document.getElementById("downlink").textContent = '带宽' + info.downlink + "Mb/s";
-                document.getElementById("rtt").textContent = '延迟' + info.rtt + "ms";
-            } else {
-                document.getElementById("downlink").textContent = '当前';
-                document.getElementById("rtt").textContent = '离线';
-            }
-        }
+<script>
+function showInfoDialog() {
+    document.getElementById('info-dialog').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
 
-        updateNetworkInfo();
+function hideInfoDialog() {
+    document.getElementById('info-dialog').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
 
-        window.addEventListener("online", updateNetworkInfo);
-        window.addEventListener("offline", updateNetworkInfo);
-        navigator.connection.addEventListener("change", updateNetworkInfo);
-        setInterval(updateNetworkInfo, 1000);
-    </script>
-</body>
-</html>
+// 点击遮罩层关闭弹窗
+document.getElementById('overlay').addEventListener('click', hideInfoDialog);
+</script>
 
 <!-- 一、自制卡拉OK字幕现在已经在B站占据了相当的分量，并且其中绝大部分均具有一定的实用价值，而且它已经形成了一个有一定规模的圈子，就如某某游戏圈、某某影视圈一样具有同样的地位，不应该受到这样的、某种意义上的歧视
 二、该视频的部分字幕内容（包括家驹在中间的独白，以及一些伴唱内容、最后一段的《真的爱你》的一段结尾）在全网是找不到类似内容的，以及其制作过程非常消耗精力，我认为这并不属于“简单添加字幕素材”的范畴

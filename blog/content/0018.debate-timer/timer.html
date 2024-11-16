@@ -16,14 +16,15 @@
 <body>
     <div class="content">
         <!-- 自由分配环节 -->
-        <div class="rounded-box3" id="timer-bg">
-            <p class="title"><span class="title-bg">高中时期 , 爱慕之情应该表达出来 / 藏在心底</span></p>
+        <div class="rounded-box1" id="timer-bg">
+            <p class="title"><span id="title1" class="title-bg" contenteditable="true" spellcheck="false">高中时期 ,
+                    爱慕之情应该表达出来 / 藏在心底</span></p>
             <div class="grid-container">
                 <div class="grid-item">
                     <span class="team-display">正方</span><br>
                     <span id="timer1" class="time-display">16:00</span><br>
                     <button onclick="startTimer(1)">开始</button>
-                    <button onclick="stopTimer(1)">停止</button>
+                    <button onclick="stopTimer(1)" style="margin-left: 5px;">停止</button>
                 </div>
                 <div class="grid-item">
                     <span style="font-size: 75px;">VS</span><br>
@@ -33,14 +34,15 @@
                     <span class="team-display">反方</span><br>
                     <span id="timer2" class="time-display">16:00</span><br>
                     <button onclick="startTimer(2)">开始</button>
-                    <button onclick="stopTimer(2)">停止</button>
+                    <button onclick="stopTimer(2)" style="margin-left: 5px;">停止</button>
                 </div>
             </div>
         </div>
 
         <!-- 自由辩论环节 -->
-        <div class="rounded-box3" id="debate-timer-bg">
-            <p class="title"><span class="title-bg">高中时期 , 爱慕之情应该表达出来 / 藏在心底</span></p>
+        <div class="rounded-box1" id="debate-timer-bg">
+            <p class="title"><span class="title-bg" id="title2" contenteditable="true" spellcheck="false">高中时期 ,
+                    爱慕之情应该表达出来 / 藏在心底</span></p>
             <div class="grid-container">
                 <div class="grid-item">
                     <span class="team-display">正方</span><br>
@@ -58,28 +60,60 @@
             </div>
             <div style="height: 150px;"></div>
             <div style="text-align: center;">
-                <button onclick="toggleDebateTimer()" class="debate-button">切换</button>
-                <button onclick="stopDebateTimers()" class="debate-button">停止</button>
+                <button onclick="toggleDebateTimer()">切换</button>
+                <button onclick="stopDebateTimers()" style="margin-left: 5px;">停止</button>
             </div>
         </div>
 
         <!-- 设置框 -->
-        <div class="rounded-box3">
+        <div class="rounded-box3" id="settings">
             <p>
-                <strong>时间控制</strong>
-                <label style="margin-left: 10px;">自由分配环节</label>
+                <strong>页面选择</strong>
+                <button onclick="disp1()" style="margin: 0 5px;">自由分配</button>
+                <button onclick="disp2()">自由辩论</button>
+                <strong style="margin-left: 10px;">时间控制</strong>
+                <label style="margin-left: 10px;">自由分配环节 双方统一</label>
                 <input type="number" id="minutesInput" value="16" min="1">
                 <label>分钟</label>
-                <button onclick="setTimers()">设置</button>
-                <label style="margin-left: 10px;">自由辩论环节</label>
+                <button onclick="setTimers()" style="margin-left: 5px;">设置</button>
+                <label style="margin-left: 10px;">分离设置 正方</label>
+                <input type="number" id="minutesInputPositive" value="3" min="1">
+                <label>分钟</label>
+                <label style="margin-left: 10px;">反方</label>
+                <input type="number" id="minutesInputNegative" value="5" min="1">
+                <label>分钟</label>
+                <button onclick="setTimersSeparate()" style="margin-left: 5px;">设置</button>
+                <button id="info-btn" onclick="showInfoDialog()" title="用法说明">i</button>
+            </p>
+        </div>
+        <div class="rounded-box3" id="debate-settings">
+            <p>
+                <strong>页面选择</strong>
+                <button onclick="disp1()" style="margin: 0 5px;">自由分配</button>
+                <button onclick="disp2()">自由辩论</button>
+                <strong style="margin-left: 10px;">时间控制</strong>
+                <label style="margin-left: 10px;">自由辩论环节 双方统一</label>
                 <input type="number" id="debateMinutesInput" value="6" min="1">
                 <label>分钟</label>
-                <button onclick="setDebateTimers()" class="debate-button">设置</button>
-                <strong style="margin-left: 10px;">页面选择</strong>
-                <button onclick="disp1()">自由分配</button>
-                <button onclick="disp2()">自由辩论</button>
-                <label style="margin-left: 10px;">适配 1920*1080 100% 缩放，其它尺寸可能有显示问题</label>
+                <button onclick="setDebateTimers()" style="margin-left: 5px;">设置</button>
+                <button id="info-btn" onclick="showInfoDialog()" title="用法说明">i</button>
             </p>
+        </div>
+        <!-- 遮罩层 -->
+        <div id="overlay"></div>
+        <!-- 弹窗 -->
+        <div id="info-dialog">
+            <div class="container">
+                <h3 style="margin-top: 0;">用法说明</h3>
+                <span id="text-right" onclick="hideInfoDialog()">×</span>
+            </div>
+            <hr>
+            <p>关于该页面的说明如下：</p>
+            <ul style="margin-bottom: 0;">
+                <li>辩题可直接点击后更改，内容会存储到本地并将优先从本地加载。</li>
+                <li>自由分配可同时控制双方时间，也可分别控制。自由分配和自由辩论计时完全独立，互不干扰。</li>
+                <li>适配 1920×1080 100% 缩放，其它尺寸可能有显示问题。</li>
+            </ul>
         </div>
     </div>
 
@@ -110,8 +144,8 @@
         }
 
         input {
-            width: 50px;
-            margin: 0 -5px;
+            width: 45px;
+            margin: 0 3px;
         }
 
         .title {
@@ -125,6 +159,7 @@
             --color: #BDBDBD3A;
             background-color: var(--color);
             border-radius: 5px;
+            outline: none;
         }
 
         .grid-container {
@@ -157,22 +192,195 @@
         .finished, .debate-finished {
             color: rgb(230, 119, 119);
         }
+
+        .title-bg.invalid {
+            color: #dc3545;
+            /* 无效内容时的文字颜色 */
+        }
+
+        /* 编辑时的视觉提示 */
+        .title-bg:focus {
+            background-color: #BDBDBD4F;
+        }
+
+        .title-bg:hover {
+            background-color: #BDBDBD4F;
+        }
+
+        #info-btn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #0eb8ac;
+            background: rgba(24, 127, 118, 0.589);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: copyright;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        #info-dialog {
+            display: none;
+            position: fixed;
+            top: 50vh;
+            left: 50vw;
+            transform: translate(-50%, -50%);
+            background: #1a3e65;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #0eb8ac;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 3;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .container {
+            position: relative;
+        }
+
+        #text-right {
+            position: absolute;
+            bottom: 0px;
+            right: -25px;
+            transform: translateX(-100%);
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            border: 1px solid #24c2b7;
+            background: rgba(16, 129, 120, 0.589);
+            font-size: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: copyright;
+        }
     </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>
     <script>
+        // 获取编辑元素
+        const title1 = document.getElementById('title1');
+        const title2 = document.getElementById('title2');
+
+        // 从localStorage加载保存的内容
+        const savedTitle = localStorage.getItem('debateTitle');
+        if (savedTitle) {
+            title1.textContent = savedTitle;
+            title2.textContent = savedTitle;
+        }
+
+        // 验证内容是否为空
+        function isValidContent(content) {
+            return content.trim().length > 0;
+        }
+
+        // 更新内容的函数
+        function updateContent(source, target, content) {
+            if (isValidContent(content)) {
+                target.textContent = content;
+                source.classList.remove('invalid');
+                // 保存到localStorage
+                localStorage.setItem('debateTitle', content);
+            } else {
+                source.classList.add('invalid');
+            }
+        }
+
+        // 处理按键事件，阻止换行
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                e.target.blur();
+                return false;
+            }
+        }
+
+        // 监听输入事件
+        title1.addEventListener('input', (e) => {
+            updateContent(title1, title2, e.target.textContent);
+        });
+
+        title2.addEventListener('input', (e) => {
+            updateContent(title2, title1, e.target.textContent);
+        });
+
+        // 添加回车键处理
+        title1.addEventListener('keypress', handleKeyPress);
+        title2.addEventListener('keypress', handleKeyPress);
+
+        // 处理失去焦点事件
+        function handleBlur(element, otherElement) {
+            if (!isValidContent(element.textContent)) {
+                const savedContent = localStorage.getItem('debateTitle') || '';
+                if (savedContent) {
+                    element.textContent = savedContent;
+                    otherElement.textContent = savedContent;
+                }
+            }
+        }
+
+        title1.addEventListener('blur', () => {
+            handleBlur(title1, title2);
+        });
+
+        title2.addEventListener('blur', () => {
+            handleBlur(title2, title1);
+        });
+
+        function showInfoDialog() {
+            document.getElementById('info-dialog').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            // 防止页面滚动
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideInfoDialog() {
+            document.getElementById('info-dialog').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+            // 恢复页面滚动
+            document.body.style.overflow = 'auto';
+        }
+
+        // 点击遮罩层关闭弹窗
+        document.getElementById('overlay').addEventListener('click', hideInfoDialog);
+
         // 设置显示界面
         document.getElementById('debate-timer-bg').style.display = 'none';
+        document.getElementById('debate-settings').style.display = 'none';
 
         function disp1() {
             document.getElementById('timer-bg').style.display = 'block';
+            document.getElementById('settings').style.display = 'block';
             document.getElementById('debate-timer-bg').style.display = 'none';
+            document.getElementById('debate-settings').style.display = 'none';
         }
 
         function disp2() {
             document.getElementById('timer-bg').style.display = 'none';
+            document.getElementById('settings').style.display = 'none';
             document.getElementById('debate-timer-bg').style.display = 'block';
+            document.getElementById('debate-settings').style.display = 'block';
         }
 
         // 自由分配环节
@@ -239,6 +447,20 @@
                     stopTimer(id);
                     timers[id].seconds = seconds;
                     timers[id].originalSeconds = seconds;
+                    updateDisplay(id);
+                }
+            }
+        }
+
+        function setTimersSeparate() {
+            const minutesPos = parseInt(document.getElementById('minutesInputPositive').value);
+            const minutesNeg = parseInt(document.getElementById('minutesInputNegative').value);
+            if (minutesPos > 0 && minutesNeg > 0) {
+                const secs = [0, minutesPos * 60, minutesNeg * 60];
+                for (let id = 1; id <= 2; id++) {
+                    stopTimer(id);
+                    timers[id].seconds = secs[id];
+                    timers[id].originalSeconds = secs[id];
                     updateDisplay(id);
                 }
             }
@@ -312,7 +534,7 @@
                     debateTimers[timerId].pausedTime = Math.max(0, debateTimers[timerId].pausedTime - elapsed);
                 }
                 updateDebateDisplay(timerId);
-                
+
                 // 当一个计时器归零时，检查并启动另一个计时器
                 if (debateTimers[timerId].seconds === 0) {
                     const otherTimerId = timerId === 1 ? 2 : 1;

@@ -98,7 +98,13 @@
     {
         "url": "content/0017.math-review-2/index.html",
         "title": "数学知识点记录（二）",
-        "modified": "2024.10.13 11:29",
+        "modified": "2024.11.16 19:15",
         "category": "文化课学习记录"
+    },
+    {
+        "url": "content/0018.debate-timer/timer.html",
+        "title": "辩论用计时器",
+        "modified": "2024.11.17 00:52",
+        "category": "Web 开发实践"
     }
 ]

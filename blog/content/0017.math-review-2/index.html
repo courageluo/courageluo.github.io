@@ -45,6 +45,7 @@
                 <ul id="content-index" style="column-count: 2;">
                     <li><a href="#3d-vector">空间向量</a></li>
                     <li><a href="#line">直线</a></li>
+                    <li><a href="#conic-section">圆锥曲线</a></li>
                 </ul>
             </div>
 
@@ -222,7 +223,56 @@
                                 $l_1\parallel l_2$ $\Leftrightarrow k_1=k_2$ 且 $b_1\ne b_2$<br>
                                 $\Leftrightarrow A_1=\lambda A_2$，$B_1=\lambda B_2$，$C_1\ne\lambda C_2$，$\lambda\ne0$
                             </li>
+                            <li>
+                                $l_1\perp l_2$ $\Leftrightarrow k_1k_2=-1$<br>
+                                $\Leftrightarrow A_1A_2+B_1B_2=0$
+                            </li>
                         </ul>
+                    </li>
+                    <li>
+                        点 $(x_0,y_0)$ 到直线 $Ax+By+C=0$ 的距离 $d=\displaystyle\frac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}$<br>
+                        直线 $Ax+By+C_1=0$ 到直线 $Ax+By+C_2=0$ 的距离 $d=\displaystyle\frac{|C_2-C_1|}{\sqrt{A^2+B^2}}$
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="conic-section" class="section-title">圆锥曲线</h3>
+                    <a href="#index" id="text-right">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        圆的方程<br>
+                        设 $\odot C$ 的圆心为 $(a,b)$，半径为 $r$
+                        <ul class="margin-ul">
+                            <li>
+                                标准方程：$(x-a)^2+(y-b)^2=r^2$<br>
+                                点 $(x_0,y_0)$ 在圆上 $\Leftrightarrow (x_0-a)^2+(y_0-b)^2=r^2$<br>
+                                点 $(x_1,y_1)$ 在圆内 $\Leftrightarrow (x_1-a)^2+(y_1-b)^2&lt;r^2$<br>
+                                点 $(x_2,y_2)$ 在圆外 $\Leftrightarrow (x_2-a)^2+(y_2-b)^2&gt;r^2$
+                            </li>
+                            <li>
+                                一般方程：$x^2+y^2+Dx+Ey+F=0$ $(D^2+E^2-4F&gt;0)$<br>
+                                $a=-\displaystyle\frac D2$，$b=-\displaystyle\frac E2$，$r=\displaystyle\frac{\sqrt{D^2+E^2-4F}}2$
+                            </li>
+                            <li>
+                                参数方程：$\bigg\{\begin{aligned}
+                                    x&=a+r\cos\theta\\
+                                    y&=b+r\sin\theta
+                                \end{aligned}\;\,(\theta\in\mathbf R)$
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        直线与圆的位置关系<br>
+                        直线 $l$ 与 $\odot C$ 相交 $\Leftrightarrow d&lt;r$（$\Delta &gt;0$）<br>
+                        直线 $l$ 与 $\odot C$ 相切 $\Leftrightarrow d=r$（$\Delta =0$）<br>
+                        直线 $l$ 与 $\odot C$ 相离 $\Leftrightarrow d&gt;r$（$\Delta &lt;0$）
+                    </li>
+                    <li>
+                        点 $A(x_0,y_0)$ 是 $\odot C:(x-a)^2+(y-b)^2=r^2$ 上一点，则过点 $A$ 的切线 $l:(x-a)(x_0-a)+(y-b)(y_0-b)=r^2$<br>
+                        若点 $A$ 为 $\odot C$ 外一点，则 $l$ 为 $\odot C$ 切点弦（两切点的连线）所在直线
                     </li>
                 </ol>
             </div>
@@ -370,24 +420,6 @@
         // 页面加载时和窗口大小改变时调用更新列数函数
         window.addEventListener('load', updateColumnCount);
         window.addEventListener('resize', updateColumnCount);
-
-        // 获取所有带有特定类名的链接元素
-        // var scrollLinks = document.querySelectorAll('.scroll-link');
-
-        // 定义滚动函数
-        // function scrollToTarget(targetId) {
-        //     var targetElement = document.getElementById(targetId);
-        //     targetElement.scrollIntoView({ behavior: 'smooth' });
-        // }
-
-        // 为每个链接添加点击事件监听器
-        // scrollLinks.forEach(function (link) {
-        //     link.addEventListener('click', function (e) {
-        //         e.preventDefault();
-        //         var targetId = this.getAttribute('href').substring(1); // 去掉 "#" 符号
-        //         scrollToTarget(targetId);
-        //     });
-        // });
     </script>
 </body>
 

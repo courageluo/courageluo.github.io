@@ -78,6 +78,11 @@
             background-color: #b3c5bb;
         }
 
+        .modified-time {
+            font-size: 15px;
+            color: #2e2e2e;
+        }
+
         @media (prefers-color-scheme: dark) {
             body {
                 background-image: url('/img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
@@ -98,6 +103,10 @@
 
             .collapsible-content {
                 background-color: #314174;
+            }
+
+            .modified-time {
+                color: #7fadb1;
             }
         }
     </style>
@@ -173,9 +182,11 @@
                 content.appendChild(link);
 
                 const modified = document.createElement('p');
-                modified.textContent = '修改时间：' + article.modified;
+                modified.textContent = '更新时间：' + article.modified;
                 modified.style.textAlign = 'right';
                 modified.style.marginRight = '15px';
+                modified.style.marginTop = '10px';
+                modified.classList.add('modified-time');
                 content.appendChild(modified);
 
                 const hr = document.createElement('hr');

@@ -14,6 +14,10 @@
     width: 100%;
 }
 
+main {
+    max-width: 1185px;
+}
+
 @media (min-width: 768px) {
     .content {
         flex-direction: row;

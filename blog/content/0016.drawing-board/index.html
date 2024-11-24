@@ -198,6 +198,7 @@
             const button = document.createElement('button');
             button.className = 'color-preset';
             button.style.backgroundColor = color;
+            button.title = color;
             button.onclick = () => colorPicker.value = color;
             colorPresets.appendChild(button);
         });

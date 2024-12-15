@@ -243,6 +243,7 @@
                     <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
+                <p style="margin-bottom: -1em;">一、圆</p>
                 <ol>
                     <li>
                         圆的方程<br>
@@ -287,6 +288,82 @@
                         两个圆相交 $\Leftrightarrow |r_1-r_2|&lt;d&lt;r_1+r_2$<br>
                         两个圆内切 $\Leftrightarrow d=|r_1-r_2|$<br>
                         两个圆内含 $\Leftrightarrow d&lt;|r_1-r_2|$<br>
+                    </li>
+                </ol>
+                <p style="margin-bottom: -1em; margin-top: -0.5em;">二、椭圆</p>
+                <ol>
+                    <li>
+                        椭圆的定义
+                        <ul class="margin-ul">
+                            <li>
+                                第一定义<br>
+                                平面内与两定点 $F_1$、$F_2$ 的距离之和为常数 $2a$ 的点 $P$ 的轨迹称为椭圆
+                            </li>
+                            <li>
+                                第二定义<br>
+                                平面内到定点 $F$ 的距离与到定直线 $l:y=\dfrac{c^2}a$ 的距离之比为 $\dfrac ca$ 的点 $P$ 的轨迹称为椭圆
+                            </li>
+                        </ul>
+                        以上点 $F$ 称为椭圆的焦点，直线 $l$ 称为准线，$e=\dfrac ca\in(0,1)$ 称为离心率
+                    </li>
+                    <li>
+                        椭圆的方程<br>
+                        设椭圆 $C$ 的长轴长 $2a$，短轴长 $2b$
+                        <ul class="margin-ul">
+                            <li>
+                                焦点在 $x$ 轴上<br>
+                                $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ $(a&gt;b&gt;0)$<br>
+                            </li>
+                            <li>
+                                焦点在 $y$ 轴上<br>
+                                $\dfrac{y^2}{a^2}+\dfrac{x^2}{b^2}=1$ $(a&gt;b&gt;0)$<br>
+                            </li>
+                            <li>
+                                一般式方程<br>
+                                $mx^2+ny^2=1$ $(m,n&gt;0,m\ne n)$
+                            </li>
+                            <li>
+                                参数方程 (焦点在 $x$ 轴上)<br>
+                                $\bigg\{\begin{aligned}
+                                    x&=a\cos\theta\\
+                                    y&=b\sin\theta
+                                \end{aligned}$
+                                $(\theta\in\mathbf R)$
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        椭圆的几何性质 (以下主要研究焦点在 $x$ 轴上的椭圆)<br>
+                        <ul class="margin-ul">
+                            <li>
+                                范围<br>
+                                $x\in[-a,a],y\in[-b,b]$
+                            </li>
+                            <li>
+                                对称性<br>
+                                它关于 $x$ 轴、$y$ 轴及原点对称
+                            </li>
+                            <li>
+                                顶点<br>
+                                $A(-a,0),A'(a,0),B(0,b),B'(0,-b)$
+                            </li>
+                            <li>
+                                离心率<br>
+                                $e$ 越大，椭圆越扁
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        焦半径公式<br>
+                        椭圆上任一点 $P(x_0,y_0)$ 到左焦点 $F_1(-c,0)$ 的距离 $d=a+\dfrac ca x_0=a+ex_0\in[a-c,a+c]$ <br>
+                        即 $|PF_1|=a+ex_0,|PF_2|=a-ex_0$
+                    </li>
+                    <li>
+                        焦点弦公式<br>
+                        过一焦点的直线 $l$ 交椭圆于 $P,Q$ 两点，则 $PQ$ 称为焦点弦<br>
+                        当 $PQ\perp x$ 轴时，$|PQ|=\dfrac{c^2}a$ 最小，称为通径<br>
+                        设 $\theta$ 为 $l$ 与长轴的夹角，则 $|PF_1|$、$|PF_2|$ 中较短的一条长为 $\dfrac{b^2/a}{1+e\cos\theta}$，即 $\dfrac{ep}{1+e\cos\theta}$（$p=\dfrac{b^2}a$，称为焦准距），较长的一条长为 $\dfrac{b^2/a}{1-e\cos\theta}$ <br>
+                        即 $|PF_1|=\dfrac{b^2/a}{1+e\cos\theta}=\dfrac{ep}{1+e\cos\theta}$
                     </li>
                 </ol>
             </div>
@@ -343,11 +420,21 @@
             right: -60px;
             transform: translateX(-100%);
         }
+
+        @counter-style parentheses {
+            system: fixed;
+            symbols: "(1)" "(2)" "(3)" "(4)" "(5)" "(6)" "(7)" "(8)" "(9)" "(10)";
+            suffix: " ";
+        }
         
         .margin-ul {
-            list-style-type: lower-alpha;
+            list-style: parentheses;
             /* white-space: nowrap; */
-            margin-left: -15px;
+            margin-left: -13px;
+        }
+
+        li {
+            margin: 3px 0;
         }
 
         .scroll-item {

@@ -110,7 +110,7 @@
                 </ol>
             </div>
 
-            <div class="rounded-box6">
+            <div class="rounded-box6" id="update-container">
                 <h3 id="update" style="text-align: center;">更新日志</h3>
                 <hr>
                 <p>ver 0.6.9 2024.12.07 19:53 <br> 更换正文字体，修改猜数游戏。</p>
@@ -165,6 +165,10 @@
 
         body {
             background-image: url('/img/background/day-updatebackground.svg');
+        }
+
+        #update-container p {
+            font-feature-settings: "tnum";
         }
 
         @media (prefers-color-scheme: dark) {

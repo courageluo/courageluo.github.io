@@ -67,7 +67,6 @@ h1 {
 /* 调整网页字体 */
 body, p {
     font-family: "text";
-    font-feature-settings: "tnum";
 }
 
 h1 {

@@ -1,0 +1,8 @@
+{
+	"KaTeX Formula": {
+		"scope": "html",
+		"prefix": "katex",
+		"body": "$$1$ ",
+		"description": "Insert a KaTeX formula wrapped with $"
+	}
+}

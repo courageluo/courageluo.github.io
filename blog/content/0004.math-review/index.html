@@ -1019,11 +1019,17 @@
             right: -60px;
             transform: translateX(-100%);
         }
+
+        @counter-style parentheses {
+            system: fixed;
+            symbols: "(1)" "(2)" "(3)" "(4)" "(5)" "(6)" "(7)" "(8)" "(9)" "(10)";
+            suffix: " ";
+        }
         
         .margin-ul {
-            list-style-type: lower-alpha;
+            list-style: parentheses;
             white-space: nowrap;
-            margin-left: -12px;
+            margin-left: -13px;
         }
 
         .scroll-item {

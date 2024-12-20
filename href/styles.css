@@ -37,31 +37,37 @@ h1 {
 @font-face {
     font-family: title;
     src: url('/font/SmileySans-Oblique.woff2');
+    font-display: swap;
 }
 
 @font-face {
     font-family: text;
     src: url('/font/JiangChengHei-500W.woff2');
+    font-display: swap;
 }
 
 @font-face {
     font-family: text;
     src: url('/font/Inter-Regular.woff2');
+    font-display: swap;
 }
 
 @font-face {
     font-family: code;
     src: url('/font/JiangChengHei-500W.woff2');
+    font-display: swap;
 }
 
 @font-face {
     font-family: code;
     src: url('/font/CascadiaMono-Regular.woff2');
+    font-display: swap;
 }
 
 @font-face {
     font-family: copyright;
     src: url('/font/JetBrainsMono-Medium.ttf');
+    font-display: swap;
 }
 
 /* 调整网页字体 */

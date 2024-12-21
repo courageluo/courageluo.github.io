@@ -44,8 +44,12 @@
                 <hr>
                 <ul id="content-index" style="column-count: 2;">
                     <li><a href="#3d-vector">空间向量</a></li>
-                    <li><a href="#line">直线</a></li>
                     <li><a href="#conic-section">圆锥曲线</a></li>
+                    <ul style="margin-left: -24px;">
+                        <li><a href="#line">直线</a></li>
+                        <li><a href="#circle">圆</a></li>
+                        <li><a href="#ellipse">椭圆</a></li>
+                    </ul>
                 </ul>
             </div>
 
@@ -146,11 +150,25 @@
             </div>
             <div class="rounded-box3">
                 <div class="container">
-                    <h3 id="line" class="section-title">直线</h3>
+                    <h3 id="conic-section" class="section-title">圆锥曲线</h3>
                     <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
-                <p>记直线 $l_i$ 的方向向量为 $\boldsymbol{a}_i$，法向量为 $\boldsymbol{v}_i$</p>
+                <p style="margin-bottom: -0.5em;"><strong>一、圆锥曲线</strong></p>
+                <ol>
+                    <li>广义的圆锥曲线包含了直线、圆、椭圆、双曲线、抛物线等</li>
+                    <li>
+                        圆锥曲线的一般解题步骤<br>
+                        <ul class="margin-ul">
+                            <li>联 —— 联立两方程</li>
+                            <li>消 —— 消去某一变量，得到一元二次方程</li>
+                            <li>判 —— 判断判别式 $\Delta$ 是否大于 $0$</li>
+                            <li>韦 —— 应用韦达定理，为后续解题做准备</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p class="sub-header" id="line">二、直线</p>
+                <p style="margin-left: 1em; margin-bottom: -0.5em;">记直线 $l_i$ 的方向向量为 $\boldsymbol{a}_i$，法向量为 $\boldsymbol{v}_i$</p>
                 <ol>
                     <li>
                         数轴上，设 $A(x_1)$，$B(x_2)$，则：<br>
@@ -236,14 +254,7 @@
                         直线 $Ax+By+C_1=0$ 到直线 $Ax+By+C_2=0$ 的距离 $d=\displaystyle\frac{|C_2-C_1|}{\sqrt{A^2+B^2}}$
                     </li>
                 </ol>
-            </div>
-            <div class="rounded-box3">
-                <div class="container">
-                    <h3 id="conic-section" class="section-title">圆锥曲线</h3>
-                    <a href="#index" id="text-right">返回索引</a>
-                </div>
-                <hr>
-                <p style="margin-bottom: -1em;">一、圆</p>
+                <p class="sub-header" id="circle">三、圆</p>
                 <ol>
                     <li>
                         圆的方程<br>
@@ -290,18 +301,26 @@
                         两个圆内含 $\Leftrightarrow d&lt;|r_1-r_2|$<br>
                     </li>
                 </ol>
-                <p style="margin-bottom: -1em; margin-top: -0.5em;">二、椭圆</p>
+                <p class="sub-header" id="ellipse">四、椭圆</p>
                 <ol>
                     <li>
                         椭圆的定义
                         <ul class="margin-ul">
                             <li>
                                 第一定义<br>
-                                平面内与两定点 $F_1$、$F_2$ 的距离之和为常数 $2a$ 的点 $P$ 的轨迹称为椭圆
+                                平面内与两定点 $F_1$、$F_2$ 的距离之和为常数 $2a$ 的点 $P$ 的轨迹是椭圆
                             </li>
                             <li>
                                 第二定义<br>
-                                平面内到定点 $F$ 的距离与到定直线 $l:y=\dfrac{c^2}a$ 的距离之比为 $\dfrac ca$ 的点 $P$ 的轨迹称为椭圆
+                                平面内到定点 $F$ 的距离与到定直线 $l:y=\dfrac{c^2}a$ 的距离之比为 $\dfrac ca$ 的点 $P$ 的轨迹是椭圆
+                            </li>
+                            <li>
+                                第三定义<br>
+                                平面内到定点 $A_1$、$A_2$ 的斜率之积为 $-\dfrac{b^2}{a^2}$（即 $e^2-1$）的点 $P$ 的轨迹是椭圆
+                            </li>
+                            <li>
+                                “第零定义”（坐标伸缩变换）<br>
+                                椭圆 $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ 是单位圆在 $x$ 轴上拉伸 $a$ 倍，在 $y$ 轴上拉伸 $b$ 倍后的图像
                             </li>
                         </ul>
                         以上点 $F$ 称为椭圆的焦点，直线 $l$ 称为准线，$e=\dfrac ca\in(0,1)$ 称为离心率
@@ -374,7 +393,7 @@
                     </li>
                     <li>
                         伴侣点<br>
-                        对于椭圆 $C: \dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$，$A(m,0)$，$B(n,0)$，则 $mn=a^2$ $\Leftrightarrow$ $A$，$B$ 为伴侣点
+                        对于椭圆 $C: \dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$，$A(m,0)$，$B(n,0)$，则 $mn=a^2$ $\Leftrightarrow$ $A$，$B$ 互为伴侣点
                     </li>
                 </ol>
             </div>
@@ -432,6 +451,15 @@
             transform: translateX(-100%);
         }
 
+        .sub-header {
+            font-weight: bold;
+            margin-bottom: -0.5em;
+        }
+
+        ol {
+            margin-left: -5px;
+        }
+
         @counter-style parentheses {
             system: fixed;
             symbols: "(1)" "(2)" "(3)" "(4)" "(5)" "(6)" "(7)" "(8)" "(9)" "(10)";
@@ -445,7 +473,7 @@
         }
 
         li {
-            margin: 3px 0;
+            margin: 4px 0;
         }
 
         .scroll-item {

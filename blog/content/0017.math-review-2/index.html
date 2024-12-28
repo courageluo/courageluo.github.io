@@ -154,7 +154,7 @@
                     <a href="#index" id="text-right">返回索引</a>
                 </div>
                 <hr>
-                <p style="margin-bottom: -0.5em;"><strong>一、圆锥曲线</strong></p>
+                <p style="margin-bottom: -0.5em; font-size: 13pt;"><strong>一、圆锥曲线</strong></p>
                 <ol>
                     <li>广义的圆锥曲线包含了直线、圆、椭圆、双曲线、抛物线等</li>
                     <li>
@@ -168,7 +168,7 @@
                     </li>
                 </ol>
                 <p class="sub-header" id="line">二、直线</p>
-                <p style="margin-left: 1em; margin-bottom: -0.5em;">记直线 $l_i$ 的方向向量为 $\boldsymbol{a}_i$，法向量为 $\boldsymbol{v}_i$</p>
+                <p style="margin-left: 1.3em; margin-bottom: -0.5em;">记直线 $l_i$ 的方向向量为 $\boldsymbol{a}_i$，法向量为 $\boldsymbol{v}_i$</p>
                 <ol>
                     <li>
                         数轴上，设 $A(x_1)$，$B(x_2)$，则：<br>
@@ -300,6 +300,11 @@
                         两个圆内切 $\Leftrightarrow d=|r_1-r_2|$<br>
                         两个圆内含 $\Leftrightarrow d&lt;|r_1-r_2|$<br>
                     </li>
+                    <li>
+                        阿波罗尼斯圆<br>
+                        若动点 $P$ 与两定点 $A$、$B$ 的距离之比为 $\lambda$ $(\lambda&gt;0,\lambda\ne1)$，则 $P$ 的轨迹是一个圆<br>
+                        这个圆的半径 $r$ 满足 $\dfrac{|PA|}{|PB|}=\dfrac{|OA|}r=\dfrac r{|OB|}=\lambda$，即 $|OA|\cdot|OB|=r^2$，$r=\left|\dfrac{|AB|}{\lambda-\frac1\lambda}\right|$
+                    </li>
                 </ol>
                 <p class="sub-header" id="ellipse">四、椭圆</p>
                 <ol>
@@ -352,7 +357,7 @@
                         </ul>
                     </li>
                     <li>
-                        椭圆的几何性质 (以下主要研究焦点在 $x$ 轴上的椭圆)<br>
+                        椭圆的几何性质 (焦点在 $x$ 轴上)<br>
                         <ul class="margin-ul">
                             <li>
                                 范围<br>
@@ -381,8 +386,20 @@
                         焦点弦公式<br>
                         过一焦点的直线 $l$ 交椭圆于 $P,Q$ 两点，则 $PQ$ 称为焦点弦<br>
                         当 $PQ\perp x$ 轴时，$|PQ|=\dfrac{c^2}a$ 最小，称为通径<br>
-                        设 $\theta$ 为 $l$ 与长轴的夹角，则 $|PF_1|$、$|PF_2|$ 中较短的一条长为 $\dfrac{b^2/a}{1+e\cos\theta}$，即 $\dfrac{ep}{1+e\cos\theta}$（$p=\dfrac{b^2}a$，称为焦准距），较长的一条长为 $\dfrac{b^2/a}{1-e\cos\theta}$ <br>
-                        即 $|PF_1|=\dfrac{b^2/a}{1+e\cos\theta}=\dfrac{ep}{1+e\cos\theta}$
+                        设 $\theta$ 为 $l$ 与长轴的夹角，则 $|PF_1|$、$|PF_2|$ 中较短的一条长为 $\dfrac{\frac{b^2}a}{1+e\cos\theta}$，即 $\dfrac{ep}{1+e\cos\theta}$（$p=\dfrac{b^2}a$，称为焦准距），较长的一条长为 $\dfrac{\frac{b^2}a}{1-e\cos\theta}$ <br>
+                        即 $|PF_1|=\dfrac{\frac{b^2}a}{1+e\cos\theta}=\dfrac{ep}{1+e\cos\theta}$
+                    </li>
+                    <li>
+                        焦点三角形<br>
+                        设 $P(x_0,y_0)$ 是椭圆 $C: \dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ 上一点，称 $\triangle PF_1F_2$ 为焦点三角形，设 $\angle F_1PF_2=\theta$，$\angle PF_1F_2=\alpha$，$\angle PF_2F_1=\beta$<br>
+                        <ul class="margin-ul">
+                            <li>
+                                面积 $S=b^2\tan\dfrac\theta2=b^2\dfrac{\sin\theta}{1+\cos\theta}$
+                            </li>
+                            <li>
+                                离心率 $e=\dfrac{\sin\theta}{\sin\alpha+\sin\beta}$
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         外准圆与内准圆<br>
@@ -394,6 +411,126 @@
                     <li>
                         伴侣点<br>
                         对于椭圆 $C: \dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$，$A(m,0)$，$B(n,0)$，则 $mn=a^2$ $\Leftrightarrow$ $A$，$B$ 互为伴侣点
+                    </li>
+                </ol>
+                <p class="sub-header" id="hyperbola">五、双曲线</p>
+                <ol>
+                    <li>
+                        双曲线的定义<br>
+                        <ul class="margin-ul">
+                            <li>
+                                第一定义<br>
+                                平面内到定点 $F_1$、$F_2$ 的距离之差为常数 $2a$ 的点 $P$ 的轨迹是双曲线，即 $\big| |PF_1|-|PF_2|\big| =2a$<br>
+                            </li>
+                            <li>
+                                第二定义<br>
+                                平面内到定点 $F(c,0)$、定直线 $l: x=\dfrac{a^2}c$ 的距离之比为 $\dfrac ca$ 的点 $P$ 的轨迹是双曲线<br>
+                            </li>
+                            <li>
+                                第三定义<br>
+                                平面内到定点 $A_1$、$A_2$ 的斜率之积为 $\dfrac{b^2}{a^2}$ 的点 $P$ 的轨迹是双曲线
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        双曲线的方程<br>
+                        设双曲线实轴长 $2a$，虚轴长 $2b$
+                        <ul class="margin-ul">
+                            <li>
+                                焦点在 $x$ 轴上<br>
+                                $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$ $(a&gt;0,b&gt;0)$
+                            </li>
+                            <li>
+                                焦点在 $y$ 轴上<br>
+                                $\dfrac{y^2}{a^2}-\dfrac{x^2}{b^2}=1$ $(a&gt;0,b&gt;0)$
+                            </li>
+                            <li>
+                                一般式<br>
+                                $mx^2+ny^2=1$ $(mn&lt;0)$
+                            </li>
+                            <li>
+                                参数方程 (焦点在 $x$ 轴上)<br>
+                                $\bigg\{\begin{aligned}
+                                    x&=a\sec\theta\\
+                                    y&=b\tan\theta
+                                \end{aligned}$
+                                $(\theta\in\mathbf R)$
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        双曲线的几何性质 (焦点在 $x$ 轴上)<br>
+                        <ul class="margin-ul">
+                            <li>
+                                范围<br>
+                                $x\in(-\infin,-a\,]\cup[\,a,+\infin)$，$y\in\mathbf R$
+                            </li>
+                            <li>
+                                对称性<br>
+                                它关于 $x$ 轴、$y$ 轴及原点对称
+                            </li>
+                            <li>
+                                顶点<br>
+                                $A(-a,0)$，$A'(a,0)$
+                            </li>
+                            <li>
+                                离心率<br>
+                                $e\in(1,+\infin)$ 越大，双曲线开口越大
+                            </li>
+                            <li>
+                                渐近线<br>
+                                $y=\pm\dfrac{b}{a}x$<br>
+                                焦点到渐近线的距离为 $b$
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        渐近线相同的双曲线系方程<br>
+                        $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=\lambda$ $(\lambda\ne 0)$
+                    </li>
+                    <li>
+                        焦点三角形<br>
+                        <ul class="margin-ul">
+                            <li>
+                                面积 $S=\dfrac{b^2}{\tan\frac\theta2}=b^2\dfrac{\sin\theta}{1-\cos\theta}$
+                            </li>
+                            <li>
+                                焦点三角形内切圆在 $x$ 轴上的切点 $T(\pm a,0)$
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        焦半径公式<br>
+                        <ul class="margin-ul">
+                            <li>
+                                在右支上<br>
+                                $|PF_1|=ex_0+a$<br>
+                                $|PF_2|=ex_0-a$
+                            </li>
+                            <li>
+                                在左支上<br>
+                                $|PF_1|=-(ex_0+a)$<br>
+                                $|PF_2|=-(ex_0-a)$
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        焦点弦公式<br>
+                        $|PF_1|=\dfrac{ep}{1+e\cos\theta}$<br>
+                        $|PF_2|=\left|\dfrac{ep}{1-e\cos\theta}\right|$
+                    </li>
+                    <li>
+                        双曲线上任取不重合两点 $A$，$B$，则 $|AB|$ 的最小值<br>
+                        <ul class="margin-ul">
+                            <li>
+                                在同支上<br>
+                                $|AB|_{\min}=\dfrac{2b^2}{a}$
+                            </li>
+                            <li>
+                                在异支上<br>
+                                $|AB|_{\min}=2a$
+                            </li>
+                        </ul>
                     </li>
                 </ol>
             </div>
@@ -454,11 +591,12 @@
         .sub-header {
             font-weight: bold;
             margin-bottom: -0.5em;
+            font-size: 13pt;
         }
 
-        ol {
-            margin-left: -5px;
-        }
+        /* ol {
+            margin-left: -10px;
+        } */
 
         @counter-style parentheses {
             system: fixed;

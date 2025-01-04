@@ -16,7 +16,7 @@
 
 <body>
     <div class="content">
-        <aside class="sidebar" style="background-color: #204367">
+        <aside class="sidebar">
             <div class="rounded-box3">
                 <h3 style="text-align: center;">索引</h3>
                 <hr>
@@ -44,7 +44,7 @@
                     <h3 id="list" style="text-align: center; flex-grow: 1;">文章列表</h3>
                     <div id="sort-toggle" style="cursor: pointer; display: flex; align-items: center; margin-left: 10px;">
                         <img src="./sort.svg" alt="Sort Icon" width="18" height="18" style="vertical-align: middle;">
-                        <span id="sort-text">按分类</span>
+                        <span id="sort-text">按类别</span>
                     </div>
                 </div>
                 <hr>
@@ -178,7 +178,7 @@
         // 更新排序文本
         function updateSortText() {
             const sortText = document.getElementById('sort-text');
-            sortText.textContent = sortPreference === 'category' ? '按分类' : '按时间';
+            sortText.textContent = sortPreference === 'category' ? '按类别' : '按时间';
         }
         
         // 创建折叠面板

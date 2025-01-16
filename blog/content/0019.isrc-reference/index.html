@@ -1,0 +1,116 @@
+<!-- 模板 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" type="text/css" href="/href/response.css">
+</head>
+
+<body>
+    <div class="content">
+        <!-- 边栏 -->
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引</h3>
+                <hr>
+            </div>
+        </aside>
+
+        <!-- 内容 -->
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">ISRC 参考手册</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <p></p>
+                <table id="publisherTable" border="2">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px; padding: 3px 0; text-align: center;">代码</th>
+                            <th style="padding: 3px 6px; text-align: left;">出版商名称</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <p></p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+        }
+        
+        table {
+            max-width: 840px;
+        }
+
+        td {
+            padding: 3px 5px;
+            text-align: left;
+        }
+    </style>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('./data.dat')
+                .then(response => response.text())
+                .then(text => {
+                    const publishers = text.split('\n').map(line => {
+                        const match = line.match(/^(\w+)\s+(.*)/);
+                        if (match) {
+                            return { code: match[1], name: match[2] };
+                        }
+                        return null;
+                    }).filter(publisher => publisher !== null);
+
+                    const tableBody = document.querySelector('#publisherTable tbody');
+
+                    publishers.forEach(publisher => {
+                        const row = document.createElement('tr');
+                        const codeCell = document.createElement('td');
+                        const nameCell = document.createElement('td');
+
+                        codeCell.style.textAlign = 'center';
+                        codeCell.style.fontFeatureSettings = '"tnum"';
+
+                        codeCell.textContent = publisher.code;
+                        nameCell.textContent = publisher.name;
+
+                        row.appendChild(codeCell);
+                        row.appendChild(nameCell);
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching data: ', error));
+        });
+    </script>
+</body>
+
+</html>

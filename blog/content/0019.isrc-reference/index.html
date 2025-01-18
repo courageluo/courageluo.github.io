@@ -1,11 +1,11 @@
-<!-- 模板 -->
+<!-- ISRC 参考手册 -->
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>标题 - Courage Luo的网站</title>
+    <title>ISRC 参考手册 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -21,6 +21,15 @@
             <div class="rounded-box3">
                 <h3 style="text-align: center;">索引</h3>
                 <hr>
+                <ul>
+                    <li><a href="#isrc">ISRC 简介</a></li>
+                    <li><a href="#country-code">国家码</a></li>
+                    <li><a href="#registrant-code">出版者码</a></li>
+                    <li><a href="#years-of-reference">录制年码</a></li>
+                    <li><a href="#designation-code">记录码和记录项码</a></li>
+                    <li><a href="#carrier-code">载体代码</a></li>
+                    <li><a href="#classification-code">分类代码</a></li>
+                </ul>
             </div>
         </aside>
 
@@ -32,17 +41,118 @@
             </div>
 
             <!-- 内容框 -->
-            <div class="rounded-box3">
+            <div class="rounded-box3" id="isrc">
+                <p>ISRC (<strong>I</strong>nternational <strong>S</strong>tandard <strong>R</strong>ecording <strong>C</strong>ode) 是一种用于唱片音频的国际标准编码。它是一种用于唱片音频的唯一标识符，用于区分不同的音频录音。中国的 ISRC 编码格式如下：</p>
+                <div class="isrc-container">
+                    <div class="part-container-no-hover">
+                        <div class="isrc-part">ISRC</div>
+                        <div class="text-part"></div>
+                    </div>
+                    <div class="part-container" onclick="jumpToAnchor('country-code')">
+                        <div class="isrc-part">CN</div>
+                        <div class="text-part">国家码</div>
+                    </div>
+                    <div class="part-container-no-hover">
+                        <div class="isrc-part">-</div>
+                        <div class="text-part"></div>
+                    </div>
+                    <div class="part-container" onclick="jumpToAnchor('registrant-code')">
+                        <div class="isrc-part">F23</div>
+                        <div class="text-part">出版者码</div>
+                    </div>
+                    <div class="part-container-no-hover">
+                        <div class="isrc-part">-</div>
+                        <div class="text-part"></div>
+                    </div>
+                    <div class="part-container" onclick="jumpToAnchor('years-of-reference')">
+                        <div class="isrc-part">05</div>
+                        <div class="text-part">录制年码</div>
+                    </div>
+                    <div class="part-container-no-hover">
+                        <div class="isrc-part">-</div>
+                        <div class="text-part"></div>
+                    </div>
+                    <div class="part-container" onclick="jumpToAnchor('designation-code')">
+                        <div class="isrc-part">388</div>
+                        <div class="text-part">记录码</div>
+                    </div>
+                    <div class="part-container-no-hover">
+                        <div class="isrc-part">-</div>
+                        <div class="text-part"></div>
+                    </div>
+                    <div class="part-container" onclick="jumpToAnchor('designation-code')">
+                        <div class="isrc-part">00</div>
+                        <div class="text-part">记录项码</div>
+                    </div>
+                    <div class="part-container-no-hover">
+                        <div class="isrc-part">/</div>
+                        <div class="text-part"></div>
+                    </div>
+                    <div class="part-container" onclick="jumpToAnchor('carrier-code')">
+                        <div class="isrc-part">A</div>
+                        <div class="text-part">载体代码</div>
+                    </div>
+                    <div class="part-container-no-hover">
+                        <div class="isrc-part">·</div>
+                        <div class="text-part"></div>
+                    </div>
+                    <div class="part-container" onclick="jumpToAnchor('classification-code')">
+                        <div class="isrc-part">J6</div>
+                        <div class="text-part">分类代码</div>
+                    </div>
+                </div>
                 <p></p>
+            </div>
+
+            <div class="rounded-box3">
+                <h3 id="country-code">国家码</h3>
+                <hr>
+                <p>国家码由 IFPI 根据 ISO 3166 国际标准：Codes for the representation of names of countries and their subdivisions 分配给 ISRC 会员国，详细各国分配代码请参考 <a href="https://zh.wikipedia.org/wiki/ISO_3166">Wikipedia - ISO 3166</a></p>
+            </div>
+
+            <div class="rounded-box3">
+                <h3 id="registrant-code">出版者码</h3>
+                <hr>
+                <p>中国大陆的出版者码由一个字母与两个数字组成，参考如下：</p>
                 <table id="publisherTable" border="2">
                     <thead>
                         <tr>
                             <th style="width: 50px; padding: 3px 0; text-align: center;">代码</th>
-                            <th style="padding: 3px 6px; text-align: left;">出版商名称</th>
+                            <th style="padding: 3px 6px; text-align: left;">出版者名称</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
+                <p></p>
+            </div>
+
+            <div class="rounded-box3">
+                <h3 id="years-of-reference">录制年码</h3>
+                <hr>
+                <p>代表对应音像制品录制出版的完成年份，由两位数字组成。例如：92 代表 1992 年，05 代表 2005 年。</p>
+            </div>
+
+            <div class="rounded-box3">
+                <h3 id="designation-code">记录码和记录项码</h3>
+                <hr>
+                <p>
+                    记录码是音像制品的整体代码，由 3 位 (范围 300~999) 或 4 位 (范围 0000~2999) 数字组成，于 2012 年之后取消。<br>
+                    记录项码是该音像制品中每一项独立节目的代码，由 1 位 (范围 0~9) 或 2 位 (范围 00~99) 数字组成，若为 0 或 00 代表该音像制品的全部，它也于 2012 年之后取消。
+                </p>
+                <p>记录码与记录项码长度之和恒为 5 位数字，由音像出版者负责分配。</p>
+            </div>
+
+            <div class="rounded-box3">
+                <h3 id="carrier-code">载体代码</h3>
+                <hr>
+                <p>载体代码由一个字母组成，代表音像制品的载体类型。A 代表音频，V 代表视频。</p>
+            </div>
+
+            <div class="rounded-box3">
+                <h3 id="classification-code">分类代码</h3>
+                <hr>
+                <p>分类代码由中国图书馆分类法分配，具体可参考<a href="https://oldlib.ahu.edu.cn/upload_files/article/220/12_20220524093720.pdf">《中国图书馆分类法（第五版）》</a></p>
+                <iframe src="/blog/quote-js/pdfjs/web/viewer.html?file=../../../../blog/content/0019.isrc-reference/12_20220524093720.pdf" width="100%" height="500px"></iframe>
                 <p></p>
             </div>
         </main>
@@ -64,7 +174,46 @@
                 background-image: url('/img/background/night-blogbackground.svg');
             }
         }
-        
+
+        .isrc-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 5px;
+            justify-content: center;
+        }
+
+        .part-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .part-container:hover, a {
+            color: #110c50;
+        }
+
+        .part-container-no-hover {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+        }
+
+        .isrc-part {
+            font-family: "copyright";
+            font-size: 25px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .part-container:hover, a {
+                color: #50d2d2;
+            }
+        }
+
+        /* 表格样式 */
         table {
             max-width: 840px;
         }
@@ -78,6 +227,13 @@
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>
     <script>
+        function jumpToAnchor(id) {
+            const anchor = document.getElementById(id);
+            if (anchor) {
+                anchor.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             fetch('./data.dat')
                 .then(response => response.text())

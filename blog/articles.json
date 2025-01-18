@@ -69,19 +69,19 @@
         "url": "content/0012.oled-decompress/index.html",
         "title": "0.91' OLED 显示被压缩解决方案",
         "modified": "2024.08.14 10:29",
-        "category": "电子小制作"
+        "category": "小工具与备忘手册"
     },
     {
         "url": "content/0013.lrc-highlight/index.html",
         "title": "在 MT 管理器中高亮 lrc 文件",
         "modified": "2024.08.20 22:37",
-        "category": "实用小程序"
+        "category": "小工具与备忘手册"
     },
     {
         "url": "content/0014.termux-signal-9/index.html",
         "title": "解决 Termux 的 Signal 9 错误",
         "modified": "2024.08.26 23:57",
-        "category": "实用小程序"
+        "category": "小工具与备忘手册"
     },
     {
         "url": "content/0015.lower-readability/index.html",
@@ -110,7 +110,7 @@
     {
         "url": "content/0019.isrc-reference/index.html",
         "title": "ISRC 编码参考手册",
-        "modified": "2025.01.07 21:35",
-        "category": "文化课学习记录"
+        "modified": "2025.01.18 23:56",
+        "category": "小工具与备忘手册"
     }
 ]

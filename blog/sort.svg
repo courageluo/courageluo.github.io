@@ -3,7 +3,7 @@
 		:root {
 			--color: rgb(58, 59, 66);
 			@media (prefers-color-scheme: dark) {
-				--color:rgb(151, 155, 171);
+				--color: rgb(151, 155, 171);
 			}
 		}
 	</style>

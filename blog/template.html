@@ -12,6 +12,20 @@
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -40,21 +54,6 @@
 
     <!-- 页脚 -->
     <div id="footer"></div>
-
-    <!-- 内部CSS文件 -->
-    <style>
-        /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-blogbackground.svg');
-            background-size: 100%;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-blogbackground.svg');
-            }
-        }
-    </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

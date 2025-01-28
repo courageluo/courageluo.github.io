@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="这是一个跨领域博客，记录数学知识梳理、前端开发实例、C++ 算法技巧等内容，用代码和公式探索逻辑之美。">
     <title>个人博客 - Courage Luo的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
@@ -12,51 +13,6 @@
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
-</head>
-
-<body>
-    <div class="content">
-        <aside class="sidebar">
-            <div class="rounded-box3">
-                <h3 style="text-align: center;">索引</h3>
-                <hr>
-                <ul>
-                    <li><a href="#random-sentence">随机一句</a></li>
-                    <li><a href="#list">文章列表</a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <main class="content-container">
-            <!-- 标题框 -->
-            <div class="rounded-box1">
-                <h1 style="text-align: center;">个人博客</h1>
-            </div>
-
-            <!-- 随机句 -->
-            <div class="rounded-box2" id="sentence-box" style="cursor: pointer;">
-                <p id="random-sentence"></p>
-            </div>
-
-            <!-- 文章列表 -->
-            <div class="rounded-box3">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 id="list" style="text-align: center; flex-grow: 1;">文章列表</h3>
-                    <div id="sort-toggle" style="cursor: pointer; display: flex; align-items: center; margin-left: 10px;">
-                        <img src="./sort.svg" alt="Sort Icon" width="18" height="18" style="vertical-align: middle;">
-                        <span id="sort-text">按类别</span>
-                    </div>
-                </div>
-                <hr>
-                <div id="article-list"></div>
-                <p></p>
-            </div>
-        </main>
-    </div>
-
-    <!-- 页脚 -->
-    <div id="footer"></div>
-
     <!-- 内部CSS文件 -->
     <style>
         /* 背景图片设置 */
@@ -111,8 +67,13 @@
                 color: #12efef;
             }
 
-            .collapsible-title, .article-content {
+            .collapsible-title {
                 background-color: #26376f;
+                border: 2px solid #110c50;
+            }
+
+            .article-content {
+                background-color: #314174;
                 border: 2px solid #110c50;
             }
 
@@ -137,6 +98,50 @@
             }
         }
     </style>
+</head>
+
+<body>
+    <div class="content">
+        <aside class="sidebar">
+            <div class="rounded-box3">
+                <h3 style="text-align: center;">索引</h3>
+                <hr>
+                <ul>
+                    <li><a href="#random-sentence">随机一句</a></li>
+                    <li><a href="#list">文章列表</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">个人博客</h1>
+            </div>
+
+            <!-- 随机句 -->
+            <div class="rounded-box2" id="sentence-box" style="cursor: pointer;">
+                <p id="random-sentence"></p>
+            </div>
+
+            <!-- 文章列表 -->
+            <div class="rounded-box3">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 id="list" style="text-align: center; flex-grow: 1;">文章列表</h3>
+                    <div id="sort-toggle" style="cursor: pointer; display: flex; align-items: center; margin-left: 10px;">
+                        <img src="./sort.svg" alt="Sort Icon" width="18" height="18" style="vertical-align: middle;">
+                        <span id="sort-text">按类别</span>
+                    </div>
+                </div>
+                <hr>
+                <div id="article-list"></div>
+                <p></p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

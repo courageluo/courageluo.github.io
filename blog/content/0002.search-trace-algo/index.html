@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>搜索与回溯算法 - Courage Luo的网站</title>
+    <meta name="description" content="这篇文章介绍了 C++ 中的搜索与回溯算法，以及它们的实现和运用。">
+    <title>搜索与回溯算法 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -13,6 +14,78 @@
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        .tableStack {
+            margin: 5px 0 5px 0;
+            border-style: solid none solid solid;
+            border-width: 3px;
+            border-color: rgb(3, 99, 30);
+            padding: 10px 0;
+        }
+
+        .tableQueue {
+            margin: 5px 0 5px 0;
+            border-style: solid none solid none;
+            border-width: 3px;
+            border-color: rgb(8, 84, 108);
+            padding: 10px 0;
+        }
+
+        .stack {
+            margin: 5px 0px 5px 5px;
+            background-color: rgba(3, 31, 37, 0.5); /* 设置半透明的背景颜色 */
+            border-radius: 5px; /* 圆角半径 */
+            padding: 5px 4px 5px 4px; /* 从上、右、下、左添加内边距 */
+            color: white; /* 文字颜色 */
+        }
+
+        .queue {
+            margin: 5px 0px 5px 5px;
+            background-color: rgba(94, 103, 6, 0.5);
+            border-radius: 5px;
+            padding: 5px 4px 5px 4px;
+            color: white;
+        }
+
+        a {
+            color: rgb(15, 92, 57);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tableStack {
+                border-color: rgb(1, 181, 52);
+            }
+
+            .tableQueue {
+                border-color: rgb(62, 172, 203);
+            }
+
+            .stack {
+                background-color: rgba(47, 156, 184, 0.5);
+            }
+
+            .queue {
+                background-color: rgba(114, 120, 47, 0.5);
+            }
+            
+            a {
+                color: rgb(5, 198, 111);
+            }
+        }
+
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -350,79 +423,6 @@
 
     <!-- 页脚 -->
     <div id="footer"></div>
-
-    <!-- 内部CSS文件 -->
-    <style>
-        .tableStack {
-            margin: 5px 0 5px 0;
-            border-style: solid none solid solid;
-            border-width: 3px;
-            border-color: rgb(3, 99, 30);
-            padding: 10px 0;
-        }
-
-        .tableQueue {
-            margin: 5px 0 5px 0;
-            border-style: solid none solid none;
-            border-width: 3px;
-            border-color: rgb(8, 84, 108);
-            padding: 10px 0;
-        }
-
-        .stack {
-            margin: 5px 0px 5px 5px;
-            background-color: rgba(3, 31, 37, 0.5); /* 设置半透明的背景颜色 */
-            border-radius: 5px; /* 圆角半径 */
-            padding: 5px 4px 5px 4px; /* 从上、右、下、左添加内边距 */
-            color: white; /* 文字颜色 */
-        }
-
-        .queue {
-            margin: 5px 0px 5px 5px;
-            background-color: rgba(94, 103, 6, 0.5);
-            border-radius: 5px;
-            padding: 5px 4px 5px 4px;
-            color: white;
-        }
-
-        a {
-            color: rgb(15, 92, 57);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .tableStack {
-                border-color: rgb(1, 181, 52);
-            }
-
-            .tableQueue {
-                border-color: rgb(62, 172, 203);
-            }
-
-            .stack {
-                background-color: rgba(47, 156, 184, 0.5);
-            }
-
-            .queue {
-                background-color: rgba(114, 120, 47, 0.5);
-            }
-            
-            a {
-                color: rgb(5, 198, 111);
-            }
-        }
-
-        /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-blogbackground.svg');
-            background-size: 100%;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-blogbackground.svg');
-            }
-        }
-    </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

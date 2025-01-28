@@ -5,41 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简易音乐播放器 - Courage Luo的网站</title>
+    <meta name="description" content="这里是一个简易的音乐播放器，支持播放音乐的同时显示 lrc 歌词文件。">
+    <title>简易音乐播放器 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
-</head>
-
-<body>
-    <!-- 主要内容 -->
-    <div class="content">
-        <div class="container">
-            <div class="rounded-box1">
-                <h1 style="text-align: center;">简易音乐播放器</h1>
-            </div>
-            <div class="rounded-box3">
-                <p>使用说明：点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>选择音频文件所在的文件夹，待加载出音频列表后，点击以播放音频（歌词来源于文件夹下与音频同名的lrc文件）。</p>
-            </div>
-            <div class="rounded-box3">
-                <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
-                <audio id="audioPlayer" style="margin-top: 5px; width: 100%;" controls></audio>
-                <div class="delay-controls">
-                    <span id="delayInfo" style="margin-right: 10px;">歌词延迟: </span>
-                    <button id="decreaseDelay">-0.1秒</button>
-                    <span class="delay-display" id="delayDisplay">0.0秒</span>
-                    <button id="increaseDelay">+0.1秒</button>
-                </div>
-            </div>
-            <div class="lyrics" id="lyricsContainer" style="margin: 0 10px 10px 10px; text-align: center;"></div>
-        </div>
-    </div>
-
-    <!-- 页脚 -->
-    <div id="footer"></div>
-
     <!-- 内部CSS文件 -->
     <style>
         /* 背景图片设置 */
@@ -138,6 +110,34 @@
             }
         }
     </style>
+</head>
+
+<body>
+    <!-- 主要内容 -->
+    <div class="content">
+        <div class="container">
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">简易音乐播放器</h1>
+            </div>
+            <div class="rounded-box3">
+                <p>使用说明：点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>选择音频文件所在的文件夹，待加载出音频列表后，点击以播放音频（歌词来源于文件夹下与音频同名的 lrc 文件）。</p>
+            </div>
+            <div class="rounded-box3">
+                <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
+                <audio id="audioPlayer" style="margin-top: 5px; width: 100%;" controls></audio>
+                <div class="delay-controls">
+                    <span id="delayInfo" style="margin-right: 10px;">歌词延迟: </span>
+                    <button id="decreaseDelay">-0.1 秒</button>
+                    <span class="delay-display" id="delayDisplay">0.0 秒</span>
+                    <button id="increaseDelay">+0.1 秒</button>
+                </div>
+            </div>
+            <div class="lyrics" id="lyricsContainer" style="margin: 0 10px 10px 10px; text-align: center;"></div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

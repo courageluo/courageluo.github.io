@@ -1,11 +1,12 @@
-<!-- 更新日志 -->
+<!-- 关于本站 -->
 <!DOCTYPE html>
 <html>
     
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关于 - Courage Luo的网站</title>
+    <meta name="description" content="这里是本站的关于页面，包含了对引用的字体、库等的致谢，以及更新日志等内容。">
+    <title>关于 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -13,6 +14,31 @@
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/katex/katex.min.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 主题设置 */
+        a {
+            color: #25626b;
+        }
+
+        body {
+            background-image: url('/img/background/day-updatebackground.svg');
+        }
+
+        #update-container p {
+            font-feature-settings: "tnum";
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('../img/background/night-updatebackground.svg'); /* 夜晚模式下的背景图片 */
+            }
+
+            a {
+                color: #27a8b9;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -113,6 +139,7 @@
             <div class="rounded-box6" id="update-container">
                 <h3 id="update" style="text-align: center;">更新日志</h3>
                 <hr>
+                <p>ver 0.7.2 2025.01.28 22:52 <br> 调整页面结构，优化网页性能。</p>
                 <p>ver 0.7.1 2025.01.04 17:47 <br> 样式改进，博客增加排序选项。</p>
                 <p>ver 0.7.0 2025.01.01 00:00 <br> 改进部分细节。</p>
                 <p>ver 0.6.9 2024.12.15 15:33 <br> 更换正文字体，修改猜数游戏。</p>
@@ -157,32 +184,6 @@
 
     <!-- 页脚 -->
     <div id="footer"></div>
-    
-    <!-- 内部CSS文件 -->
-    <style>
-        /* 主题设置 */
-        a {
-            color: #25626b;
-        }
-
-        body {
-            background-image: url('/img/background/day-updatebackground.svg');
-        }
-
-        #update-container p {
-            font-feature-settings: "tnum";
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('../img/background/night-updatebackground.svg'); /* 夜晚模式下的背景图片 */
-            }
-
-            a {
-                color: #27a8b9;
-            }
-        }
-    </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

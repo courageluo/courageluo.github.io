@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="这是一个 ISRC 编码的参考手册，包含了 ISRC 各个部分的详细解释，并提供了查询出版者码的表格。">
     <title>ISRC 参考手册 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
@@ -12,6 +13,68 @@
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+        }
+
+        .isrc-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 5px;
+            justify-content: center;
+        }
+
+        .part-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .part-container:hover, a {
+            color: #110c50;
+        }
+
+        .part-container-no-hover {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+        }
+
+        .isrc-part {
+            font-family: "copyright";
+            font-size: 25px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .part-container:hover, a {
+                color: #50d2d2;
+            }
+        }
+
+        /* 表格样式 */
+        table {
+            max-width: 840px;
+        }
+
+        td {
+            padding: 3px 5px;
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body>
@@ -160,69 +223,6 @@
 
     <!-- 页脚 -->
     <div id="footer"></div>
-
-    <!-- 内部CSS文件 -->
-    <style>
-        /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-blogbackground.svg');
-            background-size: 100%;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-blogbackground.svg');
-            }
-        }
-
-        .isrc-container {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0 5px;
-            justify-content: center;
-        }
-
-        .part-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 5px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .part-container:hover, a {
-            color: #110c50;
-        }
-
-        .part-container-no-hover {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 5px;
-        }
-
-        .isrc-part {
-            font-family: "copyright";
-            font-size: 25px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .part-container:hover, a {
-                color: #50d2d2;
-            }
-        }
-
-        /* 表格样式 */
-        table {
-            max-width: 840px;
-        }
-
-        td {
-            padding: 3px 5px;
-            text-align: left;
-        }
-    </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

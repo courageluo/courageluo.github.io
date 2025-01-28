@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>艾点教听力脚本 - Courage Luo的网站</title>
+    <meta name="description" content="这个页面给出了几个能够显示出艾点教听力答案的代码，既有油猴脚本，也有更简单的粘贴到控制台方法。">
+    <title>艾点教听力脚本 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -13,6 +14,32 @@
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        a {
+            color: #110c50;
+        }
+
+        .update {
+            font-feature-settings: "tnum";
+        }
+
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+
+            a {
+                color: #50d2d2;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -42,8 +69,8 @@
                 <p id="intro">适用于艾点教的听力自动获取答案。</p>
             </div>
             <div class="rounded-box3">
-                <p id="script">脚本代码如下，也可以<a href="./script.js" download>点击这里</a>下载。</p>
-                <pre class="language-javascript">
+                <p id="script">脚本代码如下，需要使用篡改猴等插件实现，也可以<a href="./script.js" download>点击这里</a>下载代码并导入。</p>
+                <pre class="language-javascript" style="height: 300px;">
                     <code class="line-numbers">
                         // ==UserScript==
                         // @name         自动显示听力答案
@@ -82,7 +109,7 @@
 
                                     // 获取答案并存储
                                     var answers = new Array();
-                                    for (var i = 0; i < numElements; i ++ ) {
+                                    for (var i = 0; i &lt; numElements; i ++ ) {
                                         var ans = document.querySelectorAll('.incorrect')[i].innerText.replace('回答错误,正确答案', '');
                                         answers[i] = '第' + (i + 1) + '题选择' + ans + '项';
                                     }
@@ -97,7 +124,7 @@
                                     }
 
                                     // 遍历 questions 并插入对应的 answer
-                                    for (i = 0; i < questions.length; i++) {
+                                    for (i = 0; i &lt; questions.length; i++) {
                                         // 创建元素存放答案
                                         var answer = document.createElement('p');
                                         answer.innerText = answers[i];
@@ -118,8 +145,72 @@
                         })();
                     </code>
                 </pre>
-                <p>打印到控制台（粘贴到控制台中运行）</p>
-                <pre class="language-javascript">
+                <p>如果上述脚本无法正常工作，你可以使用下面的较老版本，同样也可以<a href="./script-old.js" download>点击这里</a>下载。</p>
+                <pre class="line-numbers" style="height: 300px;">
+                    <code class="language-javascript">
+                        // ==UserScript==
+                        // @name         自动显示听力答案
+                        // @namespace    https://courageluo.xn--kivy66br3pu7d.top/
+                        // @supportURL   courageluo@gmail.com
+                        // @version      2024-07-30
+                        // @description  Display the answer of idianjiao automatically
+                        // @author       Courage Luo
+                        // @match        https://www.idianjiao.com/*
+                        // @icon         https://courageluo.xn--kivy66br3pu7d.top/img/favicon.png
+                        // @grant        none
+                        // ==/UserScript==
+
+                        (function() {
+                            'use strict';
+
+                            window.addEventListener('load', function() {
+                                // 给你2.5秒按"跳过"按钮，原因见下
+                                setTimeout(() => {
+                                    // 大多数现代浏览器为了防止自动播放广告和其他不必要的声音，限制了自动播放音频的行为。
+                                    // 浏览器要求用户必须有与页面的交互（如点击、键盘输入等），然后才能播放音频。
+                                    // 所以自动按按钮不会播放音频，也就按不了提交按钮，所以懒得折腾了
+                                    // var btn = document.querySelector('.tg');
+                                    // btn.click();
+
+                                    // 获取答案并存储在数组中
+                                    var answers = new Array();
+                                    for (var i = 0; i &lt; 20; i ++ ) {
+                                        var ans = document.querySelectorAll('.incorrect')[i].innerText.replace('回答错误,正确答案', '');
+                                        answers[i] = '第' + (i + 1) + '题选择' + ans + '项';
+                                    }
+
+                                    // 获取元素
+                                    var questions = document.querySelectorAll('.answer');
+
+                                    // 确保数量匹配
+                                    if (questions.length !== answers.length) {
+                                        console.error('数量不匹配！');
+                                        return;
+                                    }
+
+                                    // 遍历questions并插入对应的answer
+                                    for (i = 0; i &lt; questions.length; i++) {
+                                        // 创建元素存放答案
+                                        var answer = document.createElement('p');
+                                        answer.textContent = answers[i];
+
+                                        // 调节一下样式
+                                        answer.style.fontSize = '14px';
+                                        answer.style.color = '#FF3333';
+
+                                        // 获取当前元素
+                                        var question = questions[i];
+
+                                        // 在当前元素之后插入答案元素
+                                        question.parentNode.insertBefore(answer, question.nextSibling);
+                                    }
+                                }, 2500);
+                            });
+                        })();
+                    </code>
+                </pre>
+                <p>如果你不希望使用脚本，你可以复制以下内容并粘贴到控制台中运行，以将相应的内容打印到控制台，也可以<a href="./print-to-console.js" download>点击这里</a>下载对应代码。</p>
+                <pre class="language-javascript" style="height: 300px;">
                     <code class="line-numbers">
                         function formatDateTime() {
                             const now = new Date();
@@ -150,14 +241,14 @@
                             const numElements = document.querySelectorAll('.answer').length;
                         
                             var answers = new Array();
-                            for (var i = 0; i < numElements; i++) {
+                            for (var i = 0; i &lt; numElements; i++) {
                                 var ans = document.querySelectorAll('.incorrect')[i].innerText.replace('回答错误,正确答案', '');
                                 answers[i] = ans;
                             }
                         
                             const partSize = 5;
                         
-                            for (var i = 0; i < answers.length; i += partSize) {
+                            for (var i = 0; i &lt; answers.length; i += partSize) {
                                 const start = i;
                                 const end = i + partSize - 1;
                                 const part = answers.slice(start, start + partSize);
@@ -170,7 +261,7 @@
                         printToConsole();                        
                     </code>
                 </pre>
-                <p>原理：听力过程中答案只是隐藏而并未删除，只需要获取对应元素并依次显示出来即可。</p>
+                <p>原理：听力过程中答案完全为前端验证，所以只是隐藏而并未删除，只需要获取对应元素并依次显示出来即可。</p>
             </div>
             <div class="rounded-box3">
                 <h3 id="update-log" style="text-align: center;">更新日志</h3>
@@ -188,33 +279,6 @@
 
     <!-- 页脚 -->
     <div id="footer"></div>
-
-    <!-- 内部CSS文件 -->
-    <style>
-        a {
-            color: #110c50;
-        }
-
-        .update {
-            font-feature-settings: "tnum";
-        }
-
-        /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-blogbackground.svg');
-            background-size: 100%;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-blogbackground.svg');
-            }
-
-            a {
-                color: #50d2d2;
-            }
-        }
-    </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

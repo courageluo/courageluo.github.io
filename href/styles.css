@@ -2,9 +2,9 @@
 
 /* 颜色主题设置 */
 :root {
-    --bg-color-light: white;
+    --bg-color-light: #bcd5da;
     --text-color-light: black;
-    --bg-color-dark: black;
+    --bg-color-dark: #1d446b;
     --text-color-dark: white;
 }
 

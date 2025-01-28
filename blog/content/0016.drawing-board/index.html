@@ -7,66 +7,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简易画板 - Courage Luo的网站</title>
+    <meta name="description" content="这是一个简易的画板，支持触摸与鼠标操作，同时有预设颜色、画笔粗细调整和撤消重做等功能。">
+    <title>简易画板 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
-</head>
-
-<body>
-    <!-- 内容 -->
-    <div class="content">
-        <div class="container">
-            <!-- 标题框 -->
-            <div class="rounded-box1">
-                <h1 style="text-align: center;">简易画板</h1>
-            </div>
-
-            <!-- 内容框 -->
-            <div class="rounded-box3">
-                <div id="canvas-container">
-                    <canvas id="canvas"></canvas>
-                    <canvas id="brush-preview"></canvas>
-                </div>
-                <div id="controls">
-                    <div id="brushColorSetting" class="align-items">
-                        <span>画笔颜色</span>
-                        <input type="color" id="colorPicker" value="#000000">
-                    </div>
-                    <div id="brushColorPresets" class="align-items">
-                        <span>预设</span>
-                        <div id="colorPresets"></div>
-                    </div>
-                    <div id="brushSizeSetting" class="align-items">
-                        <span id="sizeLabel">画笔粗细</span>
-                        <input type="range" id="brushSize" min="1" max="20" value="5">
-                        <span id="brushSizeDisplay">5px</span>
-                    </div>
-                    <div id="bgColorSetting" class="align-items">
-                        <span>背景颜色</span>
-                        <input type="color" id="bgColorPicker" value="#ffffff">
-                    </div>
-                    <div id="functionSelect" class="align-items">
-                        <button id="eraser">橡皮擦</button>
-                        <button id="clear">清除屏幕</button>
-                        <button id="save">保存图像</button>
-                    </div>
-                    <div id="undoAndRedo" class="align-items">
-                        <button id="undo">撤销</button>
-                        <button id="redo">重做</button>
-                    </div>
-                </div>
-                <div style="height: 10px;"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 页脚 -->
-    <div id="footer"></div>
-
     <!-- 内部CSS文件 -->
     <style>
         /* 背景图片设置 */
@@ -151,6 +99,58 @@
             max-width: 200px;
         }
     </style>
+</head>
+
+<body>
+    <!-- 内容 -->
+    <div class="content">
+        <div class="container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">简易画板</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <div id="canvas-container">
+                    <canvas id="canvas"></canvas>
+                    <canvas id="brush-preview"></canvas>
+                </div>
+                <div id="controls">
+                    <div id="brushColorSetting" class="align-items">
+                        <span>画笔颜色</span>
+                        <input type="color" id="colorPicker" value="#000000">
+                    </div>
+                    <div id="brushColorPresets" class="align-items">
+                        <span>预设</span>
+                        <div id="colorPresets"></div>
+                    </div>
+                    <div id="brushSizeSetting" class="align-items">
+                        <span id="sizeLabel">画笔粗细</span>
+                        <input type="range" id="brushSize" min="1" max="20" value="5">
+                        <span id="brushSizeDisplay">5px</span>
+                    </div>
+                    <div id="bgColorSetting" class="align-items">
+                        <span>背景颜色</span>
+                        <input type="color" id="bgColorPicker" value="#ffffff">
+                    </div>
+                    <div id="functionSelect" class="align-items">
+                        <button id="eraser">橡皮擦</button>
+                        <button id="clear">清除屏幕</button>
+                        <button id="save">保存图像</button>
+                    </div>
+                    <div id="undoAndRedo" class="align-items">
+                        <button id="undo">撤销</button>
+                        <button id="redo">重做</button>
+                    </div>
+                </div>
+                <div style="height: 10px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

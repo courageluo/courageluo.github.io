@@ -5,101 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>因式分解 - Courage Luo的网站</title>
+    <meta name="description" content="这是一个简易的因式分解小游戏。">
+    <title>因式分解 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
-</head>
-
-<body>
-    <div class="content">
-        <!-- 标题框 -->
-        <div class="rounded-box1">
-            <h1 style="text-align: center;">因式分解</h1>
-        </div>
-
-        <!-- 操作框 -->
-        <div class="rounded-box3">
-            <!-- 显示需要分解的式子 -->
-            <p>请分解:<span id="poly"></span></p>
-            <!-- 输入框 -->
-            <p>你的答案是:(<input type="number" id="coeff1">x+<input type="number" id="factor1">)*(<input type="number" id="coeff2">x+<input type="number" id="factor2">)</p>
-            <!-- 提交按钮 -->
-            <button id="submitButton" onclick="checkGuess()">提交</button>
-            <button id="toggleButton">查看玩法</button>
-            <button id="abandonButton" onclick="abandonGame()">直接重开</button>
-            <img src="../img/settings.svg" alt="Settings" id="settingsIcon" onclick="toggleSettings()">
-            <div style="height: 10px;"></div>
-        </div>
-
-        <!-- 游戏设置框 -->
-        <div class="rounded-box-settings" id="settingsBox">
-            <div class="rounded-box1">
-                <h1 style="text-align: center;">游戏设置</h1>
-            </div>
-            <div class="rounded-box3p">
-                <div class="container">
-                    <div class="rectangle">
-                        <div class="left-side active" onclick="selectMode('single')">单局练习模式</div>
-                        <div class="right-side" onclick="selectMode('endless')">无尽记分模式</div>
-                    </div>
-                </div>
-                <div class="coeffSetting">
-                    <label for="minCoeffInput"><strong>系数</strong>最小值:</label>
-                    <input type="number" id="minCoeffInput" value="1" onfocus="clearValue(this)" onblur="resetValue(this)">
-                    <label for="maxCoeffInput">最大值:</label>
-                    <input type="number" id="maxCoeffInput" value="10" onfocus="clearValue(this)" onblur="resetValue(this)">
-                </div>
-                <div class="constSetting">
-                    <label for="minConstInput"><strong>常数</strong>最小值:</label>
-                    <input type="number" id="minConstInput" value="1" onfocus="clearValue(this)" onblur="resetValue(this)">
-                    <label for="maxConstInput">最大值:</label>
-                    <input type="number" id="maxConstInput" value="10" onfocus="clearValue(this)" onblur="resetValue(this)">
-                </div>
-                <button onclick="applySettings()">确定</button>
-                <button onclick="cancelSettings()" class="cancelSetting">取消</button>
-                <button onclick="resetGameButton()" class="resetGameButton">重置游戏</button>
-            </div>
-        </div>
-
-        <!-- 玩法提示框 -->
-        <div class="rounded-box2" style="display: none;">
-            <p id="gameRules">玩法：系统自动生成一个二次三项式，你需要对其进行因式分解。每次输入答案后，系统会检查你的答案，直到你正确地完成因式分解为止。</p>
-        </div>
-
-        <!-- 状态反馈框 -->
-        <div class="rounded-box1" id="feedbackContainer" style="display: none;">
-            <p id="feedback"></p>
-        </div>
-
-        <!-- 游戏结束矩形框 -->
-        <div class="rounded-box-settings" id="gameOverBox">
-            <div class="rounded-box1">
-                <h1>游戏结束</h1>
-            </div>
-            <div class="rounded-box3p">
-                <div class="endGameButtons">
-                    <button onclick="resetGame()">再来一局</button>
-                    <button id="backHome">返回主页</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 页脚 -->
-    <div id="footer"></div>
-
     <!-- 内部CSS文件 -->
     <style>
-        /* 颜色变量 */
-        :root {
-            --bg-color-light: #d2d5d94d;
-            --text-color-light: #000000;
-            --bg-color-dark: #18323fa2;
-            --text-color-dark: #BBBBBB;
-        }
-
         /* 设置图标 */
         #settingsIcon {
             position: absolute;
@@ -267,6 +180,85 @@
             margin-bottom: 10px;
         }
     </style>
+</head>
+
+<body>
+    <div class="content">
+        <!-- 标题框 -->
+        <div class="rounded-box1">
+            <h1 style="text-align: center;">因式分解</h1>
+        </div>
+
+        <!-- 操作框 -->
+        <div class="rounded-box3">
+            <!-- 显示需要分解的式子 -->
+            <p>请分解:<span id="poly"></span></p>
+            <!-- 输入框 -->
+            <p>你的答案是:(<input type="number" id="coeff1">x+<input type="number" id="factor1">)*(<input type="number" id="coeff2">x+<input type="number" id="factor2">)</p>
+            <!-- 提交按钮 -->
+            <button id="submitButton" onclick="checkGuess()">提交</button>
+            <button id="toggleButton">查看玩法</button>
+            <button id="abandonButton" onclick="abandonGame()">直接重开</button>
+            <img src="../img/settings.svg" alt="Settings" id="settingsIcon" onclick="toggleSettings()">
+            <div style="height: 10px;"></div>
+        </div>
+
+        <!-- 游戏设置框 -->
+        <div class="rounded-box-settings" id="settingsBox">
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">游戏设置</h1>
+            </div>
+            <div class="rounded-box3p">
+                <div class="container">
+                    <div class="rectangle">
+                        <div class="left-side active" onclick="selectMode('single')">单局练习模式</div>
+                        <div class="right-side" onclick="selectMode('endless')">无尽记分模式</div>
+                    </div>
+                </div>
+                <div class="coeffSetting">
+                    <label for="minCoeffInput"><strong>系数</strong>最小值:</label>
+                    <input type="number" id="minCoeffInput" value="1" onfocus="clearValue(this)" onblur="resetValue(this)">
+                    <label for="maxCoeffInput">最大值:</label>
+                    <input type="number" id="maxCoeffInput" value="10" onfocus="clearValue(this)" onblur="resetValue(this)">
+                </div>
+                <div class="constSetting">
+                    <label for="minConstInput"><strong>常数</strong>最小值:</label>
+                    <input type="number" id="minConstInput" value="1" onfocus="clearValue(this)" onblur="resetValue(this)">
+                    <label for="maxConstInput">最大值:</label>
+                    <input type="number" id="maxConstInput" value="10" onfocus="clearValue(this)" onblur="resetValue(this)">
+                </div>
+                <button onclick="applySettings()">确定</button>
+                <button onclick="cancelSettings()" class="cancelSetting">取消</button>
+                <button onclick="resetGameButton()" class="resetGameButton">重置游戏</button>
+            </div>
+        </div>
+
+        <!-- 玩法提示框 -->
+        <div class="rounded-box2" style="display: none;">
+            <p id="gameRules">玩法：系统自动生成一个二次三项式，你需要对其进行因式分解。每次输入答案后，系统会检查你的答案，直到你正确地完成因式分解为止。</p>
+        </div>
+
+        <!-- 状态反馈框 -->
+        <div class="rounded-box1" id="feedbackContainer" style="display: none;">
+            <p id="feedback"></p>
+        </div>
+
+        <!-- 游戏结束矩形框 -->
+        <div class="rounded-box-settings" id="gameOverBox">
+            <div class="rounded-box1">
+                <h1>游戏结束</h1>
+            </div>
+            <div class="rounded-box3p">
+                <div class="endGameButtons">
+                    <button onclick="resetGame()">再来一局</button>
+                    <button id="backHome">返回主页</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

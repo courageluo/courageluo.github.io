@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数学知识点记录 - Courage Luo的网站</title>
+    <meta name="description" content="这篇文章记录了高中人教 B 版选修部分的数学知识点，以及一些扩展内容。">
+    <title>数学知识点记录 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -13,6 +14,117 @@
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/katex/katex.min.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 调试用 */
+        /* * {
+            outline: solid rgb(255, 0, 0) 1px !important;
+            background: #000 !important;
+            color: #fff !important;
+        } */
+
+        /* 问题：在小于一定宽度时，右边会留白
+           临时解决方案如下，但似乎手机上依然这样 */
+        /* html {
+            width: 100%;
+            overflow-x: hidden;
+        } */
+
+        a {
+            color: #110c50;
+        }
+
+        .formula-container {
+            position: table-cell;
+            vertical-align: middle;
+        }
+
+        .formula-rectangle {
+            max-width: calc(100% - 15px);
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: inline-block;
+            vertical-align: middle;
+            border: 1.5px solid black;
+            border-radius: 3px;
+            padding: 5px;
+            margin: 4px;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        #text-right {
+            position: absolute;
+            bottom: 0px;
+            right: -60px;
+            transform: translateX(-100%);
+        }
+
+        .sub-header {
+            font-weight: bold;
+            margin-bottom: -0.5em;
+            font-size: 13pt;
+        }
+
+        /* ol {
+            margin-left: -10px;
+        } */
+
+        @counter-style parentheses {
+            system: fixed;
+            symbols: "(1)" "(2)" "(3)" "(4)" "(5)" "(6)" "(7)" "(8)" "(9)" "(10)";
+            suffix: " ";
+        }
+        
+        .margin-ul {
+            list-style: parentheses;
+            /* white-space: nowrap; */
+            margin-left: -13px;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        .scroll-item {
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        /* 一点响应式设计 */
+        @media (min-width: 768px) {
+            #index-box {
+                display: none;
+            }
+
+            #text-right {
+                display: none;
+            }
+        }
+
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
+            }
+
+            a {
+                color: #50d2d2;
+            }
+
+            .formula-rectangle {
+                border: 1.5px solid var(--text-color-dark);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -626,118 +738,6 @@
 
     <!-- 页脚 -->
     <div id="footer"></div>
-
-    <!-- 内部CSS文件 -->
-    <style>
-        /* 调试用 */
-        /* * {
-            outline: solid rgb(255, 0, 0) 1px !important;
-            background: #000 !important;
-            color: #fff !important;
-        } */
-
-        /* 问题：在小于一定宽度时，右边会留白
-           临时解决方案如下，但似乎手机上依然这样 */
-        /* html {
-            width: 100%;
-            overflow-x: hidden;
-        } */
-
-        a {
-            color: #110c50;
-        }
-
-        .formula-container {
-            position: table-cell;
-            vertical-align: middle;
-        }
-
-        .formula-rectangle {
-            max-width: calc(100% - 15px);
-            overflow-x: auto;
-            overflow-y: hidden;
-            display: inline-block;
-            vertical-align: middle;
-            border: 1.5px solid black;
-            border-radius: 3px;
-            padding: 5px;
-            margin: 4px;
-        }
-
-        .container {
-            position: relative;
-        }
-
-        #text-right {
-            position: absolute;
-            bottom: 0px;
-            right: -60px;
-            transform: translateX(-100%);
-        }
-
-        .sub-header {
-            font-weight: bold;
-            margin-bottom: -0.5em;
-            font-size: 13pt;
-        }
-
-        /* ol {
-            margin-left: -10px;
-        } */
-
-        @counter-style parentheses {
-            system: fixed;
-            symbols: "(1)" "(2)" "(3)" "(4)" "(5)" "(6)" "(7)" "(8)" "(9)" "(10)";
-            suffix: " ";
-        }
-        
-        .margin-ul {
-            list-style: parentheses;
-            /* white-space: nowrap; */
-            margin-left: -13px;
-        }
-
-        li {
-            margin: 4px 0;
-        }
-
-        .scroll-item {
-            white-space: nowrap;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-
-        /* 一点响应式设计 */
-        @media (min-width: 768px) {
-            #index-box {
-                display: none;
-            }
-
-            #text-right {
-                display: none;
-            }
-        }
-
-        /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-blogbackground.svg');
-            background-size: 100%;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-blogbackground.svg'); /* 夜晚模式下的背景图片 */
-            }
-
-            a {
-                color: #50d2d2;
-            }
-
-            .formula-rectangle {
-                border: 1.5px solid var(--text-color-dark);
-            }
-        }
-    </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

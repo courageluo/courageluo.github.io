@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C++中的system函数 - Courage Luo的网站</title>
+    <meta name="description" content="这篇文章介绍了 C++ 中的 system 函数，并展示了如何使用它来编写一些小程序。">
+    <title>C++ 中的 system 函数 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -13,6 +14,29 @@
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        a {
+            color: #110c50;
+            text-decoration: none;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+            
+            a {
+                color: #12efef;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,8 +50,8 @@
                     <li><a href="#usage">函数作用及使用</a></li>
                     <li><a href="#test">检验函数可用性</a></li>
                     <li><a href="#timer">定时关机程序</a></li>
-                    <li><a href="#num-wordle">猜数游戏程序</a></li>
-                    <li><a href="#wordle">仿Wordle游戏</a></li>
+                    <li><a href="#num-wordle">猜数游戏</a></li>
+                    <li><a href="#wordle">仿 Wordle 小游戏</a></li>
                 </ul>
             </div>
         </aside>
@@ -35,18 +59,18 @@
         <main class="content-container">
             <!-- 标题框 -->
             <div class="rounded-box1">
-                <h1 style="text-align: center;">C++中的system函数</h1>
+                <h1 style="text-align: center;">C++ 中的 system 函数</h1>
             </div>
 
             <!-- 内容框 -->
             <div class="rounded-box3">
-                <p id="instruction">在C++中，system函数可在Windows、Unix等系统上有效，其用于执行系统命令，可以使用<code class="language-cpp">stdlib.h</code>、<code class="language-cpp">cstdlib</code>等声明。此函数原型如下：</p>
+                <p id="instruction">在 C++ 中，system 函数可在 Windows、Unix 等系统上有效，其用于执行系统命令，可以使用 <code class="language-cpp">stdlib.h</code>、<code class="language-cpp">cstdlib</code> 等声明。此函数原型如下：</p>
                 <pre>
                     <code class="language-cpp">
                         int system(const char *command);
                     </code>
                 </pre>
-                <p id="usage">它的作用是执行一个命令行命令，<code class="language-cpp">command</code>是一个指向命令行命令字符串的指针。这里有一些简单的示例：</p>
+                <p id="usage">它的作用是执行一个命令行命令，<code class="language-cpp">command</code> 是一个指向命令行命令字符串的指针。这里有一些简单的示例：</p>
                 <ol>
                     <li>
                         清屏
@@ -76,20 +100,20 @@
                         </pre>
                     </li>
                 </ol>
-                <p>常用的还有<code class="language-cpp">system("pause")</code>等等。但是使用时要多加考虑，因为执行该命令时有以下繁重的步骤：</p>
+                <p>常用的还有 <code class="language-cpp">system("pause")</code> 等等。但是使用时要多加考虑，因为执行该命令时有以下繁重的步骤：</p>
                 <ul>
                     <li>
-                        挂起程序，调用操作系统打开系统shell。
+                        挂起程序，调用操作系统打开系统 shell。
                     </li>
                     <li>
                         操作系统找到等待执行的命令，并分配内存以执行命令。
                     </li>
                     <li>
-                        重新分配内存，退出shell并恢复程序。
+                        重新分配内存，退出 shell 并恢复程序。
                     </li>
                 </ul>
                 <p id="test">
-                    我们可以使用一个空指针<code class="language-cpp">NULL</code>来测试OS中是否支持<code class="language-cpp">system()</code>函数：
+                    我们可以使用一个空指针 <code class="language-cpp">NULL</code> 来测试 OS 中是否支持 <code class="language-cpp">system()</code> 函数：
                     <pre class="line-numbers">
                         <code class="language-cpp">
                             #include&lt;iostream&gt;
@@ -510,30 +534,6 @@
 
     <!-- 页脚 -->
     <div id="footer"></div>
-
-    <!-- 内部CSS文件 -->
-    <style>
-        /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-blogbackground.svg');
-            background-size: 100%;
-        }
-
-        a {
-            color: #110c50;
-            text-decoration: none;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-blogbackground.svg');
-            }
-            
-            a {
-                color: #12efef;
-            }
-        }
-    </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

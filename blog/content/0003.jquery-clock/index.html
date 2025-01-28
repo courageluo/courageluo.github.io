@@ -5,63 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>时钟 - Courage Luo的网站</title>
+    <meta name="description" content="这个页面是一个建议的时钟，借用了 jQuery 来简化一些操作。">
+    <title>时钟 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
-</head>
-
-<body>
-    <div class="content">
-        <!-- 标题框 -->
-        <div class="rounded-box1">
-            <h1 style="text-align: center;">时钟</h1>
-        </div>
-
-        <!-- 内容框 -->
-        <div class="rounded-box3">
-            <div class="container">
-                <div class="rectangle">
-                    <div class="left-side active" onclick="selectMode('clock')">时钟</div>
-                    <div class="middle-side" onclick="selectMode('stopwatch')">秒表</div>
-                    <div class="right-side" onclick="selectMode('countdown')">倒计时</div>
-                </div>
-            </div>
-            <div id="formalBtnSet" class="hidden">
-                <button id="clockBtn">时钟</button>
-                <button id="stopwatchBtn">秒表</button>
-                <button id="countdownBtn">倒计时</button>
-            </div>
-            <div id="clock" class="hidden" style="text-align: center;">
-                <div id="systemTimeContainer">
-                    <div id="clockDisplay" style="font-size: 50px; font-family: time; text-align: center;"></div>
-                    <div id="currentDate" style="margin-bottom: 10px;"></div>
-                </div>
-            </div>
-            <div id="stopwatch" class="hidden">
-                <div id="stopwatchDisplay" style="font-size: 50px; font-family: time; text-align: center;">00:00:00.00</div>
-                <div id="stopwatchCtrlBtn" style="display: flex; justify-content: center; margin-bottom: 10px;">
-                    <button id="toggleStopwatch">开始</button>
-                    <button id="resetStopwatch" style="margin-left: 10px;">重置</button>
-                </div>
-            </div>
-            <div id="countdown" class="hidden">
-                <div id="countdownDisplay" style="font-size: 50px; font-family: time; text-align: center;">00:00:00</div>
-                <div id="countdownCtrlBtn" style="display: flex; justify-content: center; margin-bottom: 10px;">
-                    <button id="toggleCountdown">开始</button>
-                    <button id="resetCountdown" style="margin-left: 10px;">重置</button>
-                    <input type="number" id="countdownInput" placeholder="秒数" style="margin-left: 10px; width: 50px;">
-                    <button id="setCountdown" style="margin-left: 10px;">确定</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 页脚 -->
-    <div id="footer"></div>
-
     <!-- 内部CSS文件 -->
     <style>
         a {
@@ -129,6 +79,56 @@
             src: url('font.woff2');
         }
     </style>
+</head>
+
+<body>
+    <div class="content">
+        <!-- 标题框 -->
+        <div class="rounded-box1">
+            <h1 style="text-align: center;">时钟</h1>
+        </div>
+
+        <!-- 内容框 -->
+        <div class="rounded-box3">
+            <div class="container">
+                <div class="rectangle">
+                    <div class="left-side active" onclick="selectMode('clock')">时钟</div>
+                    <div class="middle-side" onclick="selectMode('stopwatch')">秒表</div>
+                    <div class="right-side" onclick="selectMode('countdown')">倒计时</div>
+                </div>
+            </div>
+            <div id="formalBtnSet" class="hidden">
+                <button id="clockBtn">时钟</button>
+                <button id="stopwatchBtn">秒表</button>
+                <button id="countdownBtn">倒计时</button>
+            </div>
+            <div id="clock" class="hidden" style="text-align: center;">
+                <div id="systemTimeContainer">
+                    <div id="clockDisplay" style="font-size: 50px; font-family: time; text-align: center;"></div>
+                    <div id="currentDate" style="margin-bottom: 10px;"></div>
+                </div>
+            </div>
+            <div id="stopwatch" class="hidden">
+                <div id="stopwatchDisplay" style="font-size: 50px; font-family: time; text-align: center;">00:00:00.00</div>
+                <div id="stopwatchCtrlBtn" style="display: flex; justify-content: center; margin-bottom: 10px;">
+                    <button id="toggleStopwatch">开始</button>
+                    <button id="resetStopwatch" style="margin-left: 10px;">重置</button>
+                </div>
+            </div>
+            <div id="countdown" class="hidden">
+                <div id="countdownDisplay" style="font-size: 50px; font-family: time; text-align: center;">00:00:00</div>
+                <div id="countdownCtrlBtn" style="display: flex; justify-content: center; margin-bottom: 10px;">
+                    <button id="toggleCountdown">开始</button>
+                    <button id="resetCountdown" style="margin-left: 10px;">重置</button>
+                    <input type="number" id="countdownInput" placeholder="秒数" style="margin-left: 10px; width: 50px;">
+                    <button id="setCountdown" style="margin-left: 10px;">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

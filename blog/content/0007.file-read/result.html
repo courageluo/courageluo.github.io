@@ -5,68 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网页端读取文件效果 - Courage Luo的网站</title>
+    <meta name="description" content="网页端读取本地文件，并具有代码高亮等功能。">
+    <title>网页端读取文件效果 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
-</head>
-
-<body>
-    <div class="content">
-        <!-- 标题框 -->
-        <div class="rounded-box1">
-            <h1 style="text-align: center;">网页端读取文件</h1>
-        </div>
-
-        <!-- 内容框 -->
-        <div class="rounded-box3">
-            <input id="reading" type="file" onchange="ofs(event)" style="width: 100%; margin-top: 15px;">
-            <div id="container" style="display: flex; align-items: center; width: 100%; margin: 15px 0;">
-                <span style="white-space: nowrap;">编码：</span>
-                <select id="decoding" style="flex: 0 1 auto; white-space: nowrap; flex: 1;">
-                    <option>UTF-8</option>
-                    <option>UTF-16BE</option>
-                    <option>UTF-16LE</option>
-                    <option>GBK</option>
-                    <option>GB18030</option>
-                    <option>BIG5</option>
-                    <option>ISO-8859-1</option>
-                    <option>ISO-8859-2</option>
-                    <option>ISO-8859-3</option>
-                    <option>ISO-8859-4</option>
-                    <option>ISO-8859-5</option>
-                    <option>ISO-8859-6</option>
-                    <option>ISO-8859-7</option>
-                    <option>ISO-8859-8</option>
-                    <option>ISO-8859-9</option>
-                    <option>ISO-8859-10</option>
-                    <option>ISO-8859-11</option>
-                    <option>ISO-8859-13</option>
-                    <option>ISO-8859-14</option>
-                    <option>ISO-8859-15</option>
-                    <option>ISO-8859-16</option>
-                </select>
-                <span style="white-space: nowrap; margin-left: 10px; font-family: ligature;">连字：</span>
-                <select id="ligature" style="flex: 0 1 auto; white-space: nowrap; flex: 1;">
-                    <option value="disabled">禁用</option>
-                    <option value="enabled">启用</option>
-                </select>
-            </div>        
-        </div>
-        <div class="rounded-box3" id="fileContainer" style="display: none;">
-            <div id="progressContainer">
-                <progress id="progressBar" value="0" max="100"></progress>
-                <span id="progressPercentage">0%</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 页脚 -->
-    <div id="footer"></div>
-
     <!-- 内部CSS文件 -->
     <style>
         @font-face {
@@ -147,6 +93,60 @@
             }
         }
     </style>
+</head>
+
+<body>
+    <div class="content">
+        <!-- 标题框 -->
+        <div class="rounded-box1">
+            <h1 style="text-align: center;">网页端读取文件</h1>
+        </div>
+
+        <!-- 内容框 -->
+        <div class="rounded-box3">
+            <input id="reading" type="file" onchange="ofs(event)" style="width: 100%; margin-top: 15px;">
+            <div id="container" style="display: flex; align-items: center; width: 100%; margin: 15px 0;">
+                <span style="white-space: nowrap;">编码：</span>
+                <select id="decoding" style="flex: 0 1 auto; white-space: nowrap; flex: 1;">
+                    <option>UTF-8</option>
+                    <option>UTF-16BE</option>
+                    <option>UTF-16LE</option>
+                    <option>GBK</option>
+                    <option>GB18030</option>
+                    <option>BIG5</option>
+                    <option>ISO-8859-1</option>
+                    <option>ISO-8859-2</option>
+                    <option>ISO-8859-3</option>
+                    <option>ISO-8859-4</option>
+                    <option>ISO-8859-5</option>
+                    <option>ISO-8859-6</option>
+                    <option>ISO-8859-7</option>
+                    <option>ISO-8859-8</option>
+                    <option>ISO-8859-9</option>
+                    <option>ISO-8859-10</option>
+                    <option>ISO-8859-11</option>
+                    <option>ISO-8859-13</option>
+                    <option>ISO-8859-14</option>
+                    <option>ISO-8859-15</option>
+                    <option>ISO-8859-16</option>
+                </select>
+                <span style="white-space: nowrap; margin-left: 10px; font-family: ligature;">连字：</span>
+                <select id="ligature" style="flex: 0 1 auto; white-space: nowrap; flex: 1;">
+                    <option value="disabled">禁用</option>
+                    <option value="enabled">启用</option>
+                </select>
+            </div>        
+        </div>
+        <div class="rounded-box3" id="fileContainer" style="display: none;">
+            <div id="progressContainer">
+                <progress id="progressBar" value="0" max="100"></progress>
+                <span id="progressPercentage">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
 
     <!-- 内部JS文件 -->
     <!-- <script src="/blog/quote-js/jquery/jquery-3.7.1.js"></script> -->

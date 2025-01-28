@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在MT管理器中高亮lrc文件 - Courage Luo的网站</title>
+    <meta name="description" content="这篇文章给出了一段 mtsx 代码，用于在 MT 管理器中高亮 lrc 文件。">
+    <title>在 MT 管理器中高亮 lrc 文件 - Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -13,6 +14,90 @@
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
     <link rel="stylesheet" type="text/css" href="/href/response.css">
     <link rel="stylesheet" type="text/css" href="/blog/quote-js/prismjs/prism.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-blogbackground.svg');
+            background-size: 100%;
+        }
+
+        a {
+            color: #110c50;
+        }
+
+        #img-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #img-container img {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 15px auto;
+        }
+
+        #img-container img:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (min-width: 600px) {
+            #img-container {
+                flex-direction: row;
+            }
+
+            #img-container img {
+                width: 48%;
+                margin-right: 2%;
+            }
+
+            #img-container img:last-child {
+                margin-right: 1%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #img-container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #img-container img {
+                width: 100%;
+                max-width: 500px;
+                margin: 0 auto 15px auto;
+            }
+
+            #img-container img:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (min-width: 900px) {
+            #img-container {
+                flex-direction: row;
+            }
+
+            #img-container img {
+                width: 48%;
+                margin-right: 2%;
+            }
+
+            #img-container img:last-child {
+                margin-right: 1%;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-blogbackground.svg');
+            }
+
+            a {
+                color: #12efef;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -47,8 +132,8 @@
                 <hr>
                 <p>
                     <div id="img-container">
-                        <img src="./effect-day.jpg">
-                        <img src="./effect-night.jpg">
+                        <img src="./effect-day.jpg" loading="lazy" alt="浅色模式下的效果">
+                        <img src="./effect-night.jpg" loading="lazy" alt="深色模式下的效果">
                     </div>
                 </p>
                 <h3 id="code">代码</h3>
@@ -155,91 +240,6 @@
 
     <!-- 页脚 -->
     <div id="footer"></div>
-
-    <!-- 内部CSS文件 -->
-    <style>
-        /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-blogbackground.svg');
-            background-size: 100%;
-        }
-
-        a {
-            color: #110c50;
-        }
-
-        #img-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        #img-container img {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto 15px auto;
-        }
-
-        #img-container img:last-child {
-            margin-bottom: 0;
-        }
-
-        @media (min-width: 600px) {
-            #img-container {
-                flex-direction: row;
-            }
-
-            #img-container img {
-                width: 48%;
-                margin-right: 2%;
-            }
-
-            #img-container img:last-child {
-                margin-right: 1%;
-            }
-        }
-
-        @media (min-width: 768px) {
-            #img-container {
-                display: flex;
-                flex-direction: column;
-            }
-
-            #img-container img {
-                width: 100%;
-                max-width: 500px;
-                margin: 0 auto 15px auto;
-            }
-
-            #img-container img:last-child {
-                margin-bottom: 0;
-            }
-        }
-
-        @media (min-width: 900px) {
-            #img-container {
-                flex-direction: row;
-            }
-
-            #img-container img {
-                width: 48%;
-                margin-right: 2%;
-            }
-
-            #img-container img:last-child {
-                margin-right: 1%;
-            }
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-blogbackground.svg');
-            }
-
-            a {
-                color: #12efef;
-            }
-        }
-    </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

@@ -5,12 +5,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="这是一个跨领域博客，记录数学知识梳理、前端开发实例、C++算法技巧等内容，用代码和公式探索逻辑之美。">
     <title>Courage Luo 的网站</title>
     <!-- 链接favicon -->
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        body {
+            background-image: url('/img/background/day-background.svg');
+            background-size: 175%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('/img/background/night-background.svg'); /* 夜晚模式下的背景图片 */
+            }
+        }
+
+        /* 按键间距设置 */
+        .buttonSet {
+            margin-bottom: 10px;
+        }
+
+        #button2, #button4 {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,28 +62,6 @@
 
     <!-- 页脚 -->
     <div id="footer"></div>
-
-    <!-- 内部CSS文件 -->
-    <style>
-        /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-background.svg');
-            background-size: 175%;
-        }
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-background.svg'); /* 夜晚模式下的背景图片 */
-            }
-        }
-
-        /* 按键间距设置 */
-        .buttonSet {
-            margin-bottom: 10px;
-        }
-        #button2, #button4 {
-            margin-left: 10px;
-        }
-    </style>
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>

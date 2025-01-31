@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <!-- 将外部CSS文件链接到HTML文档 -->
     <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <link rel="stylesheet" href="/href/2048.css">
     <!-- 内部CSS文件 -->
     <style>
         /* 背景图片设置 */
@@ -27,12 +28,31 @@
         }
 
         /* 按键间距设置 */
-        .buttonSet {
+        .button-set {
             margin-bottom: 10px;
+        }
+
+        .button-set-top, .button-set-bottom {
+            display: flex;
+            justify-content: center;
+            height: 30px;
+        }
+
+        .button-set-top {
+            margin-top: 20px;
+        }
+
+        .button-set-bottom {
+            margin-top: 10px;
         }
 
         #button2, #button4 {
             margin-left: 10px;
+        }
+
+        /* 游戏样式设置 */
+        .game-zone {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -41,21 +61,72 @@
     <!-- 网页内容 -->
     <div class="content">
         <!-- 标题和问候语 -->
-        <div id="greetingContainer">
+        <div>
             <h1 id="greeting" style="text-align: center;"></h1>
         </div>
-        <p style="text-align: center;">这里目前还什么都没有，按下面的按钮玩玩吧<br>（ 广告请手动屏蔽 cloudflare-app 元素 ）</p>
+        <p style="text-align: center; margin: -10px 0;">这里目前还什么都没有，按下面的按钮玩玩吧<br>（滑动或按下方向键游玩 2048 小游戏）</p>
     
         <!-- 按钮整体 -->
-        <div class="buttonSet">
+        <div class="button-set">
             <!-- 上面两个按钮 -->
-            <div style="display: flex; justify-content: center; height: 30px;">
+            <div class="button-set-top">
                 <button id="button1">玩玩猜数游戏</button>
                 <button id="button2">练习因式分解</button>
             </div>
-            <div style="display: flex; justify-content: center; height: 30px; margin-top: 10px;">
+            <div class="button-set-bottom">
                 <button id="button3">个人博客</button>
                 <button id="button4">自愿被 Rickroll</button>
+            </div>
+        </div>
+
+        <!-- 2048 -->
+        <div class="game-zone">
+            <div class="container">
+                <div class="heading">
+                    <button class="restart-button">重新开始</button>
+                    <div class="scores-container">
+                        <div class="score-container">
+                            <div class="score-addition"></div>
+                        </div>
+                        <div class="best-container"></div>
+                    </div>
+                </div>
+                <div class="game-container">
+                    <div class="game-message">
+                        <p></p>
+                        <div class="lower">
+                            <a class="keep-playing-button">继续游戏</a>
+                            <a class="retry-button">再来一局</a>
+                        </div>
+                    </div>
+                    <div class="grid-container">
+                        <div class="grid-row">
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                        </div>
+                        <div class="grid-row">
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                        </div>
+                        <div class="grid-row">
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                        </div>
+                        <div class="grid-row">
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                            <div class="grid-cell"></div>
+                        </div>
+                    </div>
+                    <div class="tile-container"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -65,6 +136,7 @@
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>
+    <script src="/href/2048.js"></script>
     <script>
         // 为按钮设置ID
         var button1 = document.getElementById("button1");

@@ -83,7 +83,6 @@
 
             .modified-time {
                 color: #7fadb1;
-                font-feature-settings: "tnum";
             }
 
             #sort-text {
@@ -220,6 +219,7 @@
                 link.textContent = '\n' + article.title;
                 link.style.display = 'block';
                 link.style.margin = '0 15px';
+                link.classList.add('article-link');
                 content.appendChild(link);
         
                 const modified = document.createElement('p');
@@ -227,6 +227,7 @@
                 modified.style.textAlign = 'right';
                 modified.style.marginRight = '15px';
                 modified.style.marginTop = '10px';
+                modified.style.fontFeatureSettings = '"tnum"';
                 modified.classList.add('modified-time');
                 content.appendChild(modified);
         
@@ -297,6 +298,7 @@
                             modified.style.textAlign = 'right';
                             modified.style.marginRight = '15px';
                             modified.style.marginTop = '10px';
+                            modified.style.fontFeatureSettings = '"tnum"';
                             modified.classList.add('modified-time');
                             articleContent.appendChild(modified);
         

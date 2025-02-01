@@ -102,6 +102,12 @@
     animation-fill-mode: both;
 }
 
+@media (prefers-color-scheme: dark) {
+    .score-container .score-addition, .best-container .score-addition {
+        color: #ffffffd0;
+    }
+}
+
 .score-container:after {
     content: "当前";
 }
@@ -194,6 +200,13 @@
     box-sizing: border-box;
 }
 
+@media (prefers-color-scheme: dark) {
+    .game-container {
+        background: #113358;
+        border: #194a7f solid 1.5px;
+    }
+}
+
 .game-message {
     display: none;
     position: absolute;
@@ -214,17 +227,21 @@
     animation-fill-mode: both;
 }
 
+@media (prefers-color-scheme: dark) {
+    .game-message {
+        background: rgba(33, 31, 31, 0.72);
+    }
+}
+
 .game-message p {
-    font-size: 60px;
-    /* font-weight: bold; */
-    height: 60px;
-    line-height: 60px;
-    margin-top: 222px;
+    font-size: 30px;
+    height: 30px;
+    line-height: 30px;
 }
 
 .game-message .lower {
     display: block;
-    margin-top: 29px;
+    margin-top: 20px;
 }
 
 .game-message .mailing-list {
@@ -243,8 +260,8 @@
 
 .game-message a {
     display: inline-block;
-    background: #6d4a4a;
-    border: #696363 solid 1.5px;
+    background: #10919a;
+    border: #0c464a solid 1.5px;
     border-radius: 3px;
     padding: 0 20px;
     text-decoration: none;
@@ -252,7 +269,14 @@
     height: 40px;
     line-height: 42px;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: -5px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .game-message a {
+        background: #0e3b6c;
+        border: #1d60a7 solid 1.5px;
+    }
 }
 
 .game-message a.keep-playing-button {
@@ -322,6 +346,12 @@
     float: left;
     border-radius: 3px;
     background: rgba(238, 228, 218, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+    .grid-cell {
+        background: rgba(92, 85, 85, 0.45);
+    }
 }
 
 .grid-cell:last-child {
@@ -465,10 +495,24 @@
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
 }
 
+@media (prefers-color-scheme: dark) {
+    .tile.tile-2 .tile-inner {
+        color: #e8e6e4;
+        background: #3181b6;
+    }
+}
+
 .tile.tile-4 .tile-inner {
     color: #776e65;
     background: #ede0c8;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
+}
+
+@media (prefers-color-scheme: dark) {
+    .tile.tile-4 .tile-inner {
+        color: #f5f2ee;
+        background: #52699f;
+    }
 }
 
 .tile.tile-8 .tile-inner {
@@ -476,9 +520,23 @@
     background: #f2b179;
 }
 
+@media (prefers-color-scheme: dark) {
+    .tile.tile-8 .tile-inner {
+        color: #f9f6f2;
+        background: #3c609e;
+    }
+}
+
 .tile.tile-16 .tile-inner {
     color: #f9f6f2;
     background: #f59563;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tile.tile-16 .tile-inner {
+        color: #f9f6f2;
+        background: #324c8f;
+    }
 }
 
 .tile.tile-32 .tile-inner {
@@ -486,16 +544,37 @@
     background: #f67c5f;
 }
 
+@media (prefers-color-scheme: dark) {
+    .tile.tile-32 .tile-inner {
+        color: #f9f6f2;
+        background: #34418e;
+    }
+}
+
 .tile.tile-64 .tile-inner {
     color: #f9f6f2;
     background: #f65e3b;
 }
 
+@media (prefers-color-scheme: dark) {
+    .tile.tile-64 .tile-inner {
+        color: #f9f6f2;
+        background: #1a6b60;
+    }
+}
+    
 .tile.tile-128 .tile-inner {
     color: #f9f6f2;
     background: #edcf72;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
     font-size: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tile.tile-128 .tile-inner {
+        color: #f9f6f2;
+        background: #bc9727;
+    }
 }
 
 .tile.tile-256 .tile-inner {
@@ -504,12 +583,26 @@
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.31746), inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
     font-size: 20px;
 }
+
+@media (prefers-color-scheme: dark) {
+    .tile.tile-256 .tile-inner {
+        color: #f9f6f2;
+        background: #d0a420;
+    }
+}
  
 .tile.tile-512 .tile-inner {
     color: #f9f6f2;
     background: #edc850;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.39683), inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
     font-size: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tile.tile-512 .tile-inner {
+        color: #f9f6f2;
+        background: #c0a125;
+    }
 }
  
 .tile.tile-1024 .tile-inner {
@@ -680,8 +773,8 @@
 
 @media (prefers-color-scheme: dark) {
     .restart-button {
-        background: #364d63;
-        border: #123860 solid 1.5px;
+        background: #0f2f50;
+        border: #194a7e solid 1.5px;
         color: #efefef;
     }
 }

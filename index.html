@@ -50,9 +50,53 @@
             margin-left: 10px;
         }
 
+        .main-text {
+            text-align: center;
+            margin: -10px 0;
+        }
+
         /* 游戏样式设置 */
-        .game-zone {
+        .game {
             margin-top: 10px;
+        }
+
+        /* 响应式设计 */
+        @media (min-width: 670px) {
+            .content {
+                display: flex;
+            }
+
+            .main {
+                flex-grow: 1;
+                margin-right: 10px;
+            }
+
+            .game {
+                flex-shrink: 0;
+                margin-right: 20px;
+                margin-top: 20px;
+            }
+
+            .main-text {
+                margin: 0;
+            }
+        }
+
+        @media (min-width: 700px) {
+            .game {
+                margin-right: 5%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .content {
+                margin: 0 auto;
+            }
+
+            .main {
+                min-width: 400px;
+                margin-right: 5%;
+            }
         }
     </style>
 </head>
@@ -60,27 +104,29 @@
 <body>
     <!-- 网页内容 -->
     <div class="content">
-        <!-- 标题和问候语 -->
-        <div>
-            <h1 id="greeting" style="text-align: center;"></h1>
-        </div>
-        <p style="text-align: center; margin: -10px 0;">这里目前还什么都没有，按下面的按钮玩玩吧<br>（滑动或按下方向键游玩 2048 小游戏）</p>
-    
-        <!-- 按钮整体 -->
-        <div class="button-set">
-            <!-- 上面两个按钮 -->
-            <div class="button-set-top">
-                <button id="button1">玩玩猜数游戏</button>
-                <button id="button2">练习因式分解</button>
+        <div class="main">
+            <!-- 标题和问候语 -->
+            <div>
+                <h1 id="greeting" style="text-align: center;"></h1>
             </div>
-            <div class="button-set-bottom">
-                <button id="button3">个人博客</button>
-                <button id="button4">自愿被 Rickroll</button>
+            <p class="main-text">这里目前还什么都没有，按下面的按钮玩玩吧<br>（滑动或按下方向键游玩 2048 小游戏）</p>
+        
+            <!-- 按钮整体 -->
+            <div class="button-set">
+                <!-- 上面两个按钮 -->
+                <div class="button-set-top">
+                    <button id="button1">玩玩猜数游戏</button>
+                    <button id="button2">练习因式分解</button>
+                </div>
+                <div class="button-set-bottom">
+                    <button id="button3">个人博客</button>
+                    <button id="button4">自愿被 Rickroll</button>
+                </div>
             </div>
         </div>
 
         <!-- 2048 -->
-        <div class="game-zone">
+        <div class="game">
             <div class="container">
                 <div class="heading">
                     <button class="restart-button">重新开始</button>

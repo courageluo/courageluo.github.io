@@ -5,7 +5,7 @@
     --bg-color-light: #bcd5da;
     --text-color-light: black;
     --bg-color-dark: #1d446b;
-    --text-color-dark: white;
+    --text-color-dark: #efefef;
 }
 
 /* 背景图片设置 */
@@ -125,12 +125,12 @@ input, button {
     background-color: rgba(0, 0, 0, 0.5); /* 设置半透明的背景颜色 */
     border-radius: 10px; /* 圆角半径 */
     padding: 5px 20px 5px 20px; /* 从上、右、下、左添加内边距 */
-    color: white; /* 文字颜色 */
+    color: #efefef; /* 文字颜色 */
     backdrop-filter: blur(2px);
 }
 
 .rounded-box2 {
-    background-color: rgba(255, 209, 140, 0.45);
+    background-color: rgba(218, 178, 118, 0.45);
 }
 
 .rounded-box3 {
@@ -180,7 +180,7 @@ input, button {
 
 @media (prefers-color-scheme: dark) {
     .rounded-box2, .rounded-box3, .rounded-box3p, .rounded-box4, .rounded-box5, .rounded-box6, .rounded-box7 {
-        color: white;
+        color: #efefef;
     }
 }
 

@@ -162,6 +162,12 @@
                 position: sticky;
                 top: 10px;
             }
+
+            #controls {
+                display: block;
+                position: sticky;
+                bottom: 10px;
+            }
         }
 
         /* 自定义控件样式 */
@@ -196,6 +202,11 @@
             width: 24px;
             height: 24px;
             pointer-events: none;
+        }
+
+        /* 优化视觉效果 */
+        .play-icon {
+            margin-left: 2px;
         }
 
         .control-btn:hover {
@@ -262,9 +273,9 @@
                 <div class="info">
                     <div class="rounded-box3">
                         <p id="usage">使用说明：点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>选择音频文件所在的文件夹，待加载出音频列表后，点击以播放音频（歌词来源于文件夹下与音频同名的 lrc 文件）。</p>
-                    </div>
-                    <div class="rounded-box3">
                         <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
+                    </div>
+                    <div class="rounded-box3" id="controls" style="background: #74a1a754; border: #67847fb2 solid 1.5px; backdrop-filter: blur(9px);">
                         <audio id="audioPlayer" hidden></audio>
                         <!-- 自定义音频控件 -->
                         <div class="custom-controls">
@@ -306,17 +317,29 @@
         const increaseDelayBtn = document.getElementById('increaseDelay');
         const delayDisplay = document.getElementById('delayDisplay');
 
-        // 空格键控制播放/暂停
+        // 快捷键
         document.addEventListener("keydown", function (event) {
-            if (event.code === "Space") {
-                event.preventDefault();
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                    togglePlayState(true);
-                } else {
-                    audioPlayer.pause();
-                    togglePlayState(false);
-                }
+            switch(event.code) {
+                case "Space":
+                    event.preventDefault();
+                    if (audioPlayer.paused) {
+                        audioPlayer.play();
+                        togglePlayState(true);
+                    } else {
+                        audioPlayer.pause();
+                        togglePlayState(false);
+                    }
+                    break;
+                case "ArrowLeft":
+                    event.preventDefault();
+                    audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 5);
+                    updateProgress();
+                    break;
+                case "ArrowRight":
+                    event.preventDefault();
+                    audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 5);
+                    updateProgress();
+                    break;
             }
         });
 
@@ -387,8 +410,8 @@
 
         let lyricsData = [];
         let currentLyricIndex = 0;
-        let songDelayMap = {};  // 存储每首歌的延迟
-        let currentSong = '';   // 当前播放的歌曲名称
+        let songDelayMap = {}; // 存储每首歌的延迟
+        let currentSong = '';  // 当前播放的歌曲名称
 
         // 文件夹选取及文本显示
         const textElement = document.getElementById('usage');
@@ -420,14 +443,14 @@
                     }
                 }
 
-                textElement.innerHTML = '点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>以继续选择文件夹。';
+                textElement.innerHTML = '点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>以继续选择文件夹。<br><h3 style="text-align: center;">音频列表</h3><hr>';
 
                 audioList.innerHTML = '';
                 audioFiles.forEach(file => {
                     const listItem = document.createElement('li');
                     listItem.textContent = file.name;
                     listItem.dataset.file = file.name;
-                    listItem.addEventListener('click', () => playAudio(file, lrcFiles[file.name.replace(/\.(mp3|wav|ogg|flac|m4a)$/, '')]));
+                    listItem.addEventListener('click', () => playAudio(file, lrcFiles[file.name.replace(/\.[^.]+$/, '')]));
                     audioList.appendChild(listItem);
                 });
             } catch (err) {
@@ -537,6 +560,13 @@
 
             // 按时间排序歌词数据
             lyricsData.sort((a, b) => a.time - b.time);
+
+            // 便于完整显示歌词
+            const lastTime = lyricsData[lyricsData.length - 1]?.time || 0;
+            for (let i = 0; i < 13; i++) {
+                lyricsData.push({ time: lastTime + 864000 + i, text: '　' });
+            }
+
             displayLyrics();
         }
 

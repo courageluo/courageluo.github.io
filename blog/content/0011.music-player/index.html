@@ -73,6 +73,8 @@
         }
 
         .lyrics .highlight {
+            margin: 5px 2px;
+            line-height: 1.3;
             opacity: 1;
             font-size: 18px;
             transform: scale(1.1);
@@ -161,11 +163,96 @@
                 top: 10px;
             }
         }
+
+        /* 自定义控件样式 */
+        .custom-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 10px;
+            background: #5a5656db;
+            border: #615656 solid 1.5px;
+            border-radius: 8px;
+            flex-wrap: nowrap;
+        }
+
+        .control-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            background: #bbd1ce;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .control-btn img {
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #7b979b;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #95beba;
+            border: #0f4b4e solid 1.5px;
+            cursor: pointer;
+        }
+
+        .time-display {
+            font-size: 14px;
+            color: #f1f1f1;
+            text-align: center;
+            font-feature-settings: "tnum";
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .custom-controls {
+                background: #353232;
+            }
+
+            .control-btn {
+                background: #9b9ba3;
+            }
+
+            .progress-bar {
+                background: #6b5f5fc8;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <!-- 主要内容 -->
     <div class="content">
         <div class="container">
             <div class="rounded-box1">
@@ -178,7 +265,20 @@
                     </div>
                     <div class="rounded-box3">
                         <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
-                        <audio id="audioPlayer" style="margin-top: 5px; width: 100%;" controls></audio>
+                        <audio id="audioPlayer" hidden></audio>
+                        <!-- 自定义音频控件 -->
+                        <div class="custom-controls">
+                            <button id="playPauseBtn" class="control-btn">
+                                <img src="./play.svg" alt="播放" class="play-icon">
+                                <img src="./pause.svg" alt="暂停" class="pause-icon" style="display: none;">
+                            </button>
+                            <span id="currentTime" class="time-display">0:00</span>
+                            <span class="time-display" style="margin: 0 -5px;">/</span>
+                            <span id="duration" class="time-display">0:00</span>
+                            <div class="progress-container">
+                                <input type="range" id="progressBar" class="progress-bar" value="0" max="0">
+                            </div>
+                        </div>
                         <div class="delay-controls">
                             <span id="delayInfo" style="margin-right: 10px;">歌词延迟: </span>
                             <button id="decreaseDelay">-0.1 秒</button>
@@ -212,10 +312,77 @@
                 event.preventDefault();
                 if (audioPlayer.paused) {
                     audioPlayer.play();
+                    togglePlayState(true);
                 } else {
                     audioPlayer.pause();
+                    togglePlayState(false);
                 }
             }
+        });
+
+        // 自定义音频控件
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeDisplay = document.getElementById('currentTime');
+        const durationDisplay = document.getElementById('duration');
+
+        // 播放/暂停图标切换
+        function togglePlayState(isPlaying) {
+            document.querySelector('.play-icon').style.display = isPlaying ? 'none' : 'block';
+            document.querySelector('.pause-icon').style.display = isPlaying ? 'block' : 'none';
+        }
+
+        // 播放/暂停控制
+        playPauseBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                togglePlayState(true);
+            } else {
+                audioPlayer.pause();
+                togglePlayState(false);
+            }
+        });
+
+        // 进度条更新
+        audioPlayer.addEventListener('timeupdate', updateProgress);
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            progressBar.max = audioPlayer.duration;
+            durationDisplay.textContent = formatTime(audioPlayer.duration);
+        });
+
+        // 进度条交互
+        let isDragging = false;
+        progressBar.addEventListener('input', () => isDragging = true);
+        progressBar.addEventListener('change', () => {
+            audioPlayer.currentTime = progressBar.value;
+            isDragging = false;
+        });
+
+        // 进度条拖动时实时更新时间
+        progressBar.addEventListener('input', (e) => {
+            isDragging = true;
+            const currentTime = parseFloat(e.target.value);
+            currentTimeDisplay.textContent = formatTime(currentTime);
+        });
+
+        function updateProgress() {
+            if (!isDragging) {
+                progressBar.value = audioPlayer.currentTime;
+                currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
+            }
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            seconds = Math.floor(seconds % 60);
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // 音频结束时重置状态
+        audioPlayer.addEventListener('ended', () => {
+            togglePlayState(false);
+            progressBar.value = 0;
+            currentTimeDisplay.textContent = '0:00';
         });
 
         let lyricsData = [];
@@ -306,6 +473,7 @@
             const url = URL.createObjectURL(file);
             audioPlayer.src = url;
             audioPlayer.play();
+            togglePlayState(true); // 更新播放状态
 
             const songName = file.name;
             currentSong = songName;

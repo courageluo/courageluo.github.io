@@ -21,7 +21,6 @@
         }
 
         .container {
-            max-width: 700px;
             margin: 0 auto;
         }
 
@@ -34,23 +33,23 @@
         .audio-list li {
             padding: 10px;
             margin: 10px -5px;
-            background: #c0afaf;
+            background: #96a7a9e7;
             cursor: pointer;
             border-radius: 5px;
             transition: background 0.3s;
         }
 
         .audio-list li:hover {
-            background: #e0e0e0;
+            background: #cddcdee7;
         }
 
         .lyrics {
-            background: #222222EE;
+            background: #222222e5;
             backdrop-filter: blur(5px);
             color: #fff;
             padding: 20px;
             border-radius: 10px;
-            height: 300px;
+            height: 350px;
             overflow: hidden;
             position: relative;
             margin-top: 20px;
@@ -81,8 +80,12 @@
             margin: 15px 0;
         }
 
-        .delay-controls button:hover {
-            background-color: #1d887b;
+        .delay-controls button, #filePicker {
+            transition: background 0.3s;
+        }
+
+        .delay-controls button:hover, #filePicker:hover {
+            background-color: #36d4c2;
         }
 
         .delay-display {
@@ -102,11 +105,48 @@
             }
 
             .audio-list li {
-                background: #202020;
+                background: #1e1d1dc5;
             }
 
             .audio-list li:hover {
-                background: #3a3a3a;
+                background: #6d5f5fe7;
+            }
+
+            .delay-controls button, #filePicker {
+                transition: background 0.3s;
+            }
+
+            .delay-controls button:hover, #filePicker:hover {
+                background-color: #515165;
+            }
+        }
+
+        /* 500px + 0.02 * width = width - 20px => width = 530.61px */
+        @media (min-width: 530.7px) {
+            .container {
+                width: calc(500px + 2%);
+            }
+        }
+
+        @media (min-width: 700px) {
+            .container {
+                width: 100%;
+                min-width: 700px;
+                max-width: 850px;
+            }
+
+            .mainContainer {
+                display: flex;
+            }
+
+            .info {
+                flex-shrink: 0;
+                width: 340px;
+                margin: -10px -10px 0 0;
+            }
+
+            .lyrics {
+                flex-grow: 1;
             }
         }
     </style>
@@ -119,20 +159,24 @@
             <div class="rounded-box1">
                 <h1 style="text-align: center;">简易音乐播放器</h1>
             </div>
-            <div class="rounded-box3">
-                <p>使用说明：点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>选择音频文件所在的文件夹，待加载出音频列表后，点击以播放音频（歌词来源于文件夹下与音频同名的 lrc 文件）。</p>
-            </div>
-            <div class="rounded-box3">
-                <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
-                <audio id="audioPlayer" style="margin-top: 5px; width: 100%;" controls></audio>
-                <div class="delay-controls">
-                    <span id="delayInfo" style="margin-right: 10px;">歌词延迟: </span>
-                    <button id="decreaseDelay">-0.1 秒</button>
-                    <span class="delay-display" id="delayDisplay">0.0 秒</span>
-                    <button id="increaseDelay">+0.1 秒</button>
+            <div class="mainContainer">
+                <div class="info">
+                    <div class="rounded-box3">
+                        <p id="usage">使用说明：点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>选择音频文件所在的文件夹，待加载出音频列表后，点击以播放音频（歌词来源于文件夹下与音频同名的 lrc 文件）。</p>
+                    </div>
+                    <div class="rounded-box3">
+                        <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
+                        <audio id="audioPlayer" style="margin-top: 5px; width: 100%;" controls></audio>
+                        <div class="delay-controls">
+                            <span id="delayInfo" style="margin-right: 10px;">歌词延迟: </span>
+                            <button id="decreaseDelay">-0.1 秒</button>
+                            <span class="delay-display" id="delayDisplay">0.0 秒</span>
+                            <button id="increaseDelay">+0.1 秒</button>
+                        </div>
+                    </div>
                 </div>
+                <div class="lyrics" id="lyricsContainer" style="margin: 0 10px 10px 10px; text-align: center;"></div>
             </div>
-            <div class="lyrics" id="lyricsContainer" style="margin: 0 10px 10px 10px; text-align: center;"></div>
         </div>
     </div>
 
@@ -155,14 +199,17 @@
         let songDelayMap = {};  // 存储每首歌的延迟
         let currentSong = '';   // 当前播放的歌曲名称
 
-        // 文件夹选取
-        const fileInputBtn = document.getElementById('filePicker');
+        // 文件夹选取及文本显示
+        const textElement = document.getElementById('usage');
 
-        fileInputBtn.addEventListener('click', async function () {
+        async function handleClick() {
+            textElement.innerHTML = '等待系统弹出文件夹选择对话框……';
+
             if (!('showDirectoryPicker' in window)) {
-                alert("您的浏览器不支持读取文件夹！");
+                textElement.innerHTML = '您的浏览器不支持文件夹选择功能。';
                 return;
             }
+
             try {
                 const directoryHandle = await window.showDirectoryPicker();
                 const audioFiles = [];
@@ -182,6 +229,8 @@
                     }
                 }
 
+                textElement.innerHTML = '点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>以继续选择文件夹。';
+
                 audioList.innerHTML = '';
                 audioFiles.forEach(file => {
                     const listItem = document.createElement('li');
@@ -192,9 +241,14 @@
                 });
             } catch (err) {
                 console.error('Failed to pick directory:', err);
-                alert("您需要允许本页面查看文件才能继续操作！");
+                textElement.innerHTML = '您需要允许本页面查看文件才能继续操作，请点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>以继续选择文件夹。';
             }
-        });
+
+            const newBtn = document.getElementById('filePicker');
+            newBtn.addEventListener('click', handleClick);
+        }
+
+        document.getElementById('filePicker').addEventListener('click', handleClick);
 
         fileInput.addEventListener('change', function (event) {
             const files = event.target.files;

@@ -187,7 +187,7 @@ input, button {
 /* 白天模式下的按钮颜色 */
 button {
     border-radius: 3px;
-    border-width: 1.5px;
+    border-width: 1.75px;
     background-color: #11bbbb; /* 蓝色背景 */
     color: black; /* 白色文字 */
 }

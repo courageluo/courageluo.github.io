@@ -45,22 +45,31 @@
 
         .lyrics {
             background: #222222e5;
+            border: #515165 solid 1.5px;
             backdrop-filter: blur(5px);
             color: #fff;
             padding: 20px;
             border-radius: 10px;
             height: 350px;
-            overflow: hidden;
             position: relative;
             margin-top: 20px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .lyrics::-webkit-scrollbar {
+            display: none;
         }
 
         .lyrics p {
-            margin: 0;
+            margin: 3px 1px;
             font-size: 16px;
             line-height: 1.5;
             opacity: 0.6;
-            transition: opacity 0.3s, transform 0.3s;
+            transition: opacity 0.4s, transform 0.4s;
         }
 
         .lyrics .highlight {
@@ -109,7 +118,7 @@
             }
 
             .audio-list li:hover {
-                background: #6d5f5fe7;
+                background: #3d3737e7;
             }
 
             .delay-controls button, #filePicker {
@@ -147,6 +156,9 @@
 
             .lyrics {
                 flex-grow: 1;
+                display: block;
+                position: sticky;
+                top: 10px;
             }
         }
     </style>
@@ -193,6 +205,18 @@
         const decreaseDelayBtn = document.getElementById('decreaseDelay');
         const increaseDelayBtn = document.getElementById('increaseDelay');
         const delayDisplay = document.getElementById('delayDisplay');
+
+        // 空格键控制播放/暂停
+        document.addEventListener("keydown", function (event) {
+            if (event.code === "Space") {
+                event.preventDefault();
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                } else {
+                    audioPlayer.pause();
+                }
+            }
+        });
 
         let lyricsData = [];
         let currentLyricIndex = 0;
@@ -250,6 +274,7 @@
 
         document.getElementById('filePicker').addEventListener('click', handleClick);
 
+        // 加载音频文件
         fileInput.addEventListener('change', function (event) {
             const files = event.target.files;
             const audioFiles = [];
@@ -284,6 +309,8 @@
 
             const songName = file.name;
             currentSong = songName;
+
+            document.title = '正在播放：' + songName + ' - 简易音乐播放器 - Courage Luo 的网站';
 
             // 重置或恢复当前歌曲的延迟
             let lyricDelay = songDelayMap[songName] || 0;
@@ -372,7 +399,17 @@
                         if (previousLyric) previousLyric.classList.remove('highlight');
                         const currentLyric = lyricsContainer.children[i];
                         currentLyric.classList.add('highlight');
-                        currentLyric.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                        if (currentLyric) {
+                            const container = lyricsContainer;
+                            const lyricTop = currentLyric.offsetTop;
+                            const lyricHeight = currentLyric.offsetHeight;
+                            const containerHeight = container.offsetHeight;
+
+                            // 计算目标滚动位置
+                            container.scrollTop = lyricTop - (containerHeight - lyricHeight) / 2 + 55;
+                        }
+
                         currentLyricIndex = i;
                     }
                     break;

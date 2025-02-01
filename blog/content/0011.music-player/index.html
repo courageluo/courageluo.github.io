@@ -69,7 +69,11 @@
             font-size: 16px;
             line-height: 1.5;
             opacity: 0.6;
-            transition: opacity 0.4s, transform 0.4s;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .lyrics p:hover {
+            color: #d7d7d7;
         }
 
         .lyrics .highlight {
@@ -225,19 +229,24 @@
             height: 5px;
             -webkit-appearance: none;
             appearance: none;
-            background: #7b979b;
+            background: #849a9d;
             border-radius: 3px;
             cursor: pointer;
         }
 
         .progress-bar::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 13px;
-            height: 13px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #95beba;
-            border: #0f4b4e solid 1.5px;
+            background: #c9cd8b;
+            outline: #ffffff25 solid 3px;
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .progress-bar::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
         }
 
         .time-display {
@@ -318,6 +327,8 @@
         const delayDisplay = document.getElementById('delayDisplay');
 
         // 快捷键
+        // Space -> 播放/暂停  左箭头 -> 快退5s  右箭头 -> 快进5s
+        // - -> 减少歌词延迟  + -> 增加歌词延迟
         document.addEventListener("keydown", function (event) {
             switch(event.code) {
                 case "Space":
@@ -339,6 +350,14 @@
                     event.preventDefault();
                     audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 5);
                     updateProgress();
+                    break;
+                case "Minus":
+                    event.preventDefault();
+                    decreaseDelayBtn.click();
+                    break;
+                case "Equal":
+                    event.preventDefault();
+                    increaseDelayBtn.click();
                     break;
             }
         });
@@ -487,7 +506,7 @@
                 const listItem = document.createElement('li');
                 listItem.textContent = file.name;
                 listItem.dataset.file = file.name;
-                listItem.addEventListener('click', () => playAudio(file, lrcFiles[file.name.replace(/\.(mp3|wav|ogg|flac|m4a)$/, '')]));
+                listItem.addEventListener('click', () => playAudio(file, lrcFiles[file.name.replace(/\.[^.]+$/, '')]));
                 audioList.appendChild(listItem);
             });
         });
@@ -564,7 +583,11 @@
             // 便于完整显示歌词
             const lastTime = lyricsData[lyricsData.length - 1]?.time || 0;
             for (let i = 0; i < 13; i++) {
-                lyricsData.push({ time: lastTime + 864000 + i, text: '　' });
+                lyricsData.push({ 
+                    time: lastTime + 864000 + i,
+                    text: '　',
+                    isPadding: true
+                });
             }
 
             displayLyrics();
@@ -575,6 +598,19 @@
             lyricsData.forEach((lyric, index) => {
                 const p = document.createElement('p');
                 p.textContent = lyric.text;
+
+                if (!lyric.isPadding) {
+                    p.style.cursor = 'pointer';
+                    p.addEventListener('click', () => {
+                        const targetTime = lyric.time - (songDelayMap[currentSong] || 0);
+                        audioPlayer.currentTime = Math.max(0, targetTime);
+                        updateProgress();
+                        if (audioPlayer.paused) audioPlayer.play();
+                    });
+                } else {
+                    p.style.userSelect = 'none';
+                }
+
                 lyricsContainer.appendChild(p);
             });
 
@@ -586,12 +622,15 @@
         }
 
         function updateLyrics(lyricDelay) {
-            if (!lyricsData.length) return;
+            if (!lyricsData.length || isDragging) return;
 
             const currentTime = audioPlayer.currentTime + lyricDelay;
 
-            for (let i = 0; i < lyricsData.length; i++) {
-                if (currentTime >= lyricsData[i].time && (!lyricsData[i + 1] || currentTime < lyricsData[i + 1].time)) {
+            // 过滤掉填充行（time超过歌曲时长）
+            const validLyrics = lyricsData.filter(l => l.time <= audioPlayer.duration + 5);
+            
+            for (let i = 0; i < validLyrics.length; i++) {
+                if (currentTime >= validLyrics[i].time && (!validLyrics[i + 1] || currentTime < validLyrics[i + 1].time)) {
                     if (currentLyricIndex !== i) {
                         const previousLyric = lyricsContainer.children[currentLyricIndex];
                         if (previousLyric) previousLyric.classList.remove('highlight');
@@ -605,7 +644,7 @@
                             const containerHeight = container.offsetHeight;
 
                             // 计算目标滚动位置
-                            container.scrollTop = lyricTop - (containerHeight - lyricHeight) / 2 + 55;
+                            container.scrollTop = lyricTop - (containerHeight - lyricHeight) / 2 + 55; // 略微偏上
                         }
 
                         currentLyricIndex = i;

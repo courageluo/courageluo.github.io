@@ -69,7 +69,8 @@
             font-size: 16px;
             line-height: 1.5;
             opacity: 0.6;
-            transition: opacity 0.3s, transform 0.3s;
+            /* transition: opacity 0.3s, transform 0.3s; */
+            transition: all 0.3s;
         }
 
         .lyrics p:hover {
@@ -423,6 +424,16 @@
         // 音频结束时重置状态
         audioPlayer.addEventListener('ended', () => {
             togglePlayState(false);
+
+            // 自动播放下一首
+            const currentItem = audioList.querySelector(`li[data-file="${currentSong}"]`);
+            if (currentItem) {
+                const nextItem = currentItem.nextElementSibling; // 列表循环播放： || audioList.firstElementChild;
+                if (nextItem) {
+                    setTimeout(() => nextItem.click(), 200); // 添加短暂延迟确保资源加载
+                }
+            }
+
             progressBar.value = 0;
             currentTimeDisplay.textContent = '0:00';
         });
@@ -447,6 +458,8 @@
                 const directoryHandle = await window.showDirectoryPicker();
                 const audioFiles = [];
                 const lrcFiles = {};
+
+                textElement.innerHTML = '处理音频列表中……';
 
                 for await (const [name, handle] of directoryHandle.entries()) {
                     if (handle.kind === 'file') {
@@ -512,6 +525,9 @@
         });
 
         function playAudio(file, lrcFile) {
+            progressBar.value = 0;
+            currentTimeDisplay.textContent = '0:00';
+
             const url = URL.createObjectURL(file);
             audioPlayer.src = url;
             audioPlayer.play();

@@ -759,7 +759,12 @@
                 delimiters: [
                     {left: "$$", right: "$$", display: true},
                     {left: "$", right: "$", display: false}
-                ]
+                ],
+                macros: {
+                    '\\le': '\\leqslant',
+                    '\\ge': '\\geqslant',
+                    '\\parallel': '\\kern1pt/\\kern-2.5pt/\\kern1pt'
+                }
             })
         });
 

@@ -226,14 +226,14 @@
                 <hr>
                 <ol>
                     <li>
-                        均值不等式(一正二定三相等)：$ a+b\geqslant 2\sqrt{ab} $，$ a,b>0 $ <br>
-                        二定三相等：$ a^2+b^2\geqslant 2ab $，$ a,b\in \mathbf{R} $
+                        均值不等式(一正二定三相等)：$ a+b\ge 2\sqrt{ab} $，$ a,b>0 $ <br>
+                        二定三相等：$ a^2+b^2\ge 2ab $，$ a,b\in \mathbf{R} $
                     </li>
                     <li>
-                        扩展：$ \displaystyle\sqrt{\frac{a^2+b^2}{2}}\geqslant\frac{a+b}{2}\geqslant\sqrt{ab}\geqslant\frac{2}{\displaystyle\frac{1}{a}+\frac{1}{b}} $，$ a,b>0 $
+                        扩展：$ \displaystyle\sqrt{\frac{a^2+b^2}{2}}\ge\frac{a+b}{2}\ge\sqrt{ab}\ge\frac{2}{\displaystyle\frac{1}{a}+\frac{1}{b}} $，$ a,b>0 $
                     </li>
                     <li>
-                        柯西不等式：$ \left(a^2+b^2\right)\left(x^2+y^2\right)\geqslant\left(ax+by\right)^2 $
+                        柯西不等式：$ \left(a^2+b^2\right)\left(x^2+y^2\right)\ge\left(ax+by\right)^2 $
                     </li>
                 </ol>
             </div>
@@ -283,8 +283,8 @@
                     <li>
                         $ \overrightarrow{AB}+\overrightarrow{BC}=\overrightarrow{AC} $，<br>
                         $ \overrightarrow{CA}-\overrightarrow{CB}=\overrightarrow{BA} $，$ \overrightarrow{AC}-\overrightarrow{BC}=\overrightarrow{AB} $ <br>
-                        $ | |\boldsymbol{a}|-|\boldsymbol{b}| | \leqslant |\boldsymbol{a}+\boldsymbol{b}| \leqslant |\boldsymbol{a}|+|\boldsymbol{b}| $ <br>
-                        $ | |\boldsymbol{a}|-|\boldsymbol{b}| | \leqslant |\boldsymbol{a}-\boldsymbol{b}| \leqslant |\boldsymbol{a}|+|\boldsymbol{b}| $
+                        $ | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}+\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| $ <br>
+                        $ | |\boldsymbol{a}|-|\boldsymbol{b}| | \le |\boldsymbol{a}-\boldsymbol{b}| \le |\boldsymbol{a}|+|\boldsymbol{b}| $
                     </li>
                     <li>
                         $ \boldsymbol{a}+\boldsymbol{b}=\boldsymbol{b}+\boldsymbol{a} $ <br>
@@ -748,7 +748,7 @@
                             </li>
                             <div style="height: 5px;"></div>
                             <li>
-                                <div class="scroll-item">开方：若$ n\geqslant 2 $，则非零复数$ z=r(\cos\theta+\mathrm i\sin\theta) $的$n$次方根有$n$个，分别是<br>
+                                <div class="scroll-item">开方：若$ n\ge 2 $，则非零复数$ z=r(\cos\theta+\mathrm i\sin\theta) $的$n$次方根有$n$个，分别是<br>
                                 $ \displaystyle\sqrt[n]{r}\left(\cos\frac{\theta+2k\pi}n+\mathrm i\sin\frac{\theta+2k\pi}2\right) $，$ k=0,1,\cdots,n-1 $，$ r>0 $</div>
                             </li>
                         </ul>
@@ -966,7 +966,7 @@
                 <hr>
                 <ol>
                     <li>
-                        均值不等式的原型：$ \displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i\geqslant\sqrt[n]{\prod_{i=1}^{n}x_i} $
+                        均值不等式的原型：$ \displaystyle\frac{1}{n}\sum_{i=1}^{n}x_i\ge\sqrt[n]{\prod_{i=1}^{n}x_i} $
                     </li>
                     <li>
                         两个向量的外积（矢量积）是一个向量，满足$ |\boldsymbol{a\times b}|=|\boldsymbol{a}||\boldsymbol{b}|\sin \left \langle \boldsymbol{a}, \boldsymbol{b} \right \rangle  $
@@ -1088,9 +1088,14 @@
         document.addEventListener("DOMContentLoaded", function() {
             renderMathInElement(document.body, {
                 delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false }
+                ],
+                macros: {
+                    '\\le': '\\leqslant',
+                    '\\ge': '\\geqslant',
+                    '\\parallel': '\\kern1pt/\\kern-2.5pt/\\kern1pt'
+                }
             })
         });
 

@@ -31,6 +31,7 @@
         }
 
         .audio-list li {
+            text-align: start;
             padding: 10px;
             margin: 10px -5px;
             background: #96a7a9e7;
@@ -41,6 +42,69 @@
 
         .audio-list li:hover {
             background: #cddcdee7;
+        }
+
+        .audio-list li.folder {
+            background: #7a8b8de7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: #517272dd solid 1.5px;
+        }
+
+        .audio-list li.folder:hover {
+            background: #8fa3a6e7;
+        }
+
+        .audio-list li.folder::before {
+            margin-top: 4px;
+            content: url('./folder.svg');
+        }
+
+        .audio-list li.back-item {
+            background: #88999be7;
+            border: #6d8a8add solid 1.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .audio-list li.back-item::before {
+            content: url('./folder-arrow-up.svg');
+            margin-top: 4px;
+        }
+
+        .audio-list li.audio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: #6fa4a4e1 solid 1.5px;
+        }
+
+        .audio-list li.audio-item::before {
+            content: url('./music.svg');
+            margin-top: 4px;
+        }
+
+        /* 深色模式适配 */
+        @media (prefers-color-scheme: dark) {
+            .audio-list li.audio-item {
+                border: #525454dd solid 1.5px;
+            }
+
+            .audio-list li.folder {
+                background: #2a2929c5;
+                border: #1e1d1dc5 solid 1.5px;
+            }
+            
+            .audio-list li.folder:hover {
+                background: #3d3939e7;
+            }
+
+            .audio-list li.back-item {
+                background: #2d2c2cc5;
+                border: #373a3add solid 1.5px;
+            }
         }
 
         .lyrics {
@@ -204,14 +268,14 @@
         }
 
         .control-btn img {
-            width: 24px;
-            height: 24px;
+            width: 18px;
+            height: 18px;
             pointer-events: none;
         }
 
         /* 优化视觉效果 */
         .play-icon {
-            margin-left: 2px;
+            margin-left: 1.75px;
         }
 
         .control-btn:hover {
@@ -282,7 +346,7 @@
             <div class="mainContainer">
                 <div class="info">
                     <div class="rounded-box3">
-                        <p id="usage">使用说明：点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>选择音频文件所在的文件夹，待加载出音频列表后，点击以播放音频（歌词来源于文件夹下与音频同名的 lrc 文件）。</p>
+                        <p id="usage">使用说明：点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>选择音频文件所在的文件夹，待加载出文件列表后，点击以播放音频（歌词来源于文件夹下与音频同名的 lrc 文件）。</p>
                         <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
                     </div>
                     <div class="rounded-box3" id="controls" style="background: #74a1a754; border: #67847fb2 solid 1.5px; backdrop-filter: blur(9px);">
@@ -442,6 +506,8 @@
         let currentLyricIndex = 0;
         let songDelayMap = {}; // 存储每首歌的延迟
         let currentSong = '';  // 当前播放的歌曲名称
+        let currentDirectoryHandle = null; // 当前文件夹句柄
+        let directoryStack = []; // 文件夹选择栈
 
         // 文件夹选取及文本显示
         const textElement = document.getElementById('usage');
@@ -456,35 +522,9 @@
 
             try {
                 const directoryHandle = await window.showDirectoryPicker();
-                const audioFiles = [];
-                const lrcFiles = {};
-
-                textElement.innerHTML = '处理音频列表中……';
-
-                for await (const [name, handle] of directoryHandle.entries()) {
-                    if (handle.kind === 'file') {
-                        const file = await handle.getFile();
-                        const ext = file.name.split('.').pop().toLowerCase();
-
-                        if (file.type.startsWith('audio/')) {
-                            audioFiles.push(file);
-                        } else if (ext === 'lrc') {
-                            const baseName = file.name.replace('.lrc', '');
-                            lrcFiles[baseName] = file;
-                        }
-                    }
-                }
-
-                textElement.innerHTML = '点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>以继续选择文件夹。<br><h3 style="text-align: center;">音频列表</h3><hr>';
-
-                audioList.innerHTML = '';
-                audioFiles.forEach(file => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = file.name;
-                    listItem.dataset.file = file.name;
-                    listItem.addEventListener('click', () => playAudio(file, lrcFiles[file.name.replace(/\.[^.]+$/, '')]));
-                    audioList.appendChild(listItem);
-                });
+                currentDirectoryHandle = directoryHandle;
+                directoryStack.length = 0;  // 清空目录栈
+                await loadDirectory(directoryHandle);
             } catch (err) {
                 console.error('Failed to pick directory:', err);
                 textElement.innerHTML = '您需要允许本页面查看文件才能继续操作，请点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>以继续选择文件夹。';
@@ -492,6 +532,80 @@
 
             const newBtn = document.getElementById('filePicker');
             newBtn.addEventListener('click', handleClick);
+        }
+
+        async function loadDirectory(directoryHandle, depth = 0) {
+            if (depth > 10) return;  // 限制最大嵌套深度为10
+
+            const entries = [];
+            const folders = [];
+            const audioFiles = [];
+            const lrcFiles = new Map();
+
+            textElement.innerHTML = '处理文件列表中……';
+
+            try {
+                for await (const [name, handle] of directoryHandle.entries()) {
+                    if (handle.kind === 'directory') {
+                        folders.push({ name, handle });
+                    } else if (handle.kind === 'file') {
+                        const file = await handle.getFile();
+                        const ext = file.name.split('.').pop().toLowerCase();
+
+                        if (file.type.startsWith('audio/')) {
+                            audioFiles.push({ name: file.name, file });
+                        } else if (ext === 'lrc') {
+                            const baseName = file.name.replace('.lrc', '');
+                            lrcFiles.set(baseName, file);
+                        }
+                    }
+                }
+
+                // 更新界面
+                audioList.innerHTML = '';
+                
+                // 添加返回上级目录按钮（如果不是根目录）
+                if (directoryStack.length > 0) {
+                    const backItem = document.createElement('li');
+                    backItem.textContent = '..（返回上级）';
+                    backItem.className = 'back-item';
+                    backItem.addEventListener('click', async () => {
+                        const previousDir = directoryStack.pop();
+                        currentDirectoryHandle = previousDir;
+                        await loadDirectory(previousDir, depth - 1);
+                    });
+                    audioList.appendChild(backItem);
+                }
+
+                // 添加文件夹
+                for (const folder of folders) {
+                    const folderItem = document.createElement('li');
+                    folderItem.textContent = folder.name;
+                    folderItem.className = 'folder';
+                    folderItem.addEventListener('click', async () => {
+                        directoryStack.push(currentDirectoryHandle);
+                        currentDirectoryHandle = folder.handle;
+                        await loadDirectory(folder.handle, depth + 1);
+                    });
+                    audioList.appendChild(folderItem);
+                }
+
+                // 添加音频文件
+                for (const audio of audioFiles) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = audio.name;
+                    listItem.className = 'audio-item';
+                    listItem.dataset.file = audio.name;
+                    listItem.addEventListener('click', () => playAudio(audio.file, lrcFiles.get(audio.name.replace(/\.[^.]+$/, ''))));
+                    audioList.appendChild(listItem);
+                }
+
+                textElement.innerHTML = '点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>以继续选择文件夹。<br><h3 style="text-align: center;">文件列表</h3><hr>';
+
+            } catch (err) {
+                console.error('Error loading directory:', err);
+                textElement.innerHTML = '加载目录时出错，请重试。';
+            }
         }
 
         document.getElementById('filePicker').addEventListener('click', handleClick);

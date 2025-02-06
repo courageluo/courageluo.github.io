@@ -51,6 +51,7 @@
                 <hr>
                 <ul>
                     <li><a href="#intro">介绍</a></li>
+                    <li><a href="#theory">原理</a></li>
                     <li><a href="#script">脚本代码</a></li>
                     <li><a href="#update-log">更新日志</a></li>
                     <li><a href="#announcement">声明</a></li>
@@ -69,9 +70,22 @@
                 <p id="intro">适用于艾点教的听力自动获取答案。</p>
             </div>
             <div class="rounded-box3">
-                <p id="script">脚本代码如下，需要使用篡改猴等插件实现，也可以<a href="./script.js" download>点击这里</a>下载代码并导入。</p>
-                <pre class="language-javascript" style="height: 300px;">
-                    <code class="line-numbers">
+                <p id="theory">其基本原理为，听力过程中答案完全是前端验证，所以只是隐藏而并未删除，只需要获取对应元素并依次显示出来即可，其核心代码如下：</p>
+                <pre class="line-numbers">
+                    <code class="language-javascript">
+                        const numElements = document.querySelectorAll('.answer').length;
+                        var answers = new Array();
+
+                        for (var i = 0; i &lt; numElements; i++) {
+                            var ans = document.querySelectorAll('.incorrect')[i].innerText.replace('回答错误,正确答案', '');
+                            answers[i] = ans;
+                        }
+                    </code>
+                </pre>
+                <p>只需要运行上面的代码，就可以将答案获取并存储在<code class="language-javascript">answers[]</code>数组中。有了这个基础，就可以写出更便于使用的脚本或代码块了。</p>
+                <p id="script">将答案显示在页面上的脚本代码如下，需要使用篡改猴等插件实现，也可以<a href="./script.js" download>点击这里</a>下载代码并导入。</p>
+                <pre class="line-numbers" style="height: 300px;">
+                    <code class="language-javascript">
                         // ==UserScript==
                         // @name         自动显示听力答案
                         // @namespace    https://courageluo.xn--kivy66br3pu7d.top/
@@ -210,8 +224,8 @@
                     </code>
                 </pre>
                 <p>如果你不希望使用脚本，你可以复制以下内容并粘贴到控制台中运行，以将相应的内容打印到控制台，也可以<a href="./print-to-console.js" download>点击这里</a>下载对应代码。</p>
-                <pre class="language-javascript" style="height: 300px;">
-                    <code class="line-numbers">
+                <pre class="line-numbers" style="height: 300px;">
+                    <code class="language-javascript">
                         function formatDateTime() {
                             const now = new Date();
                         
@@ -261,11 +275,44 @@
                         printToConsole();                        
                     </code>
                 </pre>
-                <p>原理：听力过程中答案完全为前端验证，所以只是隐藏而并未删除，只需要获取对应元素并依次显示出来即可。</p>
+                <p>更进一步地，可以通过<code class="language-javascript">click()</code>来实现自动点击，一个示例如下，粘贴至控制台即可运行，也同样可以<a href="./auto-click.js">点击这里</a>下载。</p>
+                <pre class="line-numbers" style="height: 300px;">
+                    <code class="language-javascript">
+                        const numElements = document.querySelectorAll('.answer').length;
+
+                        function getAnswers() {
+                            var answers = new Array();
+
+                            for (var i = 0; i &lt; numElements; i++) {
+                                var ans = document.querySelectorAll('.incorrect')[i].innerText.replace('回答错误,正确答案', '');
+                                answers[i] = letterToNumber(ans);
+                            }
+
+                            return answers;
+                        }
+
+                        function letterToNumber(letter) {
+                            const map = { A: 1, B: 2, C: 3 };
+                            return map[letter] || 'undef';
+                        }
+
+                        function autoClick() {
+                            const answers = getAnswers();
+                            const selection = document.querySelectorAll('dl');
+
+                            for (var i = 0; i &lt; numElements; i++) {
+                                selection[i].children[answers[i]].children[0].children[0].click();
+                            }
+                        }
+
+                        autoClick();
+                    </code>
+                </pre>
             </div>
             <div class="rounded-box3">
                 <h3 id="update-log" style="text-align: center;">更新日志</h3>
                 <hr>
+                <p class="update">2025.02.06&emsp;加入几个代码块示例。</p>
                 <p class="update">2025.01.16&emsp;去除点击按钮时间限制，样式优化。</p>
                 <p class="update">2024.07.30&emsp;创建脚本。</p>
             </div>

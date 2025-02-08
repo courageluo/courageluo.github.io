@@ -137,8 +137,15 @@
             transition: all 0.3s;
         }
 
-        .lyrics p:hover {
-            color: #d7d7d7;
+        .lyrics .played {
+            opacity: 0.4;
+        }
+
+        /* 仅针对非触屏设备 */
+        @media (hover: hover) {
+            .lyrics p:hover {
+                color: #cecece;
+            }
         }
 
         .lyrics .highlight {
@@ -177,6 +184,12 @@
             font-size: 18px;
             color: #aaa;
             line-height: 300px;
+        }
+
+        #controls {
+            display: block;
+            position: sticky;
+            bottom: 10px;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -230,12 +243,6 @@
                 display: block;
                 position: sticky;
                 top: 10px;
-            }
-
-            #controls {
-                display: block;
-                position: sticky;
-                bottom: 10px;
             }
         }
 
@@ -345,7 +352,7 @@
             </div>
             <div class="mainContainer">
                 <div class="info">
-                    <div class="rounded-box3">
+                    <div class="rounded-box3" id="tipText">
                         <p id="usage">使用说明：点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>选择音频文件所在的文件夹，待加载出文件列表后，点击以播放音频（歌词来源于文件夹下与音频同名的 lrc 文件）。</p>
                         <ul class="audio-list" id="audioList" style="margin-top: 10px;"></ul>
                     </div>
@@ -494,7 +501,10 @@
             if (currentItem) {
                 const nextItem = currentItem.nextElementSibling; // 列表循环播放： || audioList.firstElementChild;
                 if (nextItem) {
-                    setTimeout(() => nextItem.click(), 200); // 添加短暂延迟确保资源加载
+                    setTimeout(() => {
+                        nextItem.click();
+                        lyricsContainer.scrollTop = 0;
+                    }, 200); // 添加短暂延迟确保资源加载
                 }
             }
 
@@ -758,32 +768,42 @@
             if (!lyricsData.length || isDragging) return;
 
             const currentTime = audioPlayer.currentTime + lyricDelay;
-
-            // 过滤掉填充行（time超过歌曲时长）
             const validLyrics = lyricsData.filter(l => l.time <= audioPlayer.duration + 5);
-            
+            let newIndex = -1;
+
+            // 查找当前应高亮的歌词索引
             for (let i = 0; i < validLyrics.length; i++) {
                 if (currentTime >= validLyrics[i].time && (!validLyrics[i + 1] || currentTime < validLyrics[i + 1].time)) {
-                    if (currentLyricIndex !== i) {
-                        const previousLyric = lyricsContainer.children[currentLyricIndex];
-                        if (previousLyric) previousLyric.classList.remove('highlight');
-                        const currentLyric = lyricsContainer.children[i];
-                        currentLyric.classList.add('highlight');
-
-                        if (currentLyric) {
-                            const container = lyricsContainer;
-                            const lyricTop = currentLyric.offsetTop;
-                            const lyricHeight = currentLyric.offsetHeight;
-                            const containerHeight = container.offsetHeight;
-
-                            // 计算目标滚动位置
-                            container.scrollTop = lyricTop - (containerHeight - lyricHeight) / 2 + 55; // 略微偏上
-                        }
-
-                        currentLyricIndex = i;
-                    }
+                    newIndex = i;
                     break;
                 }
+            }
+
+            if (newIndex === -1) return;
+
+            // 遍历所有歌词元素更新样式
+            for (let j = 0; j < lyricsContainer.children.length; j++) {
+                const p = lyricsContainer.children[j];
+                p.classList.remove('highlight', 'played');
+
+                if (j < newIndex) {
+                    p.classList.add('played');
+                } else if (j === newIndex) {
+                    p.classList.add('highlight');
+                }
+            }
+
+            // 滚动到高亮歌词
+            if (currentLyricIndex !== newIndex) {
+                const currentLyric = lyricsContainer.children[newIndex];
+                if (currentLyric) {
+                    const container = lyricsContainer;
+                    const lyricTop = currentLyric.offsetTop;
+                    const lyricHeight = currentLyric.offsetHeight;
+                    const containerHeight = container.offsetHeight;
+                    container.scrollTop = lyricTop - (containerHeight - lyricHeight) / 2 + 55;
+                }
+                currentLyricIndex = newIndex;
             }
         }
     </script>

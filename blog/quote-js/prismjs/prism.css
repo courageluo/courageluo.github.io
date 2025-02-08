@@ -6,10 +6,11 @@ https://prismjs.com/download#themes=prism-tomorrow&languages=markup+css+clike+ja
  * @author Rose Pritchard
  */
 
-/* Modified by Courage Luo
- * Changed some display effects like border radius and margins
- * Including different color decide by media prefer color
- * March 16th, 2024
+/**
+ * Modified by Courage Luo
+ * Changed some display effects like border radius and transitions
+ * Including different color decided by prefers color scheme
+ * Mar. 16th, 2024; Feb. 8th, 2025
  */
 
 code[class*="language-"],
@@ -165,21 +166,20 @@ pre[class*="language-"].line-numbers > code {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-
 }
 
-	.line-numbers-rows > span {
-		display: block;
-		counter-increment: linenumber;
-	}
+.line-numbers-rows > span {
+	display: block;
+	counter-increment: linenumber;
+}
 
-		.line-numbers-rows > span:before {
-			content: counter(linenumber);
-			color: #999;
-			display: block;
-			padding-right: 0.8em;
-			text-align: right;
-		}
+.line-numbers-rows > span:before {
+	content: counter(linenumber);
+	color: #999;
+	display: block;
+	padding-right: 0.8em;
+	text-align: right;
+}
 
 div.code-toolbar {
 	position: relative;
@@ -235,6 +235,7 @@ div.code-toolbar > .toolbar > .toolbar-item > span {
 	background: #f5f2f0;
 	background: rgba(224, 224, 224, 0.2);
 	box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);
+	transition: all 0.3s;
 	border-radius: .4em;
 }
 
@@ -247,4 +248,3 @@ div.code-toolbar > .toolbar > .toolbar-item > span:focus {
 	color: inherit;
 	text-decoration: none;
 }
-

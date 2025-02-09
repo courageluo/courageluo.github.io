@@ -1,36 +1,36 @@
 [
     {
-        "url": "content/0001.contest-1009-div-2/index.html",
+        "url": "content/0001.contest-1009-div-2",
         "title": "Contest 1009 - 下北泽奥林匹克信息雷厉风行科普赛 (Div. 2 场) 部分题解 - NZOJ",
         "modified": "2024.02.19 15:03",
         "category": "C++ 比赛题解"
     },
     {
-        "url": "content/0002.search-trace-algo/index.html",
+        "url": "content/0002.search-trace-algo",
         "title": "搜索与回溯算法",
         "modified": "2024.02.20 20:56",
         "category": "C++ 学习记录"
     },
     {
-        "url": "content/0003.jquery-clock/index.html",
+        "url": "content/0003.jquery-clock",
         "title": "借用 jQuery 实现的时钟",
         "modified": "2024.04.21 14:49",
         "category": "Web 开发实践"
     },
     {
-        "url": "content/0004.math-review/index.html",
+        "url": "content/0004.math-review",
         "title": "数学知识点记录（一）",
         "modified": "2025.02.06 23:13",
         "category": "文化课学习记录"
     },
     {
-        "url": "content/0005.cpp-system/index.html",
+        "url": "content/0005.cpp-system",
         "title": "C++ 中的 system 函数",
         "modified": "2024.03.16 21:37",
         "category": "C++ 学习记录"
     },
     {
-        "url": "content/0006.contest-1011/index.html",
+        "url": "content/0006.contest-1011",
         "title": "Contest 1011 - 2024 年 4 月测试题解 - NZOJ",
         "modified": "2024.04.20 18:44",
         "category": "C++ 比赛题解"
@@ -42,61 +42,61 @@
         "category": "Web 开发实践"
     },
     {
-        "url": "content/0008.notes-graph/index.html",
+        "url": "content/0008.notes-graph",
         "title": "图论",
         "modified": "2024.07.24 12:50",
         "category": "C++ 学习记录"
     },
     {
-        "url": "content/0009.idianjiao-script/index.html",
+        "url": "content/0009.idianjiao-script",
         "title": "艾点教听力答案显示脚本",
         "modified": "2025.02.06 15:25",
         "category": "Web 开发实践"
     },
     {
-        "url": "content/0010.oi-optimize/index.html",
+        "url": "content/0010.oi-optimize",
         "title": "OI 中的骗分和禁赛级优化方案",
         "modified": "2024.08.08 14:21",
         "category": "C++ 学习记录"
     },
     {
-        "url": "content/0011.music-player/index.html",
+        "url": "content/0011.music-player",
         "title": "简易音乐播放器",
-        "modified": "2025.02.08 17:29",
+        "modified": "2025.02.09 15:13",
         "category": "Web 开发实践"
     },
     {
-        "url": "content/0012.oled-decompress/index.html",
+        "url": "content/0012.oled-decompress",
         "title": "0.91' OLED 显示被压缩解决方案",
         "modified": "2024.08.14 10:29",
         "category": "小工具与备忘手册"
     },
     {
-        "url": "content/0013.lrc-highlight/index.html",
+        "url": "content/0013.lrc-highlight",
         "title": "在 MT 管理器中高亮 lrc 文件",
         "modified": "2024.08.20 22:37",
         "category": "小工具与备忘手册"
     },
     {
-        "url": "content/0014.termux-signal-9/index.html",
+        "url": "content/0014.termux-signal-9",
         "title": "解决 Termux 的 Signal 9 错误",
         "modified": "2024.08.26 23:57",
         "category": "小工具与备忘手册"
     },
     {
-        "url": "content/0015.lower-readability/index.html",
+        "url": "content/0015.lower-readability",
         "title": "降低程序可读性的方法",
         "modified": "2024.10.12 19:14",
         "category": "C++ 学习记录"
     },
     {
-        "url": "content/0016.drawing-board/index.html",
+        "url": "content/0016.drawing-board",
         "title": "简易画板",
         "modified": "2024.11.24 10:59",
         "category": "Web 开发实践"
     },
     {
-        "url": "content/0017.math-review-2/index.html",
+        "url": "content/0017.math-review-2",
         "title": "数学知识点记录（二）",
         "modified": "2025.01.27 19:53",
         "category": "文化课学习记录"
@@ -108,7 +108,7 @@
         "category": "Web 开发实践"
     },
     {
-        "url": "content/0019.isrc-reference/index.html",
+        "url": "content/0019.isrc-reference",
         "title": "ISRC 编码参考手册",
         "modified": "2025.01.18 23:56",
         "category": "小工具与备忘手册"

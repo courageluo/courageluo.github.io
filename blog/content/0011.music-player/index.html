@@ -285,10 +285,13 @@
             margin-left: 1.75px;
         }
 
-        .control-btn:hover {
-            transform: scale(1.1);
+        /* 仅针对非触屏设备 */
+        @media (hover: hover) {
+            .control-btn:hover {
+                transform: scale(1.1);
+            }
         }
-
+        
         .progress-container {
             flex-grow: 1;
             display: flex;
@@ -399,8 +402,8 @@
         const delayDisplay = document.getElementById('delayDisplay');
 
         // 快捷键
-        // Space -> 播放/暂停  左箭头 -> 快退5s  右箭头 -> 快进5s
-        // - -> 减少歌词延迟  + -> 增加歌词延迟
+        // [Space] 播放/暂停  [左箭头] 快退5s  [右箭头] 快进5s
+        // [-] 减少歌词延迟  [=] 增加歌词延迟
         document.addEventListener("keydown", function (event) {
             switch(event.code) {
                 case "Space":
@@ -499,12 +502,9 @@
             // 自动播放下一首
             const currentItem = audioList.querySelector(`li[data-file="${currentSong}"]`);
             if (currentItem) {
-                const nextItem = currentItem.nextElementSibling; // 列表循环播放： || audioList.firstElementChild;
+                const nextItem = currentItem.nextElementSibling; // 列表循环播放: || audioList.firstElementChild;
                 if (nextItem) {
-                    setTimeout(() => {
-                        nextItem.click();
-                        lyricsContainer.scrollTop = 0;
-                    }, 200); // 添加短暂延迟确保资源加载
+                    setTimeout(() => { nextItem.click(); }, 200); // 添加短暂延迟确保资源加载
                 }
             }
 
@@ -514,10 +514,10 @@
 
         let lyricsData = [];
         let currentLyricIndex = 0;
-        let songDelayMap = {}; // 存储每首歌的延迟
-        let currentSong = '';  // 当前播放的歌曲名称
-        let currentDirectoryHandle = null; // 当前文件夹句柄
-        let directoryStack = []; // 文件夹选择栈
+        let songDelayMap = {};              // 每首歌的延迟
+        let currentSong = '';               // 当前播放的歌曲名称
+        let currentDirectoryHandle = null;  // 当前文件夹句柄
+        let directoryStack = [];            // 文件夹选择栈
 
         // 文件夹选取及文本显示
         const textElement = document.getElementById('usage');
@@ -533,19 +533,20 @@
             try {
                 const directoryHandle = await window.showDirectoryPicker();
                 currentDirectoryHandle = directoryHandle;
-                directoryStack.length = 0;  // 清空目录栈
+                directoryStack.length = 0; // 清空目录栈
                 await loadDirectory(directoryHandle);
             } catch (err) {
                 console.error('Failed to pick directory:', err);
                 textElement.innerHTML = '您需要允许本页面查看文件才能继续操作，请点击<button id="filePicker" style="margin: 0 5px;">此按钮</button>以继续选择文件夹。';
             }
 
+            // 重新绑定按钮，不然按了没反应
             const newBtn = document.getElementById('filePicker');
             newBtn.addEventListener('click', handleClick);
         }
 
         async function loadDirectory(directoryHandle, depth = 0) {
-            if (depth > 10) return;  // 限制最大嵌套深度为10
+            if (depth > 10) return; // 限制最大嵌套深度
 
             const entries = [];
             const folders = [];
@@ -655,6 +656,8 @@
             progressBar.value = 0;
             currentTimeDisplay.textContent = '0:00';
 
+            lyricsContainer.scrollTop = 0;
+
             const url = URL.createObjectURL(file);
             audioPlayer.src = url;
             audioPlayer.play();
@@ -704,7 +707,7 @@
             lyricsData = [];
             const lines = lrcText.split('\n');
             lines.forEach(line => {
-                // 正则表达式匹配每个时间戳并获取时间和歌词文本
+                // 匹配时间戳并获取时间和歌词
                 const timeMatches = line.match(/\[(\d+):(\d+)\.(\d+)\]/g);
                 const lyricText = line.replace(/\[(\d+):(\d+)\.(\d+)\]/g, '').trim();
 
@@ -726,7 +729,7 @@
             // 便于完整显示歌词
             const lastTime = lyricsData[lyricsData.length - 1]?.time || 0;
             for (let i = 0; i < 13; i++) {
-                lyricsData.push({ 
+                lyricsData.push({
                     time: lastTime + 864000 + i,
                     text: '　',
                     isPadding: true
@@ -748,7 +751,6 @@
                         const targetTime = lyric.time - (songDelayMap[currentSong] || 0);
                         audioPlayer.currentTime = Math.max(0, targetTime);
                         updateProgress();
-                        if (audioPlayer.paused) audioPlayer.play();
                     });
                 } else {
                     p.style.userSelect = 'none';

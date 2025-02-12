@@ -282,37 +282,69 @@
 
                         function getAnswers() {
                             var answers = new Array();
-
+                        
                             for (var i = 0; i &lt; numElements; i++) {
                                 var ans = document.querySelectorAll('.incorrect')[i].innerText.replace('回答错误,正确答案', '');
                                 answers[i] = letterToNumber(ans);
                             }
-
+                        
                             return answers;
                         }
-
+                        
                         function letterToNumber(letter) {
                             const map = { A: 1, B: 2, C: 3 };
                             return map[letter] || 'undef';
                         }
-
-                        function autoClick() {
+                        
+                        function handleClick() {
                             const answers = getAnswers();
                             const selection = document.querySelectorAll('dl');
-
+                        
                             for (var i = 0; i &lt; numElements; i++) {
                                 selection[i].children[answers[i]].children[0].children[0].click();
                             }
+                        
+                            return answers;
                         }
-
-                        autoClick();
+                        
+                        function autoClick() {
+                            const answers = handleClick();
+                        
+                            if (arguments.length === 0) {
+                                return;
+                            } else if (arguments.length === 1) {
+                                const count = arguments[0];
+                                const selection = document.querySelectorAll('dl');
+                        
+                                if (count &lt; 0 || count &gt; 20 || typeof count !== 'number') {
+                                    throw new Error('输入参数无效');
+                                }
+                        
+                                let numbers = Array.from({ length: 20 }, (_, i) => i);
+                                for (let i = numbers.length - 1; i &gt; 0; i--) {
+                                    const j = Math.floor(Math.random() * (i + 1));
+                                    [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+                                }
+                        
+                                const wrongMap = { 1: 2, 2: 3, 3: 1 };
+                                for (let i = 0; i &lt; count; i++) {
+                                    selection[numbers[i]].children[wrongMap[answers[i]]].children[0].children[0].click();
+                                }
+                            } else {
+                                throw new Error('输入参数过多');
+                            }
+                        }
+                        
+                        // 用法：autoClick() 自动点击正确答案
+                        // autoClick(n) 在点击正确答案之后重新点击n个错误答案
+                        autoClick(1);                        
                     </code>
                 </pre>
             </div>
             <div class="rounded-box3">
                 <h3 id="update-log" style="text-align: center;">更新日志</h3>
                 <hr>
-                <p class="update">2025.02.06&emsp;加入几个代码块示例。</p>
+                <p class="update">2025.02.12&emsp;加入几个代码块示例。</p>
                 <p class="update">2025.01.16&emsp;去除点击按钮时间限制，样式优化。</p>
                 <p class="update">2024.07.30&emsp;创建脚本。</p>
             </div>

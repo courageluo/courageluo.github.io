@@ -16,13 +16,45 @@ function letterToNumber(letter) {
     return map[letter] || 'undef';
 }
 
-function autoClick() {
+function handleClick() {
     const answers = getAnswers();
     const selection = document.querySelectorAll('dl');
 
     for (var i = 0; i < numElements; i++) {
         selection[i].children[answers[i]].children[0].children[0].click();
     }
+
+    return answers;
 }
 
-autoClick();
+function autoClick() {
+    const answers = handleClick();
+
+    if (arguments.length === 0) {
+        return;
+    } else if (arguments.length === 1) {
+        const count = arguments[0];
+        const selection = document.querySelectorAll('dl');
+
+        if (count < 0 || count > 20 || typeof count !== 'number') {
+            throw new Error('输入参数无效');
+        }
+
+        let numbers = Array.from({ length: 20 }, (_, i) => i);
+        for (let i = numbers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+        }
+
+        const wrongMap = { 1: 2, 2: 3, 3: 1 };
+        for (let i = 0; i < count; i++) {
+            selection[numbers[i]].children[wrongMap[answers[i]]].children[0].children[0].click();
+        }
+    } else {
+        throw new Error('输入参数过多');
+    }
+}
+
+// 用法：autoClick() 自动点击正确答案
+// autoClick(n) 在点击正确答案之后重新点击n个错误答案
+autoClick(1);

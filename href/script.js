@@ -5,6 +5,32 @@ fetch("/footer/footer.html")
         document.getElementById('footer').innerHTML = data;
     });
 
+// 优化锚点跳转
+document.addEventListener('click', function(e) {
+    const anchor = e.target.closest('a[href^="#"]');
+    if (!anchor) return;
+
+    e.preventDefault();
+    const hash = anchor.getAttribute('href');
+    const target = document.querySelector(hash);
+
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+
+        const newUrl = window.location.pathname + hash;
+        history.replaceState(null, document.title, newUrl);
+    }
+});
+
+window.addEventListener('load', function() {
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+});
+
 // 控制台输出字符画
 const fontSize = 10;
 const colors = [

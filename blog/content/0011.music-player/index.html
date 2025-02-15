@@ -393,6 +393,20 @@
     <!-- 内部JS文件 -->
     <script src="/href/script.js"></script>
     <script>
+        // 图片预加载
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloadIcons = [
+                './folder-arrow-up.svg',
+                './folder.svg',
+                './music.svg'
+            ];
+
+            preloadIcons.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            })
+        });
+
         const fileInput = document.getElementById('fileInput');
         const audioList = document.getElementById('audioList');
         const audioPlayer = document.getElementById('audioPlayer');

@@ -164,6 +164,7 @@
                         <li><a href="#hyperbola">双曲线</a></li>
                         <li><a href="#parabola">抛物线</a></li>
                     </ul>
+                    <li><a href="#arrangement-conbination">排列与组合</a></li>
                 </ul>
             </div>
 
@@ -730,6 +731,29 @@
                                 过点 $(2p,0)$ 的焦点弦 $AB$，满足 $OA\perp OB$
                             </li>
                         </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="arrangement-conbination" class="section-title">排列与组合</h3>
+                    <a href="#index" id="text-right">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        基本计数原理<br>
+                        <strong>分类加法计数原理</strong> 完成一件事，如果有 $n$ 类办法，且第 $n$ 类办法中有 $m_n$ 种不同的方法，那么完成这件事共有 $N=m_1+m_2+\cdots+m_n$ 种不同的方法<br>
+                        <strong>分步乘法计数原理</strong> 完成一件事，如果需要分成 $n$ 个步骤，且做第 $n$ 步有 $m_n$ 种不同的方法，那么完成这件事共有 $N=m_1\times m_2\times\cdots\times m_n$ 种不同的方法<br>
+                    </li>
+                    <li>
+                        排列数公式<br>
+                        $\mathrm A_n^m = n (n-1)\cdots (n-m+1) = \dfrac{n!}{(n-m)!}$ <br>
+                        特殊地，$\mathrm A_n^n = n!$，且规定：$\mathrm A_n^0 = 1$，$0! = 1$
+                    </li>
+                    <li>
+                        组合数公式<br>
+                        $\mathrm C_n^m = \dfrac{\mathrm A_n^m}{\mathrm A_m^m} = \dfrac{n(n-1)\cdots (n-m+1)}{m\times (m-1)\times \cdots \times 2\times 1} = \dfrac{n!}{(n-m)!m!}$
                     </li>
                 </ol>
             </div>

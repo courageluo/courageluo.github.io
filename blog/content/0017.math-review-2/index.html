@@ -748,12 +748,29 @@
                     </li>
                     <li>
                         排列数公式<br>
-                        $\mathrm A_n^m = n (n-1)\cdots (n-m+1) = \dfrac{n!}{(n-m)!}$ <br>
-                        特殊地，$\mathrm A_n^n = n!$，且规定：$\mathrm A_n^0 = 1$，$0! = 1$
+                        $\A_n^m = n (n-1)\cdots (n-m+1) = \dfrac{n!}{(n-m)!}$ <br>
+                        特殊地，$\A_n^n = n!$，且规定：$\A_n^0 = 1$，$0! = 1$
                     </li>
                     <li>
                         组合数公式<br>
-                        $\mathrm C_n^m = \dfrac{\mathrm A_n^m}{\mathrm A_m^m} = \dfrac{n(n-1)\cdots (n-m+1)}{m\times (m-1)\times \cdots \times 2\times 1} = \dfrac{n!}{(n-m)!m!}$
+                        $\C_n^m = \dfrac{\A_n^m}{\A_m^m} = \dfrac{n(n-1)\cdots (n-m+1)}{m\times (m-1)\times \cdots \times 2\times 1} = \dfrac{n!}{(n-m)!m!}$ <br>
+                        特殊地，$\C_n^0 = 1$，$\C_n^n = 1$，$\C_n^1 = n$
+                    </li>
+                    <li>
+                        组合数的性质<br>
+                        $\C_n^m = \C_n^{n-m}$，$\C_n^{m+1} + \C_n^m = \C_{n+1}^{m+1}$
+                    </li>
+                    <li>
+                        二项式定理<br>
+                        $(a + b)^n = \C_n^0 a^n + \C_n^1 a^{n-1} b + \cdots + \C_n^k a^{n-k}b^k + \cdots + \C_n^n b^n$ <br>
+                        <div style="height: 3px;"></div>
+                        第 $k + 1$ 项 $T_{k+1} = \C_n^k a^{n-k} b^k$，其中 $\C_n^k$ 称为二项式系数
+                    </li>
+                    <li>
+                        二项式定理的性质<br>
+                        $2^n = \C_n^0 + \C_n^1 + \cdots + \C_n^k + \cdots + \C_n^{n-1} + \C_n^n$ <br>
+                        <div style="height: 5px;"></div>
+                        $\C_n^0 + \C_n^2 + \C_n^4 + \cdots = \C_n^1 + \C_n^3 + \C_n^5 + \cdots$
                     </li>
                 </ol>
             </div>
@@ -787,7 +804,9 @@
                 macros: {
                     '\\le': '\\leqslant',
                     '\\ge': '\\geqslant',
-                    '\\parallel': '\\kern1pt/\\kern-2.5pt/\\kern1pt'
+                    '\\parallel': '\\kern1pt/\\kern-2.5pt/\\kern1pt',
+                    '\\A': '\\mathrm A',
+                    '\\C': '\\mathrm C'
                 }
             })
         });

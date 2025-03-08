@@ -165,6 +165,7 @@
                         <li><a href="#parabola">抛物线</a></li>
                     </ul>
                     <li><a href="#arrangement-conbination">排列与组合</a></li>
+                    <li><a href="#probability-statistics">概率与统计</a></li>
                 </ul>
             </div>
 
@@ -771,6 +772,51 @@
                         $2^n = \C_n^0 + \C_n^1 + \cdots + \C_n^k + \cdots + \C_n^{n-1} + \C_n^n$ <br>
                         <div style="height: 5px;"></div>
                         $\C_n^0 + \C_n^2 + \C_n^4 + \cdots = \C_n^1 + \C_n^3 + \C_n^5 + \cdots$
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="probability-statistics" class="section-title">概率与统计</h3>
+                    <a href="#index" id="text-right">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        条件概率<br>
+                        $P(A|B) = \dfrac{P(AB)}{P(B)} = \dfrac{n(AB)}{n(B)}$
+                    </li>
+                    <li>
+                        乘法公式<br>
+                        $P(BA) = P(A) P(B|A)$
+                    </li>
+                    <li>
+                        全概率公式<br>
+                        $P(B) = P(BA) + P(B\bar{A}) = P(A) P(B|A) + P(\bar{A}) P(B|\bar{A})$
+                    </li>
+                    <li>
+                        贝叶斯公式<br>
+                        $P(A|B)=\dfrac{P(A) P(B|A)}{P(B)} = \dfrac{P(A) P(B|A)}{P(A) P(B|A) + P(\bar{A}) P(B|\bar{A})}$
+                    </li>
+                    <li>
+                        $A$ 与 $B$ 独立 $\Leftrightarrow$ $P(A|B) = P(A)$
+                    </li>
+                    <li>
+                        概率公式的扩充<br>
+                        <ol class="margin-ul">
+                            <li>
+                                乘法公式<br>
+                                $\displaystyle P \left(\bigcap _{i=1} ^n A_i \right) = \prod _{k=1} ^n P \left( A_k \Bigg| \bigcap _{j=1} ^{k-1} A_j \right)$
+                            </li>
+                            <li>
+                                全概率公式<br>
+                                $\displaystyle P(B) = \sum _{i=1} ^n P(BA_i) = \sum _{i=1} ^n P(A_i) P(B|A_i)$
+                            </li>
+                            <li>
+                                贝叶斯公式<br>
+                                $\displaystyle P(A_j|B) = \frac{P(A_j) P(B|A_j)}{P(B)} = \frac{P(A_j) P(B|A_j)}{\displaystyle \sum _{i=1} ^n P(A_i) P(B|A_i)}$
+                            </li>
+                        </ol>
                     </li>
                 </ol>
             </div>

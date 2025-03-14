@@ -127,6 +127,7 @@ input, button {
     padding: 5px 20px 5px 20px; /* 从上、右、下、左添加内边距 */
     color: #efefef; /* 文字颜色 */
     backdrop-filter: blur(2px);
+    border: 1.5px solid #22222215;
 }
 
 .rounded-box2 {
@@ -175,12 +176,18 @@ input, button {
     padding: 5px 20px 5px 20px;
     color: black;
     margin-top: 10px;
+    border: 1.5px solid #97979735;
     backdrop-filter: blur(2px);
 }
 
 @media (prefers-color-scheme: dark) {
+    .rounded-box1 {
+        border: 1.5px solid #5f5f5f15;
+    }
+
     .rounded-box2, .rounded-box3, .rounded-box3p, .rounded-box4, .rounded-box5, .rounded-box6, .rounded-box7 {
         color: #efefef;
+        border: 1.5px solid #22222235;
     }
 }
 

@@ -25,10 +25,10 @@
 
         /* 问题：在小于一定宽度时，右边会留白
            临时解决方案如下，但似乎手机上依然这样 */
-        /* html {
+        html {
             width: 100%;
             overflow-x: hidden;
-        } */
+        }
 
         a {
             color: #110c50;
@@ -94,6 +94,22 @@
             overflow-y: hidden;
         }
 
+        .dist-list {
+            margin: 5px 1%;
+            white-space: nowrap;
+            border-collapse: collapse;
+        }
+
+        .dist-list td {
+            padding: 5px 10px;
+            text-align: center;
+            border: #000000 1.5px solid;
+        }
+
+        .dist-list tr td:first-child {
+            background-color: #b9ebeb50;
+        }
+
         /* 一点响应式设计 */
         @media (min-width: 768px) {
             #index-box {
@@ -122,6 +138,14 @@
 
             .formula-rectangle {
                 border: 1.5px solid var(--text-color-dark);
+            }
+
+            .dist-list td {
+                border: #efefef 1.5px solid;
+            }
+
+            .dist-list tr td:first-child {
+                background-color: #52676f75;
             }
         }
     </style>
@@ -817,6 +841,64 @@
                                 $\displaystyle P(A_j|B) = \frac{P(A_j) P(B|A_j)}{P(B)} = \frac{P(A_j) P(B|A_j)}{\displaystyle \sum _{i=1} ^n P(A_i) P(B|A_i)}$
                             </li>
                         </ol>
+                    </li>
+                    <li>
+                        随机变量一般用 $X, Y, Z, \cdots$ 或 $\xi, \eta, \zeta, \cdots$ 来表示
+                    </li>
+                    <li>
+                        离散型随机变量的分布列满足
+                        <ol class="margin-ul">
+                            <li>$p_k \ge 0, k = 1, 2, \cdots, n$</li>
+                            <li>$\displaystyle \sum _{k=1} ^ n p_k = 1$</li>
+                        </ol>
+                    </li>
+                    <li>
+                        两点分布<br>
+                        如果随机变量 $X$ 的分布列能写成
+                        <div class="scroll-item">
+                            <table class="dist-list">
+                                <tr>
+                                    <td>$X$</td>
+                                    <td>$1$</td>
+                                    <td>$0$</td>
+                                </tr>
+                                <tr>
+                                    <td>$P$</td>
+                                    <td>$p$</td>
+                                    <td>$1-p$</td>
+                                </tr>
+                            </table>
+                        </div>
+                        的形式，则称 $X$ 服从参数为 $p$ 的两点分布（或 0-1 分布、伯努利分布），即 $P(X = 1) = p$
+                    </li>
+                    <li>
+                        二项分布<br>
+                        如果 $X$ 的分布列符合
+                        <!-- 页面宽度溢出的问题似乎出在这个表格，打个 tag 在这 -->
+                        <div class="scroll-item">
+                            <table class="dist-list">
+                                <tr>
+                                    <td>$X$</td>
+                                    <td>$0$</td>
+                                    <td>$1$</td>
+                                    <td>$\cdots$</td>
+                                    <td>$k$</td>
+                                    <td>$\cdots$</td>
+                                    <td>$n$</td>
+                                </tr>
+                                <tr>
+                                    <td>$P$</td>
+                                    <td>$\C_n^0 p^0 q^n$</td>
+                                    <td>$\C_n^1 p^1 q^{n-1}$</td>
+                                    <td>$\cdots$</td>
+                                    <td>$\C_n^k p^k q^{n-k}$</td>
+                                    <td>$\cdots$</td>
+                                    <td>$\C_n^n p^n q^0$</td>
+                                </tr>
+                            </table>
+                        </div>
+                        的形式，则称 $X$ 服从参数为 $n$，$p$ 的二项分布，记作 $X \sim B(n,p)$ <br>
+                        其中 $n$ 表示 $n$ 次重复试验，$X$ 表示“成功”的次数，$p$ 表示出现“成功”的概率，$q = 1 - p$ 
                     </li>
                 </ol>
             </div>

@@ -28,7 +28,13 @@
         html {
             width: 100%;
             overflow-x: hidden;
-            max-width: 100vw;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
         }
 
         a {
@@ -100,12 +106,13 @@
             margin: 5px 1%;
             white-space: nowrap;
             border-collapse: collapse;
+            border: #000000 1.5px solid;
         }
 
         .dist-list td {
             padding: 5px 10px;
             text-align: center;
-            border: #000000 1.5px solid;
+            border: #000000 1px solid;
         }
 
         .dist-list tr td:first-child {
@@ -142,8 +149,12 @@
                 border: 1.5px solid var(--text-color-dark);
             }
 
-            .dist-list td {
+            .dist-list {
                 border: #efefef 1.5px solid;
+            }
+
+            .dist-list td {
+                border: #efefef 1px solid;
             }
 
             .dist-list tr td:first-child {
@@ -899,8 +910,107 @@
                                 </tr>
                             </table>
                         </div>
-                        的形式，则称 $X$ 服从参数为 $n$，$p$ 的二项分布，记作 $X \sim B(n,p)$ <br>
+                        的形式，即<br>
+                        &ensp;$P(X = k) = \C_n^k p^k q^{n-k}$，$k = 0, 1, \cdots, n$<br>
+                        则称 $X$ 服从参数为 $n$，$p$ 的二项分布，记作 $X \sim B(n,p)$ <br>
                         其中 $n$ 表示 $n$ 次重复试验，$X$ 表示“成功”的次数，$p$ 表示出现“成功”的概率，$q = 1 - p$ 
+                    </li>
+                    <li>
+                        超几何分布<br>
+                        如果 $X$ 的分布列符合
+                        <div class="scroll-item">
+                            <table class="dist-list">
+                                <tr>
+                                    <td>$X$</td>
+                                    <td>$0$</td>
+                                    <td>$1$</td>
+                                    <td>$\cdots$</td>
+                                    <td>$k$</td>
+                                    <td>$\cdots$</td>
+                                    <td>$n$</td>
+                                </tr>
+                                <tr>
+                                    <td>$P$</td>
+                                    <td>$\dfrac{\C^0_M \C^{n}_{N-M}}{\C^n_N}$</td>
+                                    <td>$\dfrac{\C^1_M \C^{n-1}_{N-M}}{\C^n_N}$</td>
+                                    <td>$\cdots$</td>
+                                    <td>$\dfrac{\C^k_M \C^{n-k}_{N-M}}{\C^n_N}$</td>
+                                    <td>$\cdots$</td>
+                                    <td>$\dfrac{\C^s_M \C^{n-s}_{N-M}}{\C^n_N}$</td>
+                                </tr>
+                            </table>
+                        </div>
+                        的形式，即<br>
+                        &ensp;$P(X = k) = \dfrac{\C^k_M \C^{n-k}_{N-M}}{\C^n_N}$，$k = t, t + 1, \cdots, s$<br>
+                        其中 $t = \max \{ 0, n - (N - M) \}$，$s = \min \{ M, n \}$，则称 $X$ 服从参数为 $N$，$n$，$M$ 的超几何分布，记作 $X \sim H(N,n,M)$ <br>
+                        其中 $N$ 表示总体的个数，$M$ 表示甲类的个数，随机取 $n$ 个，其中有 $X$ 个甲类
+                    </li>
+                    <li>
+                        均值 / 数学期望 / 期望 $E(X) = \displaystyle \sum _{i=1} ^n x_i p_i$ <br>
+                        方差 $D(X) = \displaystyle \sum _{i=1} ^n (x_i - E(X))^2 p_i = E(X^2) - (E(X))^2$ <br>
+                        若 $Y = aX + b$，则 $E(Y) = aE(X) + b$，$D(Y) = a^2 D(X)$
+                    </li>
+                    <li>
+                        不同分布对应的数字特征
+                        <div class="scroll-item">
+                            <table class="dist-list">
+                                <tr>
+                                    <td>$X \sim$</td>
+                                    <td>参数为 $p$ 的两点分布</td>
+                                    <td>$B(n, p)$</td>
+                                    <td>$H(N, n ,M)$</td>
+                                </tr>
+                                <tr>
+                                    <td>$E(X) =$</td>
+                                    <td>$p$</td>
+                                    <td>$np$</td>
+                                    <td>$n \dfrac MN$</td>
+                                </tr>
+                                <tr>
+                                    <td>$D(X) =$</td>
+                                    <td>$p(1 - p)$</td>
+                                    <td>$np(1 - p)$</td>
+                                    <td>$n \dfrac MN \left( 1 - \dfrac MN \right) \left( 1 - \dfrac{n - 1}{N - 1} \right)$</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        正态分布<br>
+                        <ul class="margin-ul">
+                            <li>
+                                正态曲线<br>
+                                $\normfunc = \dfrac 1 {\sigma \sqrt{2 \pi}} \mathrm e ^{ - \frac{(x - \mu) ^2}{2 \sigma ^2}}$ <br>
+                                其中 $\mu = E(X)$，$\sigma = \sqrt{D(X)}$ <br>
+                            </li>
+                            <li>
+                                正态曲线的性质 <br>
+                                $\normfunc$ 关于 $x = \mu$ 对称<br>
+                                <div style="height: 7px;"></div>
+                                $\displaystyle \int _{ - \infin} ^{ + \infin} \normfunc \mathrm d x = 1$ <br>
+                                <div style="height: 7px;"></div>
+                                $\sigma$ 越大，曲线越“矮胖”，$\sigma$ 越小，曲线越“高瘦”
+                            </li>
+                            <li>
+                                若 $X$ 落在 $[a,b]$ 之间的概率等于 $\normfunc$ 在 $[a,b]$ 之间的面积，则称 $X$ 服从参数为 $\mu$，$\sigma$ 的正态分布，记作 $X \sim N(\mu, \sigma ^2)$ <br>
+                                此时 $\normfunc$ 称为 $X$ 的概率密度函数，且 $\mu$ 是 $X$ 的期望，$\sigma$ 是 $X$ 的标准差
+                            </li>
+                            <li>
+                                “$3 \sigma$”原则 <br>
+                                若 $X \sim N(\mu, \sigma ^2)$，则 <br>
+                                $P(X \le \mu) = 0.5000$ <br>
+                                $P(| X - \mu | \le \sigma) \approx 0.6827$ <br>
+                                $P(| X - \mu | \le 2 \sigma) \approx 0.9545$ <br>
+                                $P(| X - \mu | \le 3 \sigma) \approx 0.9973$ <br>
+                                即 $X$ 落在 $[\mu - 3 \sigma, \mu + 3 \sigma]$ 之外可以看成小概率事件
+                            </li>
+                            <li>
+                                标准正态分布 <br>
+                                $\mu = 0$ 且 $\sigma = 1$ 的正态分布称为标准正态分布 <br>
+                                若 $Y \sim N(\mu, \sigma ^2)$，令 $X = \dfrac{Y - \mu}{\pm \sigma}$， 则 $X \sim N(0, 1)$，即任意正态分布通过变换都可以化为标准正态分布 <br>
+                                若 $X \sim N(0, 1)$，记 $\mathit \Phi (a) = P(X &lt; a)$，且 $\mathit \Phi ( - a) + \mathit \Phi (a) = 1$
+                            </li>
+                        </ul>
                     </li>
                 </ol>
             </div>
@@ -936,7 +1046,8 @@
                     '\\ge': '\\geqslant',
                     '\\parallel': '\\kern1pt/\\kern-2.5pt/\\kern1pt',
                     '\\A': '\\mathrm A',
-                    '\\C': '\\mathrm C'
+                    '\\C': '\\mathrm C',
+                    '\\normfunc': '\\varphi _{\\mu, \\sigma} (x)'
                 }
             })
         });

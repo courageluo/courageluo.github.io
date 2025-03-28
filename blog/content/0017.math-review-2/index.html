@@ -24,7 +24,7 @@
         } */
 
         /* 问题：在小于一定宽度时，右边会留白
-           临时解决方案如下，但似乎手机上依然这样 */
+           临时解决方案如下 */
         html {
             width: 100%;
             overflow-x: hidden;
@@ -52,6 +52,7 @@
             overflow-y: hidden;
             display: inline-block;
             vertical-align: middle;
+            white-space: nowrap;
             border: 1.5px solid black;
             border-radius: 3px;
             padding: 5px;
@@ -1011,6 +1012,52 @@
                                 若 $X \sim N(0, 1)$，记 $\mathit \Phi (a) = P(X &lt; a)$，且 $\mathit \Phi ( - a) + \mathit \Phi (a) = 1$
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        残差 $e = y_i - \hat y _i$ <br>
+                        如果一次函数 $\hat y = \hat b x - \hat a$ 能使残差平方和 $\displaystyle \sum _{i=1} ^n (y_i - \hat y_i) ^2$ 最小，则称该函数为 $y$ 关于 $x$ 的回归直线方程，且<br>
+                        <div class="formula-rectangle">
+                            $
+                                \begin{aligned}
+                                    \hat b &= \dfrac{\displaystyle \sum _{i=1} ^n (x_i - \bar x)(y_i - \bar y)}{\displaystyle \sum _{i=1} ^n (x_i - \bar x) ^2} = \dfrac{\displaystyle \sum _{i=1} ^n x_i y_i - n \bar x \bar y}{\displaystyle \sum _{i=1} ^n x_i ^2 - n \bar x ^2} \\
+                                    \hat a &= \bar y - \hat b \bar x
+                                \end{aligned}
+                            $
+                        </div>
+                    </li>
+                    <li>
+                        回归直线方程的性质<br>
+                        <ol class="margin-ul">
+                            <li>
+                                回归直线一定过样本中心点 $(\bar x, \bar y)$
+                            </li>
+                            <li>
+                                $y$ 与 $x$ 正相关 $\Leftrightarrow$ $\hat b &gt; 0$ <br>
+                                $y$ 与 $x$ 负相关 $\Leftrightarrow$ $\hat b &lt; 0$
+                            </li>
+                            <li>
+                                $x$ 增大一个单位，$\hat y$ 增大 $\hat b$ 个单位
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        线性相关系数<br>
+                        <div class="formula-rectangle">
+                            $ r = \dfrac{\displaystyle \sum _{i=1} ^n (x_i - \bar x)(y_i - \bar y)}{\sqrt{\displaystyle \sum _{i=1} ^n (x_i - \bar x) ^2} \sqrt{\displaystyle \sum _{i=1} ^n (y_i - \bar y) ^2}} = \dfrac{\displaystyle \sum _{i=1} ^n x_i y_i - n \bar x \bar y}{\sqrt{\displaystyle \sum _{i=1} ^n x_i ^2 - n \bar x ^2} \sqrt{\displaystyle \sum _{i=1} ^n y_i ^2 - n \bar y ^2}} $
+                        </div> <br>
+                        用 $r$ 来衡量 $y$ 与 $x$ 的线性相关性强弱，且一般
+                        <ul class="margin-ul">
+                            <li>
+                                $|\, r \,| \in [0.75, 1]$，称相关性较强
+                            </li>
+                            <li>
+                                $|\, r \,| \in [0, 0.3]$，称无太大关联
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        非线性回归<br>
+                        一般使用换元法替换 $y$ 与 $x$ 的关系式，使其变为线性关系，再使用线性回归方法求解即可
                     </li>
                 </ol>
             </div>

@@ -120,6 +120,10 @@
             background-color: #b9ebeb50;
         }
 
+        .contingency-table tr:first-child td {
+            background-color: #b9ebeb50;
+        }
+
         /* 一点响应式设计 */
         @media (min-width: 768px) {
             #index-box {
@@ -159,6 +163,10 @@
             }
 
             .dist-list tr td:first-child {
+                background-color: #52676f75;
+            }
+            
+            .contingency-table tr:first-child td {
                 background-color: #52676f75;
             }
         }
@@ -1009,7 +1017,7 @@
                                 标准正态分布 <br>
                                 $\mu = 0$ 且 $\sigma = 1$ 的正态分布称为标准正态分布 <br>
                                 若 $Y \sim N(\mu, \sigma ^2)$，令 $X = \dfrac{Y - \mu}{\pm \sigma}$， 则 $X \sim N(0, 1)$，即任意正态分布通过变换都可以化为标准正态分布 <br>
-                                若 $X \sim N(0, 1)$，记 $\mathit \Phi (a) = P(X &lt; a)$，且 $\mathit \Phi ( - a) + \mathit \Phi (a) = 1$
+                                若 $X \sim N(0, 1)$，记 $\mathit \Phi (a) = P(X &lt; a)$，有 $\mathit \Phi ( - a) + \mathit \Phi (a) = 1$
                             </li>
                         </ul>
                     </li>
@@ -1058,6 +1066,39 @@
                     <li>
                         非线性回归<br>
                         一般使用换元法替换 $y$ 与 $x$ 的关系式，使其变为线性关系，再使用线性回归方法求解即可
+                    </li>
+                    <li>
+                        相关性检验<br>
+                        若事件 $A$ 与 $B$ 样本数据的 $2 \times 2$ 列连表呈
+                        <div class="scroll-item">
+                            <table class="dist-list contingency-table">
+                                <tr>
+                                    <td></td>
+                                    <td>$A$</td>
+                                    <td>$\bar A$</td>
+                                    <td>合计</td>
+                                </tr>
+                                <tr>
+                                    <td>$B$</td>
+                                    <td>$a$</td>
+                                    <td>$b$</td>
+                                    <td>$a + b$</td>
+                                </tr>
+                                <tr>
+                                    <td>$\bar B$</td>
+                                    <td>$c$</td>
+                                    <td>$d$</td>
+                                    <td>$c + d$</td>
+                                </tr>
+                                <tr>
+                                    <td>合计</td>
+                                    <td>$a + c$</td>
+                                    <td>$b + d$</td>
+                                    <td>$n = a + b + c + d$
+                                </tr>
+                            </table>
+                        </div>
+                        所示，则 $\chi ^2 = \dfrac{n (ad-bc) ^2}{(a + b) (c + d) (a + c) (b + d)}$，且总能找到满足给定显著性水平 $\alpha$，使 $P(\chi ^2 \ge k) = \alpha$ 的数 $k$。若 $\chi ^2 \ge k$，则称在犯错误概率不超过 $\alpha$ 的前提下，$A$ 与 $B$ 有关；或有 $1 - \alpha$ 的把握认为 $A$ 与 $B$ 有关
                     </li>
                 </ol>
             </div>

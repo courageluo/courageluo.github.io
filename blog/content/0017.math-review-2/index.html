@@ -1022,7 +1022,7 @@
                         </ul>
                     </li>
                     <li>
-                        残差 $e = y_i - \hat y _i$ <br>
+                        残差 $e_i = y_i - \hat y _i$ <br>
                         如果一次函数 $\hat y = \hat b x - \hat a$ 能使残差平方和 $\displaystyle \sum _{i=1} ^n (y_i - \hat y_i) ^2$ 最小，则称该函数为 $y$ 关于 $x$ 的回归直线方程，且<br>
                         <div class="formula-rectangle">
                             $
@@ -1032,6 +1032,7 @@
                                 \end{aligned}
                             $
                         </div>
+                        且回归直线方程总是使 $\displaystyle \sum _{i=1} ^n e_i = 0$
                     </li>
                     <li>
                         回归直线方程的性质<br>
@@ -1068,7 +1069,7 @@
                         一般使用换元法替换 $y$ 与 $x$ 的关系式，使其变为线性关系，再使用线性回归方法求解即可
                     </li>
                     <li>
-                        相关性检验<br>
+                        独立性检验<br>
                         若事件 $A$ 与 $B$ 样本数据的 $2 \times 2$ 列连表呈
                         <div class="scroll-item">
                             <table class="dist-list contingency-table">
@@ -1098,7 +1099,20 @@
                                 </tr>
                             </table>
                         </div>
-                        所示，则 $\chi ^2 = \dfrac{n (ad-bc) ^2}{(a + b) (c + d) (a + c) (b + d)}$，且总能找到满足给定显著性水平 $\alpha$，使 $P(\chi ^2 \ge k) = \alpha$ 的数 $k$。若 $\chi ^2 \ge k$，则称在犯错误概率不超过 $\alpha$ 的前提下，$A$ 与 $B$ 有关；或有 $1 - \alpha$ 的把握认为 $A$ 与 $B$ 有关
+                        形式，则 $\chi ^2 = \dfrac{n (ad-bc) ^2}{(a + b) (c + d) (a + c) (b + d)}$，且总能找到满足给定显著性水平 $\alpha$，使 $P(\chi ^2 \ge k) = \alpha$ 的数 $k$。若 $\chi ^2 \ge k$，则称在犯错误概率不超过 $\alpha$ 的前提下，$A$ 与 $B$ 有关；或有 $1 - \alpha$ 的把握认为 $A$ 与 $B$ 有关
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="num-seq" class="section-title">数列</h3>
+                    <a href="#index" id="text-right">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        数列<br>
+                        按照一定顺序排列的一列数称为数列，它一般可以写为 $a_1, a_2, \cdots, a_n, a_{n+1}, \cdots$ 的形式，简记为 $\{ a_n \}$
                     </li>
                 </ol>
             </div>

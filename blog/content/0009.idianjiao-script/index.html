@@ -275,6 +275,140 @@
                         printToConsole();                        
                     </code>
                 </pre>
+                <p>以下是一个批量获取答案的脚本，需要通过 EditThisCookie 导出你的登录后 cookies 并存放于<code class="language-">cookies.json</code>中，并将代码<code class="language-">batch-process.js</code>置于同一目录下，于终端中通过<code class="language-powershell">npm i puppeteer</code>安装 puppeteer，然后以<code class="language-powershell">node batch-process.js</code>运行，<a href="./batch-process.js" download>点击此处</a>下载所需代码。</p>
+                <pre class="line-numbers" style="height: 300px;">
+                    <code class="language-javascript">
+                        const puppeteer = require('puppeteer');
+                        const fs = require('fs');
+
+                        // 自定义获取的网页地址
+                        const TARGET_URLS = [
+                            'https://www.idianjiao.com/djtest/ExamPractice?id=38960&ms=2',
+                            'https://www.idianjiao.com/djtest/ExamPractice?id=38961&ms=2',
+                            'https://www.idianjiao.com/djtest/ExamPractice?id=38962&ms=2'
+                        ];
+
+                        (async () => {
+                            const browser = await puppeteer.launch({
+                                headless: false,
+                                args: ['--no-sandbox']
+                            });
+
+                            const page = await browser.newPage();
+                            let isLoggedIn = false;
+
+                            // 添加自定义消息过滤标识
+                            let customLogIdentifier = '[CUSTOM_LOG]';
+
+                            if (fs.existsSync('./cookies.json')) {
+                                const cookies = JSON.parse(fs.readFileSync('./cookies.json'));
+                                await page.setCookie(...cookies);
+                                console.log('Cookies 已加载');
+                                isLoggedIn = true;
+                            }
+
+                            // 监听控制台消息并过滤
+                            page.on('console', msg => {
+                                const text = msg.text();
+                                // 只处理带有自定义标识的消息
+                                if (text.startsWith(customLogIdentifier)) {
+                                    // 提取实际内容并清理格式
+                                    const cleanText = text
+                                        .replace(customLogIdentifier, '')
+                                        .replace(/%c|color:.*?;|font-.*?;/g, '')
+                                        .trim();
+                                    console.log(cleanText);
+                                }
+                            });
+
+                            for (const url of TARGET_URLS) {
+                                console.log(`\n开始处理: ${url}`);
+
+                                try {
+                                    await page.goto(url, {
+                                        waitUntil: 'networkidle2',
+                                        timeout: 60000
+                                    });
+
+                                    if (!isLoggedIn && page.url().includes('/login')) {
+                                        console.log('检测到需要登录...');
+                                        await login(page);
+                                        isLoggedIn = true;
+                                    }
+
+                                    await processPage(page, customLogIdentifier);
+                                    console.log(`处理完成: ${url}`);
+
+                                } catch (error) {
+                                    console.error(`处理失败 (${url}):`, error.message);
+                                }
+                            }
+
+                            await browser.close();
+                        })();
+
+                        // 提供模板，如果 cookies 正确加载那么无需这些代码
+                        async function login(page) {
+                            await page.goto('https://www.idianjiao.com/djtest/login');
+                            await page.waitForSelector('#username', { timeout: 5000 });
+
+                            // 建议通过环境变量获取凭证
+                            await page.type('#username', 'your_username');
+                            await page.type('#password', 'your_password');
+
+                            await Promise.all([
+                                page.waitForNavigation(),
+                                page.click('#login-button')
+                            ]);
+
+                            const cookies = await page.cookies();
+                            fs.writeFileSync('./cookies.json', JSON.stringify(cookies));
+                            console.log('登录成功并保存 Cookies');
+                        }
+
+                        async function processPage(page, logIdentifier) {
+                            try {
+                                await page.waitForSelector('.answer', { timeout: 10000 });
+
+                                await page.evaluate((identifier) => {
+                                    function formatDateTime() {
+                                        const now = new Date();
+                                        const pad = n => n.toString().padStart(2, '0');
+                                        return `${now.getFullYear()}.${pad(now.getMonth()+1)}.${pad(now.getDate())} ` +
+                                            `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+                                    }
+
+                                    function printToConsole() {
+                                        // 添加标识前缀并去除样式参数
+                                        try {
+                                            const title = document.querySelector('h1').innerText;
+                                            console.log(`${identifier}${title}`);
+
+                                            console.log(`${identifier}Summary time: ${formatDateTime()}`);
+
+                                            const answers = Array.from(document.querySelectorAll('.incorrect'))
+                                                .map(el => el.innerText.replace('回答错误,正确答案', ''));
+
+                                            const partSize = 5;
+                                            for (let i = 0; i &lt; answers.length; i += partSize) {
+                                                const part = answers.slice(i, i + partSize);
+                                                const range = `${i+1}-${Math.min(i+partSize, answers.length)}`;
+                                                console.log(`${identifier}${range}: ${part.join('')}`);
+                                            }
+                                        } catch (error) {
+                                            console.log(`${identifier}ERROR: ${error.message}`);
+                                        }
+                                    }
+
+                                    printToConsole();
+                                }, logIdentifier);
+
+                            } catch (error) {
+                                console.error('页面处理失败:', error.message);
+                            }
+                        }
+                    </code>
+                </pre>
                 <p>更进一步地，可以通过<code class="language-javascript">click()</code>来实现自动点击，一个示例如下，粘贴至控制台即可运行，也同样可以<a href="./auto-click.js">点击这里</a>下载。</p>
                 <pre class="line-numbers" style="height: 300px;">
                     <code class="language-javascript">
@@ -344,6 +478,7 @@
             <div class="rounded-box3">
                 <h3 id="update-log" style="text-align: center;">更新日志</h3>
                 <hr>
+                <p class="update">2025.05.02&emsp;加入自动化的代码示例。</p>
                 <p class="update">2025.02.12&emsp;加入几个代码块示例。</p>
                 <p class="update">2025.01.16&emsp;去除点击按钮时间限制，样式优化。</p>
                 <p class="update">2024.07.30&emsp;创建脚本。</p>

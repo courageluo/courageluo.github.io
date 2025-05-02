@@ -103,20 +103,24 @@
             overflow-y: hidden;
         }
 
-        .dist-list {
+        .dist-list, .head-highlight-table {
             margin: 5px 1%;
             white-space: nowrap;
             border-collapse: collapse;
             border: #000000 1.5px solid;
         }
 
-        .dist-list td {
+        .dist-list td, .head-highlight-table td {
             padding: 5px 10px;
             text-align: center;
             border: #000000 1px solid;
         }
 
         .dist-list tr td:first-child {
+            background-color: #b9ebeb50;
+        }
+
+        .head-highlight-table tr:first-child td {
             background-color: #b9ebeb50;
         }
 
@@ -154,15 +158,19 @@
                 border: 1.5px solid var(--text-color-dark);
             }
 
-            .dist-list {
+            .dist-list, .head-highlight-table {
                 border: #efefef 1.5px solid;
             }
 
-            .dist-list td {
+            .dist-list td, .head-highlight-table td {
                 border: #efefef 1px solid;
             }
 
             .dist-list tr td:first-child {
+                background-color: #52676f75;
+            }
+
+            .head-highlight-table tr:first-child td {
                 background-color: #52676f75;
             }
             
@@ -212,6 +220,7 @@
                     </ul>
                     <li><a href="#arrangement-conbination">排列与组合</a></li>
                     <li><a href="#probability-statistics">概率与统计</a></li>
+                    <li><a href="#num-seq">数列</a></li>
                 </ul>
             </div>
 
@@ -1031,7 +1040,7 @@
                                     \hat a &= \bar y - \hat b \bar x
                                 \end{aligned}
                             $
-                        </div>
+                        </div> <br>
                         且回归直线方程总是使 $\displaystyle \sum _{i=1} ^n e_i = 0$
                     </li>
                     <li>
@@ -1113,6 +1122,191 @@
                     <li>
                         数列<br>
                         按照一定顺序排列的一列数称为数列，它一般可以写为 $a_1, a_2, \cdots, a_n, a_{n+1}, \cdots$ 的形式，简记为 $\{ a_n \}$
+                    </li>
+                    <li>
+                        给定数列 $\{ a_n \}$，称 $S_n = a_1 + a_2 + a_3 + \cdots + a_n$ 为该数列的前 $n$ 项和，由此可得 $\{ a_n \}$ 的通项公式为<br>
+                        $ a_n = \bigg\{\begin{aligned}
+                                    & S_1, & n=1 \\
+                                    & S_n - S_{n-1}, & n \ge 2
+                                \end{aligned}$
+                    </li>
+                    <li>
+                        等差数列与等比数列的比较<br>
+                        <div class="scroll-item">
+                            <table class="dist-list contingency-table">
+                                <tr>
+                                    <td></td>
+                                    <td>等差数列</td>
+                                    <td>等比数列</td>
+                                </tr>
+                                <tr>
+                                    <td>判断方法</td>
+                                    <td>$a_{n + 1} - a_n = d$ 或 <br> $2a_{n + 1} = a_n + a_{n + 2}$</td>
+                                    <td>$\dfrac{a_{n + 1}}{a_n} = q$ 或 <br> $\dfrac{a_{n + 1}}{a_n} = \dfrac{a_{n + 2}}{a_{n + 1}}$</td>
+                                </tr>
+                                <tr>
+                                    <td>通项公式</td>
+                                    <td>$\begin{aligned}
+                                            a_n &= a_1 + (n - 1)d \\
+                                            &= a_m + (n - m)d
+                                        \end{aligned}$</td>
+                                    <td>$\begin{aligned}
+                                            a_n &= a_1 q ^{n - 1} \\
+                                            &= a_m q ^{n - m}
+                                        \end{aligned}$</td>
+                                </tr>
+                                <tr>
+                                    <td>前 $n$ 项和</td>
+                                    <td>
+                                        $\begin{aligned}
+                                            S_n &= \dfrac{n(a_1 + a_n)}{2} \\
+                                            &= na_1 + \dfrac{n(n - 1)}{2} d
+                                        \end{aligned}$ <br>
+                                        且满足 $S_n = An^2 + Bn$ 的形式
+                                    </td>
+                                    <td>
+                                        $ S_n = \Bigg\{\begin{aligned}
+                                                    & na_1, & q = 1 \\
+                                                    & \dfrac{a_1 (1 - q^n)}{1 - q}, & q \ne 1
+                                                \end{aligned}$ <br>
+                                        且满足 $S_n = Aq^n - A$ 的形式
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>性质</td>
+                                    <td>
+                                        $s + t = p + q \Rightarrow a_s + a_t = a_p + a_q$ <br>
+                                        $S_m, S_{2m} - S_m, S_{3m} - S_{2m}, \cdots$ 是等差数列
+                                    </td>
+                                    <td>
+                                        $s + t = p + q \Rightarrow a_s a_t = a_p a_q$ <br>
+                                        $S_m, S_{2m} - S_m, S_{3m} - S_{2m}, \cdots$ 是等比数列
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        等差数列的单调性<br>
+                        <div class="scroll-item">
+                            <table class="head-highlight-table">
+                                <tr>
+                                    <td>条件</td>
+                                    <td>单调性</td>
+                                </tr>
+                                <tr>
+                                    <td>$d &gt; 0$</td>
+                                    <td>递增数列</td>
+                                </tr>
+                                <tr>
+                                    <td>$d &lt; 0$</td>
+                                    <td>递减数列</td>
+                                </tr>
+                            </table>
+                        </div>
+                        等比数列的单调性<br>
+                        <div class="scroll-item">
+                            <table class="head-highlight-table">
+                                <tr>
+                                    <td colspan="3">条件</td>
+                                    <td>单调性</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">$q &lt; 0$</td>
+                                    <td>摆动数列</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="5">$q &gt; 0$</td>
+                                    <td colspan="2">$q = 1$</td>
+                                    <td>常数列</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">$q &gt; 1$</td>
+                                    <td>$a_1 &gt; 0$</td>
+                                    <td>递增数列</td>
+                                </tr>
+                                <tr>
+                                    <td>$a_1 &lt; 0$</td>
+                                    <td>递减数列</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">$q &lt; 1$</td>
+                                    <td>$a_1 &lt; 0$</td>
+                                    <td>递增数列</td>
+                                </tr>
+                                <tr>
+                                    <td>$a_1 &gt; 0$</td>
+                                    <td>递减数列</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        求数列通项
+                        <ul class="margin-ul">
+                            <li>
+                                构造等差<br>
+                                结构：$a_n - a_{n + 1} = d a_n a_{n + 1}$ <br>
+                                两边同除 $a_n a_{n + 1}$，得 $\left\{ \dfrac{1}{a_n} \right\}$ 是公差为 $d$ 的等差数列
+                            </li>
+                            <li>
+                                构造等比 1<br>
+                                结构：$A a_{n+1} = Ba_n + C$ <br>
+                                两边除以 $A$，应用待定系数法求解得 $\left\{ a_n + \dfrac{C}{B-A} \right\}$ 是公比为 $\dfrac{B}{A}$ 的等比数列
+                            </li>
+                            <li>
+                                构造等比 2<br>
+                                结构：$a_{n + 1} = p a_n + q \cdot 2^{n + 1}$ <br>
+                                两边同除 $2^{n + 1}$，得 $\dfrac{a_{n + 1}}{2^{n + 1}} = p \dfrac{a_n}{2^n} + q$，然后应用 (2) 构造等比
+                            </li>
+                            <li>
+                                构造等比 3<br>
+                                结构：$a_{n + 1} = p a_n^q$ <br>
+                                两边取底数为 $q$ 的对数，得 $\log_q a_{n + 1} = q \log_q a_n + \log_q p$，然后应用 (2) 构造等比
+                            </li>
+                            <li>
+                                分式型<br>
+                                结构：$a_{n + 1} = \dfrac{r a_n + s}{p a_n + q}$ ($r, p \ne 0$) <br>
+                                将 $a_n$ 和 $a_{n + 1}$ 替换为 $x$ 并求根 $r_1$、$r_2$，若<br>
+                                <ol type="a" style="margin-left: -15px;">
+                                    <li>有 2 个不同实根，$\left\{ \dfrac{a_n - r_1}{a_n - r_2} \right\}$ 为等比数列</li>
+                                    <li>有 2 个相同实根，$\left\{ \dfrac 1 {a_n - r} \right\}$ 为等差数列</li>
+                                    <li>无实根，$\{ a_n \}$ 为周期数列</li>
+                                </ol>
+                            </li>
+                            <li>
+                                二阶线性<br>
+                                结构：$a_{n + 2} = p a_{n + 1} + q a_n$ <br>
+                                令 $a_n = r^n$，有 $r^2 - p r - q = 0$，求解 $r_1$、$r_2$，若<br>
+                                <ol type="a" style="margin-left: -15px;">
+                                    <li>有 2 个不同实根，设 $a_n = x r_1^n + y r_2^n$ 以待定系数法求解 $x$、$y$</li>
+                                    <li>有 2 个相同实根，设 $a_n = (x + yn) r^n$ 求解 $x$、$y$</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        求数列前 $n$ 项和<br>
+                        <ul class="margin-ul">
+                            <li>
+                                裂项相消<br>
+                                <ol type="a" style="margin-left: -15px;">
+                                    <li>$\dfrac{1}{n(n+k)} = \dfrac 1 k \left( \dfrac 1 n - \dfrac 1 {n+k} \right)$</li>
+                                    <li>$\dfrac{1}{\sqrt{n+1} + \sqrt{n}} = \sqrt{n+1} - \sqrt{n}$</li>
+                                </ol>
+                            </li>
+                            <li>
+                                错位相减<br>
+                                结构：$a_n = n p^n$ <br>
+                                先展开写 $S_n$，再错一位写 $p S_n$，相减即可化简
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        等额本金还款法：每期还款金额 $a_n = \dfrac{A_0}{m} + r \left( A_0 - \dfrac{A_0}{m}(n - 1) \right)$ <br>
+                        等额本息还款法：每期还款金额 $x = \dfrac{A_0 r (1+r)^m}{(1+r)^m - 1}$ <br>
+                        其中 $A_0$ 为贷款总额，$m$ 为还款期数，$r$ 为期利率 <br>
+                        若记现在的 $A_0$ 元相当于 $n$ 年后的 $A_n$ 元，则 $A_n = A_0 (1 + r)^n$，称 $A_0$ 为 $A_n$ 的现值，$A_n$ 为 $A_0$ 的未来值，等额本息还款金额由此推出<br>
                     </li>
                 </ol>
             </div>

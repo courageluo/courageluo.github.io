@@ -85,11 +85,22 @@
             symbols: "(1)" "(2)" "(3)" "(4)" "(5)" "(6)" "(7)" "(8)" "(9)" "(10)";
             suffix: " ";
         }
+
+        @counter-style mi {
+            system: fixed;
+            symbols: "(i)" "(ii)";
+            suffix: " ";
+        }
         
         .margin-ul {
             list-style: parentheses;
             /* white-space: nowrap; */
             margin-left: -13px;
+        }
+
+        .mi {
+            list-style: mi;
+            margin-left: -15px;
         }
 
         li {
@@ -221,6 +232,7 @@
                     <li><a href="#arrangement-conbination">排列与组合</a></li>
                     <li><a href="#probability-statistics">概率与统计</a></li>
                     <li><a href="#num-seq">数列</a></li>
+                    <li><a href="#derivative">导数</a></li>
                 </ul>
             </div>
 
@@ -1307,6 +1319,40 @@
                         等额本息还款法：每期还款金额 $x = \dfrac{A_0 r (1+r)^m}{(1+r)^m - 1}$ <br>
                         其中 $A_0$ 为贷款总额，$m$ 为还款期数，$r$ 为期利率 <br>
                         若记现在的 $A_0$ 元相当于 $n$ 年后的 $A_n$ 元，则 $A_n = A_0 (1 + r)^n$，称 $A_0$ 为 $A_n$ 的现值，$A_n$ 为 $A_0$ 的未来值，等额本息还款金额由此推出<br>
+                    </li>
+                    <li>
+                        数学归纳法<br>
+                        如果一个以<strong>自然数</strong>有关的命题，<br>
+                        <ol class="mi">
+                            <li>
+                                当 $n = n_0$ 时，命题成立；
+                            </li>
+                            <li>
+                                在假设 $n = k$（$ k \ge n_0$）时命题成立的前提下，能够推出 $n = k + 1$ 时命题也成立
+                            </li>
+                        </ol>
+                        那么这个命题对大于等于 $n_0$ 的所有<strong>自然数</strong>都成立
+                    </li>
+                    <li>
+                        $\displaystyle \sum _{i = 1} ^n i^2 = \dfrac{n(n + 1)(2n + 1)}{6}$ <br>
+                        $\displaystyle \sum _{i = 1} ^n i^3 = \left( \dfrac{n(n + 1)}{2} \right)^2$
+                    </li>
+                </ol>
+            </div>
+            <div class="rounded-box3">
+                <div class="container">
+                    <h3 id="derivative" class="section-title">导数</h3>
+                    <a href="#index" id="text-right">返回索引</a>
+                </div>
+                <hr>
+                <ol>
+                    <li>
+                        平均变化率<br>
+                        称 $\dfrac{\Delta f}{\Delta x} = \dfrac{f(x_2) - f(x_1)}{x_2 - x_1} = \dfrac{f(x_1 + \Delta x) - f(x_1)}{\Delta x}$ 为函数 $f(x)$ 在以 $x_1$，$x_2$ 为端点的闭区间上的平均变化率
+                    </li>
+                    <li>
+                        瞬时变化率与导数<br>
+                        设函数 $f(x)$ 在 $x_0$ 附近有定义，自变量在 $x = x_0$ 附近的变化量为 $\Delta x$，当 $\Delta x \to 0$ 时，若 $\dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} \to k$，即 $f'(x_0) = k = \displaystyle \lim_{\Delta x \to 0} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}$，则称 $k$ 为 $f(x)$ 在 $x = x_0$ 处的瞬时变化率，即 $f(x)$ 在 $x_0$ 处可导，并称 $k$ 为 $f(x)$ 在 $x_0$ 处的导数
                     </li>
                 </ol>
             </div>

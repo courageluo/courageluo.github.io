@@ -1352,7 +1352,67 @@
                     </li>
                     <li>
                         瞬时变化率与导数<br>
-                        设函数 $f(x)$ 在 $x_0$ 附近有定义，自变量在 $x = x_0$ 附近的变化量为 $\Delta x$，当 $\Delta x \to 0$ 时，若 $\dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} \to k$，即 $f'(x_0) = k = \displaystyle \lim_{\Delta x \to 0} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}$，则称 $k$ 为 $f(x)$ 在 $x = x_0$ 处的瞬时变化率，即 $f(x)$ 在 $x_0$ 处可导，并称 $k$ 为 $f(x)$ 在 $x_0$ 处的导数
+                        设 $f(x)$ 在 $x_0$ 附近有定义，自变量在 $x = x_0$ 附近的变化量为 $\Delta x$，当 $\Delta x \to 0$ 时，若 $\dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} \to k$，即 $f'(x_0) = k = \displaystyle \lim_{\Delta x \to 0} \dfrac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}$，则称 $k$ 为 $f(x)$ 在 $x = x_0$ 处的瞬时变化率，即 $f(x)$ 在 $x_0$ 处可导，并称 $k$ 为 $f(x)$ 在 $x_0$ 处的导数
+                    </li>
+                    <li>
+                        导数的几何意义<br>
+                        设 $f(x)$ 在 $x = x_0$ 附近有定义，$f'(x_0)$ 存在，则：<br>
+                        <ul class="margin-ul">
+                            <li>
+                                切线斜率：$f'(x_0)$ 是 $f(x)$ 在点 $(x_0, f(x_0))$ 处的切线的斜率
+                            </li>
+                            <li>
+                                切线方程：$y - f(x_0) = f'(x_0)(x - x_0)$
+                            </li>
+                            <li>
+                                估计函数值：$f(x_0 + \Delta x) \approx f(x_0) + f'(x_0) \Delta x$，且 $|\Delta x|$ 越小，近似效果越好
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        导函数<br>
+                        如果 $f(x)$ 在定义域内每一点 $x$ 都可导，且每一个 $x$ 都对应一个确定导数 $f'(x)$，在 $f(x)$ 的定义域内，$f'(x)$ 是一个函数，则称 $f'(x)$ 为 $f(x)$ 的导函数，记作 $f'(x) = y' = y_x' = \displaystyle \lim _{\Delta x \to 0} \dfrac{f(x + \Delta x) - f(x)}{\Delta x}$，也简称导数
+                    </li>
+                    <li>
+                        导数公式表<br>
+                        <div class="formula-rectangle">
+                            $
+                                \begin{aligned}
+                                    & C' = 0 \\
+                                    & (x^\alpha)' = \alpha x^{\alpha - 1} \\
+                                    & (a^x)' = a^x \ln a \\
+                                    & (\log _a x)' = \dfrac{1}{x \ln a} \\
+                                    & (\sin x)' = \cos x \\
+                                    & (\cos x)' = - \sin x
+                                \end{aligned}
+                            $
+                        </div> <br>
+                        特别地，$(e^x)' = e^x$，$(\ln x)' = \dfrac{1}{x}$
+                    </li>
+                    <li>
+                        求导法则<br>
+                        <ul class="margin-ul">
+                            <li>
+                                $(f(x) + g(x))' = f'(x) + g'(x)$
+                            </li>
+                            <li>
+                                $(f(x) - g(x))' = f'(x) - g'(x)$
+                            </li>
+                            <li>
+                                $(f(x)g(x))' = f'(x)g(x) + f(x)g'(x)$ <br>
+                                特别地，$(Cf(x))' = Cf'(x)$
+                            </li>
+                            <li>
+                                $\left( \dfrac{f(x)}{g(x)} \right)' = \dfrac{f'(x)g(x) - f(x)g'(x)}{g^2(x)}$
+                            </li>
+                            <li>
+                                设 $y = h(x) = f(g(x))$，$t = g(x)$，则 $h'(x) = f'(t) g'(x)$，即 $y_x' = y_t' t_x'$
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        导数与函数的单调性<br>
+                        若在区间 $(a,b)$ 上，$f'(x) &gt; 0$，则 $f(x)$ 在 $(a,b)$ 上单调递增；若 $f'(x) &lt; 0$，则 $f(x)$ 在 $(a,b)$ 上单调递减。
                     </li>
                 </ol>
             </div>

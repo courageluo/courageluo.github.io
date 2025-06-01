@@ -14,27 +14,27 @@
     <!-- 内部CSS文件 -->
     <style>
         /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-guessbackground.svg');
+        .background-layer {
             background-size: 200%;
         }
 
         @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-guessbackground.svg');
-            }
-
             a {
                 color: #50d2d2;
             }
         }
 
         .content {
-            text-align: center;
+            margin: 0 auto;
+        }
+
+        .content-container {
+            margin: 0 auto;
         }
 
         .headtitle {
             font-size: 50px;
+            text-align: center;
         }
     </style>
 </head>
@@ -42,17 +42,21 @@
 <body>
     <div class="content">
         <p class="headtitle">404</p>
-        <p>您要访问的页面不存在</p>
-        <p>您输入的网址可能不正确</p>
-        <p>或者该页面已被删除或移动</p>
-        <p>您可以尝试 <a href="/">返回首页</a></p>
+        <div class="content-container">
+            <div class="rounded-box3" style="max-width: 300px; text-align: center; padding: 10px 50px;">
+                <p>您要访问的页面不存在</p>
+                <p>您输入的网址可能不正确</p>
+                <p>或者该页面已被删除或移动</p>
+                <p>您可以尝试 <a href="/">返回首页</a></p>
+            </div>
+        </div>
     </div>
 
     <!-- 页脚 -->
     <div id="footer"></div>
 
     <!-- 内部JS文件 -->
-    <script src="/href/script.js"></script>
+    <script src="/href/script.js" defer></script>
 </body>
 
 </html>

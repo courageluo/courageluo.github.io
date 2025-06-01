@@ -18,16 +18,12 @@
     <!-- 内部CSS文件 -->
     <style>
         /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-blogbackground.svg');
+        .background-layer {
             background-size: 100%;
         }
 
         @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-blogbackground.svg');
-            }
-        }
+                    }
 
         .container {
             max-width: 1200px;
@@ -153,7 +149,7 @@
     <div id="footer"></div>
 
     <!-- 内部JS文件 -->
-    <script src="/href/script.js"></script>
+    <script src="/href/script.js" defer></script>
     <script>
         // 获取相应的元素
         const canvas = document.getElementById('canvas');

@@ -21,8 +21,8 @@
             color: #25626b;
         }
 
-        body {
-            background-image: url('/img/background/day-updatebackground.svg');
+        .background-layer {
+            background-size: 100%;
         }
 
         #update-container p {
@@ -30,10 +30,6 @@
         }
 
         @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('../img/background/night-updatebackground.svg'); /* 夜晚模式下的背景图片 */
-            }
-
             a {
                 color: #27a8b9;
             }
@@ -139,6 +135,7 @@
             <div class="rounded-box3" id="update-container">
                 <h3 id="update" style="text-align: center;">更新日志</h3>
                 <hr>
+                <p>ver 0.7.6 2025.06.01 02:25 <br> 加入网站样式设置（测试版）。</p>
                 <p>ver 0.7.5 2025.03.14 23:58 <br> Happy $\pi$'s day! 优化一些样式。</p>
                 <p>ver 0.7.4 2025.02.15 17:52 <br> 优化性能、用户体验以及一些样式。</p>
                 <p>ver 0.7.3 2025.02.01 21:02 <br> 首页添加 2048 游戏。<br>增加一些响应式设计，优化样式与性能。</p>
@@ -189,7 +186,7 @@
     <div id="footer"></div>
 
     <!-- 内部JS文件 -->
-    <script src="/href/script.js"></script>
+    <script src="/href/script.js" defer></script>
     <script src="/blog/quote-js/pdfjs/build/pdf.mjs" type="module"></script>
     <script src="/blog/quote-js/jquery/jquery-3.7.1.js"></script>
     <script src="/blog/quote-js/katex/katex.min.js"></script>

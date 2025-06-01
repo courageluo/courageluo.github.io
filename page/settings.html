@@ -1,0 +1,319 @@
+<!-- 网站全局设置 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站设置 - Courage Luo的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <!-- 内部CSS文件 -->
+    <style>
+        /* 背景图片设置 */
+        .background-layer {
+            background-size: 150%;
+        }
+
+        .content-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        select {
+            flex: 0 1 auto;
+            white-space: nowrap;
+            border-radius: 5px;
+            font-size: 15px;
+            height: 25px;
+            color: black;
+            background-color: #bacfd7;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            select {
+                color: white;
+                background-color: #074860;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #1d2031;
+            border: #074860 1.5px solid;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        input[type="color"] {
+            width: 50px;
+            border-radius: 3px;
+        }
+
+        input[type="range"] {
+            /* -webkit-appearance: none; */
+            width: 200px;
+            height: 7px;
+            background: #6b8792;
+            border-radius: 5px;
+            outline: none;
+            margin: 0 10px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #248d9e;
+            cursor: pointer;
+            border: 2px solid #e4eaeb;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            input[type="range"] {
+                background: #197799;
+            }
+            
+            input[type="range"]::-webkit-slider-thumb {
+                background: #10457d;
+                border: 1.5px solid #a9b0b9;
+            }
+        }
+
+        /* 垂直居中容器 */
+        .zoom-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #zoomSlider {
+            margin: 0 10px 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <!-- 内容 -->
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">网站全局设置</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <p>此处可以设置网站的全局样式。</p>
+                <form id="settings-form">
+                    <h3>字体设置</h3>
+                    <hr>
+                    <p>注：更改为非网站默认字体可能会导致某些内容的显示问题。</p>
+                    <!-- 字体设置 -->
+                    <label>正文字体（中文）：</label>
+                    <select name="textFontChinese">
+                        <option value="JiangChengHei">江城黑体（默认）</option>
+                        <option value="SmileySans">得意黑</option>
+                        <option value="system-ui">系统默认</option>
+                    </select>
+
+                    <p></p>
+
+                    <label>正文字体（西文）：</label>
+                    <select name="textFontWestern">
+                        <option value="Inter">Inter（默认）</option>
+                        <option value="CascadiaMono">Cascadia Mono</option>
+                        <option value="CascadiaCode">Cascadia Code</option>
+                        <option value="JetBrainsMono">JetBrains Mono</option>
+                    </select>
+
+                    <p></p>
+
+                    <label>代码字体（中文）：</label>
+                    <select name="codeFontChinese">
+                        <option value="JiangChengHei">江城黑体（默认）</option>
+                        <option value="SmileySans">得意黑</option>
+                        <option value="system-ui">系统默认</option>
+                    </select>
+
+                    <p></p>
+
+                    <label>代码字体（西文）：</label>
+                    <select name="codeFontWestern">
+                        <option value="CascadiaMono">Cascadia Mono（默认）</option>
+                        <option value="CascadiaCode">Cascadia Code</option>
+                        <option value="JetBrainsMono">JetBrains Mono</option>
+                    </select>
+
+                    <p></p>
+
+                    <h3>背景设置</h3>
+                    <hr>
+                    <p></p>
+                    <!-- 背景设置 -->
+                    <label>背景类型：</label>
+                    <input type="radio" name="bgType" value="default" id="default" checked><label for="default">默认背景</label>
+                    <input type="radio" name="bgType" value="solid" id="solid"><label for="solid">纯色背景</label>
+
+                    <div id="solid-bg-options" style="display: none;">
+                        <div style="height: 10px;"></div>
+                        <label>浅色模式背景颜色：</label>
+                        <input type="color" name="bgColorLight" value="#bcd5da">
+                        <div style="height: 5px;"></div>
+                        <label>深色模式背景颜色：</label>
+                        <input type="color" name="bgColorDark" value="#1d446b">
+                    </div>
+
+                    <p></p>
+
+                    <h3>页面缩放</h3>
+                    <hr>
+                    <p>调整整个页面的缩放比例。</p>
+
+                    <div class="zoom-container">
+                        <label>比例：</label>
+                        <input type="range" name="zoomLevel" min="75" max="125" step="5" value="100" id="zoomSlider">
+                        <span id="zoomValue">100%</span>
+                    </div>
+
+                    <p></p>
+
+                    <h3>提交或重置</h3>
+                    <hr>
+                    <p></p>
+                    <!-- 提交和重置 -->
+                    <button type="submit" style="margin-right: 7px;">保存设置</button>
+                    <button type="button" id="reset-settings">重置设置</button>
+                </form>
+                <p></p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('settings-form');
+            const bgTypeRadios = document.querySelectorAll('input[name="bgType"]');
+            const solidBgOptions = document.getElementById('solid-bg-options');
+
+            bgTypeRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    solidBgOptions.style.display = this.value === 'solid' ? 'block' : 'none';
+                });
+            });
+
+            // 初始化
+            const bgType = localStorage.getItem('bgType') || 'default';
+            document.querySelector(`input[name="bgType"][value="${bgType}"]`).checked = true;
+            solidBgOptions.style.display = bgType === 'solid' ? 'block' : 'none';
+
+            // 初始化缩放设置
+            const zoomLevel = localStorage.getItem('zoomLevel') || '100';
+            document.querySelector('input[name="zoomLevel"]').value = zoomLevel;
+            document.getElementById('zoomValue').textContent = `${zoomLevel}%`;
+            
+            // 缩放滑块事件
+            document.getElementById('zoomSlider').addEventListener('input', function() {
+                const zoomValue = this.value;
+                document.getElementById('zoomValue').textContent = `${zoomValue}%`;
+                applyZoom(zoomValue);
+            });
+
+            // 初始化字体设置
+            const textFontChinese = localStorage.getItem('textFontChinese') || 'JiangChengHei';
+            const textFontWestern = localStorage.getItem('textFontWestern') || 'Inter';
+            const codeFontChinese = localStorage.getItem('codeFontChinese') || 'JiangChengHei';
+            const codeFontWestern = localStorage.getItem('codeFontWestern') || 'CascadiaMono';
+            
+            // 设置字体选择器的值
+            document.querySelector('select[name="textFontChinese"]').value = textFontChinese;
+            document.querySelector('select[name="textFontWestern"]').value = textFontWestern;
+            document.querySelector('select[name="codeFontChinese"]').value = codeFontChinese;
+            document.querySelector('select[name="codeFontWestern"]').value = codeFontWestern;
+
+            // 保存设置
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+                const zoomLevel = formData.get('zoomLevel');
+                localStorage.setItem('zoomLevel', zoomLevel);
+                localStorage.setItem('textFontChinese', formData.get('textFontChinese'));
+                localStorage.setItem('textFontWestern', formData.get('textFontWestern'));
+                localStorage.setItem('codeFontChinese', formData.get('codeFontChinese'));
+                localStorage.setItem('codeFontWestern', formData.get('codeFontWestern'));
+                localStorage.setItem('fontSize', formData.get('fontSize') + 'px');
+                localStorage.setItem('bgType', formData.get('bgType'));
+                if (formData.get('bgType') === 'solid') {
+                    localStorage.setItem('bgColorLight', formData.get('bgColorLight'));
+                    localStorage.setItem('bgColorDark', formData.get('bgColorDark'));
+                } else {
+                    localStorage.removeItem('bgColorLight');
+                    localStorage.removeItem('bgColorDark');
+                }
+                applySettings();
+                showToast('设置已保存！');
+            });
+
+            // 重置设置
+            document.getElementById('reset-settings').addEventListener('click', function() {
+                localStorage.removeItem('zoomLevel');
+                document.querySelector('input[name="zoomLevel"]').value = '100';
+                document.getElementById('zoomValue').textContent = '100%';
+                applyZoom('100');
+                localStorage.removeItem('textFontChinese');
+                localStorage.removeItem('textFontWestern');
+                localStorage.removeItem('codeFontChinese');
+                localStorage.removeItem('codeFontWestern');
+                localStorage.removeItem('fontSize');
+                localStorage.removeItem('bgType');
+                localStorage.removeItem('bgColorLight');
+                localStorage.removeItem('bgColorDark');
+                form.reset();
+                solidBgOptions.style.display = 'none';
+                applySettings();
+                showToast('已重置为默认设置！');
+            });
+
+            applySettings();
+            applyZoom(zoomLevel);
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySettings);
+        });
+
+        // 显示信息
+        function showToast(message) {
+            let toast = document.querySelector('.toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'toast';
+                document.body.appendChild(toast);
+            }
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

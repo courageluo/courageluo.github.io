@@ -52,15 +52,8 @@
         }
 
         /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-guessbackground.svg');
+        .background-layer {
             background-size: 200%;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-guessbackground.svg'); /* 夜晚模式下的背景图片 */
-            }
         }
 
         /* 在弹出设置框之前，将其隐藏 */
@@ -278,7 +271,7 @@
     <div id="footer"></div>
 
     <!-- 内部JS文件 -->
-    <script src="/href/script.js"></script>
+    <script src="/href/script.js" defer></script>
     <script src="/blog/quote-js/jquery/jquery-3.7.1.js"></script>
     <script>
         let isGameOver = false;

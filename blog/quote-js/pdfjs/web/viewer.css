@@ -519,7 +519,6 @@
   }
 
 .annotationLayer .textWidgetAnnotation :is(input, textarea), .annotationLayer .choiceWidgetAnnotation select, .annotationLayer .buttonWidgetAnnotation:is(.checkBox, .radioButton) input{
-    background-image:var(--annotation-unfocused-field-background);
     border:2px solid var(--input-unfocused-border-color);
     box-sizing:border-box;
     font:calc(9px * var(--scale-factor)) sans-serif;
@@ -567,7 +566,6 @@
   }
 
 .annotationLayer .buttonWidgetAnnotation:is(.checkBox, .radioButton) :focus{
-    background-image:none;
     background-color:transparent;
   }
 
@@ -903,7 +901,6 @@
 }
 
 :is(.xfaTextfield, .xfaSelect):focus{
-  background-image:none;
   background-color:transparent;
   outline:var(--xfa-focus-outline);
   outline-offset:-1px;
@@ -920,7 +917,6 @@
   flex:1 1 auto;
   border:none;
   resize:none;
-  background-image:var(--xfa-unfocused-field-background);
 }
 
 .xfaSelect{

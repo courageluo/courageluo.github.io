@@ -22,16 +22,11 @@
         }
 
         /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-blogbackground.svg');
+        .background-layer {
             background-size: 100%;
         }
 
         @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-blogbackground.svg');
-            }
-
             a {
                 color: #20e3d6;
             }
@@ -393,7 +388,7 @@
     <div id="footer"></div>
 
     <!-- 内部JS文件 -->
-    <script src="/href/script.js"></script>
+    <script src="/href/script.js" defer></script>
     <script src="/blog/quote-js/prismjs/prism.js"></script>
     <script src="/blog/quote-js/katex/katex.min.js"></script>
     <script src="/blog/quote-js/katex/contrib/copy-tex.min.js"></script>

@@ -31,6 +31,180 @@ window.addEventListener('load', function() {
     }
 });
 
+// 背景图片定义
+const bgConfig = {
+    "/": {
+        "light": "/img/background/day/main.svg",
+        "dark": "/img/background/night/main.svg"
+    },
+    "/404.html": {
+        "light": "/img/background/day/guessnum.svg",
+        "dark": "/img/background/night/guessnum.svg"
+    },
+    "/page/about.html": {
+        "light": "/img/background/day/update.svg",
+        "dark": "/img/background/night/update.svg"
+    },
+    "/page/guessnum.html": {
+        "light": "/img/background/day/guessnum.svg",
+        "dark": "/img/background/night/guessnum.svg"
+    },
+    "/page/factorize.html": {
+        "light": "/img/background/day/factorize.svg",
+        "dark": "/img/background/night/factorize.svg"
+    },
+    "/page/settings.html": {
+        "light": "/img/background/day/settings.svg",
+        "dark": "/img/background/night/settings.svg"
+    },
+    "/blog/": {
+        "light": "/img/background/day/blog.svg",
+        "dark": "/img/background/night/blog.svg"
+    }
+};
+
+// 在 DOM 加载时初始化
+document.addEventListener('DOMContentLoaded', function() {
+    // 确保背景层存在
+    if (!document.querySelector('.background-layer')) {
+        const bgLayer = document.createElement('div');
+        bgLayer.className = 'background-layer';
+        document.body.insertBefore(bgLayer, document.body.firstChild);
+    }
+    applySettings();
+});
+
+// 动态应用设置
+function applySettings() {
+    const defaultBgLight = getDefaultBgLight();
+    const defaultBgDark = getDefaultBgDark();
+    const bgType = localStorage.getItem('bgType') || 'default';
+
+    // 设置字体
+    const textFontChinese = localStorage.getItem('textFontChinese') || 'JiangChengHei';
+    const textFontWestern = localStorage.getItem('textFontWestern') || 'Inter';
+    const codeFontChinese = localStorage.getItem('codeFontChinese') || 'JiangChengHei';
+    const codeFontWestern = localStorage.getItem('codeFontWestern') || 'CascadiaMono';
+
+    document.body.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;
+    document.querySelectorAll('p:not(.copyright)').forEach(p => p.style.fontFamily = `${textFontWestern}, ${textFontChinese}`);
+    document.querySelectorAll('select').forEach(select => {select.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;});
+    document.querySelectorAll('button').forEach(button => {button.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;});
+    document.querySelectorAll('input').forEach(input => {input.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;});
+    document.querySelectorAll('code').forEach(code => {code.style.fontFamily = `${codeFontWestern}, ${codeFontChinese}`;});
+
+    // 应用缩放设置
+    const zoomLevel = localStorage.getItem('zoomLevel') || '100';
+    applyZoom(zoomLevel);
+    
+    // 设置背景
+    let bgLayer = document.querySelector('.background-layer');
+    if (!bgLayer) {
+        bgLayer = document.createElement('div');
+        bgLayer.className = 'background-layer';
+        document.body.insertBefore(bgLayer, document.body.firstChild);
+    }
+
+    if (bgType === 'solid') {
+        bgLayer.style.display = 'none';
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.style.backgroundColor = bgColorDark;
+        } else {
+            document.body.style.backgroundColor = bgColorLight;
+        }
+    } else {
+        bgLayer.style.display = 'block';
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            bgLayer.style.backgroundImage = `url(${defaultBgDark})`;
+        } else {
+            bgLayer.style.backgroundImage = `url(${defaultBgLight})`;
+        }
+        document.body.style.backgroundColor = 'transparent';
+    }
+
+    // 确保背景层高度始终覆盖整个内容
+    const updateBgLayerHeight = () => {
+        const contentHeight = document.documentElement.scrollHeight;
+        bgLayer.style.height = `${Math.max(contentHeight, window.innerHeight)}px`;
+    };
+    
+    updateBgLayerHeight();
+    window.addEventListener('resize', updateBgLayerHeight);
+    window.addEventListener('scroll', updateBgLayerHeight);
+}
+
+// 缩放调节
+window.addEventListener('resize', function() {
+    const currentHeight = document.querySelector('.content').scrollHeight * (localStorage.zoomLevel / 100 || 1);
+    if (currentHeight !== lastHeight) {
+        lastHeight = currentHeight;
+        document.querySelector('.background-layer').style.height = `${lastHeight}px`;
+        // console.log(lastHeight);
+    }
+    document.querySelector('.background-layer').style.height = `${currentHeight}px`;
+});
+
+function bgZoom() {
+    const bgLayer = document.querySelector('.background-layer');
+    if (!bgLayer) { return; }
+    const zoomLevel = localStorage.getItem('zoomLevel') / 100 || 1;
+    let pageHeight = document.querySelector('.content').scrollHeight + document.querySelector('#footer').scrollHeight;
+    let bgHeight = zoomLevel * pageHeight;
+    bgLayer.style.height = `${bgHeight}px`;
+}
+
+// 引用 script.js 不加 defer 用这句
+// window.addEventListener('load', bgZoom);
+document.addEventListener('DOMContentLoaded', bgZoom);
+
+function applyZoom(zoomLevel) {
+    document.querySelector('#footer').style.zoom = `${zoomLevel}%`;
+    document.querySelector('.content').style.zoom = `${zoomLevel}%`;
+    bgZoom();
+}
+
+window.addEventListener('load', function() {
+    if (document.querySelector('.sidebar')) {
+        // let height = window.innerHeight + 'px';
+        // const asideElement = document.querySelector('.sidebar');
+        // asideElement.style.cssText = 'height: ' + height + ' !important;';
+        // asideElement.style.setProperty('height', height, 'important');
+        document.querySelector('.sidebar').style.height = '1000px';
+    }
+});
+
+// 基于路径获取默认背景
+function getDefaultBgLight() {
+    return getDefaultBg('light');
+}
+
+function getDefaultBgDark() {
+    return getDefaultBg('dark');
+}
+
+function getDefaultBg(mode) {
+    const path = window.location.pathname;
+
+    // 优先精确匹配（bgConfig 中直接定义到具体文件的）
+    if (bgConfig[path] && bgConfig[path][mode]) {
+        return bgConfig[path][mode];
+    }
+
+    // 否则找最符合的路径（bgConfig 中定义到文件夹的）
+    let matchingFolder = '';
+    Object.keys(bgConfig).forEach(key => {
+        if (key.endsWith('/') && path.startsWith(key) && key.length > matchingFolder.length) {
+            matchingFolder = key;
+        }
+    });
+
+    return bgConfig[matchingFolder]?.[mode] || '/img/background/day/main.svg';
+}
+
+// 应用深色设置
+document.addEventListener('DOMContentLoaded', applySettings);
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySettings);
+
 // 控制台输出字符画
 const fontSize = 10;
 const colors = [

@@ -1,23 +1,57 @@
 /* 还没学CSS，整着玩的 */
 
-/* 颜色主题设置 */
 :root {
+    /* 颜色变量设置 */
     --bg-color-light: #bcd5da;
     --text-color-light: black;
     --bg-color-dark: #1d446b;
     --text-color-dark: #efefef;
 }
 
+html {
+    background-color: var(--bg-color-light);
+}
+
+body {
+    width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        background-color: var(--bg-color-dark);
+    }
+}
+
+html, body {
+    height: 100%;
+}
+
 /* 背景图片设置 */
 body {
-    margin: 0px;
+    margin: 0;
     display: flex;
     min-height: 100vh;
+    position: absolute;
     flex-direction: column;
     color: var(--text-color-light);
     background-color: var(--bg-color-light);
-    background-repeat: repeat; /* 重复填充背景图片 */
+    /* background-repeat: repeat;
     background-attachment: scroll;
+    background-size: cover;
+    background-position: center center; */
+}
+
+.background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* 置于内容下方 */
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center center;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -70,11 +104,44 @@ h1 {
     font-display: swap;
 }
 
-/* 调整网页字体 */
-body, p {
-    font-family: "text";
+/* 便于自定义全局字体后的修改 */
+
+@font-face {
+    font-family: SmileySans;
+    src: url('/font/SmileySans-Oblique.woff2');
+    font-display: swap;
 }
 
+@font-face {
+    font-family: JiangChengHei;
+    src: url('/font/JiangChengHei-500W.woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('/font/Inter-Regular.woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: CascadiaMono;
+    src: url('/font/CascadiaMono-Regular.woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: CascadiaCode;
+    src: url('/font/CascadiaCode-Regular.woff2');
+}
+
+@font-face {
+    font-family: JetBrainsMono;
+    src: url('/font/JetBrainsMono-Medium.ttf');
+    font-display: swap;
+}
+
+/* 调整网页字体 */
 h1 {
     font-family: "title";
 }
@@ -96,7 +163,11 @@ label {
 
 /* 全局设定 */
 .content {
-    flex: 1;
+    flex: 1 0 auto;
+}
+
+#footer {
+    flex-shrink: 0;
 }
 
 body {
@@ -115,7 +186,7 @@ html {
 
 /* 输入框和按钮字体和文字大小 */
 input, button {
-    font-family: text;
+    /* font-family: text; */
     font-size: 16px;
 }
 

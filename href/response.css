@@ -27,7 +27,7 @@ main {
         display: block;
         top: 0;
         width: 35%;
-        height: 100vh;
+        /* height: 100vh; */
         position: sticky;
         border-right: 3px dotted #649c9c;
     }

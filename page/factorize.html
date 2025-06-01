@@ -23,15 +23,8 @@
         }
 
         /* 背景图片设置 */
-        body {
-            background-image: url('/img/background/day-factorizebackground.svg');
+        .background-layer {
             background-size: 100%;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-image: url('/img/background/night-factorizebackground.svg');
-            }
         }
 
         /* 在弹出设置框之前，将其隐藏 */
@@ -261,7 +254,7 @@
     <div id="footer"></div>
 
     <!-- 内部JS文件 -->
-    <script src="/href/script.js"></script>
+    <script src="/href/script.js" defer></script>
     <script>
         // 生成随机数
         function randomInt(a, b) {

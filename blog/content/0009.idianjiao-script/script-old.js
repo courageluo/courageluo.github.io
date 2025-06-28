@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         自动显示听力答案
-// @namespace    https://courageluo.xn--kivy66br3pu7d.top/
+// @namespace    https://courageluo.github.io/
 // @supportURL   courageluo@gmail.com
 // @version      2024-07-30
 // @description  Display the answer of idianjiao automatically
 // @author       Courage Luo
 // @match        https://www.idianjiao.com/*
-// @icon         https://courageluo.xn--kivy66br3pu7d.top/img/favicon.png
+// @icon         https://courageluo.github.io/img/favicon.png
 // @grant        none
 // ==/UserScript==
 

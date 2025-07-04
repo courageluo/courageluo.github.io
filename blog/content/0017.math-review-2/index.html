@@ -25,10 +25,10 @@
 
         /* 问题：在小于一定宽度时，右边会留白
            临时解决方案如下 */
-        html {
+        /* html {
             width: 100%;
             overflow-x: hidden;
-        }
+        } */
 
         @media (max-width: 768px) {
             body {
@@ -362,7 +362,7 @@
                         若已知 $\boldsymbol a=(x_0,y_0)$，则 $\boldsymbol v=(y_0,-x_0)$ 是 $l$ 的一个法向量
                     </li>
                     <li>
-                        若已知 $\boldsymbol a=(u,v)$，则 $u=0$ 时，$\theta=90^\circ$，若$u\ne0$，则 $k=\tan\theta=\displaystyle\frac vu$
+                        若已知 $\boldsymbol a=(u,v)$，则 $u=0$ 时，$\theta=90^\circ$，若 $u\ne0$，则 $k=\tan\theta=\displaystyle\frac vu$
                     </li>
                     <li>
                         记 $A(x_1,y_1)$，$B(x_2,y_2)$ 是直线 $l:y=kx+b$ 上的不相同两点，则<br>
@@ -495,7 +495,7 @@
                             </li>
                             <li>
                                 第二定义<br>
-                                平面内到定点 $F$ 的距离与到定直线 $l:y=\dfrac{c^2}a$ 的距离之比为 $\dfrac ca$ 的点 $P$ 的轨迹是椭圆
+                                平面内到定点 $F(c,0)$ 的距离与到定直线 $l:x=\dfrac{c^2}a$ 的距离之比为 $\dfrac ca$ 的点 $P$ 的轨迹是椭圆
                             </li>
                             <li>
                                 第三定义<br>
@@ -564,7 +564,7 @@
                         焦点弦公式<br>
                         过一焦点的直线 $l$ 交椭圆于 $P,Q$ 两点，则 $PQ$ 称为焦点弦<br>
                         当 $PQ\perp x$ 轴时，$|PQ|=\dfrac{c^2}a$ 最小，称为通径<br>
-                        设 $\theta$ 为 $l$ 与长轴的夹角，则 $|PF_1|$、$|PF_2|$ 中较短的一条长为 $\dfrac{\frac{b^2}a}{1+e\cos\theta}$，即 $\dfrac{ep}{1+e\cos\theta}$（$p=\dfrac{b^2}a$，称为焦准距），较长的一条长为 $\dfrac{\frac{b^2}a}{1-e\cos\theta}$ <br>
+                        设 $\theta$ 为 $l$ 与长轴的夹角，则 $|PF_1|$、$|PF_2|$ 中较短的一条长为 $\dfrac{\frac{b^2}a}{1+e\cos\theta}$，即 $\dfrac{ep}{1+e\cos\theta}$（$p=\dfrac{b^2}c$，称为焦准距），较长的一条长为 $\dfrac{\frac{b^2}a}{1-e\cos\theta}$ <br>
                         即 $|PF_1|=\dfrac{\frac{b^2}a}{1+e\cos\theta}=\dfrac{ep}{1+e\cos\theta}$
                     </li>
                     <li>
@@ -578,6 +578,9 @@
                                 离心率 $e=\dfrac{\sin\theta}{\sin\alpha+\sin\beta}$
                             </li>
                         </ul>
+                        <div class="formula-rectangle">
+                            <img src="./img/chapter-2-3/F-triangle.svg" alt="焦点三角形" style="width: 100%; max-width: 500px;">
+                        </div>
                     </li>
                     <li>
                         外准圆与内准圆<br>
@@ -1317,7 +1320,7 @@
                     </li>
                     <li>
                         数学归纳法<br>
-                        如果一个以<strong>自然数</strong>有关的命题，<br>
+                        如果一个与<strong>自然数</strong>有关的命题，<br>
                         <ol class="mi">
                             <li>
                                 当 $n = n_0$ 时，命题成立；
@@ -1461,26 +1464,26 @@
                     <li>
                         对数、指数与 $x$ 乘除的函数图像<br>
                         <div class="formula-rectangle">
-                            <img src="./img/xex.svg" alt="f(x)=x*e^x" style="width: 100%; max-width: 700px;">
+                            <img src="./img/chapter-6/x-ex.svg" alt="f(x)=x*e^x" style="width: 100%; max-width: 700px;">
                         </div>
                         <div style="height: 5px;"></div>
                         <div class="formula-rectangle">
-                            <img src="./img/ex-x.svg" alt="f(x)=e^x/x" style="width: 100%; max-width: 700px;">
+                            <img src="./img/chapter-6/ex-x.svg" alt="f(x)=e^x/x" style="width: 100%; max-width: 700px;">
                         </div>
                         <div class="formula-rectangle">
-                            <img src="./img/x-ex.svg" alt="f(x)=x/e^x" style="width: 100%; max-width: 700px;">
-                        </div>
-                        <div style="height: 5px;"></div>
-                        <div class="formula-rectangle">
-                            <img src="./img/xlnx.svg" alt="f(x)=x*lnx" style="width: 100%; max-width: 700px;">
+                            <img src="./img/chapter-6/x-ex.svg" alt="f(x)=x/e^x" style="width: 100%; max-width: 700px;">
                         </div>
                         <div style="height: 5px;"></div>
                         <div class="formula-rectangle">
-                            <img src="./img/lnx-x.svg" alt="f(x)=lnx/x" style="width: 100%; max-width: 700px;">
+                            <img src="./img/chapter-6/xlnx.svg" alt="f(x)=x*lnx" style="width: 100%; max-width: 700px;">
                         </div>
                         <div style="height: 5px;"></div>
                         <div class="formula-rectangle">
-                            <img src="./img/x-lnx.svg" alt="f(x)=x/lnx" style="width: 100%; max-width: 700px;">
+                            <img src="./img/chapter-6/lnx-x.svg" alt="f(x)=lnx/x" style="width: 100%; max-width: 700px;">
+                        </div>
+                        <div style="height: 5px;"></div>
+                        <div class="formula-rectangle">
+                            <img src="./img/chapter-6/x-lnx.svg" alt="f(x)=x/lnx" style="width: 100%; max-width: 700px;">
                         </div>
                     </li>
                 </ol>

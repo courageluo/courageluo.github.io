@@ -104,43 +104,6 @@ h1 {
     font-display: swap;
 }
 
-/* 便于自定义全局字体后的修改 */
-
-@font-face {
-    font-family: SmileySans;
-    src: url('/font/SmileySans-Oblique.woff2');
-    font-display: swap;
-}
-
-@font-face {
-    font-family: JiangChengHei;
-    src: url('/font/JiangChengHei-500W.woff2');
-    font-display: swap;
-}
-
-@font-face {
-    font-family: Inter;
-    src: url('/font/Inter-Regular.woff2');
-    font-display: swap;
-}
-
-@font-face {
-    font-family: CascadiaMono;
-    src: url('/font/CascadiaMono-Regular.woff2');
-    font-display: swap;
-}
-
-@font-face {
-    font-family: CascadiaCode;
-    src: url('/font/CascadiaCode-Regular.woff2');
-}
-
-@font-face {
-    font-family: JetBrainsMono;
-    src: url('/font/JetBrainsMono-Medium.ttf');
-    font-display: swap;
-}
-
 /* 调整网页字体 */
 h1 {
     font-family: "title";
@@ -290,4 +253,46 @@ input {
         background-color: #0E2A47; /* 深蓝色背景 */
         color: #aaaaaa; /* 浅灰文字 */
     }
+}
+
+/* 自定义字体样式的字体名 */
+@font-face {
+    font-family: SmileySans;
+    src: url('/font/SmileySans-Oblique.woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: JiangChengHei;
+    src: url('/font/JiangChengHei-500W.woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('/font/Inter-Regular.woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: CascadiaMono;
+    src: url('/font/CascadiaMono-Regular.woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: CascadiaCode;
+    src: url('/font/CascadiaCode-Regular.woff2');
+}
+
+@font-face {
+    font-family: JetBrainsMono;
+    src: url('/font/JetBrainsMono-Medium.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: MapleMono;
+    src: url('/font/MapleMono-Regular.woff2');
+    font-display: swap;
 }

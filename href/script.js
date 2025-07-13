@@ -107,10 +107,14 @@ function applySettings() {
 
     if (bgType === 'solid') {
         bgLayer.style.display = 'none';
+        const bgColorLight = localStorage.getItem('bgColorLight') || '#bcd5da';
+        const bgColorDark = localStorage.getItem('bgColorDark') || '#1d446b';
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.body.style.backgroundColor = bgColorDark;
+            document.documentElement.style.backgroundColor = bgColorDark;
         } else {
             document.body.style.backgroundColor = bgColorLight;
+            document.documentElement.style.backgroundColor = bgColorLight;
         }
     } else {
         bgLayer.style.display = 'block';
@@ -136,10 +140,12 @@ function applySettings() {
 // 缩放调节
 window.addEventListener('resize', function() {
     const currentHeight = document.querySelector('.content').scrollHeight * (localStorage.zoomLevel / 100 || 1);
+    let lastHeight = currentHeight;
+    console.log(lastHeight);
     if (currentHeight !== lastHeight) {
         lastHeight = currentHeight;
         document.querySelector('.background-layer').style.height = `${lastHeight}px`;
-        // console.log(lastHeight);
+        console.log(lastHeight);
     }
     document.querySelector('.background-layer').style.height = `${currentHeight}px`;
 });

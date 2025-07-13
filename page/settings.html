@@ -138,6 +138,7 @@
                         <option value="Inter">Inter（默认）</option>
                         <option value="CascadiaMono">Cascadia Mono</option>
                         <option value="CascadiaCode">Cascadia Code</option>
+                        <option value="MapleMono">Maple Mono</option>
                         <option value="JetBrainsMono">JetBrains Mono</option>
                     </select>
 
@@ -156,6 +157,7 @@
                     <select name="codeFontWestern">
                         <option value="CascadiaMono">Cascadia Mono（默认）</option>
                         <option value="CascadiaCode">Cascadia Code</option>
+                        <option value="MapleMono">Maple Mono</option>
                         <option value="JetBrainsMono">JetBrains Mono</option>
                     </select>
 
@@ -250,6 +252,12 @@
             document.querySelector('select[name="codeFontChinese"]').value = codeFontChinese;
             document.querySelector('select[name="codeFontWestern"]').value = codeFontWestern;
 
+            // 初始化颜色选择器
+            if (bgType === 'solid') {
+                document.querySelector('input[name="bgColorLight"]').value = localStorage.getItem('bgColorLight') || '#bcd5da';
+                document.querySelector('input[name="bgColorDark"]').value = localStorage.getItem('bgColorDark') || '#1d446b';
+            }
+
             // 保存设置
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
@@ -265,9 +273,6 @@
                 if (formData.get('bgType') === 'solid') {
                     localStorage.setItem('bgColorLight', formData.get('bgColorLight'));
                     localStorage.setItem('bgColorDark', formData.get('bgColorDark'));
-                } else {
-                    localStorage.removeItem('bgColorLight');
-                    localStorage.removeItem('bgColorDark');
                 }
                 applySettings();
                 showToast('设置已保存！');

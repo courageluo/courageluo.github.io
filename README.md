@@ -1,12 +1,12 @@
-# Courage Luo的网站
+# Courage Luo 的网站
 
-一个并不完整的网站构想，作为我从零开始学习HTML的记录。现在网页上有几个简单的功能，您可以通过[点击此处](https://courageluo.github.io/index.html)访问。
+一个并不完整的网站构想，作为我从零开始学习 HTML 的记录。现在网页上有几个简单的功能，您可以通过[点击此处](https://courageluo.github.io/index.html)访问。
 
 An incomplete website concept as a record of my learning HTML from scratch. There are several simple functions on the webpage now, which you can access by [clicking here](https://courageluo.github.io/index.html).
 
 ## 运行
 
-克隆仓库到本地，进入目录并运行`run.py`。
+克隆仓库到本地，进入目录并运行 `run.py`。
 
 Clone the repo to your computer, then go into the root directory and run `run.py`.
 
@@ -16,7 +16,7 @@ cd courageluo.github.io
 python run.py
 ```
 
-然后打开`run.url`或访问`http://127.0.0.1:8000/`来运行这个网站。当然，您也可以通过直接打开`index.html`运行，但这样可能无法动态加载内容。
+然后打开 `run.url` 或访问 `http://127.0.0.1:8000/` 来运行这个网站。当然，您也可以通过直接打开 `index.html` 运行，但这样可能无法动态加载内容。
 
 Then open `run.url` or access `http://127.0.0.1:8000/` to run this website. Of course, you can also run it by opening `index.html` directly, but this may not load the content dynamically.
 

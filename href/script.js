@@ -125,30 +125,29 @@ function applySettings() {
         }
         document.body.style.backgroundColor = 'transparent';
     }
-
-    // 确保背景层高度始终覆盖整个内容
-    const updateBgLayerHeight = () => {
-        const contentHeight = document.documentElement.scrollHeight;
-        bgLayer.style.height = `${Math.max(contentHeight, window.innerHeight)}px`;
-    };
     
     updateBgLayerHeight();
     window.addEventListener('resize', updateBgLayerHeight);
     window.addEventListener('scroll', updateBgLayerHeight);
 }
 
-// 缩放调节
-window.addEventListener('resize', function() {
-    const currentHeight = document.querySelector('.content').scrollHeight * (localStorage.zoomLevel / 100 || 1);
-    let lastHeight = currentHeight;
-    console.log(lastHeight);
-    if (currentHeight !== lastHeight) {
-        lastHeight = currentHeight;
-        document.querySelector('.background-layer').style.height = `${lastHeight}px`;
-        console.log(lastHeight);
-    }
-    document.querySelector('.background-layer').style.height = `${currentHeight}px`;
-});
+function updateBgLayerHeight() {
+    const bgLayer = document.querySelector('.background-layer');
+    if (!bgLayer) return;
+    
+    const contentHeight = Math.max(
+        document.body.scrollHeight, 
+        document.body.offsetHeight,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight
+    );
+    
+    bgLayer.style.height = `${Math.max(contentHeight, window.innerHeight)}px`;
+}
+
+// 为了防止调整窗口大小后背景层高度不正确
+window.addEventListener('resize', applySettings);
 
 function bgZoom() {
     const bgLayer = document.querySelector('.background-layer');

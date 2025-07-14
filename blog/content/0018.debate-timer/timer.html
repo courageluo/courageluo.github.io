@@ -19,9 +19,6 @@
             background-size: 100%;
         }
 
-        @media (prefers-color-scheme: dark) {
-                    }
-
         @font-face {
             font-family: time;
             src: url('/blog/content/0003.jquery-clock/font.woff2');
@@ -38,11 +35,12 @@
 
         .title {
             font-size: 45px;
-            font-family: title;
+            font-family: title !important;
             text-align: center;
         }
 
         .title-bg {
+            font-family: title !important;
             padding: 10px 15px;
             --color: #BDBDBD3A;
             background-color: var(--color);
@@ -62,7 +60,7 @@
         }
 
         .time-display {
-            font-family: time;
+            font-family: time !important;
             font-size: 175px;
         }
 
@@ -74,6 +72,7 @@
             height: 800px;
             background-size: cover;
             background-position: center;
+            background-image: url('./bg.svg') !important;
         }
 
         .finished, .debate-finished {
@@ -107,7 +106,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: copyright;
+            font-family: copyright !important;
         }
 
         #overlay {
@@ -158,7 +157,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: copyright;
+            font-family: copyright !important;
         }
     </style>
 </head>

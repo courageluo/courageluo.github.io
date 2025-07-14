@@ -65,7 +65,6 @@ const bgConfig = {
 
 // 在 DOM 加载时初始化
 document.addEventListener('DOMContentLoaded', function() {
-    // 确保背景层存在
     if (!document.querySelector('.background-layer')) {
         const bgLayer = document.createElement('div');
         bgLayer.className = 'background-layer';
@@ -80,18 +79,80 @@ function applySettings() {
     const defaultBgDark = getDefaultBgDark();
     const bgType = localStorage.getItem('bgType') || 'default';
 
-    // 设置字体
-    const textFontChinese = localStorage.getItem('textFontChinese') || 'JiangChengHei';
-    const textFontWestern = localStorage.getItem('textFontWestern') || 'Inter';
-    const codeFontChinese = localStorage.getItem('codeFontChinese') || 'JiangChengHei';
-    const codeFontWestern = localStorage.getItem('codeFontWestern') || 'CascadiaMono';
+    const getFontValue = (settingName, defaultValue) => {
+        // 先尝试获取自定义字体值
+        const customValue = localStorage.getItem(`${settingName}Custom`);
+        if (customValue) return customValue;
+        
+        // 然后尝试获取预设字体值
+        const presetValue = localStorage.getItem(settingName);
+        return presetValue || defaultValue;
+    };
 
-    document.body.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;
-    document.querySelectorAll('p:not(.copyright)').forEach(p => p.style.fontFamily = `${textFontWestern}, ${textFontChinese}`);
-    document.querySelectorAll('select').forEach(select => {select.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;});
-    document.querySelectorAll('button').forEach(button => {button.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;});
-    document.querySelectorAll('input').forEach(input => {input.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;});
-    document.querySelectorAll('code').forEach(code => {code.style.fontFamily = `${codeFontWestern}, ${codeFontChinese}`;});
+    // 解析CSS内容获取字体名称
+    function parseFontFamily(cssText) {
+        const match = cssText.match(/font-family:\s*'([^']+)'|font-family:\s*"([^"]+)"/);
+        return match ? (match[1] || match[2]) : null;
+    }
+
+    async function loadWebFont(fontValue) {
+        const indicator = document.querySelector('.font-loading-indicator');
+        
+        try {
+            if (indicator) {
+                indicator.style.display = 'block';
+            }
+            
+            // 处理 URL 类型的字体
+            if (fontValue && fontValue.startsWith('http')) {
+                const response = await fetch(fontValue);
+                const cssText = await response.text();
+                
+                const fontFamily = parseFontFamily(cssText);
+                if (!fontFamily) {
+                    throw new Error('无法解析字体名称');
+                }
+                
+                const style = document.createElement('style');
+                style.textContent = cssText;
+                document.head.appendChild(style);
+                
+                return fontFamily;
+            } else { // 处理本地字体
+                return fontValue;
+            }
+        } catch (error) {
+            console.error('字体加载失败:', error);
+            showToast(`字体加载失败: ${error.message}`);
+            return null;
+        } finally {
+            if (indicator) {
+                indicator.style.display = 'none';
+            }
+        }
+    }
+
+    // 异步加载字体并应用
+    async function applyFontSettings() {
+        const fonts = await Promise.all([
+            loadWebFont(getFontValue('textFontChinese', 'JiangChengHei')),
+            loadWebFont(getFontValue('textFontWestern', 'Inter')),
+            loadWebFont(getFontValue('codeFontChinese', 'JiangChengHei')),
+            loadWebFont(getFontValue('codeFontWestern', 'CascadiaMono'))
+        ]);
+
+        const [textFontChinese, textFontWestern, codeFontChinese, codeFontWestern] = fonts;
+        
+        // 应用字体设置
+        document.body.style.fontFamily = `${textFontWestern || 'Inter'}, ${textFontChinese || 'JiangChengHei'}`;
+        document.querySelectorAll('p:not(.copyright)').forEach(p => p.style.fontFamily = `${textFontWestern}, ${textFontChinese}`);
+        document.querySelectorAll('select').forEach(select => {select.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;});
+        document.querySelectorAll('button').forEach(button => {button.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;});
+        document.querySelectorAll('input').forEach(input => {input.style.fontFamily = `${textFontWestern}, ${textFontChinese}`;});
+        document.querySelectorAll('code').forEach(code => {code.style.fontFamily = `${codeFontWestern}, ${codeFontChinese}`;});
+    }
+
+    applyFontSettings();
 
     // 应用缩放设置
     const zoomLevel = localStorage.getItem('zoomLevel') || '100';
@@ -170,10 +231,6 @@ function applyZoom(zoomLevel) {
 
 window.addEventListener('load', function() {
     if (document.querySelector('.sidebar')) {
-        // let height = window.innerHeight + 'px';
-        // const asideElement = document.querySelector('.sidebar');
-        // asideElement.style.cssText = 'height: ' + height + ' !important;';
-        // asideElement.style.setProperty('height', height, 'important');
         document.querySelector('.sidebar').style.height = '1000px';
     }
 });
@@ -209,6 +266,21 @@ function getDefaultBg(mode) {
 // 应用深色设置
 document.addEventListener('DOMContentLoaded', applySettings);
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySettings);
+
+// 消息显示
+function showToast(message) {
+    let toast = document.querySelector('.toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2000);
+}
 
 // 控制台输出字符画
 const fontSize = 10;

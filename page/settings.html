@@ -33,6 +33,16 @@
             background-color: #bacfd7;
         }
 
+        .custom-font-input {
+            display: none;
+            margin-top: 10px;
+            padding-left: 5px;
+            width: 100%;
+            max-width: 350px;
+            height: 22px;
+            border-radius: 5px;
+        }
+
         @media (prefers-color-scheme: dark) {
             select {
                 color: white;
@@ -40,22 +50,18 @@
             }
         }
 
-        .toast {
+        .font-loading-indicator {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #1d2031;
-            border: #074860 1.5px solid;
-            color: #fff;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #d2d5e6cc;
+            border: #5ec1b9 1.5px solid;
+            color: #000000;
             padding: 10px 20px;
             border-radius: 5px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            z-index: 1;
-        }
-
-        .toast.show {
-            opacity: 1;
+            display: block;
+            z-index: 10;
         }
 
         input[type="color"] {
@@ -93,6 +99,12 @@
                 background: #10457d;
                 border: 1.5px solid #a9b0b9;
             }
+
+            .font-loading-indicator {
+                background-color: #1d2031cc;
+                border: #074860 1.5px solid;
+                color: #fff;
+            }
         }
 
         /* 垂直居中容器 */
@@ -125,41 +137,57 @@
                     <p>注：更改为非网站默认字体可能会导致某些内容的显示问题。</p>
                     <!-- 字体设置 -->
                     <label>正文字体（中文）：</label>
-                    <select name="textFontChinese">
+                    <select name="textFontChinese" id="textFontChinese">
                         <option value="JiangChengHei">江城黑体（默认）</option>
                         <option value="SmileySans">得意黑</option>
                         <option value="system-ui">系统默认</option>
-                    </select>
+                        <option value="custom">自定义</option>
+                    </select><br>
+
+                    <input type="text" name="textFontChineseCustom" id="textFontChineseCustom"
+                        class="custom-font-input" placeholder="输入本地字体名称或外部 URL">
 
                     <p></p>
 
                     <label>正文字体（西文）：</label>
-                    <select name="textFontWestern">
+                    <select name="textFontWestern" id="textFontWestern">
                         <option value="Inter">Inter（默认）</option>
                         <option value="CascadiaMono">Cascadia Mono</option>
                         <option value="CascadiaCode">Cascadia Code</option>
                         <option value="MapleMono">Maple Mono</option>
                         <option value="JetBrainsMono">JetBrains Mono</option>
-                    </select>
+                        <option value="custom">自定义</option>
+                    </select><br>
+
+                    <input type="text" name="textFontWesternCustom" id="textFontWesternCustom"
+                        class="custom-font-input" placeholder="输入本地字体名称或外部 URL">
 
                     <p></p>
 
                     <label>代码字体（中文）：</label>
-                    <select name="codeFontChinese">
+                    <select name="codeFontChinese" id="codeFontChinese">
                         <option value="JiangChengHei">江城黑体（默认）</option>
                         <option value="SmileySans">得意黑</option>
                         <option value="system-ui">系统默认</option>
-                    </select>
+                        <option value="custom">自定义</option>
+                    </select><br>
+
+                    <input type="text" name="codeFontChineseCustom" id="codeFontChineseCustom"
+                        class="custom-font-input" placeholder="输入本地字体名称或外部 URL">
 
                     <p></p>
 
                     <label>代码字体（西文）：</label>
-                    <select name="codeFontWestern">
+                    <select name="codeFontWestern" id="codeFontWestern">
                         <option value="CascadiaMono">Cascadia Mono（默认）</option>
                         <option value="CascadiaCode">Cascadia Code</option>
                         <option value="MapleMono">Maple Mono</option>
                         <option value="JetBrainsMono">JetBrains Mono</option>
-                    </select>
+                        <option value="custom">自定义</option>
+                    </select><br>
+
+                    <input type="text" name="codeFontWesternCustom" id="codeFontWesternCustom"
+                        class="custom-font-input" placeholder="输入本地字体名称或外部 URL">
 
                     <p></p>
 
@@ -203,6 +231,7 @@
                 </form>
                 <p></p>
             </div>
+            <div class="font-loading-indicator">正在加载字体</div>
         </main>
     </div>
 
@@ -258,22 +287,73 @@
                 document.querySelector('input[name="bgColorDark"]').value = localStorage.getItem('bgColorDark') || '#1d446b';
             }
 
+            // 自定义字体设置
+            const fontSettings = [
+                { select: 'textFontChinese', input: 'textFontChineseCustom' },
+                { select: 'textFontWestern', input: 'textFontWesternCustom' },
+                { select: 'codeFontChinese', input: 'codeFontChineseCustom' },
+                { select: 'codeFontWestern', input: 'codeFontWesternCustom' }
+            ];
+
+            // 初始化自定义字体显示状态
+            fontSettings.forEach(setting => {
+                const select = document.querySelector(`select[name="${setting.select}"]`);
+                const input = document.querySelector(`input[name="${setting.input}"]`);
+                
+                // 检查是否有保存的自定义字体
+                const customValue = localStorage.getItem(`${setting.select}Custom`);
+                if (customValue) {
+                    // 设置选择器为"自定义"选项
+                    select.value = 'custom';
+                    input.value = customValue;
+                    input.style.display = 'block';
+                }
+                
+                // 添加change事件监听
+                select.addEventListener('change', function() {
+                    input.style.display = this.value === 'custom' ? 'block' : 'none';
+                });
+            });
+
             // 保存设置
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
                 const formData = new FormData(form);
                 const zoomLevel = formData.get('zoomLevel');
+
+                fontSettings.forEach(setting => {
+                    const selectValue = formData.get(setting.select);
+                    const inputElement = document.querySelector(`input[name="${setting.input}"]`);
+                    
+                    if (selectValue === 'custom') {
+                        const customValue = formData.get(setting.input);
+                        if (customValue) {
+                            localStorage.setItem(`${setting.select}Custom`, customValue);
+                        }
+                    } else {
+                        // 保存预设值
+                        localStorage.setItem(setting.select, selectValue);
+                        // 清除自定义值
+                        localStorage.removeItem(`${setting.select}Custom`);
+                        inputElement.value = '';
+                        inputElement.style.display = 'none';
+                    }
+                });
+
                 localStorage.setItem('zoomLevel', zoomLevel);
                 localStorage.setItem('textFontChinese', formData.get('textFontChinese'));
                 localStorage.setItem('textFontWestern', formData.get('textFontWestern'));
                 localStorage.setItem('codeFontChinese', formData.get('codeFontChinese'));
                 localStorage.setItem('codeFontWestern', formData.get('codeFontWestern'));
                 localStorage.setItem('fontSize', formData.get('fontSize') + 'px');
+                const bgType = formData.get('bgType');
                 localStorage.setItem('bgType', formData.get('bgType'));
+
                 if (formData.get('bgType') === 'solid') {
                     localStorage.setItem('bgColorLight', formData.get('bgColorLight'));
                     localStorage.setItem('bgColorDark', formData.get('bgColorDark'));
                 }
+
                 applySettings();
                 showToast('设置已保存！');
             });
@@ -284,15 +364,27 @@
                 document.querySelector('input[name="zoomLevel"]').value = '100';
                 document.getElementById('zoomValue').textContent = '100%';
                 applyZoom('100');
-                localStorage.removeItem('textFontChinese');
-                localStorage.removeItem('textFontWestern');
-                localStorage.removeItem('codeFontChinese');
-                localStorage.removeItem('codeFontWestern');
+                
+                const fontTypes = [
+                    'textFontChinese', 'textFontWestern', 
+                    'codeFontChinese', 'codeFontWestern'
+                ];
+                fontTypes.forEach(type => {
+                    localStorage.removeItem(type);
+                    localStorage.removeItem(`${type}Custom`);
+                });
                 localStorage.removeItem('fontSize');
                 localStorage.removeItem('bgType');
                 localStorage.removeItem('bgColorLight');
                 localStorage.removeItem('bgColorDark');
                 form.reset();
+
+                fontSettings.forEach(setting => {
+                    const input = document.querySelector(`input[name="${setting.input}"]`);
+                    input.value = '';
+                    input.style.display = 'none';
+                });
+
                 solidBgOptions.style.display = 'none';
                 applySettings();
                 showToast('已重置为默认设置！');
@@ -303,21 +395,6 @@
 
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySettings);
         });
-
-        // 显示信息
-        function showToast(message) {
-            let toast = document.querySelector('.toast');
-            if (!toast) {
-                toast = document.createElement('div');
-                toast.className = 'toast';
-                document.body.appendChild(toast);
-            }
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
-        }
     </script>
 </body>
 

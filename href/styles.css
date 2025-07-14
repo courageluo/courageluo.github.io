@@ -113,6 +113,7 @@ h1 {
     font-family: "copyright";
     text-align: center;
     font-size: 12px;
+    line-height: 1.4;
 }
 
 code {
@@ -122,6 +123,10 @@ code {
 
 label {
     font-size: 16px;
+}
+
+p, li {
+    line-height: 1.5;
 }
 
 /* 全局设定 */
@@ -252,6 +257,35 @@ input {
     input {
         background-color: #0E2A47; /* 深蓝色背景 */
         color: #aaaaaa; /* 浅灰文字 */
+    }
+}
+
+/* 消息框 */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 60%;
+    font-family: code;
+    background-color: #d2d5e6;
+    border: #5ec1b9 1.5px solid;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .toast {
+        background-color: #1d2031;
+        border: #074860 1.5px solid;
+        color: #ffffff;
     }
 }
 

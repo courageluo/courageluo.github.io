@@ -1,6 +1,6 @@
 <!-- 404 -->
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
@@ -15,13 +15,20 @@
     <style>
         /* 背景图片设置 */
         .background-layer {
-            background-size: 200%;
+            background-size: 125%;
         }
 
         @media (prefers-color-scheme: dark) {
             a {
                 color: #50d2d2;
             }
+        }
+
+        .image {
+            width: 100%;
+            border: #07adad7d 1.5px solid;
+            border-radius: 3px;
+            margin-top: 15px;
         }
 
         .content {
@@ -41,9 +48,10 @@
 
 <body>
     <div class="content">
-        <p class="headtitle">404</p>
+        <!-- <p class="headtitle">404</p> -->
         <div class="content-container">
-            <div class="rounded-box3" style="max-width: 300px; text-align: center; padding: 10px 50px;">
+            <div class="rounded-box3" style="max-width: 300px; text-align: center; padding: 10px 50px; margin-top: 30px;">
+            <img src="/img/404.jpg" alt="https://http.cat/404" class="image">
                 <p>您要访问的页面不存在</p>
                 <p>您输入的网址可能不正确</p>
                 <p>或者该页面已被删除或移动</p>

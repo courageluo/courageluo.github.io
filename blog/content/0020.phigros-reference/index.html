@@ -1,0 +1,455 @@
+<!-- Phigros 曲目查询器 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phigros 曲目查询器 - Courage Luo 的网站</title>
+    <!-- 链接favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <!-- 将外部CSS文件链接到HTML文档 -->
+    <link rel="stylesheet" type="text/css" href="/href/styles.css">
+    <style>
+        /* 背景图片设置 */
+        .background-layer {
+            background-size: 100%;
+        }
+
+        @font-face {
+            font-family: diff;
+            src: url(./Saira-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: diff-med;
+            src: url(./Saira-Medium.ttf);
+        }
+
+        a {
+            color: #110c50;
+        }
+
+        #results {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        #searchBox {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1.5px solid #0a88869a;
+            border-radius: 7px;
+            background-color: #83aabb9d;
+            color: #000000;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        #searchBox:focus {
+            outline: none;
+            border-color: #0c2e54bb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #51686d6d;
+            border: 1.5px solid;
+            border-radius: 7px;
+            overflow: hidden;
+            text-align: start;
+        }
+
+        th {
+            background-color: #4f545a;
+            border-right: 1px solid #8e8e91;
+            color: #fff;
+            padding: 12px;
+            text-align: left;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        th:hover {
+            background-color: #383a3dec;
+        }
+
+        th.asc::after {
+            content: '↑';
+            opacity: 1;
+        }
+
+        th.desc::after {
+            content: '↓';
+            opacity: 1;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #828286;
+            border-right: 1px solid #8e8e91;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background-color: #36365124;
+        }
+
+        .song-name {
+            color: #1c4071;
+        }
+
+        .pack-name {
+            color: #101010;
+            font-size: 0.9em;
+        }
+
+        .difficulty-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .difficulty-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .difficulty-label {
+            font-family: diff-med;
+            width: 30px;
+            text-align: center;
+        }
+
+        .ez { color: #a8e6cf; }
+        .hd { color: #ffd93d; }
+        .in { color: #ff8b6b; }
+        .at { color: #ff91b0; }
+
+        .level {
+            font-family: diff;
+        }
+
+        .notes-info {
+            font-size: 0.85em;
+            color: #3d3d3d;
+        }
+
+        .artist-info {
+            font-size: 0.9em;
+            color: #101010;
+        }
+        
+        .duration-info {
+            font-size: 0.9em;
+            color: #212121;
+        }
+
+        .no-results {
+            text-align: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            color: #442323;
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            background-color: #99e8e3ce;
+            color: #1c1c1c;
+            border-radius: 1px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            a {
+                color: #50d2d2;
+            }
+
+            #searchBox {
+                border: 1.5px solid #a29aae9a;
+                background-color: #30303fe0;
+                color: #efefef;
+            }
+
+            #searchBox:focus {
+                border-color: #3cdbecbb;
+            }
+
+            table {
+                background-color: #2b2b3dca;
+            }
+
+            th {
+                background-color: #1d446b;
+                border-right: 1px solid #2c2c3a;
+                color: #fff;
+            }
+
+            th:hover {
+                background-color: #394779;
+            }
+
+            td {
+                border-bottom: 1px solid #3a3a4f;
+                border-right: 1px solid #2c2c3a;
+            }
+            
+            tr:hover {
+                background-color: #36365177;
+            }
+
+            .song-name {
+                color: #08a9da;
+            }
+
+            .pack-name {
+                color: #cdd1cf;
+            }
+
+            .ez { color: #a8e6cf; }
+            .hd { color: #ffd93d; }
+            .in { color: #ff6b6b; }
+            .at { color: #c44569; }
+
+            .notes-info {
+                color: #bbb;
+            }
+
+            .artist-info {
+                color: #a8e6cf;
+            }
+            
+            .duration-info {
+                color: #bbb;
+            }
+
+            .no-results {
+                color: #d0a9a9;
+            }
+
+            .highlight {
+                background-color: #2b9682ba;
+                color: #f3f3f3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <!-- 内容 -->
+        <main class="content-container">
+            <!-- 标题框 -->
+            <div class="rounded-box1">
+                <h1 style="text-align: center;">Phigros 曲目查询器</h1>
+            </div>
+
+            <!-- 内容框 -->
+            <div class="rounded-box3">
+                <input type="text" id="searchBox" placeholder="键入曲目名称进行搜索">
+                <div id="results"></div>
+                <p>数据来源于 <a href="https://phigros.fandom.com/wiki/Phigros_Wiki:Song_Data">Phigros Wiki: Song Data</a>，数据收取于 2025.07.21，随时间推移可能有偏差。由于算法等的不完善，使用过程中可能出现 bug，数据以实际游戏为准。</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer"></div>
+
+    <!-- 内部JS文件 -->
+    <script src="/href/script.js" defer></script>
+
+    <script>
+        const PACK_MAP = {
+            legacy: '过去的章节',
+            story5: '第五章 霓虹灯牌',
+            story6: '第六章 方舟蜃景',
+            story7: '第七章 时钟连结',
+            story8: '第八章 凌日潮汐',
+            side1: '支线章节1 忘忧宫',
+            side2: '支线章节2 弭刻日',
+            side3: '支线章节3 盗乐行',
+            side4: '支线章节4 无相乡',
+            single: '单曲精选集',
+            tea: '茶鸣拾贰律',
+            musedash: 'Muse Dash 精选集',
+            good: 'GOOD 精选集',
+            hyun: 'HyuN 精选集',
+            risingsun: 'Rising Sun Traxx',
+            waveat: 'WAVEAT 精选集',
+            lanota: 'Lanota 精选集',
+            chunithm: 'CHUNITHM 精选集',
+            takumi: 'TAKUMI³ 精选集',
+            paradigm: 'Paradigm: Reboot',
+            ongeki: 'オンゲキ 精选集',
+            rhythmmaster: '节奏大师 精选集',
+            shinobislash: 'SHINOBI SLASH 精选集',
+            immaculeesekai: 'Immaculée Sekai',
+            egts: 'EGTS 精选集',
+            bassareus: 'BassAreUs 精选集',
+            rotaeno: 'Rotaeno 精选集'
+        };
+
+        let songsData = [];
+        let currentSort = { column: 'song', direction: 'asc' };
+        let currentQuery = '';
+
+        fetch('./songs.json')
+            .then(response => response.json())
+            .then(data => {
+                songsData = Object.entries(data).map(([key, song]) => ({
+                    id: key,
+                    name: song.title || key,
+                    pack: song.pack || 'Unknown',
+                    artist: formatArtist(song.artist || 'Unknown'),
+                    duration: song.duration || '-',
+                    ez: song.ez || null,
+                    hd: song.hd || null,
+                    in: song.in || null,
+                    at: song.at || null
+                }));
+                displaySongs(songsData);
+            })
+            .catch(error => {
+                console.error('加载数据失败:', error);
+                document.getElementById('results').innerHTML = '<div class="no-results">加载数据失败，请检查 songs.json 文件是否存在。</div>';
+            });
+
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            currentQuery = e.target.value.toLowerCase();
+            const filtered = songsData.filter(song => 
+                song.name.toLowerCase().includes(currentQuery)
+            );
+            displaySongs(filtered);
+        });
+
+        function formatArtist(artist) {
+            if (typeof artist === 'string') return artist;
+            if (artist.format) {
+                let formatted = artist.format;
+                Object.keys(artist).forEach(key => {
+                    if (key !== 'format') {
+                        const pattern = new RegExp(`<<<${key}(?:\\|([^>]+))?>>>`, 'g');
+                        formatted = formatted.replace(pattern, (match, p1) => p1 || artist[key]);
+                    }
+                });
+                return formatted;
+            }
+            return 'Unknown';
+        }
+
+        function formatCharter(charter) {
+            if (!charter) return 'Unknown';
+            if (typeof charter === 'string') return charter;
+            if (charter.format) {
+                let formatted = charter.format;
+                Object.keys(charter).forEach(key => {
+                    if (key !== 'format') {
+                        const pattern = new RegExp(`<<<${key}(?:\\|([^>]+))?>>>`, 'g');
+                        formatted = formatted.replace(pattern, (match, p1) => p1 || charter[key]);
+                    }
+                });
+                return formatted;
+            }
+            return 'Unknown';
+        }
+
+        function highlightText(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+            return text.replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function displaySongs(songs) {
+            const container = document.getElementById('results');
+            
+            if (songs.length === 0) {
+                container.innerHTML = '<div class="no-results">没有找到匹配的曲目</div>';
+                return;
+            }
+
+            const sortedSongs = [...songs].sort((a, b) => {
+                let aVal = a[currentSort.column];
+                let bVal = b[currentSort.column];
+                
+                if (currentSort.column === 'song') {
+                    aVal = a.name;
+                    bVal = b.name;
+                }
+                
+                if (typeof aVal === 'number' && typeof bVal === 'number') {
+                    return currentSort.direction === 'asc' ? aVal - bVal : bVal - aVal;
+                }
+                
+                aVal = String(aVal).toLowerCase();
+                bVal = String(bVal).toLowerCase();
+                
+                if (currentSort.direction === 'asc') {
+                    return aVal.localeCompare(bVal);
+                } else {
+                    return bVal.localeCompare(aVal);
+                }
+            });
+
+            let html = '<table><thead><tr>';
+            html += '<th onclick="sortTable(\'song\')">曲目名 ' + (currentSort.column === 'song' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '') + '</th>';
+            html += '<th onclick="sortTable(\'pack\')">章节 ' + (currentSort.column === 'pack' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '') + '</th>';
+            html += '<th>定数 & 物量 & 谱师</th>';
+            html += '<th onclick="sortTable(\'artist\')">曲师 ' + (currentSort.column === 'artist' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '') + '</th>';
+            html += '<th onclick="sortTable(\'duration\')">时长 ' + (currentSort.column === 'duration' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '') + '</th>';
+            html += '</tr></thead><tbody>';
+
+            sortedSongs.forEach(song => {
+                html += '<tr>';
+                html += `<td class="song-name">${highlightText(song.name, currentQuery)}</td>`;
+                html += `<td class="pack-name">${PACK_MAP[song.pack] || song.pack}</td>`;
+                
+                html += '<td class="difficulty-info">';
+                const difficulties = ['ez', 'hd', 'in', 'at'];
+                difficulties.forEach(diff => {
+                    if (song[diff]) {
+                        const level = song[diff].level;
+                        const notes = song[diff].notes;
+                        const charter = formatCharter(song[diff].charter);
+                        html += `<div class="difficulty-row">
+                            <span class="difficulty-label ${diff}">${diff.toUpperCase()}</span>
+                            <span class="level">${level}</span>
+                            <span class="notes-info">(${notes} notes) by ${charter}</span>
+                        </div>`;
+                    }
+                });
+                html += '</td>';
+                
+                html += `<td class="artist-info">${highlightText(song.artist, currentQuery)}</td>`;
+                html += `<td class="duration-info">${song.duration}</td>`;
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function sortTable(column) {
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = column;
+                currentSort.direction = 'asc';
+            }
+            
+            const filtered = songsData.filter(song => 
+                song.name.toLowerCase().includes(currentQuery)
+            );
+            displaySongs(filtered);
+        }
+    </script>
+</body>
+</html>

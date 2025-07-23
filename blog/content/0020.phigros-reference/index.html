@@ -97,7 +97,7 @@
 
         td {
             padding: 12px 10px;
-            border-bottom: 1px solid #828286;
+            border-top: 1px solid #828286;
             border-right: 1px solid #8e8e91;
             vertical-align: top;
         }
@@ -201,7 +201,7 @@
             }
 
             td {
-                border-bottom: 1px solid #3a3a4f;
+                border-top: 1px solid #3a3a4f;
                 border-right: 1px solid #2c2c3a;
             }
             
@@ -258,7 +258,7 @@
             <div class="rounded-box3">
                 <input type="text" id="searchBox" placeholder="键入曲目名称进行搜索">
                 <div id="results"></div>
-                <p><span style="font-family: diff;">Tip:</span> 数据来源于 <a href="https://phigros.fandom.com/wiki/Phigros_Wiki:Song_Data">Phigros Wiki: Song Data</a>，数据收取于 2025.07.21，随时间推移可能有偏差。由于算法等的不完善，使用过程中可能出现 bug，数据以实际游戏为准。</p>
+                <p><span style="font-family: diff;">Tip:</span> 数据来源于 <a href="https://phigros.fandom.com/wiki/Phigros_Wiki:Song_Data">Phigros Wiki: Song Data</a>（CC-BY-SA 协议），数据收集于 2025.07.21，随时间推移可能有偏差。由于算法等的不完善，使用过程中可能出现 bug，数据以实际游戏为准咕！</p>
             </div>
         </main>
     </div>
@@ -268,7 +268,6 @@
 
     <!-- 内部JS文件 -->
     <script src="/href/script.js" defer></script>
-
     <script>
         const PACK_MAP = {
             legacy: '过去的章节',
@@ -297,7 +296,10 @@
             immaculeesekai: 'Immaculée Sekai',
             egts: 'EGTS 精选集',
             bassareus: 'BassAreUs 精选集',
-            rotaeno: 'Rotaeno 精选集'
+            rotaeno: 'Rotaeno 精选集',
+            overrapid: 'OverRapid 精选集',
+            jmt: 'JMT 精选集',
+            kalpa: 'KALPA 精选集'
         };
 
         let songsData = [];
@@ -310,13 +312,15 @@
                 songsData = Object.entries(data).map(([key, song]) => ({
                     id: key,
                     name: song.title || key,
-                    pack: song.pack || 'Unknown',
+                    pack: song.pack || '<i>未知章节</i>',
+                    charter: song.charter || '<i>未知谱师</i>',
                     artist: formatArtist(song.artist || 'Unknown'),
                     duration: song.duration || '-',
                     ez: song.ez || null,
                     hd: song.hd || null,
                     in: song.in || null,
-                    at: song.at || null
+                    at: song.at || null,
+                    version: song.version || 'Unknown'
                 }));
                 displaySongs(songsData);
             })
@@ -345,11 +349,11 @@
                 });
                 return formatted;
             }
-            return 'Unknown';
+            return '<i>未知曲师</i>';
         }
 
         function formatCharter(charter) {
-            if (!charter) return 'Unknown';
+            if (!charter) return '<i>未知谱师</i>';
             if (typeof charter === 'string') return charter;
             if (charter.format) {
                 let formatted = charter.format;
@@ -361,7 +365,7 @@
                 });
                 return formatted;
             }
-            return 'Unknown';
+            return '<i>未知谱师</i>';
         }
 
         function highlightText(text, query) {
@@ -419,19 +423,23 @@
                 html += `<td class="pack-name">${PACK_MAP[song.pack] || song.pack}</td>`;
                 
                 html += '<td class="difficulty-info">';
-                const difficulties = ['ez', 'hd', 'in', 'at'];
-                difficulties.forEach(diff => {
-                    if (song[diff]) {
-                        const level = song[diff].level;
-                        const notes = song[diff].notes;
-                        const charter = formatCharter(song[diff].charter);
-                        html += `<div class="difficulty-row">
-                            <span class="difficulty-label ${diff}">${diff.toUpperCase()}</span>
-                            <span class="level">${level}</span>
-                            <span class="notes-info">(${notes} notes) by ${charter}</span>
-                        </div>`;
-                    }
-                });
+                if (!song.ez && !song.hd && !song.in && !song.at) {
+                    html += `<span class="notes-info">&emsp14;仅限 ${song.version} 版本</span>`;
+                } else {
+                    const difficulties = ['ez', 'hd', 'in', 'at'];
+                    difficulties.forEach(diff => {
+                        if (song[diff]) {
+                            const level = song[diff].level;
+                            const notes = song[diff].notes;
+                            const charter = song[diff].charter ? formatCharter(song[diff].charter) : formatCharter(song.charter);
+                            html += `<div class="difficulty-row">
+                                <span class="difficulty-label ${diff}">${diff.toUpperCase()}</span>
+                                <span class="level">${level}</span>
+                                <span class="notes-info">(${notes} notes) by ${charter}</span>
+                            </div>`;
+                        }
+                    });
+                }
                 html += '</td>';
                 
                 html += `<td class="artist-info">${highlightText(song.artist, currentQuery)}</td>`;

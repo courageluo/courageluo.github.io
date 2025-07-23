@@ -4747,9 +4747,10 @@
             "level": 12.3,
             "notes": 666,
             "charter": {
-                "format": "<<<1|while(TangScend>=TangScend);>>>",
+                "format": "while(TangScend>=TangScend);",
                 "1": "TangScend"
-            }
+            },
+            "explanation": "Modified by Courage Luo 'cause it can't be parsed by JS"
         },
         "in": {
             "level": 14.8,

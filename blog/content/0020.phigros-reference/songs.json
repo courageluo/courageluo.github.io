@@ -6,14 +6,7 @@
             "level": 1,
             "notes": 93
         },
-        "hd": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
-        "in": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
+        "_explanation": "Modified by Courage Luo for the viewing experience",
         "version": "3.1.0",
         "artist": {
             "format": "<<<1>>> & <<<2>>>",
@@ -32,14 +25,7 @@
             "level": 2,
             "notes": 42
         },
-        "hd": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
-        "in": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
+        "_explanation":"Modified by Courage Luo for the viewing experience",
         "version": "2.5.0",
         "artist": {
             "format": "<<<1>>> & <<<2>>>",
@@ -58,14 +44,7 @@
             "level": 2,
             "notes": 180
         },
-        "hd": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
-        "in": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
+        "_explanation":"Modified by Courage Luo for the viewing experience",
         "version": "2.0.0",
         "artist": {
             "format": "<<<1>>> & <<<2>>>",
@@ -83,14 +62,7 @@
             "level": 2,
             "notes": 288
         },
-        "hd": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
-        "in": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
+        "_explanation": "Modified by Courage Luo for the viewing experience",
         "version": "1.0.0",
         "artist": "姜米條",
         "charter": "Catcats",
@@ -104,14 +76,7 @@
             "level": 2,
             "notes": 331
         },
-        "hd": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
-        "in": {
-            "level": "N/A",
-            "notes": "N/A"
-        },
+        "_explanation": "Modified by Courage Luo for the viewing experience",
         "version": "1.0.0",
         "artist": "姜米條",
         "charter": "Catcats",
@@ -4750,7 +4715,7 @@
                 "format": "while(TangScend>=TangScend);",
                 "1": "TangScend"
             },
-            "explanation": "Modified by Courage Luo 'cause it can't be parsed by JS"
+            "_explanation": "Modified by Courage Luo 'cause it can't be parsed by JS"
         },
         "in": {
             "level": 14.8,

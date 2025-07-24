@@ -309,6 +309,12 @@ input {
 }
 
 @font-face {
+    font-family: Saira;
+    src: url('/blog/content/0020.phigros-reference/Saira-Regular.ttf');
+    display: swap;
+}
+
+@font-face {
     font-family: CascadiaMono;
     src: url('/font/CascadiaMono-Regular.woff2');
     font-display: swap;

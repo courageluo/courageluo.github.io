@@ -309,9 +309,8 @@ input {
 }
 
 @font-face {
-    font-family: Saira;
-    src: url('/blog/content/0020.phigros-reference/Saira-Regular.ttf');
-    display: swap;
+    font-family: Geist;
+    src: url('/font/Geist-Regular.ttf');
 }
 
 @font-face {
@@ -323,6 +322,11 @@ input {
 @font-face {
     font-family: CascadiaCode;
     src: url('/font/CascadiaCode-Regular.woff2');
+}
+
+@font-face {
+    font-family: GeistMono;
+    src: url('/font/GeistMono-Regular.ttf');
 }
 
 @font-face {
